@@ -1,0 +1,42 @@
+# macOS and IntelliJ IDEA
+.DS_Store
+.idea/
+*.iml
+
+# Local configuration
+.env
+.env.*
+!.env.example
+!.env.*.example
+application-local.*
+!application-local.example.*
+
+# Logs
+*.log
+
+# Spring, Gradle, and Kotlin
+api/HELP.md
+.gradle/
+build/
+out/
+.kotlin/
+*.class
+
+# Go
+workers/bin/
+*.test
+coverage.out
+
+# Client
+node_modules/
+dist/
+coverage/
+.vite/
+*.tsbuildinfo
+
+# Generated contracts
+contracts/generated/
+
+# Local Docker data and overrides
+compose.override.yaml
+.local/
