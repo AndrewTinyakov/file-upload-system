@@ -11,6 +11,16 @@ docker compose -f compose.local.yaml up -d
 
 Compose starts PostgreSQL, RabbitMQ, and MinIO. The API runs on the host and applies Flyway migrations at startup.
 
+## Database code generation
+
+After Flyway has applied the migrations, regenerate the jOOQ sources:
+
+```bash
+./api/gradlew -p api jooqCodegen
+```
+
+The generated Java sources are stored in `api/src/generated/java` and are committed with the schema change. The generator connects to `jdbc:postgresql://localhost:5432/file_upload` with the local credentials by default. Set `JOOQ_DB_URL`, `JOOQ_DB_USER`, and `JOOQ_DB_PASSWORD` to use a different database.
+
 Useful addresses:
 
 - RabbitMQ: <http://localhost:15672>
