@@ -36,7 +36,7 @@ flowchart LR
 
 The API handles metadata, authorization placeholders, upload coordination, and state. File bytes never pass through it. Clients upload directly to S3-compatible storage, and Go workers prepare uploaded objects asynchronously.
 
-PostgreSQL stores file assets, upload sessions, asset variants, and outbox events. One S3-compatible installation provides an `uploads` bucket for temporary input and an `assets` bucket for permanent output. Local development uses MinIO; a deployment can use S3 and a CDN.
+PostgreSQL stores file assets, upload sessions, asset variants, and outbox messages. One S3-compatible installation provides an `uploads` bucket for temporary input and an `assets` bucket for permanent output. Local development uses MinIO; a deployment can use S3 and a CDN.
 
 ### RabbitMQ routing
 
@@ -119,7 +119,7 @@ sequenceDiagram
     U-->>API: object metadata
     Note over API: Verify object exists and byte size matches
 
-    API->>DB: Transaction:<br/>UploadSession = COMPLETED<br/>FileAsset = PREPARING<br/>insert outbox event
+    API->>DB: Transaction:<br/>UploadSession = COMPLETED<br/>FileAsset = PREPARING<br/>insert outbox message
     API-->>C: 202 Accepted<br/>assetId, PREPARING
     Note over C,API: Client short-polls GET /assets/{assetId}<br/>until READY or FAILED
 

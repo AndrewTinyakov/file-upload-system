@@ -22,4 +22,4 @@ docs/         Architecture
 
 - [Architecture](docs/architecture.md)
 - [Domain language](CONTEXT.md)
-
+- [Local development](docs/local-development.md)

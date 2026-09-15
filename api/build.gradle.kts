@@ -22,6 +22,7 @@ repositories {
 }
 
 dependencies {
+    implementation("com.github.f4b6a3:ulid-creator:5.2.4")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.boot:spring-boot-starter-amqp")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")

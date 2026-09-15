@@ -13,13 +13,13 @@ class TestcontainersConfiguration {
     @Bean
     @ServiceConnection
     fun postgresContainer(): PostgreSQLContainer {
-        return PostgreSQLContainer(DockerImageName.parse("postgres:latest"))
+        return PostgreSQLContainer(DockerImageName.parse("postgres:18.6"))
     }
 
     @Bean
     @ServiceConnection
     fun rabbitContainer(): RabbitMQContainer {
-        return RabbitMQContainer(DockerImageName.parse("rabbitmq:latest"))
+        return RabbitMQContainer(DockerImageName.parse("rabbitmq:4.3.5-management"))
     }
 
 }

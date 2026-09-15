@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:${POSTGRES_PORT:5432}/file_upload
+    username: file_upload
+    password: file_upload
+  rabbitmq:
+    host: localhost
+    port: ${RABBITMQ_AMQP_PORT:5672}
+    username: file_upload
+    password: file_upload
+    virtual-host: file_upload
+
+file-upload:
+  storage:
+    endpoint: http://localhost:${MINIO_API_PORT:9000}
+    region: us-east-1
+    access-key: file_upload
+    secret-key: file_upload
+    path-style-access: true
+    uploads-bucket: uploads
+    assets-bucket: assets

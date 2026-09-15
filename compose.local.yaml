@@ -1,0 +1,73 @@
+services:
+  postgres:
+    image: postgres:18.6
+    environment:
+      POSTGRES_DB: file_upload
+      POSTGRES_USER: file_upload
+      POSTGRES_PASSWORD: file_upload
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U file_upload -d file_upload"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 5s
+
+  rabbitmq:
+    image: rabbitmq:4.3.5-management
+    hostname: rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: file_upload
+      RABBITMQ_DEFAULT_PASS: file_upload
+      RABBITMQ_DEFAULT_VHOST: file_upload
+    ports:
+      - "${RABBITMQ_AMQP_PORT:-5672}:5672"
+      - "${RABBITMQ_MANAGEMENT_PORT:-15672}:15672"
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+  minio:
+    image: quay.io/minio/minio:RELEASE.2025-09-07T16-13-09Z
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: file_upload
+      MINIO_ROOT_PASSWORD: file_upload
+      MINIO_API_CORS_ALLOW_ORIGIN: "*"
+    ports:
+      - "${MINIO_API_PORT:-9000}:9000"
+      - "${MINIO_CONSOLE_PORT:-9001}:9001"
+    volumes:
+      - minio_data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 5s
+
+  minio-init:
+    image: quay.io/minio/mc:RELEASE.2025-08-13T08-35-41Z
+    depends_on:
+      minio:
+        condition: service_healthy
+    entrypoint:
+      - /bin/sh
+      - -c
+      - |
+        mc alias set local http://minio:9000 file_upload file_upload
+        mc mb --ignore-existing local/uploads
+        mc mb --ignore-existing local/assets
+
+volumes:
+  postgres_data:
+  rabbitmq_data:
+  minio_data:
