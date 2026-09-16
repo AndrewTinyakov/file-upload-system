@@ -1,0 +1,27 @@
+$schema: http://json-schema.org/draft-07/schema#
+title: AssetPreparationFailedEventV1
+type: object
+additionalProperties: false
+required:
+  - commandId
+  - assetId
+  - failureCode
+properties:
+  commandId:
+    type: string
+    pattern: '^[0-9A-HJKMNP-TV-Z]{26}$'
+    description: ULID copied from the preparation command.
+  assetId:
+    type: string
+    pattern: '^[0-9A-HJKMNP-TV-Z]{26}$'
+    description: ULID of the file asset that could not be prepared.
+  failureCode:
+    type: string
+    minLength: 1
+    pattern: '^[A-Z][A-Z0-9_]*$'
+    description: >-
+      Stable permanent input-failure code. Initial values are
+      SOURCE_OBJECT_NOT_FOUND, SOURCE_OBJECT_CHANGED, UNSUPPORTED_IMAGE_FORMAT,
+      and INVALID_IMAGE. Consumers must accept future codes.
+    examples:
+      - SOURCE_OBJECT_NOT_FOUND

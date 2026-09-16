@@ -1,0 +1,46 @@
+correlationIds:
+  PreparationCommandId:
+    description: >-
+      The API creates this ULID and workers copy it into their outcome event.
+    location: $message.payload#/commandId
+
+messages:
+  PrepareDocumentCommandV1:
+    name: PrepareDocumentCommandV1
+    title: Prepare document command v1
+    summary: Copy an uploaded object into permanent document storage.
+    contentType: application/json
+    correlationId:
+      $ref: '#/correlationIds/PreparationCommandId'
+    payload:
+      $ref: ./schemas/asset/command/prepare-document-v1.yaml
+
+  PrepareImageCommandV1:
+    name: PrepareImageCommandV1
+    title: Prepare image command v1
+    summary: Produce permanent image variants from an uploaded object.
+    contentType: application/json
+    correlationId:
+      $ref: '#/correlationIds/PreparationCommandId'
+    payload:
+      $ref: ./schemas/asset/command/prepare-image-v1.yaml
+
+  AssetPreparationCompletedEventV1:
+    name: AssetPreparationCompletedEventV1
+    title: Asset preparation completed event v1
+    summary: Report the permanent variants produced for an asset.
+    contentType: application/json
+    correlationId:
+      $ref: '#/correlationIds/PreparationCommandId'
+    payload:
+      $ref: ./schemas/asset/event/asset-preparation-completed-v1.yaml
+
+  AssetPreparationFailedEventV1:
+    name: AssetPreparationFailedEventV1
+    title: Asset preparation failed event v1
+    summary: Report a permanent input failure while preparing an asset.
+    contentType: application/json
+    correlationId:
+      $ref: '#/correlationIds/PreparationCommandId'
+    payload:
+      $ref: ./schemas/asset/event/asset-preparation-failed-v1.yaml

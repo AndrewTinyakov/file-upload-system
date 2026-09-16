@@ -1,0 +1,57 @@
+$schema: http://json-schema.org/draft-07/schema#
+title: PrepareImageCommandV1
+type: object
+additionalProperties: false
+required:
+  - commandId
+  - assetId
+  - sourceBucket
+  - sourceObjectKey
+  - sourceContentType
+  - sourceByteSize
+  - sourceObjectEtag
+  - destinationBucket
+  - destinationPrefix
+  - processingProfileName
+  - processingProfileVersion
+properties:
+  commandId:
+    type: string
+    pattern: '^[0-9A-HJKMNP-TV-Z]{26}$'
+    description: ULID shared by the outbox row, AMQP message, and outcome event.
+  assetId:
+    type: string
+    pattern: '^[0-9A-HJKMNP-TV-Z]{26}$'
+    description: ULID of the file asset being prepared.
+  sourceBucket:
+    type: string
+    minLength: 1
+  sourceObjectKey:
+    type: string
+    minLength: 1
+  sourceContentType:
+    type: string
+    minLength: 1
+    description: Declared upload media type. Workers detect the image format from its bytes.
+  sourceByteSize:
+    type: integer
+    format: int64
+    minimum: 0
+  sourceObjectEtag:
+    type: string
+    minLength: 1
+    description: Opaque object validator. It is not a content hash.
+  destinationBucket:
+    type: string
+    minLength: 1
+  destinationPrefix:
+    type: string
+    minLength: 1
+    pattern: '/$'
+  processingProfileName:
+    type: string
+    minLength: 1
+  processingProfileVersion:
+    type: integer
+    format: int32
+    minimum: 1

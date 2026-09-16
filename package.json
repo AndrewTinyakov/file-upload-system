@@ -1,0 +1,16 @@
+{
+  "name": "file-upload-system-contracts",
+  "private": true,
+  "engines": {
+    "node": ">=24.11",
+    "npm": ">=11.5.1"
+  },
+  "scripts": {
+    "validate:asyncapi": "asyncapi validate contracts/asyncapi.yaml",
+    "generate:asyncapi:kotlin": "node contracts/generate-models.mjs kotlin",
+    "generate:asyncapi:go": "node contracts/generate-models.mjs go"
+  },
+  "devDependencies": {
+    "@asyncapi/cli": "6.1.0"
+  }
+}

@@ -1,0 +1,74 @@
+$schema: http://json-schema.org/draft-07/schema#
+title: AssetPreparationCompletedEventV1
+type: object
+additionalProperties: false
+required:
+  - commandId
+  - assetId
+  - variants
+properties:
+  commandId:
+    type: string
+    pattern: '^[0-9A-HJKMNP-TV-Z]{26}$'
+    description: ULID copied from the preparation command.
+  assetId:
+    type: string
+    pattern: '^[0-9A-HJKMNP-TV-Z]{26}$'
+    description: ULID of the prepared file asset.
+  variants:
+    type: array
+    minItems: 1
+    items:
+      $ref: '#/definitions/AssetVariantV1'
+definitions:
+  AssetVariantV1:
+    title: AssetVariantV1
+    type: object
+    additionalProperties: false
+    required:
+      - variantType
+      - bucket
+      - objectKey
+      - contentType
+      - byteSize
+    properties:
+      variantType:
+        title: AssetVariantType
+        type: string
+        enum:
+          - ORIGINAL
+          - DISPLAY_SMALL
+          - DISPLAY_MEDIUM
+          - DISPLAY_LARGE
+          - DOWNLOAD
+      bucket:
+        type: string
+        minLength: 1
+      objectKey:
+        type: string
+        minLength: 1
+      contentType:
+        type: string
+        minLength: 1
+      byteSize:
+        type: integer
+        format: int64
+        minimum: 0
+      pixelDimensions:
+        $ref: '#/definitions/PixelDimensionsV1'
+  PixelDimensionsV1:
+    title: PixelDimensionsV1
+    type: object
+    additionalProperties: false
+    required:
+      - width
+      - height
+    properties:
+      width:
+        type: integer
+        format: int32
+        minimum: 1
+      height:
+        type: integer
+        format: int32
+        minimum: 1

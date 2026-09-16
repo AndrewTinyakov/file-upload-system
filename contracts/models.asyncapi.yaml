@@ -1,0 +1,27 @@
+asyncapi: 3.0.0
+
+info:
+  title: File asset preparation message models
+  version: 1.0.0
+  description: >-
+    Model-generation entry point. Payload schemas are shared with the complete
+    messaging contract in asyncapi.yaml.
+
+components:
+  messages:
+    PrepareDocumentCommandV1:
+      name: PrepareDocumentCommandV1
+      payload:
+        $ref: ./schemas/asset/command/prepare-document-v1.yaml
+    PrepareImageCommandV1:
+      name: PrepareImageCommandV1
+      payload:
+        $ref: ./schemas/asset/command/prepare-image-v1.yaml
+    AssetPreparationCompletedEventV1:
+      name: AssetPreparationCompletedEventV1
+      payload:
+        $ref: ./schemas/asset/event/asset-preparation-completed-v1.yaml
+    AssetPreparationFailedEventV1:
+      name: AssetPreparationFailedEventV1
+      payload:
+        $ref: ./schemas/asset/event/asset-preparation-failed-v1.yaml

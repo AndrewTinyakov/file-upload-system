@@ -9,7 +9,7 @@ A user's file in the system. It exists before its bytes arrive and later points 
 _Avoid_: Media asset, uploaded file
 
 **Upload session**:
-One attempt to supply the bytes for a file asset.
+One attempt to supply the bytes for one file asset, either through one object PUT or a multipart transfer. Multipart parts belong to the session and are not separate sessions.
 _Avoid_: Upload, file asset
 
 **Uploaded object**:

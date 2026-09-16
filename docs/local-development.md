@@ -1,6 +1,15 @@
 # Local development
 
-Requires Docker with Compose and Java 25.
+Requires Docker with Compose, Java 25, Node.js 24.11, and Go 1.26.
+
+Running all Go worker tests on the host also requires libvips and `pkg-config`:
+
+```bash
+brew install vips pkg-config
+```
+
+The worker container build installs libvips itself, so the host dependency is
+not required when building with Docker.
 
 From the repository root:
 
@@ -10,6 +19,14 @@ docker compose -f compose.local.yaml up -d
 ```
 
 Compose starts PostgreSQL, RabbitMQ, and MinIO. The API runs on the host and applies Flyway migrations at startup.
+
+Build and test the worker module:
+
+```bash
+npm ci
+npm run generate:asyncapi:go
+go -C workers test ./...
+```
 
 ## Database code generation
 

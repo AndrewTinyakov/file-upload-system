@@ -1,0 +1,52 @@
+assetPreparationCompleted:
+  address: asset.preparation.completed.v1
+  messages:
+    AssetPreparationCompletedEventV1:
+      $ref: ../messages.yaml#/messages/AssetPreparationCompletedEventV1
+  bindings:
+    amqp:
+      is: routingKey
+      exchange:
+        name: asset.events
+        type: topic
+        durable: true
+        autoDelete: false
+        vhost: /
+      bindingVersion: 0.3.0
+
+assetPreparationFailed:
+  address: asset.preparation.failed.v1
+  messages:
+    AssetPreparationFailedEventV1:
+      $ref: ../messages.yaml#/messages/AssetPreparationFailedEventV1
+  bindings:
+    amqp:
+      is: routingKey
+      exchange:
+        name: asset.events
+        type: topic
+        durable: true
+        autoDelete: false
+        vhost: /
+      bindingVersion: 0.3.0
+
+backendAssetEvents:
+  address: backend.asset-events
+  description: >-
+    Durable queue bound to asset.events with both asset preparation event
+    routing keys. Consumers acknowledge manually.
+  messages:
+    AssetPreparationCompletedEventV1:
+      $ref: ../messages.yaml#/messages/AssetPreparationCompletedEventV1
+    AssetPreparationFailedEventV1:
+      $ref: ../messages.yaml#/messages/AssetPreparationFailedEventV1
+  bindings:
+    amqp:
+      is: queue
+      queue:
+        name: backend.asset-events
+        durable: true
+        exclusive: false
+        autoDelete: false
+        vhost: /
+      bindingVersion: 0.3.0

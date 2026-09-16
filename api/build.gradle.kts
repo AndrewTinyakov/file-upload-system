@@ -63,6 +63,10 @@ sourceSets {
     }
 }
 
+kotlin.sourceSets.named("main") {
+    kotlin.srcDir("src/generated/asyncapi/kotlin")
+}
+
 jooq {
     configuration {
         jdbc {

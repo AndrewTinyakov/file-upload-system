@@ -1,0 +1,54 @@
+deadLetteredDocumentCommand:
+  address: document.prepare.v1
+  description: Document command after its delivery limit is exhausted.
+  messages:
+    PrepareDocumentCommandV1:
+      $ref: ../messages.yaml#/messages/PrepareDocumentCommandV1
+  bindings:
+    amqp:
+      is: routingKey
+      exchange:
+        name: asset.dead
+        type: topic
+        durable: true
+        autoDelete: false
+        vhost: /
+      bindingVersion: 0.3.0
+
+deadLetteredImageCommand:
+  address: image.prepare.v1
+  description: Image command after its delivery limit is exhausted.
+  messages:
+    PrepareImageCommandV1:
+      $ref: ../messages.yaml#/messages/PrepareImageCommandV1
+  bindings:
+    amqp:
+      is: routingKey
+      exchange:
+        name: asset.dead
+        type: topic
+        durable: true
+        autoDelete: false
+        vhost: /
+      bindingVersion: 0.3.0
+
+backendPreparationDead:
+  address: backend.preparation-dead
+  description: >-
+    Durable queue bound to asset.dead with both original command routing keys.
+    The API marks the asset as failed with RETRY_EXHAUSTED.
+  messages:
+    PrepareDocumentCommandV1:
+      $ref: ../messages.yaml#/messages/PrepareDocumentCommandV1
+    PrepareImageCommandV1:
+      $ref: ../messages.yaml#/messages/PrepareImageCommandV1
+  bindings:
+    amqp:
+      is: queue
+      queue:
+        name: backend.preparation-dead
+        durable: true
+        exclusive: false
+        autoDelete: false
+        vhost: /
+      bindingVersion: 0.3.0

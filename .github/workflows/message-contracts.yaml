@@ -1,0 +1,71 @@
+name: CI
+
+on:
+  pull_request:
+    paths-ignore:
+      - '**/*.md'
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - '**/*.md'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24.11
+          cache: npm
+
+      - name: Set up Java
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: 25
+          cache: gradle
+
+      - name: Set up Go
+        uses: actions/setup-go@v6
+        with:
+          go-version: 1.26.0
+          cache-dependency-path: workers/go.sum
+
+      - name: Install contract tooling
+        run: npm ci
+
+      - name: Check generated Kotlin models
+        run: |
+          npm run generate:asyncapi:kotlin
+          git add --intent-to-add api/src/generated/asyncapi/kotlin
+          git diff --exit-code -- api/src/generated/asyncapi/kotlin
+
+      - name: Check generated Go models
+        run: |
+          npm run generate:asyncapi:go
+          git add --intent-to-add workers/internal/generated/messaging
+          git diff --exit-code -- workers/internal/generated/messaging
+
+      - name: Install libvips
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends libvips-dev pkg-config
+
+      - name: Test API
+        id: api-tests
+        run: ./api/gradlew -p api test --no-daemon
+
+      - name: Test Go workers
+        if: ${{ !cancelled() && (success() || steps.api-tests.outcome == 'failure') }}
+        run: go -C workers test ./...

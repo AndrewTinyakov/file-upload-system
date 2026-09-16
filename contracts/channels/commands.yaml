@@ -1,0 +1,71 @@
+prepareDocumentCommand:
+  address: document.prepare.v1
+  messages:
+    PrepareDocumentCommandV1:
+      $ref: ../messages.yaml#/messages/PrepareDocumentCommandV1
+  bindings:
+    amqp:
+      is: routingKey
+      exchange:
+        name: asset.commands
+        type: topic
+        durable: true
+        autoDelete: false
+        vhost: /
+      bindingVersion: 0.3.0
+
+documentJobs:
+  address: document.jobs
+  description: >-
+    Durable quorum queue bound to asset.commands with document.prepare.v1.
+    Consumers acknowledge manually. Exhausted deliveries are dead-lettered to
+    asset.dead with the original routing key.
+  messages:
+    PrepareDocumentCommandV1:
+      $ref: ../messages.yaml#/messages/PrepareDocumentCommandV1
+  bindings:
+    amqp:
+      is: queue
+      queue:
+        name: document.jobs
+        durable: true
+        exclusive: false
+        autoDelete: false
+        vhost: /
+      bindingVersion: 0.3.0
+
+prepareImageCommand:
+  address: image.prepare.v1
+  messages:
+    PrepareImageCommandV1:
+      $ref: ../messages.yaml#/messages/PrepareImageCommandV1
+  bindings:
+    amqp:
+      is: routingKey
+      exchange:
+        name: asset.commands
+        type: topic
+        durable: true
+        autoDelete: false
+        vhost: /
+      bindingVersion: 0.3.0
+
+imageJobs:
+  address: image.jobs
+  description: >-
+    Durable quorum queue bound to asset.commands with image.prepare.v1.
+    Consumers acknowledge manually. Exhausted deliveries are dead-lettered to
+    asset.dead with the original routing key.
+  messages:
+    PrepareImageCommandV1:
+      $ref: ../messages.yaml#/messages/PrepareImageCommandV1
+  bindings:
+    amqp:
+      is: queue
+      queue:
+        name: image.jobs
+        durable: true
+        exclusive: false
+        autoDelete: false
+        vhost: /
+      bindingVersion: 0.3.0

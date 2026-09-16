@@ -1,0 +1,139 @@
+asyncapi: 3.0.0
+
+info:
+  title: File asset preparation messages
+  version: 1.0.0
+  description: >-
+    Commands and events exchanged by the file upload API and asset preparation
+    workers.
+
+defaultContentType: application/json
+
+servers:
+  rabbitmq:
+    host: localhost:5672
+    pathname: /
+    protocol: amqp
+    protocolVersion: 0-9-1
+    description: RabbitMQ broker. Deployments replace the host and virtual host.
+
+channels:
+  prepareDocumentCommand:
+    $ref: ./channels/commands.yaml#/prepareDocumentCommand
+  documentJobs:
+    $ref: ./channels/commands.yaml#/documentJobs
+  prepareImageCommand:
+    $ref: ./channels/commands.yaml#/prepareImageCommand
+  imageJobs:
+    $ref: ./channels/commands.yaml#/imageJobs
+  assetPreparationCompleted:
+    $ref: ./channels/events.yaml#/assetPreparationCompleted
+  assetPreparationFailed:
+    $ref: ./channels/events.yaml#/assetPreparationFailed
+  backendAssetEvents:
+    $ref: ./channels/events.yaml#/backendAssetEvents
+  deadLetteredDocumentCommand:
+    $ref: ./channels/dead-letters.yaml#/deadLetteredDocumentCommand
+  deadLetteredImageCommand:
+    $ref: ./channels/dead-letters.yaml#/deadLetteredImageCommand
+  backendPreparationDead:
+    $ref: ./channels/dead-letters.yaml#/backendPreparationDead
+
+operations:
+  publishPrepareDocumentCommand:
+    action: send
+    channel:
+      $ref: '#/channels/prepareDocumentCommand'
+    summary: Publish a document preparation command after upload completion.
+    bindings:
+      amqp:
+        deliveryMode: 2
+        mandatory: true
+        bindingVersion: 0.3.0
+
+  processDocumentJob:
+    action: receive
+    channel:
+      $ref: '#/channels/documentJobs'
+    summary: Prepare a document asset.
+    bindings:
+      amqp:
+        ack: true
+        bindingVersion: 0.3.0
+
+  publishPrepareImageCommand:
+    action: send
+    channel:
+      $ref: '#/channels/prepareImageCommand'
+    summary: Publish an image preparation command after upload completion.
+    bindings:
+      amqp:
+        deliveryMode: 2
+        mandatory: true
+        bindingVersion: 0.3.0
+
+  processImageJob:
+    action: receive
+    channel:
+      $ref: '#/channels/imageJobs'
+    summary: Prepare an image asset.
+    bindings:
+      amqp:
+        ack: true
+        bindingVersion: 0.3.0
+
+  publishAssetPreparationCompleted:
+    action: send
+    channel:
+      $ref: '#/channels/assetPreparationCompleted'
+    summary: Publish the permanent variants produced for an asset.
+    bindings:
+      amqp:
+        deliveryMode: 2
+        mandatory: true
+        bindingVersion: 0.3.0
+
+  publishAssetPreparationFailed:
+    action: send
+    channel:
+      $ref: '#/channels/assetPreparationFailed'
+    summary: Publish a permanent input failure.
+    bindings:
+      amqp:
+        deliveryMode: 2
+        mandatory: true
+        bindingVersion: 0.3.0
+
+  consumeAssetPreparationEvents:
+    action: receive
+    channel:
+      $ref: '#/channels/backendAssetEvents'
+    summary: Apply a worker outcome to the file asset.
+    bindings:
+      amqp:
+        ack: true
+        bindingVersion: 0.3.0
+
+  consumeExhaustedPreparationCommand:
+    action: receive
+    channel:
+      $ref: '#/channels/backendPreparationDead'
+    summary: Mark an asset failed after command delivery is exhausted.
+    bindings:
+      amqp:
+        ack: true
+        bindingVersion: 0.3.0
+
+components:
+  correlationIds:
+    PreparationCommandId:
+      $ref: ./messages.yaml#/correlationIds/PreparationCommandId
+  messages:
+    PrepareDocumentCommandV1:
+      $ref: ./messages.yaml#/messages/PrepareDocumentCommandV1
+    PrepareImageCommandV1:
+      $ref: ./messages.yaml#/messages/PrepareImageCommandV1
+    AssetPreparationCompletedEventV1:
+      $ref: ./messages.yaml#/messages/AssetPreparationCompletedEventV1
+    AssetPreparationFailedEventV1:
+      $ref: ./messages.yaml#/messages/AssetPreparationFailedEventV1

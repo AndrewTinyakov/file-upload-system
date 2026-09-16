@@ -1,6 +1,8 @@
 spring:
   application:
     name: api
+  jackson:
+    default-property-inclusion: non_null
   jooq:
     sql-dialect: postgres
   flyway:
