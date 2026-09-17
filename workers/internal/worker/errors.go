@@ -5,6 +5,14 @@ import (
 	"fmt"
 )
 
+const (
+	FailureSourceObjectNotFound   = "SOURCE_OBJECT_NOT_FOUND"
+	FailureSourceObjectChanged    = "SOURCE_OBJECT_CHANGED"
+	FailureUnsupportedImageFormat = "UNSUPPORTED_IMAGE_FORMAT"
+	FailureInvalidImage           = "INVALID_IMAGE"
+	FailureUnknownProfile         = "UNKNOWN_PROCESSING_PROFILE"
+)
+
 type PermanentError struct {
 	Code string
 	Err  error

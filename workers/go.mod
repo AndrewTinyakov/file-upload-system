@@ -10,6 +10,7 @@ require (
 	github.com/aws/smithy-go v1.28.1
 	github.com/davidbyttow/govips/v2 v2.18.0
 	github.com/rabbitmq/amqp091-go v1.15.0
+	golang.org/x/image v0.38.0
 )
 
 require (
@@ -26,7 +27,6 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/sso v1.38.0 // indirect
 	github.com/aws/aws-sdk-go-v2/service/ssooidc v1.43.0 // indirect
 	github.com/aws/aws-sdk-go-v2/service/sts v1.51.0 // indirect
-	golang.org/x/image v0.38.0 // indirect
 	golang.org/x/net v0.52.0 // indirect
 	golang.org/x/text v0.35.0 // indirect
 )

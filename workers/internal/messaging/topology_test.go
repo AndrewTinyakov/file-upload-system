@@ -26,12 +26,12 @@ func TestJobTopologies(t *testing.T) {
 	}
 }
 
-func TestEventPublisher(t *testing.T) {
+func TestEventPublisherConfig(t *testing.T) {
 	want := rabbitmq.PublisherConfig{
 		Exchanges: []rabbitmq.Exchange{{Name: EventsExchange, Kind: "topic", Durable: true}},
 	}
-	if got := EventPublisher(); !reflect.DeepEqual(got, want) {
-		t.Fatalf("EventPublisher() = %#v, want %#v", got, want)
+	if got := eventPublisherConfig(); !reflect.DeepEqual(got, want) {
+		t.Fatalf("eventPublisherConfig() = %#v, want %#v", got, want)
 	}
 }
 

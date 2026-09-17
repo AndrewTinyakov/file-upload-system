@@ -20,14 +20,6 @@ var (
 	ImageJobs    = JobRoute{Queue: "image.jobs", RoutingKey: "image.prepare.v1"}
 )
 
-func EventPublisher() rabbitmq.PublisherConfig {
-	return rabbitmq.PublisherConfig{
-		Exchanges: []rabbitmq.Exchange{
-			{Name: EventsExchange, Kind: "topic", Durable: true},
-		},
-	}
-}
-
 func (route JobRoute) Topology(deliveryLimit int) rabbitmq.Topology {
 	return rabbitmq.Topology{
 		Exchanges: []rabbitmq.Exchange{
