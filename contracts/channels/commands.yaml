@@ -1,3 +1,75 @@
+deleteAssetPrefixCommand:
+  address: asset.prefix.delete.v1
+  messages:
+    DeleteAssetPrefixCommandV1:
+      $ref: ../messages.yaml#/messages/DeleteAssetPrefixCommandV1
+  bindings:
+    amqp:
+      is: routingKey
+      exchange:
+        name: asset.commands
+        type: topic
+        durable: true
+        autoDelete: false
+        vhost: /
+      bindingVersion: 0.3.0
+
+assetCleanupJobs:
+  address: backend.asset-cleanups
+  description: >-
+    Durable quorum queue bound to asset.commands with asset.prefix.delete.v1.
+    Consumers acknowledge manually. Exhausted deliveries are dead-lettered to
+    asset.dead with the original routing key.
+  messages:
+    DeleteAssetPrefixCommandV1:
+      $ref: ../messages.yaml#/messages/DeleteAssetPrefixCommandV1
+  bindings:
+    amqp:
+      is: queue
+      queue:
+        name: backend.asset-cleanups
+        durable: true
+        exclusive: false
+        autoDelete: false
+        vhost: /
+      bindingVersion: 0.3.0
+
+abortMultipartUploadCommand:
+  address: upload.multipart.abort.v1
+  messages:
+    AbortMultipartUploadCommandV1:
+      $ref: ../messages.yaml#/messages/AbortMultipartUploadCommandV1
+  bindings:
+    amqp:
+      is: routingKey
+      exchange:
+        name: asset.commands
+        type: topic
+        durable: true
+        autoDelete: false
+        vhost: /
+      bindingVersion: 0.3.0
+
+multipartAbortJobs:
+  address: backend.multipart-aborts
+  description: >-
+    Durable quorum queue bound to asset.commands with upload.multipart.abort.v1.
+    Consumers acknowledge manually. Exhausted deliveries are dead-lettered to
+    asset.dead with the original routing key.
+  messages:
+    AbortMultipartUploadCommandV1:
+      $ref: ../messages.yaml#/messages/AbortMultipartUploadCommandV1
+  bindings:
+    amqp:
+      is: queue
+      queue:
+        name: backend.multipart-aborts
+        durable: true
+        exclusive: false
+        autoDelete: false
+        vhost: /
+      bindingVersion: 0.3.0
+
 prepareDocumentCommand:
   address: document.prepare.v1
   messages:

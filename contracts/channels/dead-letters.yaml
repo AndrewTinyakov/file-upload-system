@@ -1,3 +1,71 @@
+deadLetteredDeleteAssetPrefixCommand:
+  address: asset.prefix.delete.v1
+  description: Asset cleanup command after its delivery limit is exhausted.
+  messages:
+    DeleteAssetPrefixCommandV1:
+      $ref: ../messages.yaml#/messages/DeleteAssetPrefixCommandV1
+  bindings:
+    amqp:
+      is: routingKey
+      exchange:
+        name: asset.dead
+        type: topic
+        durable: true
+        autoDelete: false
+        vhost: /
+      bindingVersion: 0.3.0
+
+backendAssetCleanupDead:
+  address: backend.asset-cleanups-dead
+  description: Durable queue retaining exhausted asset cleanup commands.
+  messages:
+    DeleteAssetPrefixCommandV1:
+      $ref: ../messages.yaml#/messages/DeleteAssetPrefixCommandV1
+  bindings:
+    amqp:
+      is: queue
+      queue:
+        name: backend.asset-cleanups-dead
+        durable: true
+        exclusive: false
+        autoDelete: false
+        vhost: /
+      bindingVersion: 0.3.0
+
+deadLetteredAbortMultipartUploadCommand:
+  address: upload.multipart.abort.v1
+  description: Multipart abort command after its delivery limit is exhausted.
+  messages:
+    AbortMultipartUploadCommandV1:
+      $ref: ../messages.yaml#/messages/AbortMultipartUploadCommandV1
+  bindings:
+    amqp:
+      is: routingKey
+      exchange:
+        name: asset.dead
+        type: topic
+        durable: true
+        autoDelete: false
+        vhost: /
+      bindingVersion: 0.3.0
+
+backendMultipartAbortDead:
+  address: backend.multipart-aborts-dead
+  description: Durable queue retaining exhausted multipart abort commands.
+  messages:
+    AbortMultipartUploadCommandV1:
+      $ref: ../messages.yaml#/messages/AbortMultipartUploadCommandV1
+  bindings:
+    amqp:
+      is: queue
+      queue:
+        name: backend.multipart-aborts-dead
+        durable: true
+        exclusive: false
+        autoDelete: false
+        vhost: /
+      bindingVersion: 0.3.0
+
 deadLetteredDocumentCommand:
   address: document.prepare.v1
   description: Document command after its delivery limit is exhausted.

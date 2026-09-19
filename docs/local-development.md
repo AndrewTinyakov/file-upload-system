@@ -14,11 +14,15 @@ not required when building with Docker.
 From the repository root:
 
 ```bash
-docker compose -f compose.local.yaml up -d
+docker compose -f compose.local.yaml up -d --build
 ./api/gradlew -p api bootRun --args="--spring.profiles.active=local"
 ```
 
-Compose starts PostgreSQL, RabbitMQ, and MinIO. The API runs on the host and applies Flyway migrations at startup.
+Compose starts PostgreSQL, RabbitMQ, MinIO, and both Go workers. Its MinIO initializer applies upload retention and public asset-read policies. The API runs on the host and applies Flyway migrations at startup.
+
+Run the API integration suite with `./api/gradlew -p api test`; it starts isolated containers and requires Docker.
+
+With the local stack and API running, run the full system tests with `npm run test:system`.
 
 Build and test the worker module:
 

@@ -23,7 +23,9 @@ public enum FileAssetStatus implements EnumType {
 
     READY("READY"),
 
-    FAILED("FAILED");
+    FAILED("FAILED"),
+
+    DISCARDED("DISCARDED");
 
     private final String literal;
 

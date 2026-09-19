@@ -35,5 +35,9 @@ A file asset prepared into display and download variants.
 **Preparation**:
 The work that turns an uploaded object into the asset variants clients can retrieve.
 
+**Discarded**:
+A terminal file-asset state indicating that recovery is closed. Entering this state durably requests deletion of any permanent output.
+_Avoid_: Cleanup requested, cleanup started, cleanup completed
+
 **Processing profile**:
 A named, versioned set of image variants and the rules for producing them.

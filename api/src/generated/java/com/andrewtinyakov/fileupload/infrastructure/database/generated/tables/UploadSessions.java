@@ -94,6 +94,11 @@ public class UploadSessions extends TableImpl<UploadSessionsRecord> {
     public final TableField<UploadSessionsRecord, UploadStrategy> STRATEGY = createField(DSL.name("strategy"), SQLDataType.VARCHAR.nullable(false).asEnumDataType(UploadStrategy.class), this, "");
 
     /**
+     * The column <code>public.upload_sessions.part_size</code>.
+     */
+    public final TableField<UploadSessionsRecord, Long> PART_SIZE = createField(DSL.name("part_size"), SQLDataType.BIGINT, this, "");
+
+    /**
      * The column <code>public.upload_sessions.status</code>.
      */
     public final TableField<UploadSessionsRecord, UploadSessionStatus> STATUS = createField(DSL.name("status"), SQLDataType.VARCHAR.nullable(false).defaultValue(DSL.field(DSL.raw("'CREATED'::upload_session_status"), SQLDataType.VARCHAR)).asEnumDataType(UploadSessionStatus.class), this, "");
@@ -242,6 +247,7 @@ public class UploadSessions extends TableImpl<UploadSessionsRecord> {
         return Arrays.asList(
             Internal.createCheck(this, DSL.name("upload_sessions_completion_valid"), "((((status = 'COMPLETED'::upload_session_status) AND (completed_at IS NOT NULL)) OR ((status <> 'COMPLETED'::upload_session_status) AND (completed_at IS NULL))))", true),
             Internal.createCheck(this, DSL.name("upload_sessions_expiry_valid"), "((expires_at > created_at))", true),
+            Internal.createCheck(this, DSL.name("upload_sessions_part_size_valid"), "((((strategy = 'SINGLE'::upload_strategy) AND (part_size IS NULL)) OR ((strategy = 'MULTIPART'::upload_strategy) AND ((part_size >= 5242880) AND (part_size <= '5368709120'::bigint)))))", true),
             Internal.createCheck(this, DSL.name("upload_sessions_request_fingerprint_valid"), "((char_length((request_fingerprint)::text) = 64))", true),
             Internal.createCheck(this, DSL.name("upload_sessions_strategy_valid"), "((((strategy = 'SINGLE'::upload_strategy) AND (provider_upload_id IS NULL)) OR ((strategy = 'MULTIPART'::upload_strategy) AND (provider_upload_id IS NOT NULL))))", true)
         );

@@ -59,13 +59,44 @@ services:
     depends_on:
       minio:
         condition: service_healthy
+    volumes:
+      - ./infra/minio:/configuration:ro
     entrypoint:
       - /bin/sh
       - -c
       - |
+        set -eu
         mc alias set local http://minio:9000 file_upload file_upload
         mc mb --ignore-existing local/uploads
         mc mb --ignore-existing local/assets
+        mc ilm import local/uploads < /configuration/uploads-lifecycle.json
+        mc anonymous set-json /configuration/assets-policy.json local/assets
+
+  document-worker:
+    build:
+      context: ./workers
+      dockerfile: docker/document.Dockerfile
+    environment: &worker-environment
+      RABBITMQ_URL: amqp://file_upload:file_upload@rabbitmq:5672/file_upload
+      S3_ENDPOINT: http://minio:9000
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      minio-init:
+        condition: service_completed_successfully
+    restart: unless-stopped
+
+  image-worker:
+    build:
+      context: ./workers
+      dockerfile: docker/image.Dockerfile
+    environment: *worker-environment
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      minio-init:
+        condition: service_completed_successfully
+    restart: unless-stopped
 
 volumes:
   postgres_data:

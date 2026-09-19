@@ -246,7 +246,7 @@ public class FileAssets extends TableImpl<FileAssetsRecord> {
     public List<Check<FileAssetsRecord>> getChecks() {
         return Arrays.asList(
             Internal.createCheck(this, DSL.name("file_assets_byte_size_nonnegative"), "((byte_size >= 0))", true),
-            Internal.createCheck(this, DSL.name("file_assets_failure_valid"), "((((status = 'FAILED'::file_asset_status) AND (failure_code IS NOT NULL) AND (failure_code <> ''::text)) OR ((status <> 'FAILED'::file_asset_status) AND (failure_code IS NULL))))", true),
+            Internal.createCheck(this, DSL.name("file_assets_failure_valid"), "((((status = ANY (ARRAY['FAILED'::file_asset_status, 'DISCARDED'::file_asset_status])) AND (failure_code IS NOT NULL) AND (failure_code <> ''::text)) OR ((status <> ALL (ARRAY['FAILED'::file_asset_status, 'DISCARDED'::file_asset_status])) AND (failure_code IS NULL))))", true),
             Internal.createCheck(this, DSL.name("file_assets_processing_profile_valid"), "((((handling_mode = 'DOCUMENT'::file_handling_mode) AND (processing_profile_name IS NULL) AND (processing_profile_version IS NULL)) OR ((handling_mode = 'IMAGE'::file_handling_mode) AND (processing_profile_name IS NOT NULL) AND (processing_profile_name <> ''::text) AND (processing_profile_version IS NOT NULL) AND (processing_profile_version > 0))))", true)
         );
     }

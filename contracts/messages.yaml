@@ -5,6 +5,26 @@ correlationIds:
     location: $message.payload#/commandId
 
 messages:
+  DeleteAssetPrefixCommandV1:
+    name: DeleteAssetPrefixCommandV1
+    title: Delete asset prefix command v1
+    summary: Delete permanent output for an asset whose cleanup was requested.
+    contentType: application/json
+    correlationId:
+      $ref: '#/correlationIds/PreparationCommandId'
+    payload:
+      $ref: ./schemas/asset/command/delete-asset-prefix-v1.yaml
+
+  AbortMultipartUploadCommandV1:
+    name: AbortMultipartUploadCommandV1
+    title: Abort multipart upload command v1
+    summary: Release storage used by an expired multipart upload.
+    contentType: application/json
+    correlationId:
+      $ref: '#/correlationIds/PreparationCommandId'
+    payload:
+      $ref: ./schemas/asset/command/abort-multipart-upload-v1.yaml
+
   PrepareDocumentCommandV1:
     name: PrepareDocumentCommandV1
     title: Prepare document command v1

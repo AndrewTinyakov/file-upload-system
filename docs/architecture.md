@@ -34,7 +34,7 @@ flowchart LR
     IW -->|write| A
 ```
 
-The API handles metadata, authorization placeholders, upload coordination, and state. File bytes never pass through it. Clients upload directly to S3-compatible storage, and Go workers prepare uploaded objects asynchronously.
+The API handles metadata, user-scoped access through the development `X-User-ID` header, upload coordination, and state. This header is not authentication. File bytes never pass through it. Clients upload directly to S3-compatible storage, and Go workers prepare uploaded objects asynchronously.
 
 PostgreSQL stores file assets, upload sessions, asset variants, and outbox messages. One S3-compatible installation provides an `uploads` bucket for temporary input and an `assets` bucket for permanent output. Local development uses MinIO; a deployment can use S3 and a CDN.
 
@@ -46,6 +46,10 @@ flowchart LR
     CX{{asset.commands}}
     DQ[[document.jobs]]
     IQ[[image.jobs]]
+    CQ[[backend.asset-cleanups]]
+    AQ[[backend.multipart-aborts]]
+    CC[API asset cleanup consumer]
+    AC[API multipart abort consumer]
     DW[Document worker pool]
     IW[Image worker pool]
     EX{{asset.events}}
@@ -53,20 +57,30 @@ flowchart LR
     EC[API event consumer]
     DX{{asset.dead}}
     DLQ[[backend.preparation-dead]]
+    CDLQ[[backend.asset-cleanups-dead]]
+    ADLQ[[backend.multipart-aborts-dead]]
     DC[API dead-letter consumer]
 
     OP --> CX
     CX -->|document.prepare.v1| DQ
     CX -->|image.prepare.v1| IQ
+    CX -->|asset.prefix.delete.v1| CQ
+    CX -->|upload.multipart.abort.v1| AQ
     DQ --> DW
     IQ --> IW
+    CQ --> CC
+    AQ --> AC
     DW --> EX
     IW --> EX
     EX --> EQ
     EQ --> EC
     DQ -->|delivery limit exceeded| DX
     IQ -->|delivery limit exceeded| DX
-    DX --> DLQ
+    CQ -->|delivery limit exceeded| DX
+    AQ -->|delivery limit exceeded| DX
+    DX -->|document/image keys| DLQ
+    DX -->|asset cleanup key| CDLQ
+    DX -->|multipart abort key| ADLQ
     DLQ --> DC
 ```
 
@@ -87,7 +101,7 @@ sequenceDiagram
     participant W as Selected worker
     participant A as assets bucket
 
-    C->>API: POST /upload-sessions<br/>filename, contentType, byteSize, handlingMode
+    C->>API: POST /api/v1/upload-sessions<br/>filename, contentType, byteSize, handlingMode
 
     opt Multipart upload
         API->>U: CreateMultipartUpload
@@ -110,7 +124,7 @@ sequenceDiagram
         end
     end
 
-    C->>API: POST /upload-sessions/{sessionId}/complete<br/>final part list when multipart
+    C->>API: POST /api/v1/upload-sessions/{sessionId}/complete<br/>final part list when multipart
     opt Multipart upload
         API->>U: CompleteMultipartUpload
         U-->>API: completed object
@@ -121,7 +135,7 @@ sequenceDiagram
 
     API->>DB: Transaction:<br/>UploadSession = COMPLETED<br/>FileAsset = PREPARING<br/>insert outbox message
     API-->>C: 202 Accepted<br/>assetId, PREPARING
-    Note over C,API: Client short-polls GET /assets/{assetId}<br/>until READY or FAILED
+    Note over C,API: Client short-polls GET /api/v1/assets/{assetId}<br/>until READY, FAILED, or DISCARDED
 
     Note over OP: Runs inside Spring API<br/>Can be deployed separately later
     OP->>DB: Claim outbox rows<br/>FOR UPDATE SKIP LOCKED
@@ -161,7 +175,7 @@ sequenceDiagram
     API->>DB: Transaction:<br/>lock FileAsset<br/>validate and store variants<br/>FileAsset = READY
     API->>MQ: acknowledge completion event
 
-    C->>API: GET /assets/{assetId}
+    C->>API: GET /api/v1/assets/{assetId}
     API->>DB: read asset and variants
     DB-->>API: READY and variant metadata
     API-->>C: direct variant URLs
@@ -223,7 +237,7 @@ RabbitMQ 4.3 quorum queues provide delayed retry, a configurable delivery limit,
 
 ## State changes
 
-A `FileAsset` moves from `AWAITING_UPLOAD` to `PREPARING` once its upload completes, then to `READY` after preparation. An upload or preparation failure moves it to `FAILED`. A valid completion arriving after retry exhaustion can still move it from `FAILED` to `READY`.
+A `FileAsset` moves from `AWAITING_UPLOAD` to `PREPARING` once its upload completes, then to `READY` after preparation. An upload or preparation failure moves it to `FAILED`. A valid completion arriving after retry exhaustion can still move it from `FAILED` to `READY` until cleanup changes the status to `DISCARDED`.
 
 An `UploadSession` starts as `CREATED` and ends as `COMPLETED`, `ABORTED`, or `EXPIRED`.
 
@@ -232,7 +246,9 @@ An `UploadSession` starts as `CREATED` and ends as `COMPLETED`, `ABORTED`, or `E
 - Creating an upload session accepts an `Idempotency-Key`. The unique business key is `(owner_id, idempotency_key)`. Reusing a key with different request data returns `409 Conflict`.
 - Completing or aborting an upload session is idempotent.
 - The outbox connects the database transaction to command publication. Every API instance may publish rows claimed with `FOR UPDATE SKIP LOCKED`.
+- Expiration claims a batch, bulk-updates its sessions and assets, and bulk-inserts one abort command per multipart upload in the same transaction. No object-storage request runs while those rows are locked.
 - RabbitMQ delivery is at least once. Workers use deterministic output keys and check `complete.json` before repeating work.
+- Multipart abort commands are idempotent because an already-absent upload is accepted as success. The API consumes them with bounded concurrency.
 - Completion handling locks the file asset and relies on a unique `(asset_id, variant_type)` constraint. Repeated equivalent events succeed. Conflicting events are rejected and reported.
 
 ## Cleanup and scaling
@@ -241,7 +257,9 @@ An object-storage lifecycle rule removes every source object from the `uploads` 
 
 A separate lifecycle rule aborts incomplete multipart uploads after one day. Until a multipart upload is completed or aborted, its uploaded parts remain stored even though there is no readable object yet.
 
-A scheduled task in Spring claims old failed assets with `FOR UPDATE SKIP LOCKED`. After a grace period, it checks the state again and removes partial objects beneath the destination prefix. User-requested deletion of permanent assets is outside scope.
+The upload-session expiration task publishes multipart abort commands through the outbox. The API consumes those commands asynchronously, retries storage failures, and retains exhausted commands in `backend.multipart-aborts-dead`. The lifecycle rule remains the final cleanup fallback.
+
+A scheduled task in Spring claims a batch of old failed assets with `FOR UPDATE SKIP LOCKED`. In one transaction it changes their status to `DISCARDED` and bulk-inserts prefix-deletion commands into the outbox. Bounded RabbitMQ consumers delete the prefixes without holding database locks. A late preparation completion for a discarded asset enqueues another deletion command to remove any output written after the first cleanup. User-requested deletion of permanent assets is outside scope.
 
 The API is stateless outside PostgreSQL. Document and image workers consume separate queues, so each pool can be scaled independently. RabbitMQ absorbs temporary backlogs. Queue depth, oldest message age, processing duration, failures, and dead letters are monitored. Autoscaling and Kubernetes are outside scope.
 

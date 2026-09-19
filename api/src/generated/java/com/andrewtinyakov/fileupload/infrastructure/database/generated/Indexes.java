@@ -24,7 +24,7 @@ public class Indexes {
     // INDEX definitions
     // -------------------------------------------------------------------------
 
-    public static final Index FILE_ASSETS_FAILED_UPDATED_IDX = Internal.createIndex(DSL.name("file_assets_failed_updated_idx"), FileAssets.FILE_ASSETS, new OrderField[] { FileAssets.FILE_ASSETS.UPDATED_AT }, false);
+    public static final Index FILE_ASSETS_FAILED_UPDATED_IDX = Internal.createIndex(DSL.name("file_assets_failed_updated_idx"), FileAssets.FILE_ASSETS, new OrderField[] { FileAssets.FILE_ASSETS.UPDATED_AT, FileAssets.FILE_ASSETS.ID }, false);
     public static final Index FILE_ASSETS_OWNER_CREATED_IDX = Internal.createIndex(DSL.name("file_assets_owner_created_idx"), FileAssets.FILE_ASSETS, new OrderField[] { FileAssets.FILE_ASSETS.OWNER_ID, FileAssets.FILE_ASSETS.CREATED_AT.desc() }, false);
     public static final Index OUTBOX_MESSAGES_UNPUBLISHED_IDX = Internal.createIndex(DSL.name("outbox_messages_unpublished_idx"), OutboxMessages.OUTBOX_MESSAGES, new OrderField[] { OutboxMessages.OUTBOX_MESSAGES.CREATED_AT, OutboxMessages.OUTBOX_MESSAGES.ID }, false);
     public static final Index UPLOAD_SESSIONS_EXPIRY_IDX = Internal.createIndex(DSL.name("upload_sessions_expiry_idx"), UploadSessions.UPLOAD_SESSIONS, new OrderField[] { UploadSessions.UPLOAD_SESSIONS.EXPIRES_AT }, false);

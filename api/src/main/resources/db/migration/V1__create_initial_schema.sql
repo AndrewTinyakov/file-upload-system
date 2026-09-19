@@ -7,7 +7,8 @@ CREATE TYPE file_asset_status AS ENUM (
     'AWAITING_UPLOAD',
     'PREPARING',
     'READY',
-    'FAILED'
+    'FAILED',
+    'DISCARDED'
 );
 
 CREATE TABLE file_assets (
@@ -51,13 +52,13 @@ CREATE TABLE file_assets (
     CONSTRAINT file_assets_failure_valid
         CHECK (
             (
-                status = 'FAILED'
+                status IN ('FAILED', 'DISCARDED')
                 AND failure_code IS NOT NULL
                 AND failure_code <> ''
             )
             OR
             (
-                status <> 'FAILED'
+                status NOT IN ('FAILED', 'DISCARDED')
                 AND failure_code IS NULL
             )
         )
@@ -67,7 +68,7 @@ CREATE INDEX file_assets_owner_created_idx
     ON file_assets (owner_id, created_at DESC);
 
 CREATE INDEX file_assets_failed_updated_idx
-    ON file_assets (updated_at)
+    ON file_assets (updated_at, id)
     WHERE status = 'FAILED';
 
 CREATE TYPE upload_strategy AS ENUM (
@@ -89,6 +90,7 @@ CREATE TABLE upload_sessions (
     idempotency_key TEXT NOT NULL,
     request_fingerprint VARCHAR(64) NOT NULL,
     strategy upload_strategy NOT NULL,
+    part_size BIGINT,
     status upload_session_status NOT NULL DEFAULT 'CREATED',
     uploaded_object_bucket TEXT NOT NULL,
     uploaded_object_key TEXT NOT NULL,
@@ -115,6 +117,12 @@ CREATE TABLE upload_sessions (
             (strategy = 'SINGLE' AND provider_upload_id IS NULL)
             OR
             (strategy = 'MULTIPART' AND provider_upload_id IS NOT NULL)
+        ),
+    CONSTRAINT upload_sessions_part_size_valid
+        CHECK (
+            (strategy = 'SINGLE' AND part_size IS NULL)
+            OR
+            (strategy = 'MULTIPART' AND part_size BETWEEN 5242880 AND 5368709120)
         ),
     CONSTRAINT upload_sessions_completion_valid
         CHECK (

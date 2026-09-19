@@ -1,7 +1,32 @@
 spring:
+  mvc:
+    servlet:
+      path: /api
+    problemdetails:
+      enabled: true
   application:
     name: api
+  main:
+    keep-alive: true
+  threads:
+    virtual:
+      enabled: true
+  rabbitmq:
+    publisher-confirm-type: correlated
+    publisher-returns: true
+    template:
+      mandatory: true
+    listener:
+      simple:
+        acknowledge-mode: manual
+        prefetch: 20
   jackson:
+    deserialization:
+      accept-float-as-int: false
+      fail-on-unknown-properties: true
+      fail-on-null-for-primitives: true
+    mapper:
+      allow-coercion-of-scalars: false
     default-property-inclusion: non_null
   jooq:
     sql-dialect: postgres
@@ -12,3 +37,33 @@ spring:
     validate-on-migrate: true
     clean-disabled: true
     fail-on-missing-locations: true
+
+file-upload:
+  upload:
+    max-document-size: 5368709120
+    max-image-size: 52428800
+    multipart-threshold: 67108864
+    part-size: 8388608
+    max-parts-per-request: 100
+    session-lifetime: 6h
+    signed-url-lifetime: 15m
+    processing-profile-name: default-image
+    processing-profile-version: 1
+  scheduling:
+    enabled: true
+    batch-size: 20
+    max-batches-per-run: 10
+    expiration-delay: 60000
+    cleanup-delay: 60000
+    cleanup-grace-period: 24h
+  outbox:
+    poll-delay: 1000
+    confirm-timeout: 5s
+    max-batches-per-run: 10
+  messaging:
+    delivery-limit: 5
+    asset-cleanup-concurrency: 4
+    multipart-abort-concurrency: 4
+  web:
+    allowed-origins:
+      - http://localhost:5173

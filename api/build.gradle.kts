@@ -4,7 +4,12 @@ plugins {
     id("org.springframework.boot") version "4.1.1"
     id("io.spring.dependency-management") version "1.1.7"
     id("org.jooq.jooq-codegen-gradle") version "3.21.7"
+    id("org.jlleitschuh.gradle.ktlint") version "14.2.0"
     kotlin("kapt") version "2.3.21"
+}
+
+ktlint {
+    version.set("1.8.0")
 }
 
 group = "com.andrewtinyakov"
@@ -22,6 +27,9 @@ repositories {
 }
 
 dependencies {
+    implementation(platform("software.amazon.awssdk:bom:2.54.18"))
+    implementation("software.amazon.awssdk:s3")
+    implementation("software.amazon.awssdk:url-connection-client")
     implementation("com.github.f4b6a3:ulid-creator:5.2.4")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.boot:spring-boot-starter-amqp")
@@ -71,15 +79,21 @@ jooq {
     configuration {
         jdbc {
             driver = "org.postgresql.Driver"
-            url = providers.environmentVariable("JOOQ_DB_URL")
-                .orElse("jdbc:postgresql://localhost:5432/file_upload")
-                .get()
-            user = providers.environmentVariable("JOOQ_DB_USER")
-                .orElse("file_upload")
-                .get()
-            password = providers.environmentVariable("JOOQ_DB_PASSWORD")
-                .orElse("file_upload")
-                .get()
+            url =
+                providers
+                    .environmentVariable("JOOQ_DB_URL")
+                    .orElse("jdbc:postgresql://localhost:5432/file_upload")
+                    .get()
+            user =
+                providers
+                    .environmentVariable("JOOQ_DB_USER")
+                    .orElse("file_upload")
+                    .get()
+            password =
+                providers
+                    .environmentVariable("JOOQ_DB_PASSWORD")
+                    .orElse("file_upload")
+                    .get()
         }
         generator {
             name = "org.jooq.codegen.JavaGenerator"

@@ -1,0 +1,18 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {"AWS": ["*"]},
+      "Action": ["s3:GetObject"],
+      "Resource": ["arn:aws:s3:::assets/assets/*"]
+    },
+    {
+      "Effect": "Deny",
+      "Principal": {"AWS": ["*"]},
+      "Action": ["s3:GetObject"],
+      "Resource": ["arn:aws:s3:::assets/assets/*/complete.json"],
+      "Condition": {"StringNotEquals": {"s3:signatureversion": "AWS4-HMAC-SHA256"}}
+    }
+  ]
+}

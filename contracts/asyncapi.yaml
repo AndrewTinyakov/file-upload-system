@@ -1,11 +1,11 @@
 asyncapi: 3.0.0
 
 info:
-  title: File asset preparation messages
+  title: File asset messages
   version: 1.0.0
   description: >-
-    Commands and events exchanged by the file upload API and asset preparation
-    workers.
+    Commands and events exchanged by the file upload API, its asynchronous
+    storage tasks, and asset preparation workers.
 
 defaultContentType: application/json
 
@@ -18,6 +18,14 @@ servers:
     description: RabbitMQ broker. Deployments replace the host and virtual host.
 
 channels:
+  deleteAssetPrefixCommand:
+    $ref: ./channels/commands.yaml#/deleteAssetPrefixCommand
+  assetCleanupJobs:
+    $ref: ./channels/commands.yaml#/assetCleanupJobs
+  abortMultipartUploadCommand:
+    $ref: ./channels/commands.yaml#/abortMultipartUploadCommand
+  multipartAbortJobs:
+    $ref: ./channels/commands.yaml#/multipartAbortJobs
   prepareDocumentCommand:
     $ref: ./channels/commands.yaml#/prepareDocumentCommand
   documentJobs:
@@ -38,8 +46,58 @@ channels:
     $ref: ./channels/dead-letters.yaml#/deadLetteredImageCommand
   backendPreparationDead:
     $ref: ./channels/dead-letters.yaml#/backendPreparationDead
+  deadLetteredAbortMultipartUploadCommand:
+    $ref: ./channels/dead-letters.yaml#/deadLetteredAbortMultipartUploadCommand
+  backendMultipartAbortDead:
+    $ref: ./channels/dead-letters.yaml#/backendMultipartAbortDead
+  deadLetteredDeleteAssetPrefixCommand:
+    $ref: ./channels/dead-letters.yaml#/deadLetteredDeleteAssetPrefixCommand
+  backendAssetCleanupDead:
+    $ref: ./channels/dead-letters.yaml#/backendAssetCleanupDead
 
 operations:
+  publishDeleteAssetPrefixCommand:
+    action: send
+    channel:
+      $ref: '#/channels/deleteAssetPrefixCommand'
+    summary: Request deletion of permanent output for a failed asset.
+    bindings:
+      amqp:
+        deliveryMode: 2
+        mandatory: true
+        bindingVersion: 0.3.0
+
+  processAssetCleanupJob:
+    action: receive
+    channel:
+      $ref: '#/channels/assetCleanupJobs'
+    summary: Delete permanent output for one asset.
+    bindings:
+      amqp:
+        ack: true
+        bindingVersion: 0.3.0
+
+  publishAbortMultipartUploadCommand:
+    action: send
+    channel:
+      $ref: '#/channels/abortMultipartUploadCommand'
+    summary: Publish storage cleanup for an expired multipart upload.
+    bindings:
+      amqp:
+        deliveryMode: 2
+        mandatory: true
+        bindingVersion: 0.3.0
+
+  processMultipartAbortJob:
+    action: receive
+    channel:
+      $ref: '#/channels/multipartAbortJobs'
+    summary: Abort one expired multipart upload.
+    bindings:
+      amqp:
+        ack: true
+        bindingVersion: 0.3.0
+
   publishPrepareDocumentCommand:
     action: send
     channel:
@@ -129,6 +187,10 @@ components:
     PreparationCommandId:
       $ref: ./messages.yaml#/correlationIds/PreparationCommandId
   messages:
+    DeleteAssetPrefixCommandV1:
+      $ref: ./messages.yaml#/messages/DeleteAssetPrefixCommandV1
+    AbortMultipartUploadCommandV1:
+      $ref: ./messages.yaml#/messages/AbortMultipartUploadCommandV1
     PrepareDocumentCommandV1:
       $ref: ./messages.yaml#/messages/PrepareDocumentCommandV1
     PrepareImageCommandV1:

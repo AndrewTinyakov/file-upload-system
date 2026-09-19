@@ -1,0 +1,23 @@
+$schema: http://json-schema.org/draft-07/schema#
+title: DeleteAssetPrefixCommandV1
+type: object
+additionalProperties: false
+required:
+  - commandId
+  - assetId
+  - bucket
+  - prefix
+properties:
+  commandId:
+    type: string
+    pattern: '^[0-9A-HJKMNP-TV-Z]{26}$'
+    description: ULID shared by the outbox row and AMQP message.
+  assetId:
+    type: string
+    pattern: '^[0-9A-HJKMNP-TV-Z]{26}$'
+  bucket:
+    type: string
+    minLength: 1
+  prefix:
+    type: string
+    pattern: '^.+/$'

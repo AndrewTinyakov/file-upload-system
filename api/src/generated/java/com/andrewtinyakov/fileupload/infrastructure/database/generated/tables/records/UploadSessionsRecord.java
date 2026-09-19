@@ -107,129 +107,143 @@ public class UploadSessionsRecord extends UpdatableRecordImpl<UploadSessionsReco
     }
 
     /**
+     * Setter for <code>public.upload_sessions.part_size</code>.
+     */
+    public void setPartSize(Long value) {
+        set(6, value);
+    }
+
+    /**
+     * Getter for <code>public.upload_sessions.part_size</code>.
+     */
+    public Long getPartSize() {
+        return (Long) get(6);
+    }
+
+    /**
      * Setter for <code>public.upload_sessions.status</code>.
      */
     public void setStatus(UploadSessionStatus value) {
-        set(6, value);
+        set(7, value);
     }
 
     /**
      * Getter for <code>public.upload_sessions.status</code>.
      */
     public UploadSessionStatus getStatus() {
-        return (UploadSessionStatus) get(6);
+        return (UploadSessionStatus) get(7);
     }
 
     /**
      * Setter for <code>public.upload_sessions.uploaded_object_bucket</code>.
      */
     public void setUploadedObjectBucket(String value) {
-        set(7, value);
+        set(8, value);
     }
 
     /**
      * Getter for <code>public.upload_sessions.uploaded_object_bucket</code>.
      */
     public String getUploadedObjectBucket() {
-        return (String) get(7);
+        return (String) get(8);
     }
 
     /**
      * Setter for <code>public.upload_sessions.uploaded_object_key</code>.
      */
     public void setUploadedObjectKey(String value) {
-        set(8, value);
+        set(9, value);
     }
 
     /**
      * Getter for <code>public.upload_sessions.uploaded_object_key</code>.
      */
     public String getUploadedObjectKey() {
-        return (String) get(8);
+        return (String) get(9);
     }
 
     /**
      * Setter for <code>public.upload_sessions.provider_upload_id</code>.
      */
     public void setProviderUploadId(String value) {
-        set(9, value);
+        set(10, value);
     }
 
     /**
      * Getter for <code>public.upload_sessions.provider_upload_id</code>.
      */
     public String getProviderUploadId() {
-        return (String) get(9);
+        return (String) get(10);
     }
 
     /**
      * Setter for <code>public.upload_sessions.object_etag</code>.
      */
     public void setObjectEtag(String value) {
-        set(10, value);
+        set(11, value);
     }
 
     /**
      * Getter for <code>public.upload_sessions.object_etag</code>.
      */
     public String getObjectEtag() {
-        return (String) get(10);
+        return (String) get(11);
     }
 
     /**
      * Setter for <code>public.upload_sessions.expires_at</code>.
      */
     public void setExpiresAt(OffsetDateTime value) {
-        set(11, value);
+        set(12, value);
     }
 
     /**
      * Getter for <code>public.upload_sessions.expires_at</code>.
      */
     public OffsetDateTime getExpiresAt() {
-        return (OffsetDateTime) get(11);
+        return (OffsetDateTime) get(12);
     }
 
     /**
      * Setter for <code>public.upload_sessions.completed_at</code>.
      */
     public void setCompletedAt(OffsetDateTime value) {
-        set(12, value);
+        set(13, value);
     }
 
     /**
      * Getter for <code>public.upload_sessions.completed_at</code>.
      */
     public OffsetDateTime getCompletedAt() {
-        return (OffsetDateTime) get(12);
+        return (OffsetDateTime) get(13);
     }
 
     /**
      * Setter for <code>public.upload_sessions.created_at</code>.
      */
     public void setCreatedAt(OffsetDateTime value) {
-        set(13, value);
+        set(14, value);
     }
 
     /**
      * Getter for <code>public.upload_sessions.created_at</code>.
      */
     public OffsetDateTime getCreatedAt() {
-        return (OffsetDateTime) get(13);
+        return (OffsetDateTime) get(14);
     }
 
     /**
      * Setter for <code>public.upload_sessions.updated_at</code>.
      */
     public void setUpdatedAt(OffsetDateTime value) {
-        set(14, value);
+        set(15, value);
     }
 
     /**
      * Getter for <code>public.upload_sessions.updated_at</code>.
      */
     public OffsetDateTime getUpdatedAt() {
-        return (OffsetDateTime) get(14);
+        return (OffsetDateTime) get(15);
     }
 
     // -------------------------------------------------------------------------
@@ -255,7 +269,7 @@ public class UploadSessionsRecord extends UpdatableRecordImpl<UploadSessionsReco
     /**
      * Create a detached, initialised UploadSessionsRecord
      */
-    public UploadSessionsRecord(String id, String fileAssetId, String ownerId, String idempotencyKey, String requestFingerprint, UploadStrategy strategy, UploadSessionStatus status, String uploadedObjectBucket, String uploadedObjectKey, String providerUploadId, String objectEtag, OffsetDateTime expiresAt, OffsetDateTime completedAt, OffsetDateTime createdAt, OffsetDateTime updatedAt) {
+    public UploadSessionsRecord(String id, String fileAssetId, String ownerId, String idempotencyKey, String requestFingerprint, UploadStrategy strategy, Long partSize, UploadSessionStatus status, String uploadedObjectBucket, String uploadedObjectKey, String providerUploadId, String objectEtag, OffsetDateTime expiresAt, OffsetDateTime completedAt, OffsetDateTime createdAt, OffsetDateTime updatedAt) {
         super(UploadSessions.UPLOAD_SESSIONS);
 
         setId(id);
@@ -264,6 +278,7 @@ public class UploadSessionsRecord extends UpdatableRecordImpl<UploadSessionsReco
         setIdempotencyKey(idempotencyKey);
         setRequestFingerprint(requestFingerprint);
         setStrategy(strategy);
+        setPartSize(partSize);
         setStatus(status);
         setUploadedObjectBucket(uploadedObjectBucket);
         setUploadedObjectKey(uploadedObjectKey);

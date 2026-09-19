@@ -1,7 +1,7 @@
 asyncapi: 3.0.0
 
 info:
-  title: File asset preparation message models
+  title: File asset message models
   version: 1.0.0
   description: >-
     Model-generation entry point. Payload schemas are shared with the complete
@@ -9,6 +9,14 @@ info:
 
 components:
   messages:
+    DeleteAssetPrefixCommandV1:
+      name: DeleteAssetPrefixCommandV1
+      payload:
+        $ref: ./schemas/asset/command/delete-asset-prefix-v1.yaml
+    AbortMultipartUploadCommandV1:
+      name: AbortMultipartUploadCommandV1
+      payload:
+        $ref: ./schemas/asset/command/abort-multipart-upload-v1.yaml
     PrepareDocumentCommandV1:
       name: PrepareDocumentCommandV1
       payload:

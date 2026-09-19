@@ -1,0 +1,2 @@
+The system test uploads this file through the public HTTP and object-storage flow.
+The downloaded document must match these bytes exactly.

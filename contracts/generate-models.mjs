@@ -1,6 +1,8 @@
 import { execFileSync } from "node:child_process";
 import {
   mkdtempSync,
+  mkdirSync,
+  renameSync,
   readFileSync,
   readdirSync,
   rmSync,
@@ -101,6 +103,22 @@ try {
 
   if (language === "go") generatorArgs.push("--goIncludeTags");
   run(asyncApi, generatorArgs);
+
+  if (language === "kotlin") {
+    for (const file of readdirSync(join(repositoryRoot, target.output))) {
+      if (!file.endsWith(".kt")) continue;
+      const group = file.includes("Command") ? "command" : "event";
+      const sourcePath = join(repositoryRoot, target.output, file);
+      const destination = join(repositoryRoot, target.output, group);
+      mkdirSync(destination, { recursive: true });
+      const source = readFileSync(sourcePath, "utf8").replace(
+        `package ${target.packageName}`,
+        `package ${target.packageName}.${group}`,
+      );
+      writeFileSync(sourcePath, source.replace(/^(data class|enum class)/m, '@javax.annotation.processing.Generated("contracts/generate-models.mjs")\n$1').trimEnd() + "\n");
+      renameSync(sourcePath, join(destination, file));
+    }
+  }
 
   if (language === "go") {
     for (const file of readdirSync(join(repositoryRoot, target.output))) {

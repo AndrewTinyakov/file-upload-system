@@ -1,6 +1,7 @@
 {
-  "name": "file-upload-system-contracts",
+  "name": "file-upload-system",
   "private": true,
+  "type": "module",
   "engines": {
     "node": ">=24.11",
     "npm": ">=11.5.1"
@@ -8,9 +9,14 @@
   "scripts": {
     "validate:asyncapi": "asyncapi validate contracts/asyncapi.yaml",
     "generate:asyncapi:kotlin": "node contracts/generate-models.mjs kotlin",
-    "generate:asyncapi:go": "node contracts/generate-models.mjs go"
+    "generate:asyncapi:go": "node contracts/generate-models.mjs go",
+    "typecheck:system": "tsc -p tests/system/tsconfig.json",
+    "test:system": "npm run typecheck:system && node --test --test-concurrency=1 tests/system/*.test.ts"
   },
   "devDependencies": {
-    "@asyncapi/cli": "6.1.0"
+    "@asyncapi/cli": "6.1.0",
+    "@types/node": "26.6.1",
+    "sharp": "0.35.4",
+    "typescript": "7.0.2"
   }
 }

@@ -20,7 +20,7 @@ permissions:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     steps:
       - name: Check out repository
         uses: actions/checkout@v7
@@ -47,6 +47,9 @@ jobs:
       - name: Install contract tooling
         run: npm ci
 
+      - name: Validate message contracts
+        run: npm run validate:asyncapi
+
       - name: Check generated Kotlin models
         run: |
           npm run generate:asyncapi:kotlin
@@ -64,8 +67,59 @@ jobs:
 
       - name: Test API
         id: api-tests
-        run: ./api/gradlew -p api test --no-daemon
+        run: ./api/gradlew -p api test ktlintCheck --no-daemon
 
-      - name: Test Go workers
+      - name: Vet Go workers
+        run: go -C workers vet ./...
+
+      - name: Test Go workers with the race detector
         if: ${{ !cancelled() && (success() || steps.api-tests.outcome == 'failure') }}
-        run: go -C workers test ./...
+        run: go -C workers test -race -count=1 ./...
+
+      - name: Start the local system
+        run: |
+          docker compose -f compose.local.yaml up -d --build
+          ./api/gradlew -p api bootRun --args="--spring.profiles.active=local" > "$RUNNER_TEMP/file-upload-api.log" 2>&1 &
+          echo $! > "$RUNNER_TEMP/file-upload-api.pid"
+          for attempt in {1..90}; do
+            if curl --fail --silent http://localhost:8080/api/actuator/health > /dev/null; then
+              exit 0
+            fi
+            api_pid="$(<"$RUNNER_TEMP/file-upload-api.pid")"
+            if ! kill -0 "$api_pid" 2>/dev/null; then
+              cat "$RUNNER_TEMP/file-upload-api.log"
+              exit 1
+            fi
+            sleep 2
+          done
+          cat "$RUNNER_TEMP/file-upload-api.log"
+          exit 1
+
+      - name: Test Go workers against RabbitMQ and MinIO
+        env:
+          RABBITMQ_TEST_URL: amqp://file_upload:file_upload@localhost:5672/file_upload
+          S3_TEST_ENDPOINT: http://localhost:9000
+        run: go -C workers test -count=1 ./...
+
+      - name: Test the complete upload system
+        run: npm run test:system
+
+      - name: Show system logs
+        if: ${{ failure() }}
+        run: |
+          if [[ -f "$RUNNER_TEMP/file-upload-api.log" ]]; then
+            cat "$RUNNER_TEMP/file-upload-api.log"
+          fi
+          docker compose -f compose.local.yaml ps --all
+          docker compose -f compose.local.yaml logs --no-color
+
+      - name: Stop the local system
+        if: ${{ always() }}
+        run: |
+          if [[ -f "$RUNNER_TEMP/file-upload-api.pid" ]]; then
+            api_pid="$(<"$RUNNER_TEMP/file-upload-api.pid")"
+            if kill -0 "$api_pid" 2>/dev/null; then
+              kill "$api_pid"
+            fi
+          fi
+          docker compose -f compose.local.yaml down --volumes
