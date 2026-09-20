@@ -1,6 +1,7 @@
 package com.andrewtinyakov.fileupload.asset.service
 
 import com.andrewtinyakov.fileupload.asset.config.UploadProperties
+import com.andrewtinyakov.fileupload.asset.dto.CompletedUploadDto
 import com.andrewtinyakov.fileupload.asset.integration.ObjectStorage
 import com.andrewtinyakov.fileupload.asset.integration.dto.MultipartPart
 import com.andrewtinyakov.fileupload.asset.messaging.publisher.AssetPreparationPublisher
@@ -11,6 +12,7 @@ import com.andrewtinyakov.fileupload.asset.model.UploadSession
 import com.andrewtinyakov.fileupload.asset.model.UploadSessionId
 import com.andrewtinyakov.fileupload.asset.model.UploadStrategy
 import com.andrewtinyakov.fileupload.asset.model.toResponse
+import com.andrewtinyakov.fileupload.asset.monitoring.UploadSessionMetrics
 import com.andrewtinyakov.fileupload.asset.repository.FileAssetRepository
 import com.andrewtinyakov.fileupload.asset.repository.UploadSessionRepository
 import com.andrewtinyakov.fileupload.asset.web.payload.CompleteUploadSessionRequest
@@ -33,71 +35,78 @@ import java.time.OffsetDateTime
 
 @Service
 class UploadSessionActionsService(
-    private val sessions: UploadSessionRepository,
-    private val assets: FileAssetRepository,
+    private val sessionRepository: UploadSessionRepository,
+    private val assetRepository: FileAssetRepository,
     private val storage: ObjectStorage,
     private val properties: UploadProperties,
-    private val transactions: TransactionTemplate,
+    private val tx: TransactionTemplate,
     private val clock: Clock,
     private val preparation: AssetPreparationPublisher,
     private val fileAssetService: FileAssetService,
+    private val metrics: UploadSessionMetrics,
 ) {
     fun abort(
         userId: UserId,
         sessionId: UploadSessionId,
-    ): UploadSessionResponse = transactions.execute {
-        val session = requireSession(
-            userId = userId,
-            sessionId = sessionId,
-        )
-        val asset = assets.findByIdForUpdate(id = session.assetId) ?: notFound()
-        if (session.status == SessionStatus.COMPLETED) {
-            conflict(
-                code = ApiErrorCode.SESSION_COMPLETED,
-                message = "A completed upload cannot be aborted",
+    ): UploadSessionResponse {
+        var abortedStrategy: UploadStrategy? = null
+        val response = tx.execute {
+            val session = requireSession(
+                userId = userId,
+                sessionId = sessionId,
             )
-        }
-        if (session.status != SessionStatus.CREATED) {
-            return@execute session.toResponse(
+            val asset = assetRepository.findByIdForUpdate(id = session.assetId) ?: notFound()
+            if (session.status == SessionStatus.COMPLETED) {
+                conflict(
+                    code = ApiErrorCode.SESSION_COMPLETED,
+                    message = "A completed upload cannot be aborted",
+                )
+            }
+            if (session.status != SessionStatus.CREATED) {
+                return@execute session.toResponse(
+                    asset = asset,
+                    storage = storage,
+                    properties = properties,
+                    clock = clock,
+                )
+            }
+            session.providerUploadId?.let { uploadId ->
+                storage.abortMultipart(
+                    bucket = session.bucket,
+                    objectKey = session.objectKey,
+                    uploadId = uploadId,
+                )
+            }
+            val now = OffsetDateTime.now(clock)
+            sessionRepository.close(
+                id = session.id,
+                status = SessionStatus.ABORTED,
+                now = now,
+            )
+            assetRepository.transitionStatus(
+                id = asset.id,
+                expected = AssetStatus.AWAITING_UPLOAD,
+                next = AssetStatus.FAILED,
+                now = now,
+                failureCode = "UPLOAD_ABORTED",
+            )
+            abortedStrategy = session.strategy
+            session.copy(status = SessionStatus.ABORTED).toResponse(
                 asset = asset,
                 storage = storage,
                 properties = properties,
                 clock = clock,
             )
         }
-        session.providerUploadId?.let { uploadId ->
-            storage.abortMultipart(
-                bucket = session.bucket,
-                objectKey = session.objectKey,
-                uploadId = uploadId,
-            )
-        }
-        val now = OffsetDateTime.now(clock)
-        sessions.close(
-            id = session.id,
-            status = SessionStatus.ABORTED,
-            now = now,
-        )
-        assets.transitionStatus(
-            id = asset.id,
-            expected = AssetStatus.AWAITING_UPLOAD,
-            next = AssetStatus.FAILED,
-            now = now,
-            failureCode = "UPLOAD_ABORTED",
-        )
-        session.copy(status = SessionStatus.ABORTED).toResponse(
-            asset = asset,
-            storage = storage,
-            properties = properties,
-            clock = clock,
-        )
+        abortedStrategy?.let(metrics::sessionAborted)
+        return response
     }
 
     fun presignParts(
         userId: UserId,
         sessionId: UploadSessionId,
         request: SignPartsRequest,
-    ): SignedPartsResponse = transactions.execute {
+    ): SignedPartsResponse = tx.execute {
         val session = requireSession(
             userId = userId,
             sessionId = sessionId,
@@ -107,7 +116,7 @@ class UploadSessionActionsService(
             session = session,
             now = now,
         )
-        val asset = assets.findById(id = session.assetId) ?: notFound()
+        val asset = assetRepository.findById(id = session.assetId) ?: notFound()
         val count = calculateMultipartPartCount(
             session = session,
             asset = asset,
@@ -140,58 +149,75 @@ class UploadSessionActionsService(
         userId: UserId,
         sessionId: UploadSessionId,
         request: CompleteUploadSessionRequest,
-    ): FileAssetResponse = transactions.execute {
-        val session = requireSession(
-            userId = userId,
-            sessionId = sessionId,
-        )
-        if (session.status == SessionStatus.COMPLETED) {
-            return@execute fileAssetService.getAsset(
+    ): FileAssetResponse {
+        var completedUpload: CompletedUploadDto? = null
+        val response = tx.execute {
+            val session = requireSession(
                 userId = userId,
-                assetId = session.assetId,
+                sessionId = sessionId,
+            )
+            if (session.status == SessionStatus.COMPLETED) {
+                return@execute fileAssetService.getAsset(
+                    userId = userId,
+                    assetId = session.assetId,
+                )
+            }
+            val now = OffsetDateTime.now(clock)
+            validateSession(
+                session = session,
+                now = now,
+            )
+            val asset = assetRepository.findByIdForUpdate(id = session.assetId) ?: notFound()
+            completeUpload(
+                session = session,
+                asset = asset,
+                request = request,
+            )
+            val etag = getUploadedEtag(
+                session = session,
+                asset = asset,
+            )
+            sessionRepository.complete(
+                id = session.id,
+                etag = etag,
+                now = now,
+            )
+            assetRepository.transitionStatus(
+                id = asset.id,
+                expected = AssetStatus.AWAITING_UPLOAD,
+                next = AssetStatus.PREPARING,
+                now = now,
+            )
+            preparation.enqueuePreparation(
+                asset = asset,
+                session = session,
+                etag = etag,
+                preparationStartedAt = now,
+            )
+            completedUpload = CompletedUploadDto(
+                handlingMode = asset.handlingMode,
+                strategy = session.strategy,
+                byteSize = asset.byteSize,
+            )
+            fileAssetService.getAsset(
+                userId = userId,
+                assetId = asset.id,
             )
         }
-        val now = OffsetDateTime.now(clock)
-        validateSession(
-            session = session,
-            now = now,
-        )
-        val asset = assets.findByIdForUpdate(id = session.assetId) ?: notFound()
-        completeUpload(
-            session = session,
-            asset = asset,
-            request = request,
-        )
-        val etag = getUploadedEtag(
-            session = session,
-            asset = asset,
-        )
-        sessions.complete(
-            id = session.id,
-            etag = etag,
-            now = now,
-        )
-        assets.transitionStatus(
-            id = asset.id,
-            expected = AssetStatus.AWAITING_UPLOAD,
-            next = AssetStatus.PREPARING,
-            now = now,
-        )
-        preparation.enqueuePreparation(
-            asset = asset,
-            session = session,
-            etag = etag,
-        )
-        fileAssetService.getAsset(
-            userId = userId,
-            assetId = asset.id,
-        )
+        completedUpload?.let { completed ->
+            metrics.sessionCompleted(
+                handlingMode = completed.handlingMode,
+                strategy = completed.strategy,
+                byteSize = completed.byteSize,
+            )
+        }
+        return response
     }
 
     private fun requireSession(
         userId: UserId,
         sessionId: UploadSessionId,
-    ): UploadSession = sessions.findByIdForUpdate(id = sessionId)
+    ): UploadSession = sessionRepository.findByIdForUpdate(id = sessionId)
         ?.takeIf { it.ownerId == userId }
         ?: notFound()
 

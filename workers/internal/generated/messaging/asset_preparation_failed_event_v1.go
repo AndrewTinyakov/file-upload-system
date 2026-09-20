@@ -1,7 +1,10 @@
 package messaging
 
 type AssetPreparationFailedEventV1 struct {
-	CommandId   string `json:"commandId" binding:"required"`
-	AssetId     string `json:"assetId" binding:"required"`
-	FailureCode string `json:"failureCode" binding:"required"`
+	CommandId            string `json:"commandId" binding:"required"`
+	AssetId              string `json:"assetId" binding:"required"`
+	PreparationStartedAt string `json:"preparationStartedAt" binding:"required"`
+	WorkerStartedAt      string `json:"workerStartedAt" binding:"required"`
+	WorkerFinishedAt     string `json:"workerFinishedAt" binding:"required"`
+	FailureCode          string `json:"failureCode" binding:"required"`
 }

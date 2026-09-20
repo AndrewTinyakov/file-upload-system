@@ -9,18 +9,20 @@ import (
 	generated "github.com/AndrewTinyakov/file-upload-system/workers/internal/generated/messaging"
 	imageprocessor "github.com/AndrewTinyakov/file-upload-system/workers/internal/image"
 	"github.com/AndrewTinyakov/file-upload-system/workers/internal/messaging"
+	"github.com/AndrewTinyakov/file-upload-system/workers/internal/monitoring"
 	"github.com/AndrewTinyakov/file-upload-system/workers/internal/objectstore"
 	"github.com/AndrewTinyakov/file-upload-system/workers/internal/rabbitmq"
 	"github.com/AndrewTinyakov/file-upload-system/workers/internal/worker"
+	"github.com/prometheus/client_golang/prometheus"
 )
 
 type imageApp struct {
 	config         config.Image
-	processor      imageprocessor.Processor
 	shutdownEngine func()
 	connection     *rabbitmq.Connection
 	consumer       *rabbitmq.Consumer
 	publisher      *messaging.EventPublisher
+	metrics        *monitoring.WorkerMetrics
 	runner         worker.Runner
 }
 
@@ -37,11 +39,19 @@ func run(ctx context.Context, logger *slog.Logger) error {
 	defer app.close()
 
 	app.logStarted(logger)
-	return app.runner.Run(ctx)
+	return monitoring.RunWithServer(
+		ctx,
+		cfg.MetricsAddress,
+		app.metrics.Handler(),
+		app.runner.Run,
+	)
 }
 
 func newImageApp(ctx context.Context, cfg config.Image, logger *slog.Logger) (_ *imageApp, err error) {
-	app := &imageApp{config: cfg}
+	app := &imageApp{
+		config:  cfg,
+		metrics: monitoring.NewWorkerMetrics(prometheus.NewRegistry()),
+	}
 	defer func() {
 		if err != nil {
 			app.close()
@@ -81,33 +91,31 @@ func newImageApp(ctx context.Context, cfg config.Image, logger *slog.Logger) (_ 
 		return nil, fmt.Errorf("create event publisher: %w", err)
 	}
 
-	app.processor = imageprocessor.NewProcessor(storage)
-	handler, err := worker.NewCommandHandler(app.handlePrepareImage)
+	processor := imageprocessor.NewProcessor(storage)
+	handler, err := worker.NewPreparationCommandHandler(
+		processor.Process,
+		func(command generated.PrepareImageCommandV1) worker.PreparationMetadata {
+			return worker.PreparationMetadata{
+				CommandID:            command.CommandId,
+				AssetID:              command.AssetId,
+				PreparationStartedAt: command.PreparationStartedAt,
+			}
+		},
+		app.publisher,
+		app.metrics,
+	)
 	if err != nil {
 		return nil, fmt.Errorf("create command handler: %w", err)
 	}
 	app.runner = worker.Runner{
-		Consumer:    app.consumer,
-		Handler:     handler,
-		Concurrency: cfg.Concurrency,
-		Logger:      logger,
+		Consumer:      app.consumer,
+		Handler:       handler,
+		Concurrency:   cfg.Concurrency,
+		DeliveryLimit: cfg.RabbitMQ.DeliveryLimit,
+		Metrics:       app.metrics,
+		Logger:        logger,
 	}
 	return app, nil
-}
-
-func (app *imageApp) handlePrepareImage(
-	ctx context.Context,
-	command generated.PrepareImageCommandV1,
-) error {
-	record, err := app.processor.Process(ctx, command)
-	return worker.PublishPreparationResult(
-		ctx,
-		app.publisher,
-		command.CommandId,
-		command.AssetId,
-		record,
-		err,
-	)
 }
 
 func (app *imageApp) logStarted(logger *slog.Logger) {
@@ -116,6 +124,7 @@ func (app *imageApp) logStarted(logger *slog.Logger) {
 		"queue", app.consumer.QueueName(),
 		"concurrency", app.config.Concurrency,
 		"prefetch", app.config.RabbitMQ.Prefetch,
+		"metrics_address", app.config.MetricsAddress,
 	)
 }
 

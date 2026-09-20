@@ -3,11 +3,13 @@ package messaging
 import (
 	"context"
 	"fmt"
+	"time"
 
 	"github.com/AndrewTinyakov/file-upload-system/workers/internal/completion"
 	generated "github.com/AndrewTinyakov/file-upload-system/workers/internal/generated/messaging"
 	"github.com/AndrewTinyakov/file-upload-system/workers/internal/messagecodec"
 	"github.com/AndrewTinyakov/file-upload-system/workers/internal/rabbitmq"
+	"github.com/AndrewTinyakov/file-upload-system/workers/internal/worker"
 )
 
 type EventPublisher struct {
@@ -22,11 +24,18 @@ func NewEventPublisher(connection *rabbitmq.Connection) (*EventPublisher, error)
 	return &EventPublisher{publisher: publisher}, nil
 }
 
-func (publisher *EventPublisher) PublishCompletion(ctx context.Context, record completion.Record) error {
+func (publisher *EventPublisher) PublishCompletion(
+	ctx context.Context,
+	record completion.Record,
+	timing worker.PreparationTiming,
+) error {
 	event, err := completion.CompletedEvent(record)
 	if err != nil {
 		return fmt.Errorf("build completion event: %w", err)
 	}
+	event.PreparationStartedAt = timing.PreparationStartedAt().UTC().Format(time.RFC3339Nano)
+	event.WorkerStartedAt = timing.WorkerStartedAt().UTC().Format(time.RFC3339Nano)
+	event.WorkerFinishedAt = timing.WorkerFinishedAt().UTC().Format(time.RFC3339Nano)
 	return publisher.publish(ctx, PreparationCompletedRoutingKey, event)
 }
 
@@ -35,11 +44,15 @@ func (publisher *EventPublisher) PublishFailure(
 	commandID string,
 	assetID string,
 	failureCode string,
+	timing worker.PreparationTiming,
 ) error {
 	return publisher.publish(ctx, PreparationFailedRoutingKey, generated.AssetPreparationFailedEventV1{
-		CommandId:   commandID,
-		AssetId:     assetID,
-		FailureCode: failureCode,
+		CommandId:            commandID,
+		AssetId:              assetID,
+		PreparationStartedAt: timing.PreparationStartedAt().UTC().Format(time.RFC3339Nano),
+		WorkerStartedAt:      timing.WorkerStartedAt().UTC().Format(time.RFC3339Nano),
+		WorkerFinishedAt:     timing.WorkerFinishedAt().UTC().Format(time.RFC3339Nano),
+		FailureCode:          failureCode,
 	})
 }
 

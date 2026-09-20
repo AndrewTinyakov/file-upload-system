@@ -1,0 +1,110 @@
+groups:
+  - name: file-upload-availability
+    rules:
+      - alert: FileUploadTargetDown
+        expr: up{job=~"alertmanager|api|document-worker|image-worker|rabbitmq|rabbitmq-queues"} == 0
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "{{ $labels.job }} cannot be scraped"
+          description: "Prometheus has not scraped {{ $labels.instance }} for two minutes."
+
+      - alert: FileUploadServiceMissing
+        expr: absent(up{job="api"}) or absent(up{job="document-worker"}) or absent(up{job="image-worker"})
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "{{ $labels.job }} has no scrape targets"
+          description: "Prometheus has discovered no targets for {{ $labels.job }} for two minutes."
+
+      - alert: ApiHighServerErrorRate
+        expr: |
+          (
+            sum(rate(http_server_requests_seconds_count{job="api",status=~"5.."}[5m]))
+              /
+            clamp_min(sum(rate(http_server_requests_seconds_count{job="api"}[5m])), 0.001)
+              > 0.05
+          )
+            and
+          sum(increase(http_server_requests_seconds_count{job="api"}[5m])) >= 20
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: API server errors exceed 5 percent
+          description: "The API has returned more than 5 percent 5xx responses for five minutes."
+
+  - name: file-upload-processing
+    rules:
+      - alert: WorkerProcessingFailures
+        expr: sum by (job) (increase(file_upload_worker_processing_attempts_total{outcome="retryable_failure"}[10m])) > 5
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "{{ $labels.job }} is repeatedly failing jobs"
+          description: "More than five retryable processing attempts failed during the last ten minutes."
+
+      - alert: WorkerRetryAtDeliveryLimit
+        expr: increase(file_upload_worker_retries_at_delivery_limit_total[5m]) > 0
+        labels:
+          severity: warning
+        annotations:
+          summary: "{{ $labels.job }} retried a job at its delivery limit"
+          description: "The worker returned a failed job at its observed delivery limit; the RabbitMQ dead-letter metric confirms whether the broker dead-lettered it."
+
+      - alert: RabbitMQDeliveryLimitDeadLetter
+        expr: increase(rabbitmq_global_messages_dead_lettered_delivery_limit_total[5m]) > 0
+        labels:
+          severity: critical
+        annotations:
+          summary: RabbitMQ dead-lettered a delivery-limit failure
+          description: "RabbitMQ moved at least one poison message to a dead-letter queue in the last five minutes."
+
+      - alert: PreparationQueueBacklog
+        expr: rabbitmq_detailed_queue_messages_ready{queue=~"document.jobs|image.jobs"} > 100
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Preparation queue {{ $labels.queue }} is backed up"
+          description: "The queue has contained more than 100 ready jobs for at least ten minutes."
+
+      - alert: PreparationQueueHasNoConsumers
+        expr: |
+          rabbitmq_detailed_queue_consumers{queue=~"document.jobs|image.jobs"} == 0
+            and on (instance, vhost, queue)
+          rabbitmq_detailed_queue_messages_ready{queue=~"document.jobs|image.jobs"} > 0
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Preparation queue {{ $labels.queue }} has no consumers"
+          description: "Jobs are waiting but RabbitMQ reports no consumer for this queue."
+
+      - alert: PreparationQueueOldestMessage
+        expr: |
+          (
+            time() - rabbitmq_detailed_queue_head_message_timestamp{queue=~"document.jobs|image.jobs"} > 300
+              and on (instance, vhost, queue)
+            rabbitmq_detailed_queue_head_message_timestamp{queue=~"document.jobs|image.jobs"} > 0
+          )
+            and on (instance, vhost, queue)
+          rabbitmq_detailed_queue_messages_ready{queue=~"document.jobs|image.jobs"} > 0
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Preparation queue {{ $labels.queue }} has an old message"
+          description: "The oldest ready job has been queued for more than five minutes."
+
+      - alert: PreparationQueueHighUnacknowledgedMessages
+        expr: rabbitmq_detailed_queue_messages_unacked{queue=~"document.jobs|image.jobs"} > 100
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Preparation queue {{ $labels.queue }} has many unacknowledged jobs"
+          description: "More than 100 delivered jobs have remained unacknowledged for ten minutes."

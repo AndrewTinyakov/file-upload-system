@@ -5,6 +5,9 @@ additionalProperties: false
 required:
   - commandId
   - assetId
+  - preparationStartedAt
+  - workerStartedAt
+  - workerFinishedAt
   - variants
 properties:
   commandId:
@@ -15,6 +18,18 @@ properties:
     type: string
     pattern: '^[0-9A-HJKMNP-TV-Z]{26}$'
     description: ULID of the prepared file asset.
+  preparationStartedAt:
+    type: string
+    format: date-time
+    description: UTC timestamp copied from the preparation command.
+  workerStartedAt:
+    type: string
+    format: date-time
+    description: UTC timestamp when the worker began processing this delivery.
+  workerFinishedAt:
+    type: string
+    format: date-time
+    description: UTC timestamp when the worker finished processing this delivery.
   variants:
     type: array
     minItems: 1

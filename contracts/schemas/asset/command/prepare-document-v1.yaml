@@ -5,6 +5,7 @@ additionalProperties: false
 required:
   - commandId
   - assetId
+  - preparationStartedAt
   - sourceBucket
   - sourceObjectKey
   - sourceContentType
@@ -21,6 +22,10 @@ properties:
     type: string
     pattern: '^[0-9A-HJKMNP-TV-Z]{26}$'
     description: ULID of the file asset being prepared.
+  preparationStartedAt:
+    type: string
+    format: date-time
+    description: UTC timestamp when the API moved the asset to PREPARING.
   sourceBucket:
     type: string
     minLength: 1

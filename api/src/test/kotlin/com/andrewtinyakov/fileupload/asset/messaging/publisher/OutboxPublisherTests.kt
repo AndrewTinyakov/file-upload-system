@@ -33,7 +33,7 @@ class OutboxPublisherTests {
     }
     private val outbox = OutboxService(
         repository = JooqOutboxRepository(DSL.using(connection, SQLDialect.POSTGRES)),
-        transactions = TransactionTemplate(),
+        tx = TransactionTemplate(),
         rabbit = RabbitTemplate(),
         schedulingProperties = SchedulingProperties(),
         config = OutboxConfig(),

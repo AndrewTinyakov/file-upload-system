@@ -41,6 +41,8 @@ class TestcontainersConfig {
             registry.add("file-upload.storage.endpoint") {
                 "http://${minio.host}:${minio.getMappedPort(9000)}"
             }
+            registry.add("spring.security.user.name") { "metrics" }
+            registry.add("spring.security.user.password") { "metrics-local" }
         }
 
     @Bean

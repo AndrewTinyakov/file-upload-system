@@ -45,6 +45,11 @@ const asyncApi = join(
   ".bin",
   process.platform === "win32" ? "asyncapi.cmd" : "asyncapi",
 );
+const gradle = join(
+  repositoryRoot,
+  "api",
+  process.platform === "win32" ? "gradlew.bat" : "gradlew",
+);
 const run = (command, args) =>
   execFileSync(command, args, { cwd: repositoryRoot, stdio: "inherit" });
 
@@ -118,6 +123,7 @@ try {
       writeFileSync(sourcePath, source.replace(/^(data class|enum class)/m, '@javax.annotation.processing.Generated("contracts/generate-models.mjs")\n$1').trimEnd() + "\n");
       renameSync(sourcePath, join(destination, file));
     }
+    run(gradle, ["-p", "api", "ktlintFormat", "--no-daemon"]);
   }
 
   if (language === "go") {

@@ -221,6 +221,7 @@ func imageCommand(source []byte) messaging.PrepareImageCommandV1 {
 	return messaging.PrepareImageCommandV1{
 		CommandId:                imageTestCommandID,
 		AssetId:                  imageTestAssetID,
+		PreparationStartedAt:     "2026-09-20T10:00:00Z",
 		SourceBucket:             "uploads",
 		SourceObjectKey:          "source/image",
 		SourceContentType:        "image/jpeg",

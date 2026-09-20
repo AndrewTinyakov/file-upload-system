@@ -11,9 +11,9 @@ import java.time.OffsetDateTime
 
 @Service
 class AssetCleanupService(
-    private val assets: FileAssetRepository,
+    private val assetRepository: FileAssetRepository,
     private val cleanupPublisher: AssetCleanupPublisher,
-    private val transactions: TransactionTemplate,
+    private val tx: TransactionTemplate,
     private val properties: SchedulingProperties,
     private val clock: Clock,
 ) {
@@ -30,13 +30,13 @@ class AssetCleanupService(
     }
 
     private fun requestCleanupBatch(): Int =
-        transactions.execute {
+        tx.execute {
             val now = OffsetDateTime.now(clock)
-            val candidates = assets.findCleanupCandidatesForUpdate(
+            val candidates = assetRepository.findCleanupCandidatesForUpdate(
                 cutoff = now.minus(properties.cleanupGracePeriod),
                 limit = properties.batchSize,
             )
-            assets.requestCleanup(
+            assetRepository.requestCleanup(
                 ids = candidates.map(FileAsset::id),
                 now = now,
             )

@@ -44,6 +44,7 @@ The defaults match `compose.local.yaml`:
 | `WORKER_CONCURRENCY` | `4` |
 | `RABBITMQ_PREFETCH` | `WORKER_CONCURRENCY` |
 | `RABBITMQ_DELIVERY_LIMIT` | `5` |
+| `METRICS_ADDRESS` | `:2112` |
 | `S3_ENDPOINT` | `http://localhost:9000` |
 | `S3_REGION` | `us-east-1` |
 | `S3_ACCESS_KEY` / `S3_SECRET_KEY` | `file_upload` |
@@ -54,3 +55,5 @@ The defaults match `compose.local.yaml`:
 | `VIPS_MAX_CACHE_SIZE` | `100` |
 
 Image profiles are defined in `internal/image/profiles.go`.
+
+Each worker exposes Prometheus metrics at `/metrics`. The local Compose stack publishes document-worker metrics on port `2112` and image-worker metrics on port `2113`.

@@ -88,6 +88,20 @@ func (delivery amqpDelivery) Body() []byte {
 	return delivery.delivery.Body
 }
 
+func (delivery amqpDelivery) DeliveryCount() int64 {
+	value := delivery.delivery.Headers["x-delivery-count"]
+	switch count := value.(type) {
+	case int64:
+		return count
+	case int32:
+		return int64(count)
+	case int:
+		return int64(count)
+	default:
+		return 0
+	}
+}
+
 func (delivery amqpDelivery) Ack() error {
 	return delivery.delivery.Ack(false)
 }

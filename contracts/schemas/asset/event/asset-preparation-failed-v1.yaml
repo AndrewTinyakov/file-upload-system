@@ -5,6 +5,9 @@ additionalProperties: false
 required:
   - commandId
   - assetId
+  - preparationStartedAt
+  - workerStartedAt
+  - workerFinishedAt
   - failureCode
 properties:
   commandId:
@@ -15,6 +18,18 @@ properties:
     type: string
     pattern: '^[0-9A-HJKMNP-TV-Z]{26}$'
     description: ULID of the file asset that could not be prepared.
+  preparationStartedAt:
+    type: string
+    format: date-time
+    description: UTC timestamp copied from the preparation command.
+  workerStartedAt:
+    type: string
+    format: date-time
+    description: UTC timestamp when the worker began processing this delivery.
+  workerFinishedAt:
+    type: string
+    format: date-time
+    description: UTC timestamp when the worker finished processing this delivery.
   failureCode:
     type: string
     minLength: 1

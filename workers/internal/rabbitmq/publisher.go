@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"sync"
+	"time"
 
 	amqp "github.com/rabbitmq/amqp091-go"
 )
@@ -88,6 +89,7 @@ func (publisher *Publisher) Publish(ctx context.Context, message Message) error 
 			DeliveryMode: amqp.Persistent,
 			ContentType:  message.ContentType,
 			Body:         message.Body,
+			Timestamp:    time.Now().UTC(),
 		},
 	)
 	if err != nil {

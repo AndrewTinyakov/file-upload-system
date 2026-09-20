@@ -19,11 +19,14 @@ import org.springframework.amqp.core.Message
 import org.springframework.amqp.rabbit.annotation.RabbitListener
 import org.springframework.stereotype.Component
 import tools.jackson.databind.ObjectMapper
+import java.time.Clock
+import java.time.OffsetDateTime
 
 @Component
 class AssetPreparationResultListener(
     private val assetPreparationService: AssetPreparationService,
     mapper: ObjectMapper,
+    private val clock: Clock,
 ) {
     private val reader = mapper.reader()
 
@@ -38,10 +41,12 @@ class AssetPreparationResultListener(
         channel = channel,
         logger = logger,
     ) {
+        val receivedAt = OffsetDateTime.now(clock)
         when (message.messageProperties.receivedRoutingKey) {
             PREPARATION_COMPLETED -> {
                 assetPreparationService.completePreparation(
                     reader.forType(AssetPreparationCompletedEventV1::class.java).readValue(message.body),
+                    receivedAt,
                 )
             }
 
@@ -49,10 +54,7 @@ class AssetPreparationResultListener(
                 val event: AssetPreparationFailedEventV1 = reader
                     .forType(AssetPreparationFailedEventV1::class.java)
                     .readValue(message.body)
-                assetPreparationService.failPreparation(
-                    assetId = FileAssetId(event.assetId),
-                    failureCode = event.failureCode,
-                )
+                assetPreparationService.failPreparation(event, receivedAt)
             }
 
             else -> {

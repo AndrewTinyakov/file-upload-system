@@ -6,6 +6,11 @@ spring:
       enabled: true
   application:
     name: api
+  security:
+    user:
+      name: ${METRICS_USERNAME:metrics}
+      password: ${METRICS_PASSWORD:${random.uuid}}
+      roles: MONITORING
   main:
     keep-alive: true
   threads:
@@ -37,6 +42,30 @@ spring:
     validate-on-migrate: true
     clean-disabled: true
     fail-on-missing-locations: true
+
+management:
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health,prometheus
+  metrics:
+    distribution:
+      percentiles-histogram:
+        http.server.requests: true
+      minimum-expected-value:
+        http.server.requests: 5ms
+      maximum-expected-value:
+        http.server.requests: 10s
+      slo:
+        http.server.requests:
+          - 100ms
+          - 300ms
+          - 1s
+          - 3s
 
 file-upload:
   upload:

@@ -11,6 +11,7 @@ import com.andrewtinyakov.fileupload.asset.model.SessionStatus
 import com.andrewtinyakov.fileupload.asset.model.UploadSession
 import com.andrewtinyakov.fileupload.asset.model.UploadSessionId
 import com.andrewtinyakov.fileupload.asset.model.UploadStrategy
+import com.andrewtinyakov.fileupload.asset.monitoring.UploadSessionMetrics
 import com.andrewtinyakov.fileupload.asset.repository.FileAssetRepository
 import com.andrewtinyakov.fileupload.asset.repository.UploadSessionRepository
 import com.andrewtinyakov.fileupload.asset.web.payload.CreateUploadSessionRequest
@@ -19,6 +20,7 @@ import com.andrewtinyakov.fileupload.shared.id.UlidGenerator
 import com.andrewtinyakov.fileupload.shared.web.ApiErrorCode
 import com.andrewtinyakov.fileupload.shared.web.ApiException
 import com.andrewtinyakov.fileupload.user.UserId
+import io.micrometer.core.instrument.simple.SimpleMeterRegistry
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito
 import org.springframework.http.HttpStatus
@@ -30,8 +32,8 @@ import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
 class UploadSessionServiceTests {
-    private val sessions = Mockito.mock(UploadSessionRepository::class.java)
-    private val assets = Mockito.mock(FileAssetRepository::class.java)
+    private val sessionRepository = Mockito.mock(UploadSessionRepository::class.java)
+    private val assetRepository = Mockito.mock(FileAssetRepository::class.java)
     private val storage = Mockito.mock(ObjectStorage::class.java)
     private val mapper = ObjectMapper()
     private val owner = UserId("owner")
@@ -51,21 +53,22 @@ class UploadSessionServiceTests {
         expiresAt = OffsetDateTime.now().plusHours(1),
     )
     private val service = UploadSessionService(
-        sessions = sessions,
-        assets = assets,
+        sessionRepository = sessionRepository,
+        assetRepository = assetRepository,
         storage = storage,
         storageProperties = StorageProperties(),
         properties = UploadProperties(maxDocumentSize = 4),
         ulidGenerator = UlidGenerator(),
         mapper = mapper,
-        transactions = TransactionTemplate(),
+        tx = TransactionTemplate(),
         clock = Clock.systemUTC(),
+        metrics = UploadSessionMetrics(SimpleMeterRegistry()),
     )
 
     @Test
     fun `existing upload session ignores a lower size limit`() {
-        Mockito.`when`(sessions.findByOwnerAndIdempotencyKey(owner, session.idempotencyKey)).thenReturn(session)
-        Mockito.`when`(assets.findById(session.assetId)).thenReturn(
+        Mockito.`when`(sessionRepository.findByOwnerAndIdempotencyKey(owner, session.idempotencyKey)).thenReturn(session)
+        Mockito.`when`(assetRepository.findById(session.assetId)).thenReturn(
             FileAsset(
                 id = session.assetId,
                 ownerId = owner,
@@ -92,7 +95,7 @@ class UploadSessionServiceTests {
 
     @Test
     fun `changed request returns conflict before the size check`() {
-        Mockito.`when`(sessions.findByOwnerAndIdempotencyKey(owner, session.idempotencyKey)).thenReturn(session)
+        Mockito.`when`(sessionRepository.findByOwnerAndIdempotencyKey(owner, session.idempotencyKey)).thenReturn(session)
 
         val exception = assertFailsWith<ApiException> {
             service.create(owner, session.idempotencyKey, request.copy(byteSize = 6))
@@ -100,7 +103,7 @@ class UploadSessionServiceTests {
 
         assertEquals(HttpStatus.CONFLICT, exception.status)
         assertEquals(ApiErrorCode.IDEMPOTENCY_CONFLICT, exception.code)
-        Mockito.verifyNoInteractions(assets, storage)
+        Mockito.verifyNoInteractions(assetRepository, storage)
     }
 
     @Test
@@ -111,6 +114,6 @@ class UploadSessionServiceTests {
 
         assertEquals(HttpStatus.BAD_REQUEST, exception.status)
         assertEquals(ApiErrorCode.FILE_TOO_LARGE, exception.code)
-        Mockito.verifyNoInteractions(assets, storage)
+        Mockito.verifyNoInteractions(assetRepository, storage)
     }
 }

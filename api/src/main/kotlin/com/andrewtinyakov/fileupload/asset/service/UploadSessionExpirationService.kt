@@ -4,6 +4,7 @@ import com.andrewtinyakov.fileupload.asset.messaging.command.AbortMultipartUploa
 import com.andrewtinyakov.fileupload.asset.messaging.publisher.MultipartUploadAbortPublisher
 import com.andrewtinyakov.fileupload.asset.model.UploadSession
 import com.andrewtinyakov.fileupload.asset.model.UploadStrategy
+import com.andrewtinyakov.fileupload.asset.monitoring.UploadSessionMetrics
 import com.andrewtinyakov.fileupload.asset.repository.FileAssetRepository
 import com.andrewtinyakov.fileupload.asset.repository.UploadSessionRepository
 import com.andrewtinyakov.fileupload.infrastructure.config.SchedulingProperties
@@ -15,13 +16,14 @@ import java.time.OffsetDateTime
 
 @Service
 class UploadSessionExpirationService(
-    private val sessions: UploadSessionRepository,
-    private val assets: FileAssetRepository,
+    private val sessionRepository: UploadSessionRepository,
+    private val assetRepository: FileAssetRepository,
     private val multipartAborts: MultipartUploadAbortPublisher,
-    private val transactions: TransactionTemplate,
+    private val tx: TransactionTemplate,
     private val properties: SchedulingProperties,
     private val ulidGenerator: UlidGenerator,
     private val clock: Clock,
+    private val metrics: UploadSessionMetrics,
 ) {
     fun expireSessions(): Int {
         var expired = 0
@@ -35,34 +37,38 @@ class UploadSessionExpirationService(
         return expired
     }
 
-    private fun expireBatch(): Int = transactions.execute {
-        val now = OffsetDateTime.now(clock)
-        val expired = sessions.findExpiredForUpdate(
-            now = now,
-            limit = properties.batchSize,
-        )
-        sessions.expire(
-            ids = expired.map(UploadSession::id),
-            now = now,
-        )
-        assets.failForExpiredUploads(
-            ids = expired.map(UploadSession::assetId),
-            now = now,
-        )
-        multipartAborts.enqueueAborts(
-            commands = expired.mapNotNull { session ->
-                if (session.strategy != UploadStrategy.MULTIPART) {
-                    return@mapNotNull null
-                }
-                AbortMultipartUploadCommandV1(
-                    commandId = ulidGenerator.generate(),
-                    uploadSessionId = session.id.value,
-                    bucket = session.bucket,
-                    objectKey = session.objectKey,
-                    uploadId = requireNotNull(session.providerUploadId),
-                )
-            },
-        )
-        expired.size
+    private fun expireBatch(): Int {
+        val expiredStrategies = tx.execute {
+            val now = OffsetDateTime.now(clock)
+            val expired = sessionRepository.findExpiredForUpdate(
+                now = now,
+                limit = properties.batchSize,
+            )
+            sessionRepository.expire(
+                ids = expired.map(UploadSession::id),
+                now = now,
+            )
+            assetRepository.failForExpiredUploads(
+                ids = expired.map(UploadSession::assetId),
+                now = now,
+            )
+            multipartAborts.enqueueAborts(
+                commands = expired.mapNotNull { session ->
+                    if (session.strategy != UploadStrategy.MULTIPART) {
+                        return@mapNotNull null
+                    }
+                    AbortMultipartUploadCommandV1(
+                        commandId = ulidGenerator.generate(),
+                        uploadSessionId = session.id.value,
+                        bucket = session.bucket,
+                        objectKey = session.objectKey,
+                        uploadId = requireNotNull(session.providerUploadId),
+                    )
+                },
+            )
+            expired.map(UploadSession::strategy)
+        }
+        expiredStrategies.forEach(metrics::sessionExpired)
+        return expiredStrategies.size
     }
 }

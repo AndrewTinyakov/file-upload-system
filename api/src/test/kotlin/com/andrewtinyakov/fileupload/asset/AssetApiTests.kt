@@ -16,6 +16,7 @@ import com.andrewtinyakov.fileupload.infrastructure.outbox.OutboxPublishingSched
 import com.andrewtinyakov.fileupload.infrastructure.outbox.OutboxService
 import com.github.f4b6a3.ulid.UlidCreator
 import com.rabbitmq.client.Channel
+import io.micrometer.core.instrument.MeterRegistry
 import org.awaitility.Awaitility
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -46,6 +47,7 @@ import java.net.http.HttpRequest
 import java.net.http.HttpResponse
 import java.time.Duration
 import java.time.OffsetDateTime
+import java.util.Base64
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
@@ -58,6 +60,8 @@ import java.util.concurrent.TimeUnit
         "file-upload.storage.assets-bucket=prepared-assets",
         "file-upload.upload.multipart-threshold=10",
         "file-upload.upload.part-size=5242880",
+        "spring.security.user.name=metrics",
+        "spring.security.user.password=metrics-local",
     ],
 )
 class AssetApiTests
@@ -72,9 +76,10 @@ class AssetApiTests
         private val listener: AssetPreparationResultListener,
         private val cleanup: AssetCleanupScheduler,
         private val outboxService: OutboxService,
-        private val transactions: TransactionTemplate,
-        private val sessions: UploadSessionRepository,
-        private val assets: FileAssetRepository,
+        private val tx: TransactionTemplate,
+        private val sessionRepository: UploadSessionRepository,
+        private val assetRepository: FileAssetRepository,
+        private val meterRegistry: MeterRegistry,
     ) {
         @LocalServerPort
         private var port: Int = 0
@@ -107,7 +112,7 @@ class AssetApiTests
                     receivedRoutingKey = "asset.preparation.completed.v1"
                     deliveryTag = 1
                 }
-            val transactionManager = transactions.transactionManager
+            val transactionManager = tx.transactionManager
             val readOnly =
                 TransactionTemplate(requireNotNull(transactionManager)).apply {
                     isReadOnly = true
@@ -197,7 +202,7 @@ class AssetApiTests
         fun `outbox retries a message after its route is added`() {
             publication.publishPending()
             val id = UlidCreator.getMonotonicUlid().toString()
-            transactions.executeWithoutResult {
+            tx.executeWithoutResult {
                 outboxService.enqueue(
                     id,
                     AssetApiTests::class,
@@ -275,7 +280,7 @@ class AssetApiTests
                 ),
             )
             val ids = (1..8).map { UlidCreator.getMonotonicUlid().toString() }
-            transactions.executeWithoutResult {
+            tx.executeWithoutResult {
                 ids.forEach {
                     outboxService.enqueue(
                         it,
@@ -342,7 +347,7 @@ class AssetApiTests
                 ),
             )
             val ids = (1..21).map { UlidCreator.getMonotonicUlid().toString() }
-            transactions.executeWithoutResult {
+            tx.executeWithoutResult {
                 ids.forEach {
                     outboxService.enqueue(
                         it,
@@ -402,9 +407,9 @@ class AssetApiTests
             Executors.newVirtualThreadPerTaskExecutor().use { executor ->
                 val first =
                     executor.submit {
-                        transactions.executeWithoutResult {
+                        tx.executeWithoutResult {
                             assertTrue(
-                                sessions
+                                sessionRepository
                                     .findExpiredForUpdate(
                                         now,
                                         1000,
@@ -428,9 +433,9 @@ class AssetApiTests
                             TimeUnit.SECONDS,
                         ),
                     )
-                    transactions.executeWithoutResult {
+                    tx.executeWithoutResult {
                         assertTrue(
-                            sessions
+                            sessionRepository
                                 .findExpiredForUpdate(
                                     now,
                                     1000,
@@ -442,8 +447,8 @@ class AssetApiTests
                 }
                 first.get()
             }
-            transactions.executeWithoutResult {
-                assets.transitionStatus(
+            tx.executeWithoutResult {
+                assetRepository.transitionStatus(
                     assetId,
                     AssetStatus.AWAITING_UPLOAD,
                     AssetStatus.FAILED,
@@ -452,8 +457,8 @@ class AssetApiTests
                 )
             }
             Assertions.assertThrows(IllegalStateException::class.java) {
-                transactions.executeWithoutResult {
-                    assets.transitionStatus(
+                tx.executeWithoutResult {
+                    assetRepository.transitionStatus(
                         assetId,
                         AssetStatus.AWAITING_UPLOAD,
                         AssetStatus.PREPARING,
@@ -463,10 +468,10 @@ class AssetApiTests
             }
             assertEquals(
                 AssetStatus.FAILED,
-                assets.findById(assetId)?.status,
+                assetRepository.findById(assetId)?.status,
             )
-            transactions.executeWithoutResult {
-                sessions.close(
+            tx.executeWithoutResult {
+                sessionRepository.close(
                     sessionId,
                     SessionStatus.EXPIRED,
                     now,
@@ -549,11 +554,7 @@ class AssetApiTests
             val permanent = preparationCommand()
             deliverPreparationEvent(
                 "asset.preparation.failed.v1",
-                mapOf(
-                    "commandId" to permanent["commandId"].stringValue(),
-                    "assetId" to permanent["assetId"].stringValue(),
-                    "failureCode" to "FUTURE_INPUT_FAILURE",
-                ),
+                preparationFailedEvent(permanent, "FUTURE_INPUT_FAILURE"),
             )
             deliverPreparationEvent(
                 "asset.preparation.completed.v1",
@@ -630,16 +631,20 @@ class AssetApiTests
         @Test
         fun `late completion makes a file asset ready after retries stop`() {
             val command = preparationCommand()
+            val dispatchTimer = meterRegistry.get("file.upload.preparation.dispatch.duration")
+                .tags("handling_mode", "document", "outcome", "completed").timer()
+            val deliveryTimer = meterRegistry.get("file.upload.preparation.result.delivery.duration")
+                .tags("handling_mode", "document", "outcome", "completed").timer()
+            val initialDispatchCount = dispatchTimer.count()
+            val initialDeliveryCount = deliveryTimer.count()
+            clock.advance(Duration.ofMinutes(1))
             val failure =
-                mapOf(
-                    "commandId" to command["commandId"].stringValue(),
-                    "assetId" to command["assetId"].stringValue(),
-                    "failureCode" to "RETRY_EXHAUSTED",
-                )
+                preparationFailedEvent(command, "RETRY_EXHAUSTED")
             deliverPreparationEvent(
                 "asset.preparation.failed.v1",
                 failure,
             )
+            clock.advance(Duration.ofMinutes(2))
             deliverPreparationEvent(
                 "asset.preparation.completed.v1",
                 preparationCompletedEvent(command),
@@ -660,6 +665,8 @@ class AssetApiTests
                 "asset.preparation.failed.v1",
                 failure,
             )
+            assertEquals(initialDispatchCount + 1, dispatchTimer.count())
+            assertEquals(initialDeliveryCount + 1, deliveryTimer.count())
             val asset =
                 mapper.readTree(
                     request(
@@ -760,11 +767,7 @@ class AssetApiTests
             val assetId = command["assetId"].stringValue()
             deliverPreparationEvent(
                 "asset.preparation.failed.v1",
-                mapOf(
-                    "commandId" to command["commandId"].stringValue(),
-                    "assetId" to assetId,
-                    "failureCode" to "RETRY_EXHAUSTED",
-                ),
+                preparationFailedEvent(command, "RETRY_EXHAUSTED"),
             )
             s3.putObject(
                 {
@@ -860,20 +863,43 @@ class AssetApiTests
         private fun preparationCompletedEvent(
             command: JsonNode,
             key: String = command["destinationPrefix"].stringValue() + "original",
-        ) = mapOf(
-            "commandId" to command["commandId"].stringValue(),
-            "assetId" to command["assetId"].stringValue(),
-            "variants" to
-                listOf(
-                    mapOf(
-                        "variantType" to "ORIGINAL",
-                        "bucket" to "prepared-assets",
-                        "objectKey" to key,
-                        "contentType" to "text/plain",
-                        "byteSize" to 5,
+        ): Map<String, Any> {
+            val preparationStartedAt = command["preparationStartedAt"].stringValue()
+            val started = OffsetDateTime.parse(preparationStartedAt)
+            return mapOf(
+                "commandId" to command["commandId"].stringValue(),
+                "assetId" to command["assetId"].stringValue(),
+                "preparationStartedAt" to preparationStartedAt,
+                "workerStartedAt" to started.plusSeconds(1).toString(),
+                "workerFinishedAt" to started.plusSeconds(2).toString(),
+                "variants" to
+                    listOf(
+                        mapOf(
+                            "variantType" to "ORIGINAL",
+                            "bucket" to "prepared-assets",
+                            "objectKey" to key,
+                            "contentType" to "text/plain",
+                            "byteSize" to 5,
+                        ),
                     ),
-                ),
-        )
+            )
+        }
+
+        private fun preparationFailedEvent(
+            command: JsonNode,
+            failureCode: String,
+        ): Map<String, Any> {
+            val preparationStartedAt = command["preparationStartedAt"].stringValue()
+            val started = OffsetDateTime.parse(preparationStartedAt)
+            return mapOf(
+                "commandId" to command["commandId"].stringValue(),
+                "assetId" to command["assetId"].stringValue(),
+                "preparationStartedAt" to preparationStartedAt,
+                "workerStartedAt" to started.plusSeconds(1).toString(),
+                "workerFinishedAt" to started.plusSeconds(2).toString(),
+                "failureCode" to failureCode,
+            )
+        }
 
         private fun deliverPreparationEvent(
             key: String,
@@ -961,6 +987,7 @@ class AssetApiTests
                 MessageDeliveryMode.PERSISTENT,
                 received.messageProperties.receivedDeliveryMode,
             )
+            assertTrue(received.messageProperties.timestamp != null)
             assertEquals(
                 5,
                 command["sourceByteSize"].intValue(),
@@ -970,6 +997,40 @@ class AssetApiTests
                 0,
                 publication.publishPending(),
             )
+        }
+
+        @Test
+        fun `prometheus endpoint exposes API and upload metrics`() {
+            val created = request(
+                "POST",
+                "/upload-sessions",
+                """{"filename":"metrics.txt","contentType":"text/plain","byteSize":5,"handlingMode":"DOCUMENT"}""",
+            )
+            assertEquals(201, created.statusCode(), created.body())
+            val unauthorized = client.send(
+                HttpRequest.newBuilder(URI("http://localhost:$port/api/actuator/prometheus")).GET().build(),
+                HttpResponse.BodyHandlers.ofString(),
+            )
+            assertEquals(401, unauthorized.statusCode(), unauthorized.body())
+
+            val credentials = Base64.getEncoder().encodeToString("metrics:metrics-local".toByteArray())
+            val response = client.send(
+                HttpRequest
+                    .newBuilder(URI("http://localhost:$port/api/actuator/prometheus"))
+                    .header("Authorization", "Basic $credentials")
+                    .GET()
+                    .build(),
+                HttpResponse.BodyHandlers.ofString(),
+            )
+
+            assertEquals(200, response.statusCode(), response.body())
+            assertTrue(response.headers().firstValue("Content-Type").orElse("").startsWith("text/plain"))
+            assertTrue(response.body().contains("http_server_requests_seconds"))
+            assertTrue(response.body().contains("file_upload_session_events_total"))
+            assertTrue(response.body().contains("file_upload_accepted_bytes_total"))
+            assertTrue(response.body().contains("file_upload_completed_bytes_total"))
+            assertTrue(response.body().contains("file_upload_preparation_dispatch_duration_seconds"))
+            assertTrue(response.body().contains("file_upload_preparation_result_delivery_duration_seconds"))
         }
 
         @Test

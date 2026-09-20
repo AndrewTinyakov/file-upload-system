@@ -1,0 +1,7 @@
+# Use with compose.local.yaml to avoid binding every worker replica to the same host port.
+# Prometheus discovers and scrapes their container IPs on the Compose network.
+services:
+  document-worker:
+    ports: !reset []
+  image-worker:
+    ports: !reset []

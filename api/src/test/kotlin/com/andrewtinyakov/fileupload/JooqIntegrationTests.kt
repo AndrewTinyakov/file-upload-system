@@ -18,11 +18,11 @@ class JooqIntegrationTests
     @Autowired
     constructor(
         private val db: DSLContext,
-        private val transactions: TransactionTemplate,
+        private val tx: TransactionTemplate,
     ) {
         @Test
         fun `file asset starts as awaiting upload`() =
-            transactions.executeWithoutResult { status ->
+            tx.executeWithoutResult { status ->
                 val assetId = UlidCreator.getMonotonicUlid().toString()
                 val ownerId = UlidCreator.getMonotonicUlid().toString()
 

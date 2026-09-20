@@ -263,4 +263,8 @@ A scheduled task in Spring claims a batch of old failed assets with `FOR UPDATE 
 
 The API is stateless outside PostgreSQL. Document and image workers consume separate queues, so each pool can be scaled independently. RabbitMQ absorbs temporary backlogs. Queue depth, oldest message age, processing duration, failures, and dead letters are monitored. Autoscaling and Kubernetes are outside scope.
 
+## Monitoring
+
+The API exposes Prometheus metrics at `/api/actuator/prometheus`, and both workers expose `/metrics`. The local Compose stack also includes Prometheus, Grafana, and Alertmanager. RabbitMQ supplies broker and queue metrics through its Prometheus plugin. See [local development](local-development.md) for startup commands and local endpoints.
+
 Clients receive direct object URLs built from the stored bucket and object key. Example uses opaque keys as unguessable public links. Signed read URLs and authorization can be added later.

@@ -12,6 +12,7 @@ import com.andrewtinyakov.fileupload.asset.model.UploadSession
 import com.andrewtinyakov.fileupload.asset.model.UploadSessionId
 import com.andrewtinyakov.fileupload.asset.model.UploadStrategy
 import com.andrewtinyakov.fileupload.asset.model.toResponse
+import com.andrewtinyakov.fileupload.asset.monitoring.UploadSessionMetrics
 import com.andrewtinyakov.fileupload.asset.repository.FileAssetRepository
 import com.andrewtinyakov.fileupload.asset.repository.UploadSessionRepository
 import com.andrewtinyakov.fileupload.asset.web.payload.CreateUploadSessionRequest
@@ -33,15 +34,16 @@ import java.time.OffsetDateTime
 
 @Service
 class UploadSessionService(
-    private val sessions: UploadSessionRepository,
-    private val assets: FileAssetRepository,
+    private val sessionRepository: UploadSessionRepository,
+    private val assetRepository: FileAssetRepository,
     private val storage: ObjectStorage,
     private val storageProperties: StorageProperties,
     private val properties: UploadProperties,
     private val ulidGenerator: UlidGenerator,
     private val mapper: ObjectMapper,
-    private val transactions: TransactionTemplate,
+    private val tx: TransactionTemplate,
     private val clock: Clock,
+    private val metrics: UploadSessionMetrics,
 ) {
     fun create(
         userId: UserId,
@@ -95,6 +97,11 @@ class UploadSessionService(
             }
             throw exception
         }
+        metrics.sessionCreated(
+            handlingMode = asset.handlingMode,
+            strategy = savedSession.strategy,
+            byteSize = asset.byteSize,
+        )
         return savedSession.toResponse(
             asset = asset,
             storage = storage,
@@ -107,11 +114,11 @@ class UploadSessionService(
         userId: UserId,
         sessionId: UploadSessionId,
     ): UploadSessionResponse {
-        val session = sessions.findById(id = sessionId)
+        val session = sessionRepository.findById(id = sessionId)
             ?.takeIf { it.ownerId == userId }
             ?: notFound()
         return session.toResponse(
-            asset = assets.findById(id = session.assetId) ?: notFound(),
+            asset = assetRepository.findById(id = session.assetId) ?: notFound(),
             storage = storage,
             properties = properties,
             clock = clock,
@@ -229,9 +236,9 @@ class UploadSessionService(
             return Result.failure(exception)
         }
         return runCatching {
-            transactions.executeWithoutResult {
-                assets.insert(asset = asset)
-                sessions.insert(session = session)
+            tx.executeWithoutResult {
+                assetRepository.insert(asset = asset)
+                sessionRepository.insert(session = session)
             }
             session
         }.onFailure { exception ->
@@ -245,7 +252,7 @@ class UploadSessionService(
     private fun findExistingSession(
         userId: UserId,
         idempotencyKey: String,
-    ): UploadSession? = sessions.findByOwnerAndIdempotencyKey(
+    ): UploadSession? = sessionRepository.findByOwnerAndIdempotencyKey(
         ownerId = userId,
         key = idempotencyKey,
     )
@@ -261,7 +268,7 @@ class UploadSessionService(
             )
         }
         return session.toResponse(
-            asset = assets.findById(id = session.assetId) ?: notFound(),
+            asset = assetRepository.findById(id = session.assetId) ?: notFound(),
             storage = storage,
             properties = properties,
             clock = clock,

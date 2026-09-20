@@ -13,19 +13,19 @@ import org.springframework.stereotype.Service
 
 @Service
 class FileAssetService(
-    private val assets: FileAssetRepository,
-    private val variants: AssetVariantRepository,
+    private val assetRepository: FileAssetRepository,
+    private val variantRepository: AssetVariantRepository,
     private val storage: ObjectStorage,
 ) {
     fun getAsset(
         userId: UserId,
         assetId: FileAssetId,
     ): FileAssetResponse {
-        val asset = assets.findById(id = assetId)
+        val asset = assetRepository.findById(id = assetId)
             ?.takeIf { it.ownerId == userId }
             ?: notFound()
         val responseVariants = if (asset.status == AssetStatus.READY) {
-            variants.findByAssetId(assetId = asset.id)
+            variantRepository.findByAssetId(assetId = asset.id)
         } else {
             emptyList()
         }

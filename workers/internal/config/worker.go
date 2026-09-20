@@ -7,9 +7,10 @@ const (
 )
 
 type Worker struct {
-	RabbitMQ    RabbitMQ
-	Concurrency int
-	Storage     Storage
+	RabbitMQ       RabbitMQ
+	Concurrency    int
+	MetricsAddress string
+	Storage        Storage
 }
 
 type RabbitMQ struct {
@@ -53,7 +54,8 @@ func loadWorker() (Worker, error) {
 			Prefetch:      prefetch,
 			DeliveryLimit: deliveryLimit,
 		},
-		Concurrency: concurrency,
+		Concurrency:    concurrency,
+		MetricsAddress: envString("METRICS_ADDRESS", ":2112"),
 		Storage: Storage{
 			Endpoint:  envString("S3_ENDPOINT", defaultS3Endpoint),
 			Region:    envString("S3_REGION", defaultS3Region),

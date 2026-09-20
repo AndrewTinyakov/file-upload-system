@@ -63,15 +63,16 @@ func TestProcessorAgainstS3CompatibleStorage(t *testing.T) {
 	})
 
 	command := messaging.PrepareDocumentCommandV1{
-		CommandId:         "01ARZ3NDEKTSV4RRFFQ69G5FAV",
-		AssetId:           "01ARZ3NDEKTSV4RRFFQ69G5FAW",
-		SourceBucket:      "uploads",
-		SourceObjectKey:   sourceKey,
-		SourceContentType: "application/pdf",
-		SourceByteSize:    len(payload),
-		SourceObjectEtag:  aws.ToString(put.ETag),
-		DestinationBucket: "assets",
-		DestinationPrefix: destinationPrefix,
+		CommandId:            "01ARZ3NDEKTSV4RRFFQ69G5FAV",
+		AssetId:              "01ARZ3NDEKTSV4RRFFQ69G5FAW",
+		PreparationStartedAt: "2026-09-20T10:00:00Z",
+		SourceBucket:         "uploads",
+		SourceObjectKey:      sourceKey,
+		SourceContentType:    "application/pdf",
+		SourceByteSize:       len(payload),
+		SourceObjectEtag:     aws.ToString(put.ETag),
+		DestinationBucket:    "assets",
+		DestinationPrefix:    destinationPrefix,
 	}
 	record, err := NewProcessor(client).Process(ctx, command)
 	if err != nil {

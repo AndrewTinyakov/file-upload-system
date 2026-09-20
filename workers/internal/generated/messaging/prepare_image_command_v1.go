@@ -3,6 +3,7 @@ package messaging
 type PrepareImageCommandV1 struct {
 	CommandId                string `json:"commandId" binding:"required"`
 	AssetId                  string `json:"assetId" binding:"required"`
+	PreparationStartedAt     string `json:"preparationStartedAt" binding:"required"`
 	SourceBucket             string `json:"sourceBucket" binding:"required"`
 	SourceObjectKey          string `json:"sourceObjectKey" binding:"required"`
 	SourceContentType        string `json:"sourceContentType" binding:"required"`

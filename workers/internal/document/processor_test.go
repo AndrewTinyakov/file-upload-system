@@ -151,14 +151,15 @@ func TestProcessorRejectsCompletionRecordForAnotherCommand(t *testing.T) {
 
 func documentCommand() messaging.PrepareDocumentCommandV1 {
 	return messaging.PrepareDocumentCommandV1{
-		CommandId:         documentTestCommandID,
-		AssetId:           documentTestAssetID,
-		SourceBucket:      "uploads",
-		SourceObjectKey:   "source/file",
-		SourceContentType: "application/pdf",
-		SourceByteSize:    4,
-		SourceObjectEtag:  "etag-1",
-		DestinationBucket: "assets",
-		DestinationPrefix: "assets/asset-1/",
+		CommandId:            documentTestCommandID,
+		AssetId:              documentTestAssetID,
+		PreparationStartedAt: "2026-09-20T10:00:00Z",
+		SourceBucket:         "uploads",
+		SourceObjectKey:      "source/file",
+		SourceContentType:    "application/pdf",
+		SourceByteSize:       4,
+		SourceObjectEtag:     "etag-1",
+		DestinationBucket:    "assets",
+		DestinationPrefix:    "assets/asset-1/",
 	}
 }

@@ -10,6 +10,7 @@ import com.andrewtinyakov.fileupload.infrastructure.messaging.AssetMessaging.Rou
 import com.andrewtinyakov.fileupload.infrastructure.outbox.OutboxService
 import com.andrewtinyakov.fileupload.shared.id.UlidGenerator
 import org.springframework.stereotype.Component
+import java.time.OffsetDateTime
 
 @Component
 class AssetPreparationPublisher(
@@ -20,6 +21,7 @@ class AssetPreparationPublisher(
         asset: FileAsset,
         session: UploadSession,
         etag: String,
+        preparationStartedAt: OffsetDateTime,
     ) {
         val id = ulidGenerator.generate()
         val processingProfileName = asset.processingProfileName
@@ -34,6 +36,7 @@ class AssetPreparationPublisher(
                     payload = PrepareDocumentCommandV1(
                         commandId = id,
                         assetId = asset.id.value,
+                        preparationStartedAt = preparationStartedAt,
                         sourceBucket = session.bucket,
                         sourceObjectKey = session.objectKey,
                         sourceContentType = asset.contentType,
@@ -54,6 +57,7 @@ class AssetPreparationPublisher(
                     payload = PrepareImageCommandV1(
                         commandId = id,
                         assetId = asset.id.value,
+                        preparationStartedAt = preparationStartedAt,
                         sourceBucket = session.bucket,
                         sourceObjectKey = session.objectKey,
                         sourceContentType = asset.contentType,

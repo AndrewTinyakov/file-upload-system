@@ -9,6 +9,10 @@ spring:
     username: file_upload
     password: file_upload
     virtual-host: file_upload
+  security:
+    user:
+      name: metrics
+      password: metrics-local
 
 file-upload:
   storage:

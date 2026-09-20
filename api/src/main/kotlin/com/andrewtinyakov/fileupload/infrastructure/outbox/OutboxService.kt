@@ -12,12 +12,13 @@ import org.springframework.transaction.support.TransactionTemplate
 import tools.jackson.databind.ObjectMapper
 import java.time.Clock
 import java.time.OffsetDateTime
+import java.util.Date
 import kotlin.reflect.KClass
 
 @Service
 class OutboxService(
     private val repository: OutboxRepository,
-    private val transactions: TransactionTemplate,
+    private val tx: TransactionTemplate,
     private val rabbit: RabbitTemplate,
     private val schedulingProperties: SchedulingProperties,
     private val config: OutboxConfig,
@@ -74,7 +75,7 @@ class OutboxService(
     }
 
     private fun publishBatch(): Int =
-        transactions.execute {
+        tx.execute {
             val messages = repository.findUnpublishedForUpdate(schedulingProperties.batchSize)
             if (messages.isEmpty()) {
                 return@execute 0
@@ -88,6 +89,7 @@ class OutboxService(
                             messageId = message.id
                             type = message.type
                             deliveryMode = MessageDeliveryMode.PERSISTENT
+                            timestamp = Date.from(clock.instant())
                         }
                         operations.send(
                             message.exchange,

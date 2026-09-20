@@ -5,10 +5,12 @@ import (
 	"fmt"
 	"log/slog"
 	"sync"
+	"time"
 )
 
 type Delivery interface {
 	Body() []byte
+	DeliveryCount() int64
 	Ack() error
 	Retry() error
 }
@@ -27,11 +29,34 @@ func (handler HandlerFunc) Handle(ctx context.Context, payload []byte) error {
 	return handler(ctx, payload)
 }
 
+type RetryMetrics interface {
+	ObserveRetry(willDeadLetter bool)
+}
+
+type ProcessingOutcome string
+
+const (
+	ProcessingSucceeded        ProcessingOutcome = "succeeded"
+	ProcessingPermanentFailure ProcessingOutcome = "permanent_failure"
+	ProcessingRetryableFailure ProcessingOutcome = "retryable_failure"
+)
+
+type ProcessingMetrics interface {
+	ObserveProcessing(duration time.Duration, outcome ProcessingOutcome)
+}
+
+type Metrics interface {
+	RetryMetrics
+	ProcessingMetrics
+}
+
 type Runner struct {
-	Consumer    Consumer
-	Handler     Handler
-	Concurrency int
-	Logger      *slog.Logger
+	Consumer      Consumer
+	Handler       Handler
+	Concurrency   int
+	DeliveryLimit int
+	Metrics       Metrics
+	Logger        *slog.Logger
 }
 
 func (runner Runner) Run(ctx context.Context) error {
@@ -67,10 +92,12 @@ func (runner Runner) runWorkers(ctx context.Context, deliveries <-chan Delivery,
 	errors := make(chan error, 1)
 	report := newErrorReporter(errors, cancel)
 	worker := deliveryWorker{
-		deliveries: deliveries,
-		handler:    runner.Handler,
-		logger:     runner.logger(),
-		report:     report,
+		deliveries:    deliveries,
+		handler:       runner.Handler,
+		deliveryLimit: runner.DeliveryLimit,
+		metrics:       runner.Metrics,
+		logger:        runner.logger(),
+		report:        report,
 	}
 
 	var workers sync.WaitGroup
@@ -130,10 +157,12 @@ func waitForWorkers(ctx context.Context, workers *sync.WaitGroup, errors <-chan 
 }
 
 type deliveryWorker struct {
-	deliveries <-chan Delivery
-	handler    Handler
-	logger     *slog.Logger
-	report     func(error)
+	deliveries    <-chan Delivery
+	handler       Handler
+	deliveryLimit int
+	metrics       Metrics
+	logger        *slog.Logger
+	report        func(error)
 }
 
 func (worker deliveryWorker) run(ctx context.Context) {
@@ -158,11 +187,19 @@ func (worker deliveryWorker) nextDelivery(ctx context.Context) (Delivery, bool) 
 }
 
 func (worker deliveryWorker) handle(ctx context.Context, delivery Delivery) bool {
+	started := time.Now()
 	if err := worker.handler.Handle(ctx, delivery.Body()); err != nil {
+		if worker.metrics != nil {
+			worker.metrics.ObserveProcessing(time.Since(started), ProcessingRetryableFailure)
+		}
 		worker.logger.Error("job failed", "error", err)
 		if retryErr := delivery.Retry(); retryErr != nil {
 			worker.report(fmt.Errorf("retry delivery: %w", retryErr))
 			return false
+		}
+		if worker.metrics != nil {
+			willDeadLetter := worker.deliveryLimit > 0 && delivery.DeliveryCount() >= int64(worker.deliveryLimit)
+			worker.metrics.ObserveRetry(willDeadLetter)
 		}
 		return true
 	}

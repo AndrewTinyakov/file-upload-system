@@ -1,0 +1,130 @@
+fuzzy_compare: true
+rule_files:
+- alerts.yaml
+evaluation_interval: 1m
+tests:
+- name: unavailable target becomes critical
+  interval: 1m
+  input_series:
+  - series: up{job="api",instance="host.docker.internal:8080"}
+    values: 0 0 0 0
+  alert_rule_test:
+  - eval_time: 3m
+    alertname: FileUploadTargetDown
+    exp_alerts:
+    - exp_labels:
+        instance: host.docker.internal:8080
+        job: api
+        severity: critical
+      exp_annotations:
+        summary: api cannot be scraped
+        description: Prometheus has not scraped host.docker.internal:8080 for two minutes.
+- name: api error alert requires meaningful traffic
+  interval: 1m
+  input_series:
+  - series: http_server_requests_seconds_count{job="api",status="500"}
+    values: 0+1x10
+  alert_rule_test:
+  - eval_time: 10m
+    alertname: ApiHighServerErrorRate
+    exp_alerts: []
+- name: api error alert fires at volume
+  interval: 1m
+  input_series:
+  - series: http_server_requests_seconds_count{job="api",status="500"}
+    values: 0+10x12
+  alert_rule_test:
+  - eval_time: 10m
+    alertname: ApiHighServerErrorRate
+    exp_alerts:
+    - exp_labels:
+        severity: warning
+      exp_annotations:
+        summary: API server errors exceed 5 percent
+        description: The API has returned more than 5 percent 5xx responses for five minutes.
+- name: repeated retryable worker failures become warning
+  interval: 1m
+  input_series:
+  - series: file_upload_worker_processing_attempts_total{job="document-worker",outcome="retryable_failure"}
+    values: 0+2x15
+  alert_rule_test:
+  - eval_time: 12m
+    alertname: WorkerProcessingFailures
+    exp_alerts:
+    - exp_labels:
+        job: document-worker
+        severity: warning
+      exp_annotations:
+        summary: document-worker is repeatedly failing jobs
+        description: More than five retryable processing attempts failed during the last ten minutes.
+- name: delivery-limit retry is distinct from broker dead-letter
+  interval: 1m
+  input_series:
+  - series: file_upload_worker_retries_at_delivery_limit_total{job="image-worker"}
+    values: 0 0 1 1 1 1
+  alert_rule_test:
+  - eval_time: 5m
+    alertname: WorkerRetryAtDeliveryLimit
+    exp_alerts:
+    - exp_labels:
+        job: image-worker
+        severity: warning
+      exp_annotations:
+        summary: image-worker retried a job at its delivery limit
+        description: The worker returned a failed job at its observed delivery limit; the RabbitMQ dead-letter metric confirms whether the broker dead-lettered it.
+- name: oldest-message alert ignores missing timestamps
+  interval: 1m
+  input_series:
+  - series: rabbitmq_detailed_queue_head_message_timestamp{instance="rabbitmq:15692",vhost="file_upload",queue="document.jobs"}
+    values: 0 0 0 0 0 0 0
+  - series: rabbitmq_detailed_queue_messages_ready{instance="rabbitmq:15692",vhost="file_upload",queue="document.jobs"}
+    values: 1 1 1 1 1 1 1
+  alert_rule_test:
+  - eval_time: 6m
+    alertname: PreparationQueueOldestMessage
+    exp_alerts: []
+- name: oldest published timestamp becomes warning
+  interval: 1m
+  input_series:
+  - series: rabbitmq_detailed_queue_head_message_timestamp{instance="rabbitmq:15692",vhost="file_upload",queue="document.jobs"}
+    values: 1+0x12
+  - series: rabbitmq_detailed_queue_messages_ready{instance="rabbitmq:15692",vhost="file_upload",queue="document.jobs"}
+    values: 1+0x12
+  alert_rule_test:
+  - eval_time: 12m
+    alertname: PreparationQueueOldestMessage
+    exp_alerts:
+    - exp_labels:
+        instance: rabbitmq:15692
+        queue: document.jobs
+        severity: warning
+        vhost: file_upload
+      exp_annotations:
+        summary: Preparation queue document.jobs has an old message
+        description: The oldest ready job has been queued for more than five minutes.
+- name: discovery losing all replicas raises missing service alert
+  interval: 1m
+  input_series:
+  - series: up{job="api",instance="a"}
+    values: 1+0x4
+  - series: up{job="image-worker",instance="b"}
+    values: 1+0x4
+  alert_rule_test:
+  - eval_time: 3m
+    alertname: FileUploadServiceMissing
+    exp_alerts:
+    - exp_labels:
+        job: document-worker
+        severity: critical
+      exp_annotations:
+        summary: document-worker has no scrape targets
+        description: Prometheus has discovered no targets for document-worker for two minutes.
+- name: process counters aggregate after per-replica reset handling
+  interval: 15s
+  input_series:
+  - series: file_upload_session_events_total{job="api",instance="a",event="created",strategy="single"}
+    values: 0 15 30 45 60 75 90 15 30
+  - series: file_upload_session_events_total{job="api",instance="b",event="created",strategy="single"}
+    values: 0+30x8
+  - series: file_upload_worker_processing_attempts_total{job="document-worker",instance="a",outcome="succeeded"}
+    values: 0 15 30 45 60 75 90 15 30

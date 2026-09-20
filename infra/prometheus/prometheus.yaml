@@ -1,0 +1,70 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  external_labels:
+    environment: local
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+            - alertmanager:9093
+
+rule_files:
+  - /etc/prometheus/alerts.yaml
+
+scrape_configs:
+  - job_name: prometheus
+    static_configs:
+      - targets:
+          - localhost:9090
+
+  - job_name: api
+    metrics_path: /api/actuator/prometheus
+    basic_auth:
+      username: metrics
+      password: metrics-local
+    file_sd_configs:
+      - files:
+          - /etc/prometheus/targets/api.json
+        refresh_interval: 15s
+
+  - job_name: document-worker
+    dns_sd_configs:
+      - names: ["document-worker"]
+        type: A
+        port: 2112
+        refresh_interval: 15s
+
+  - job_name: image-worker
+    dns_sd_configs:
+      - names: ["image-worker"]
+        type: A
+        port: 2112
+        refresh_interval: 15s
+
+  - job_name: rabbitmq
+    static_configs:
+      - targets:
+          - rabbitmq:15692
+
+  - job_name: rabbitmq-queues
+    metrics_path: /metrics/detailed
+    params:
+      vhost:
+        - file_upload
+      queue:
+        - ^(document\.jobs|image\.jobs)$
+      family:
+        - queue_coarse_metrics
+        - queue_metrics
+        - queue_delivery_metrics
+        - queue_exchange_metrics
+    static_configs:
+      - targets:
+          - rabbitmq:15692
+
+  - job_name: alertmanager
+    static_configs:
+      - targets:
+          - alertmanager:9093

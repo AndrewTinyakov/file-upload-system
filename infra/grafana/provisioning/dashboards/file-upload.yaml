@@ -1,0 +1,10 @@
+apiVersion: 1
+
+providers:
+  - name: File upload system
+    folder: File upload system
+    type: file
+    disableDeletion: true
+    editable: true
+    options:
+      path: /var/lib/grafana/dashboards

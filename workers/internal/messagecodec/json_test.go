@@ -8,13 +8,13 @@ import (
 	"github.com/AndrewTinyakov/file-upload-system/workers/internal/generated/messaging"
 )
 
-const prepareDocumentCommandJSON = `{"commandId":"01K50V1X8QR5SM1QYQ5B3M7W9A","assetId":"01K50V1X8QR5SM1QYQ5B3M7W9B","sourceBucket":"uploads","sourceObjectKey":"incoming/report.pdf","sourceContentType":"application/pdf","sourceByteSize":2048,"sourceObjectEtag":"opaque-etag","destinationBucket":"assets","destinationPrefix":"assets/01K50V1X8QR5SM1QYQ5B3M7W9B/"}`
+const prepareDocumentCommandJSON = `{"commandId":"01K50V1X8QR5SM1QYQ5B3M7W9A","assetId":"01K50V1X8QR5SM1QYQ5B3M7W9B","preparationStartedAt":"2026-09-20T10:00:00Z","sourceBucket":"uploads","sourceObjectKey":"incoming/report.pdf","sourceContentType":"application/pdf","sourceByteSize":2048,"sourceObjectEtag":"opaque-etag","destinationBucket":"assets","destinationPrefix":"assets/01K50V1X8QR5SM1QYQ5B3M7W9B/"}`
 
-const prepareImageCommandJSON = `{"commandId":"01K50V1X8QR5SM1QYQ5B3M7W9A","assetId":"01K50V1X8QR5SM1QYQ5B3M7W9B","sourceBucket":"uploads","sourceObjectKey":"incoming/image.png","sourceContentType":"image/png","sourceByteSize":1099511627776,"sourceObjectEtag":"opaque-etag","destinationBucket":"assets","destinationPrefix":"assets/01K50V1X8QR5SM1QYQ5B3M7W9B/","processingProfileName":"default-image","processingProfileVersion":1}`
+const prepareImageCommandJSON = `{"commandId":"01K50V1X8QR5SM1QYQ5B3M7W9A","assetId":"01K50V1X8QR5SM1QYQ5B3M7W9B","preparationStartedAt":"2026-09-20T10:00:00Z","sourceBucket":"uploads","sourceObjectKey":"incoming/image.png","sourceContentType":"image/png","sourceByteSize":1099511627776,"sourceObjectEtag":"opaque-etag","destinationBucket":"assets","destinationPrefix":"assets/01K50V1X8QR5SM1QYQ5B3M7W9B/","processingProfileName":"default-image","processingProfileVersion":1}`
 
-const completionEventWithoutPixelDimensionsJSON = `{"commandId":"01K50V1X8QR5SM1QYQ5B3M7W9A","assetId":"01K50V1X8QR5SM1QYQ5B3M7W9B","variants":[{"variantType":"ORIGINAL","bucket":"assets","objectKey":"assets/01K50V1X8QR5SM1QYQ5B3M7W9B/original","contentType":"application/pdf","byteSize":1024}]}`
+const completionEventWithoutPixelDimensionsJSON = `{"commandId":"01K50V1X8QR5SM1QYQ5B3M7W9A","assetId":"01K50V1X8QR5SM1QYQ5B3M7W9B","preparationStartedAt":"2026-09-20T10:00:00Z","workerStartedAt":"2026-09-20T10:00:01Z","workerFinishedAt":"2026-09-20T10:00:02Z","variants":[{"variantType":"ORIGINAL","bucket":"assets","objectKey":"assets/01K50V1X8QR5SM1QYQ5B3M7W9B/original","contentType":"application/pdf","byteSize":1024}]}`
 
-const preparationFailedEventJSON = `{"commandId":"01K50V1X8QR5SM1QYQ5B3M7W9A","assetId":"01K50V1X8QR5SM1QYQ5B3M7W9B","failureCode":"INVALID_IMAGE"}`
+const preparationFailedEventJSON = `{"commandId":"01K50V1X8QR5SM1QYQ5B3M7W9A","assetId":"01K50V1X8QR5SM1QYQ5B3M7W9B","preparationStartedAt":"2026-09-20T10:00:00Z","workerStartedAt":"2026-09-20T10:00:01Z","workerFinishedAt":"2026-09-20T10:00:02Z","failureCode":"INVALID_IMAGE"}`
 
 func TestEncodePrepareDocumentCommand(t *testing.T) {
 	payload, err := Encode(prepareDocumentCommand())
@@ -130,23 +130,27 @@ func TestDecodeRejectsUnknownFields(t *testing.T) {
 
 func prepareDocumentCommand() messaging.PrepareDocumentCommandV1 {
 	return messaging.PrepareDocumentCommandV1{
-		CommandId:         "01K50V1X8QR5SM1QYQ5B3M7W9A",
-		AssetId:           "01K50V1X8QR5SM1QYQ5B3M7W9B",
-		SourceBucket:      "uploads",
-		SourceObjectKey:   "incoming/report.pdf",
-		SourceContentType: "application/pdf",
-		SourceByteSize:    2048,
-		SourceObjectEtag:  "opaque-etag",
-		DestinationBucket: "assets",
-		DestinationPrefix: "assets/01K50V1X8QR5SM1QYQ5B3M7W9B/",
+		CommandId:            "01K50V1X8QR5SM1QYQ5B3M7W9A",
+		AssetId:              "01K50V1X8QR5SM1QYQ5B3M7W9B",
+		PreparationStartedAt: "2026-09-20T10:00:00Z",
+		SourceBucket:         "uploads",
+		SourceObjectKey:      "incoming/report.pdf",
+		SourceContentType:    "application/pdf",
+		SourceByteSize:       2048,
+		SourceObjectEtag:     "opaque-etag",
+		DestinationBucket:    "assets",
+		DestinationPrefix:    "assets/01K50V1X8QR5SM1QYQ5B3M7W9B/",
 	}
 }
 
 func completionEventWithoutPixelDimensions() messaging.AssetPreparationCompletedEventV1 {
 	variantType := messaging.AssetVariantTypeOriginal
 	return messaging.AssetPreparationCompletedEventV1{
-		CommandId: "01K50V1X8QR5SM1QYQ5B3M7W9A",
-		AssetId:   "01K50V1X8QR5SM1QYQ5B3M7W9B",
+		CommandId:            "01K50V1X8QR5SM1QYQ5B3M7W9A",
+		AssetId:              "01K50V1X8QR5SM1QYQ5B3M7W9B",
+		PreparationStartedAt: "2026-09-20T10:00:00Z",
+		WorkerStartedAt:      "2026-09-20T10:00:01Z",
+		WorkerFinishedAt:     "2026-09-20T10:00:02Z",
 		Variants: []messaging.AssetVariantV1{{
 			VariantType: &variantType,
 			Bucket:      "assets",
@@ -159,8 +163,11 @@ func completionEventWithoutPixelDimensions() messaging.AssetPreparationCompleted
 
 func preparationFailedEvent() messaging.AssetPreparationFailedEventV1 {
 	return messaging.AssetPreparationFailedEventV1{
-		CommandId:   "01K50V1X8QR5SM1QYQ5B3M7W9A",
-		AssetId:     "01K50V1X8QR5SM1QYQ5B3M7W9B",
-		FailureCode: "INVALID_IMAGE",
+		CommandId:            "01K50V1X8QR5SM1QYQ5B3M7W9A",
+		AssetId:              "01K50V1X8QR5SM1QYQ5B3M7W9B",
+		PreparationStartedAt: "2026-09-20T10:00:00Z",
+		WorkerStartedAt:      "2026-09-20T10:00:01Z",
+		WorkerFinishedAt:     "2026-09-20T10:00:02Z",
+		FailureCode:          "INVALID_IMAGE",
 	}
 }

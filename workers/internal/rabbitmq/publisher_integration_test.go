@@ -152,6 +152,9 @@ func TestPublisherRecoversAfterCancelledConfirmation(t *testing.T) {
 				if err != nil || !ok || string(delivery.Body) != body {
 					t.Fatalf("queued message = %q, %t, %v, want %q", delivery.Body, ok, err, body)
 				}
+				if delivery.Timestamp.IsZero() {
+					t.Fatal("queued message has no timestamp")
+				}
 			}
 		})
 	}

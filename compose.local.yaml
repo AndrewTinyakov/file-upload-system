@@ -6,7 +6,7 @@ services:
       POSTGRES_USER: file_upload
       POSTGRES_PASSWORD: file_upload
     ports:
-      - "${POSTGRES_PORT:-5432}:5432"
+      - "127.0.0.1:${POSTGRES_PORT:-5432}:5432"
     volumes:
       - postgres_data:/var/lib/postgresql
     healthcheck:
@@ -24,10 +24,12 @@ services:
       RABBITMQ_DEFAULT_PASS: file_upload
       RABBITMQ_DEFAULT_VHOST: file_upload
     ports:
-      - "${RABBITMQ_AMQP_PORT:-5672}:5672"
-      - "${RABBITMQ_MANAGEMENT_PORT:-15672}:15672"
+      - "127.0.0.1:${RABBITMQ_AMQP_PORT:-5672}:5672"
+      - "127.0.0.1:${RABBITMQ_MANAGEMENT_PORT:-15672}:15672"
+      - "127.0.0.1:${RABBITMQ_PROMETHEUS_PORT:-15692}:15692"
     volumes:
       - rabbitmq_data:/var/lib/rabbitmq
+      - ./infra/rabbitmq/enabled_plugins:/etc/rabbitmq/enabled_plugins:ro
     healthcheck:
       test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
       interval: 10s
@@ -43,8 +45,8 @@ services:
       MINIO_ROOT_PASSWORD: file_upload
       MINIO_API_CORS_ALLOW_ORIGIN: "*"
     ports:
-      - "${MINIO_API_PORT:-9000}:9000"
-      - "${MINIO_CONSOLE_PORT:-9001}:9001"
+      - "127.0.0.1:${MINIO_API_PORT:-9000}:9000"
+      - "127.0.0.1:${MINIO_CONSOLE_PORT:-9001}:9001"
     volumes:
       - minio_data:/data
     healthcheck:
@@ -79,6 +81,9 @@ services:
     environment: &worker-environment
       RABBITMQ_URL: amqp://file_upload:file_upload@rabbitmq:5672/file_upload
       S3_ENDPOINT: http://minio:9000
+      METRICS_ADDRESS: :2112
+    ports:
+      - "127.0.0.1:${DOCUMENT_WORKER_METRICS_PORT:-2112}:2112"
     depends_on:
       rabbitmq:
         condition: service_healthy
@@ -91,6 +96,8 @@ services:
       context: ./workers
       dockerfile: docker/image.Dockerfile
     environment: *worker-environment
+    ports:
+      - "127.0.0.1:${IMAGE_WORKER_METRICS_PORT:-2113}:2112"
     depends_on:
       rabbitmq:
         condition: service_healthy
@@ -98,7 +105,52 @@ services:
         condition: service_completed_successfully
     restart: unless-stopped
 
+  prometheus:
+    image: prom/prometheus:v3.14.0
+    command:
+      - --config.file=/etc/prometheus/prometheus.yaml
+      - --storage.tsdb.path=/prometheus
+      - --storage.tsdb.retention.time=7d
+    ports:
+      - "127.0.0.1:${PROMETHEUS_PORT:-9090}:9090"
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    volumes:
+      - ./infra/prometheus:/etc/prometheus:ro
+      - prometheus_data:/prometheus
+    restart: unless-stopped
+
+  alertmanager:
+    image: prom/alertmanager:v0.34.1
+    command:
+      - --config.file=/etc/alertmanager/alertmanager.yaml
+      - --storage.path=/alertmanager
+    ports:
+      - "127.0.0.1:${ALERTMANAGER_PORT:-9093}:9093"
+    volumes:
+      - ./infra/alertmanager:/etc/alertmanager:ro
+      - alertmanager_data:/alertmanager
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana:13.2.2
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: admin
+    ports:
+      - "127.0.0.1:${GRAFANA_PORT:-3000}:3000"
+    volumes:
+      - ./infra/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./infra/grafana/dashboards:/var/lib/grafana/dashboards:ro
+      - grafana_data:/var/lib/grafana
+    depends_on:
+      - prometheus
+    restart: unless-stopped
+
 volumes:
   postgres_data:
   rabbitmq_data:
   minio_data:
+  prometheus_data:
+  alertmanager_data:
+  grafana_data:
