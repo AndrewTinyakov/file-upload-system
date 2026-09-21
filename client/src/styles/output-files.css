@@ -1,0 +1,40 @@
+.outputs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 18px;
+  padding: 34px 0;
+}
+
+.outputs a {
+  display: block;
+  color: #1b201d;
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.outputs small {
+  display: block;
+  margin-top: 6px;
+  color: #69716b;
+  font-size: 0.65rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.outputs img,
+.document-output {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  margin-bottom: 10px;
+  object-fit: cover;
+  background: #dfe3d8;
+}
+
+.document-output {
+  display: grid;
+  place-items: center;
+  color: #3e4a40;
+}

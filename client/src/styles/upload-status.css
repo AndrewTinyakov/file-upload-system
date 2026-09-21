@@ -1,0 +1,154 @@
+.upload-detail {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  gap: 52px;
+  padding: 34px 0;
+  border-bottom: 1px solid #d6d2c8;
+}
+
+.timeline {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.timeline-step {
+  position: relative;
+  color: #8c918b;
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.timeline-step:not(:last-child)::after {
+  position: absolute;
+  top: 12px;
+  left: 25px;
+  width: calc(100% - 15px);
+  height: 1px;
+  background: #d6d2c8;
+  content: '';
+}
+
+.timeline-step span {
+  display: grid;
+  width: 25px;
+  height: 25px;
+  position: relative;
+  z-index: 1;
+  place-items: center;
+  margin-bottom: 11px;
+  border: 1px solid #c6c6bd;
+  border-radius: 50%;
+  background: #f4f1e8;
+  font-size: 0.65rem;
+}
+
+.timeline-step p {
+  margin: 0;
+}
+
+.timeline-step.complete,
+.timeline-step.active {
+  color: #1b201d;
+}
+
+.timeline-step.complete span {
+  border-color: #6e8069;
+  background: #6e8069;
+  color: #fff;
+}
+
+.timeline-step.active:not(.complete) span {
+  border: 3px solid #b75d34;
+  color: #b75d34;
+}
+
+.progress-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  align-items: center;
+  margin-top: 34px;
+  color: #69716b;
+  font-size: 0.72rem;
+}
+
+.progress-track {
+  height: 4px;
+  overflow: hidden;
+  background: #dfddd5;
+}
+
+.progress-track div {
+  height: 100%;
+  background: #b75d34;
+  transition: width 180ms ease-out;
+}
+
+.activity {
+  padding-left: 24px;
+  border-left: 1px solid #d6d2c8;
+  color: #69716b;
+  font-size: 0.72rem;
+  line-height: 1.65;
+}
+
+.activity-step {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 16px;
+  margin: 0 0 7px;
+}
+
+.activity-start {
+  margin: 0 0 14px;
+  color: #9a9a91;
+  font-variant-numeric: tabular-nums;
+}
+
+.activity-start time {
+  color: #9a9a91;
+  font-variant-numeric: tabular-nums;
+}
+
+.activity-step strong {
+  color: #8c918b;
+  font-size: 0.66rem;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.asset-id {
+  display: block !important;
+  overflow: hidden;
+  margin-bottom: 18px !important;
+  color: #1b201d;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.error {
+  color: #9c3923;
+}
+
+@media (max-width: 620px) {
+  .upload-detail {
+    grid-template-columns: 1fr;
+  }
+
+  .timeline {
+    gap: 4px;
+  }
+
+  .timeline-step {
+    font-size: 0.6rem;
+  }
+
+  .activity {
+    padding-top: 22px;
+    padding-left: 0;
+    border-top: 1px solid #d6d2c8;
+    border-left: 0;
+  }
+}

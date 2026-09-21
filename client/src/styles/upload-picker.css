@@ -1,0 +1,147 @@
+.upload-area {
+  border: 1px solid #d6d2c8;
+  background: #fbfaf6;
+}
+
+.upload-area.empty {
+  display: grid;
+  min-height: 220px;
+  place-items: center;
+}
+
+.file-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  clip-path: inset(50%);
+}
+
+.choose-file {
+  justify-self: center;
+  grid-column: 1 / -1;
+  padding: 14px 18px;
+  border: 1px solid #1b201d;
+  background: #1b201d;
+  color: #f4f1e8;
+  cursor: pointer;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.selected-file {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.95fr) minmax(0, 1.05fr);
+  min-height: 300px;
+}
+
+.file-preview,
+.file-mark {
+  display: grid;
+  min-height: 300px;
+  place-items: center;
+  overflow: hidden;
+  background: #dfe3d8;
+}
+
+.file-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 180ms ease-out;
+}
+
+.file-preview:hover img {
+  transform: scale(1.02);
+}
+
+.file-mark {
+  color: #3e4a40;
+  font-family: Fraunces, serif;
+  font-size: 4rem;
+}
+
+.file-summary {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 32px;
+  padding: 42px;
+}
+
+.file-name {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.file-meta {
+  margin: 8px 0 0;
+  color: #69716b;
+  font-size: 0.75rem;
+}
+
+.file-data {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin: 34px 0 0;
+}
+
+.file-data div {
+  min-width: 0;
+}
+
+.file-data dt {
+  color: #8c918b;
+  font-size: 0.65rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.file-data dd {
+  overflow: hidden;
+  margin: 7px 0 0;
+  color: #3e4a40;
+  font-size: 0.75rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.secondary-action {
+  padding: 10px 0;
+  border: 0;
+  border-bottom: 1px solid #1b201d;
+  background: transparent;
+  color: #1b201d;
+  cursor: pointer;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.secondary-action:disabled {
+  cursor: wait;
+  opacity: 0.45;
+}
+
+@media (max-width: 620px) {
+  .selected-file {
+    grid-template-columns: 1fr;
+  }
+
+  .file-preview,
+  .file-mark {
+    min-height: 220px;
+  }
+
+  .file-summary {
+    padding: 24px;
+  }
+
+  .file-data {
+    grid-template-columns: 1fr;
+  }
+}

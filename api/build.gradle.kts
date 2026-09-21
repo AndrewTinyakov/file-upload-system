@@ -2,6 +2,7 @@ plugins {
     kotlin("jvm") version "2.3.21"
     kotlin("plugin.spring") version "2.3.21"
     id("org.springframework.boot") version "4.1.1"
+    id("org.springdoc.openapi-gradle-plugin") version "1.9.0"
     id("io.spring.dependency-management") version "1.1.7"
     id("org.jooq.jooq-codegen-gradle") version "3.21.7"
     id("org.jlleitschuh.gradle.ktlint") version "14.2.0"
@@ -38,6 +39,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-webmvc")
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-api:3.1.1")
     runtimeOnly("io.micrometer:micrometer-registry-prometheus")
     implementation("org.flywaydb:flyway-database-postgresql")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
@@ -125,4 +127,21 @@ jooq {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+openApi {
+    apiDocsUrl.set("http://localhost:8080/api/v3/api-docs.yaml")
+    outputDir.set(file("../contracts"))
+    outputFileName.set("openapi.yaml")
+    customBootRun {
+        args.set(
+            listOf(
+                "--spring.profiles.active=local",
+                "--spring.flyway.enabled=false",
+                "--spring.rabbitmq.dynamic=false",
+                "--spring.rabbitmq.listener.simple.auto-startup=false",
+                "--file-upload.scheduling.enabled=false",
+            ),
+        )
+    }
 }

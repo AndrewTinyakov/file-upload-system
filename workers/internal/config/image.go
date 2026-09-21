@@ -1,10 +1,13 @@
 package config
 
+import "runtime"
+
 const mebibyte = 1024 * 1024
 
 type Image struct {
 	Worker
-	Vips Vips
+	Vips               Vips
+	VariantConcurrency int
 }
 
 type Vips struct {
@@ -20,7 +23,11 @@ func LoadImage() (Image, error) {
 		return Image{}, err
 	}
 
-	concurrency, err := envIntAtLeast("VIPS_CONCURRENCY", 1, 1)
+	concurrency, err := envIntAtLeast("VIPS_CONCURRENCY", runtime.GOMAXPROCS(0), 1)
+	if err != nil {
+		return Image{}, err
+	}
+	variantConcurrency, err := envIntAtLeast("IMAGE_VARIANT_CONCURRENCY", 2, 1)
 	if err != nil {
 		return Image{}, err
 	}
@@ -45,5 +52,6 @@ func LoadImage() (Image, error) {
 			MaxCacheMemory: maxCacheMemoryMiB * mebibyte,
 			MaxCacheSize:   maxCacheSize,
 		},
+		VariantConcurrency: variantConcurrency,
 	}, nil
 }

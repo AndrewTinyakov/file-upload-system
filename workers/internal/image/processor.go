@@ -29,12 +29,17 @@ type Client interface {
 }
 
 type Processor struct {
-	client Client
-	store  completion.Store
+	client             Client
+	store              completion.Store
+	variantConcurrency int
 }
 
-func NewProcessor(client Client) Processor {
-	return Processor{client: client, store: completion.NewStore(client)}
+func NewProcessor(client Client, variantConcurrency int) Processor {
+	return Processor{
+		client:             client,
+		store:              completion.NewStore(client),
+		variantConcurrency: variantConcurrency,
+	}
 }
 
 func (processor Processor) Process(
@@ -108,48 +113,6 @@ func (processor Processor) Process(
 	return result, nil
 }
 
-func (processor Processor) writeVariants(
-	ctx context.Context,
-	command messaging.PrepareImageCommandV1,
-	profile Profile,
-	image *vips.ImageRef,
-) ([]completion.Variant, error) {
-	variants := make([]completion.Variant, 0, len(profile.Variants))
-	displays := make(map[int]completion.Variant)
-	transparent := image.HasAlpha()
-
-	for _, spec := range profile.Variants {
-		if err := ctx.Err(); err != nil {
-			return nil, err
-		}
-		switch spec.Encoding {
-		case DisplayWebP:
-			width := min(image.Width(), spec.MaxWidth)
-			variant, ok := displays[width]
-			if !ok {
-				written, err := processor.writeDisplay(ctx, command, image, width)
-				if err != nil {
-					return nil, err
-				}
-				variant = written
-				displays[width] = variant
-			}
-			variant.Type = spec.Type.Value().(string)
-			variants = append(variants, variant)
-		case DownloadJpegOrPng:
-			variant, err := processor.writeDownload(ctx, command, image, transparent)
-			if err != nil {
-				return nil, err
-			}
-			variant.Type = spec.Type.Value().(string)
-			variants = append(variants, variant)
-		default:
-			return nil, fmt.Errorf("unsupported image variant encoding %q", spec.Encoding)
-		}
-	}
-	return variants, nil
-}
-
 func (processor Processor) writeDisplay(
 	ctx context.Context,
 	command messaging.PrepareImageCommandV1,
@@ -196,8 +159,6 @@ func (processor Processor) writeDownload(
 	var extension string
 	if transparent {
 		params := vips.NewPngExportParams()
-		params.Compression = 9
-		params.Filter = vips.PngFilterAll
 		params.StripMetadata = true
 		payload, metadata, err = image.ExportPng(params)
 		contentType = "image/png"

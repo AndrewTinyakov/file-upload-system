@@ -1,0 +1,375 @@
+openapi: 3.1.0
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+- url: http://localhost:8080/api
+  description: Generated server url
+paths:
+  /v1/upload-sessions:
+    post:
+      tags:
+      - upload-session-controller
+      operationId: create
+      parameters:
+      - name: X-User-ID
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Idempotency-Key
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateUploadSessionRequest"
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/UploadSessionResponse"
+  /v1/upload-sessions/{sessionId}/parts:
+    post:
+      tags:
+      - upload-session-controller
+      operationId: presignParts
+      parameters:
+      - name: X-User-ID
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: sessionId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SignPartsRequest"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/SignedPartsResponse"
+  /v1/upload-sessions/{sessionId}/complete:
+    post:
+      tags:
+      - upload-session-controller
+      operationId: complete
+      parameters:
+      - name: X-User-ID
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: sessionId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CompleteUploadSessionRequest"
+      responses:
+        "202":
+          description: Accepted
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/FileAssetResponse"
+  /v1/upload-sessions/{sessionId}/abort:
+    post:
+      tags:
+      - upload-session-controller
+      operationId: abort
+      parameters:
+      - name: X-User-ID
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: sessionId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/UploadSessionResponse"
+  /v1/upload-sessions/{sessionId}:
+    get:
+      tags:
+      - upload-session-controller
+      operationId: getSession
+      parameters:
+      - name: X-User-ID
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: sessionId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/UploadSessionResponse"
+  /v1/assets/{assetId}:
+    get:
+      tags:
+      - file-asset-controller
+      operationId: getAsset
+      parameters:
+      - name: X-User-ID
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: assetId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/FileAssetResponse"
+components:
+  schemas:
+    CreateUploadSessionRequest:
+      type: object
+      properties:
+        filename:
+          type: string
+          maxLength: 1024
+          minLength: 0
+        contentType:
+          type: string
+          maxLength: 255
+          minLength: 0
+        byteSize:
+          type: integer
+          format: int64
+          minimum: 0
+        handlingMode:
+          type: string
+          enum:
+          - DOCUMENT
+          - IMAGE
+      required:
+      - byteSize
+      - contentType
+      - filename
+      - handlingMode
+    UploadInstructions:
+      type: object
+      properties:
+        url:
+          type: string
+        method:
+          type: string
+        headers:
+          type: object
+          additionalProperties:
+            type: string
+        expiresAt:
+          type: string
+          format: date-time
+      required:
+      - expiresAt
+      - headers
+      - method
+      - url
+    UploadSessionResponse:
+      type: object
+      properties:
+        sessionId:
+          type: string
+        assetId:
+          type: string
+        strategy:
+          type: string
+          enum:
+          - SINGLE
+          - MULTIPART
+        status:
+          type: string
+          enum:
+          - CREATED
+          - COMPLETED
+          - ABORTED
+          - EXPIRED
+        expiresAt:
+          type: string
+          format: date-time
+        upload:
+          oneOf:
+          - $ref: "#/components/schemas/UploadInstructions"
+          - type: "null"
+        partSize:
+          type:
+          - integer
+          - "null"
+          format: int64
+        partCount:
+          type:
+          - integer
+          - "null"
+          format: int32
+      required:
+      - assetId
+      - expiresAt
+      - sessionId
+      - status
+      - strategy
+    SignPartsRequest:
+      type: object
+      properties:
+        partNumbers:
+          type: array
+          items:
+            type: integer
+            format: int32
+      required:
+      - partNumbers
+    SignedPart:
+      type: object
+      properties:
+        partNumber:
+          type: integer
+          format: int32
+        upload:
+          $ref: "#/components/schemas/UploadInstructions"
+      required:
+      - partNumber
+      - upload
+    SignedPartsResponse:
+      type: object
+      properties:
+        parts:
+          type: array
+          items:
+            $ref: "#/components/schemas/SignedPart"
+      required:
+      - parts
+    CompleteUploadSessionRequest:
+      type: object
+      properties:
+        parts:
+          type: array
+          items:
+            $ref: "#/components/schemas/CompletedPart"
+      required:
+      - parts
+    CompletedPart:
+      type: object
+      properties:
+        partNumber:
+          type: integer
+          format: int32
+        etag:
+          type: string
+      required:
+      - etag
+      - partNumber
+    AssetVariantResponse:
+      type: object
+      properties:
+        variantType:
+          type: string
+          enum:
+          - ORIGINAL
+          - DISPLAY_SMALL
+          - DISPLAY_MEDIUM
+          - DISPLAY_LARGE
+          - DOWNLOAD
+        url:
+          type: string
+        contentType:
+          type: string
+        byteSize:
+          type: integer
+          format: int64
+        width:
+          type:
+          - integer
+          - "null"
+          format: int32
+        height:
+          type:
+          - integer
+          - "null"
+          format: int32
+      required:
+      - byteSize
+      - contentType
+      - url
+      - variantType
+    FileAssetResponse:
+      type: object
+      properties:
+        assetId:
+          type: string
+        filename:
+          type: string
+        contentType:
+          type: string
+        byteSize:
+          type: integer
+          format: int64
+        handlingMode:
+          type: string
+          enum:
+          - DOCUMENT
+          - IMAGE
+        status:
+          type: string
+          enum:
+          - AWAITING_UPLOAD
+          - PREPARING
+          - READY
+          - FAILED
+          - DISCARDED
+        failureCode:
+          type:
+          - string
+          - "null"
+        variants:
+          type: array
+          items:
+            $ref: "#/components/schemas/AssetVariantResponse"
+      required:
+      - assetId
+      - byteSize
+      - contentType
+      - filename
+      - handlingMode
+      - status
+      - variants

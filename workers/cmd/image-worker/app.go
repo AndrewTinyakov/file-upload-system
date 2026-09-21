@@ -91,7 +91,7 @@ func newImageApp(ctx context.Context, cfg config.Image, logger *slog.Logger) (_ 
 		return nil, fmt.Errorf("create event publisher: %w", err)
 	}
 
-	processor := imageprocessor.NewProcessor(storage)
+	processor := imageprocessor.NewProcessor(storage, cfg.VariantConcurrency)
 	handler, err := worker.NewPreparationCommandHandler(
 		processor.Process,
 		func(command generated.PrepareImageCommandV1) worker.PreparationMetadata {
@@ -123,6 +123,8 @@ func (app *imageApp) logStarted(logger *slog.Logger) {
 		"image worker started",
 		"queue", app.consumer.QueueName(),
 		"concurrency", app.config.Concurrency,
+		"variant_concurrency", app.config.VariantConcurrency,
+		"vips_concurrency", app.config.Vips.Concurrency,
 		"prefetch", app.config.RabbitMQ.Prefetch,
 		"metrics_address", app.config.MetricsAddress,
 	)

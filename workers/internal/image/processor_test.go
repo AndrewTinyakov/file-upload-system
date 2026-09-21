@@ -11,7 +11,9 @@ import (
 	"io"
 	"os"
 	"strings"
+	"sync"
 	"testing"
+	"time"
 
 	"github.com/AndrewTinyakov/file-upload-system/workers/internal/generated/messaging"
 	"github.com/AndrewTinyakov/file-upload-system/workers/internal/worker"
@@ -27,6 +29,7 @@ type storedImageObject struct {
 }
 
 type imageTestClient struct {
+	mu         sync.Mutex
 	source     []byte
 	completion string
 	headCalls  int
@@ -44,6 +47,8 @@ func (client *imageTestClient) HeadObject(
 	_ *s3.HeadObjectInput,
 	_ ...func(*s3.Options),
 ) (*s3.HeadObjectOutput, error) {
+	client.mu.Lock()
+	defer client.mu.Unlock()
 	client.headCalls++
 	return &s3.HeadObjectOutput{
 		ContentLength: aws.Int64(int64(len(client.source))),
@@ -56,6 +61,8 @@ func (client *imageTestClient) GetObject(
 	input *s3.GetObjectInput,
 	_ ...func(*s3.Options),
 ) (*s3.GetObjectOutput, error) {
+	client.mu.Lock()
+	defer client.mu.Unlock()
 	client.getCalls++
 	if strings.HasSuffix(aws.ToString(input.Key), "complete.json") {
 		if client.completion == "" {
@@ -75,6 +82,8 @@ func (client *imageTestClient) PutObject(
 	if err != nil {
 		return nil, err
 	}
+	client.mu.Lock()
+	defer client.mu.Unlock()
 	if client.objects == nil {
 		client.objects = make(map[string]storedImageObject)
 	}
@@ -83,6 +92,24 @@ func (client *imageTestClient) PutObject(
 		payload:     payload,
 	}
 	return &s3.PutObjectOutput{}, nil
+}
+
+type concurrentImageTestClient struct {
+	*imageTestClient
+	started chan struct{}
+	release chan struct{}
+}
+
+func (client *concurrentImageTestClient) PutObject(
+	ctx context.Context,
+	input *s3.PutObjectInput,
+	options ...func(*s3.Options),
+) (*s3.PutObjectOutput, error) {
+	if !strings.HasSuffix(aws.ToString(input.Key), "complete.json") {
+		client.started <- struct{}{}
+		<-client.release
+	}
+	return client.imageTestClient.PutObject(ctx, input, options...)
 }
 
 func TestMain(m *testing.M) {
@@ -103,7 +130,7 @@ func TestProcessorProducesOpaqueImageVariantsWithoutUpscaling(t *testing.T) {
 	client := &imageTestClient{source: source}
 	command := imageCommand(source)
 
-	record, err := NewProcessor(client).Process(context.Background(), command)
+	record, err := NewProcessor(client, 1).Process(context.Background(), command)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -142,7 +169,7 @@ func TestProcessorKeepsTransparencyInDownloadVariant(t *testing.T) {
 	source := encodeTransparentPNG(t, 100, 80)
 	client := &imageTestClient{source: source}
 
-	record, err := NewProcessor(client).Process(context.Background(), imageCommand(source))
+	record, err := NewProcessor(client, 1).Process(context.Background(), imageCommand(source))
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -164,7 +191,7 @@ func TestProcessorResizesEachDistinctDisplayWidth(t *testing.T) {
 	source := encodeJPEG(t, 1600, 900)
 	client := &imageTestClient{source: source}
 
-	record, err := NewProcessor(client).Process(context.Background(), imageCommand(source))
+	record, err := NewProcessor(client, 1).Process(context.Background(), imageCommand(source))
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -180,11 +207,37 @@ func TestProcessorResizesEachDistinctDisplayWidth(t *testing.T) {
 	}
 }
 
+func TestProcessorWritesDistinctVariantsConcurrently(t *testing.T) {
+	source := encodeJPEG(t, 1600, 900)
+	client := &concurrentImageTestClient{
+		imageTestClient: &imageTestClient{source: source},
+		started:         make(chan struct{}, 4),
+		release:         make(chan struct{}),
+	}
+	done := make(chan error, 1)
+	go func() {
+		_, err := NewProcessor(client, 2).Process(context.Background(), imageCommand(source))
+		done <- err
+	}()
+
+	for range 2 {
+		select {
+		case <-client.started:
+		case <-time.After(time.Second):
+			t.Fatal("variant writes did not run concurrently")
+		}
+	}
+	close(client.release)
+	if err := <-done; err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestProcessorRejectsUnsupportedImageFormat(t *testing.T) {
 	source := []byte("GIF89a123456")
 	client := &imageTestClient{source: source}
 
-	_, err := NewProcessor(client).Process(context.Background(), imageCommand(source))
+	_, err := NewProcessor(client, 1).Process(context.Background(), imageCommand(source))
 	if code, ok := worker.PermanentFailureCode(err); !ok || code != worker.FailureUnsupportedImageFormat {
 		t.Fatalf("failure = %q, %t, %v", code, ok, err)
 	}
@@ -194,7 +247,7 @@ func TestProcessorRejectsInvalidImage(t *testing.T) {
 	source := append([]byte{0xff, 0xd8, 0xff}, bytes.Repeat([]byte{0}, 20)...)
 	client := &imageTestClient{source: source}
 
-	_, err := NewProcessor(client).Process(context.Background(), imageCommand(source))
+	_, err := NewProcessor(client, 1).Process(context.Background(), imageCommand(source))
 	if code, ok := worker.PermanentFailureCode(err); !ok || code != worker.FailureInvalidImage {
 		t.Fatalf("failure = %q, %t, %v", code, ok, err)
 	}
@@ -205,7 +258,7 @@ func TestProcessorReusesCompletionRecordWithoutReadingSource(t *testing.T) {
 	command := imageCommand(nil)
 	command.SourceByteSize = 99
 
-	record, err := NewProcessor(client).Process(context.Background(), command)
+	record, err := NewProcessor(client, 1).Process(context.Background(), command)
 	if err != nil {
 		t.Fatal(err)
 	}

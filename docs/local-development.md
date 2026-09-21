@@ -16,6 +16,7 @@ From the repository root:
 ```bash
 docker compose -f compose.local.yaml up -d --build
 ./api/gradlew -p api bootRun --args="--spring.profiles.active=local"
+npm run dev:client
 ```
 
 Compose starts PostgreSQL, RabbitMQ, MinIO, and both Go workers. Its MinIO initializer applies upload retention and public asset-read policies. The API runs on the host and applies Flyway migrations at startup.
@@ -27,6 +28,13 @@ Run the API integration suite with `./api/gradlew -p api test`; it starts isolat
 With the local stack and API running, run the full system tests with `npm run test:system`.
 
 Validate the monitoring configuration and alert rules with `npm run test:monitoring`.
+
+With the local Compose services running and no API process on port 8080,
+regenerate the HTTP API contract and client declarations with:
+
+```bash
+npm run generate:openapi
+```
 
 Build and test the worker module:
 

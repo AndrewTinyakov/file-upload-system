@@ -5,9 +5,13 @@ import com.andrewtinyakov.fileupload.asset.service.UploadSessionActionsService
 import com.andrewtinyakov.fileupload.asset.service.UploadSessionService
 import com.andrewtinyakov.fileupload.asset.web.payload.CompleteUploadSessionRequest
 import com.andrewtinyakov.fileupload.asset.web.payload.CreateUploadSessionRequest
+import com.andrewtinyakov.fileupload.asset.web.payload.FileAssetResponse
 import com.andrewtinyakov.fileupload.asset.web.payload.SignPartsRequest
+import com.andrewtinyakov.fileupload.asset.web.payload.SignedPartsResponse
+import com.andrewtinyakov.fileupload.asset.web.payload.UploadSessionResponse
 import com.andrewtinyakov.fileupload.user.validateUserId
 import jakarta.validation.Valid
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -15,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestHeader
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
 import java.net.URI
 
@@ -25,11 +30,12 @@ class UploadSessionController(
     private val uploadSessionActions: UploadSessionActionsService,
 ) {
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     fun create(
         @RequestHeader("X-User-ID") userId: String,
         @RequestHeader("Idempotency-Key") idempotencyKey: String,
         @Valid @RequestBody request: CreateUploadSessionRequest,
-    ): ResponseEntity<*> {
+    ): ResponseEntity<UploadSessionResponse> {
         val response = uploadSessionService.create(
             userId = validateUserId(userId),
             idempotencyKey = idempotencyKey,
@@ -37,7 +43,7 @@ class UploadSessionController(
         )
         return ResponseEntity
             .created(
-                URI("/api/v1/upload-sessions/${response.sessionId.value}"),
+                URI("/api/v1/upload-sessions/${response.sessionId}"),
             ).body(response)
     }
 
@@ -45,7 +51,7 @@ class UploadSessionController(
     fun abort(
         @RequestHeader("X-User-ID") userId: String,
         @PathVariable sessionId: String,
-    ) = uploadSessionActions.abort(
+    ): UploadSessionResponse = uploadSessionActions.abort(
         userId = validateUserId(userId),
         sessionId = UploadSessionId(sessionId),
     )
@@ -55,18 +61,19 @@ class UploadSessionController(
         @RequestHeader("X-User-ID") userId: String,
         @PathVariable sessionId: String,
         @RequestBody request: SignPartsRequest,
-    ) = uploadSessionActions.presignParts(
+    ): SignedPartsResponse = uploadSessionActions.presignParts(
         userId = validateUserId(userId),
         sessionId = UploadSessionId(sessionId),
         request = request,
     )
 
     @PostMapping("/{sessionId}/complete")
+    @ResponseStatus(HttpStatus.ACCEPTED)
     fun complete(
         @RequestHeader("X-User-ID") userId: String,
         @PathVariable sessionId: String,
         @RequestBody(required = false) request: CompleteUploadSessionRequest?,
-    ): ResponseEntity<*> =
+    ): ResponseEntity<FileAssetResponse> =
         ResponseEntity.accepted().body(
             uploadSessionActions.complete(
                 userId = validateUserId(userId),
@@ -79,7 +86,7 @@ class UploadSessionController(
     fun getSession(
         @RequestHeader("X-User-ID") userId: String,
         @PathVariable sessionId: String,
-    ) = uploadSessionService.getSession(
+    ): UploadSessionResponse = uploadSessionService.getSession(
         userId = validateUserId(userId),
         sessionId = UploadSessionId(sessionId),
     )

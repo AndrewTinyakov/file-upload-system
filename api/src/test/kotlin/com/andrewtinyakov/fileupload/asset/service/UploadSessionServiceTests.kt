@@ -87,8 +87,8 @@ class UploadSessionServiceTests {
 
         val response = service.create(owner, session.idempotencyKey, request)
 
-        assertEquals(session.id, response.sessionId)
-        assertEquals(session.assetId, response.assetId)
+        assertEquals(session.id.value, response.sessionId)
+        assertEquals(session.assetId.value, response.assetId)
         assertEquals(SessionStatus.COMPLETED, response.status)
         Mockito.verifyNoInteractions(storage)
     }

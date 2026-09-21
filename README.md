@@ -14,7 +14,7 @@ A pet project for file uploads and asynchronous preparation.
 api/          Kotlin Spring Boot API  
 workers/      Go document and image workers
 contracts/    AsyncAPI contract and payload schemas
-client/       Demonstration client using React and Uppy 
+client/       React client and generated API types
 docs/         Architecture
 ```
 
@@ -40,3 +40,11 @@ npm run generate:asyncapi:go
 Generated code lives in `api/src/generated/asyncapi/kotlin` and
 `workers/internal/generated/messaging`. Do not edit it manually. Worker setup
 is documented in [`workers/README.md`](workers/README.md).
+
+## HTTP API contract
+
+With Compose running, generate the OpenAPI contract and client types:
+
+```shell
+npm run generate:openapi
+```

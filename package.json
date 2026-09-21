@@ -7,10 +7,14 @@
     "npm": ">=11.5.1"
   },
   "scripts": {
+    "generate:openapi": "./api/gradlew -p api generateOpenApiDocs && npm run generate:openapi:types",
+    "generate:openapi:types": "npm --prefix client run generate:api",
+    "dev:client": "npm --prefix client run dev",
     "validate:asyncapi": "asyncapi validate contracts/asyncapi.yaml",
     "generate:asyncapi:kotlin": "node contracts/generate-models.mjs kotlin",
     "generate:asyncapi:go": "node contracts/generate-models.mjs go",
     "test:monitoring": "node scripts/check-monitoring.mjs",
+    "typecheck:client": "npm --prefix client run typecheck",
     "typecheck:system": "tsc -p tests/system/tsconfig.json",
     "test:system": "npm run typecheck:system && node --test --test-concurrency=1 tests/system/*.test.ts"
   },
@@ -19,5 +23,8 @@
     "@types/node": "26.6.1",
     "sharp": "0.35.4",
     "typescript": "7.0.2"
-  }
+  },
+  "workspaces": [
+    "client"
+  ]
 }

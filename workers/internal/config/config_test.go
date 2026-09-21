@@ -7,6 +7,7 @@ import (
 
 func TestLoadImageReadsVipsResourceLimits(t *testing.T) {
 	t.Setenv("VIPS_CONCURRENCY", "2")
+	t.Setenv("IMAGE_VARIANT_CONCURRENCY", "3")
 	t.Setenv("VIPS_MAX_CACHE_FILES", "4")
 	t.Setenv("VIPS_MAX_CACHE_MEMORY_MIB", "128")
 	t.Setenv("VIPS_MAX_CACHE_SIZE", "50")
@@ -24,6 +25,9 @@ func TestLoadImageReadsVipsResourceLimits(t *testing.T) {
 	}
 	if cfg.Vips != want {
 		t.Fatalf("Vips = %+v, want %+v", cfg.Vips, want)
+	}
+	if cfg.VariantConcurrency != 3 {
+		t.Fatalf("VariantConcurrency = %d, want 3", cfg.VariantConcurrency)
 	}
 }
 
