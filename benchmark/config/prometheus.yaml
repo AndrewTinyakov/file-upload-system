@@ -1,0 +1,19 @@
+global:
+  scrape_interval: 2s
+scrape_configs:
+  - job_name: api
+    metrics_path: /api/actuator/prometheus
+    basic_auth: { username: metrics, password: metrics-local }
+    static_configs: [{ targets: ["api:8080"] }]
+  - job_name: document-worker
+    static_configs: [{ targets: ["document-worker:2112"] }]
+  - job_name: image-worker
+    static_configs: [{ targets: ["image-worker:2112"] }]
+  - job_name: rabbitmq
+    static_configs: [{ targets: ["rabbitmq:15692"] }]
+  - job_name: rabbitmq-queues
+    metrics_path: /metrics/detailed
+    params:
+      vhost: [file_upload]
+      family: [queue_coarse_metrics, queue_metrics, queue_delivery_metrics, queue_exchange_metrics]
+    static_configs: [{ targets: ["rabbitmq:15692"] }]
