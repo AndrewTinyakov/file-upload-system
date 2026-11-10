@@ -2,7 +2,7 @@
 
 This local Docker benchmark runs the actual `client/src/upload.ts` in Chromium, through the API, MinIO, RabbitMQ and workers, until READY and verified retrieval. A separate `/app` page bundles the actual React client for independent input/drop verification. Load callbacks record timings without rendering one React interface per concurrent upload. Chromium, client scheduling, polling, hashing and network emulation costs are included in generator measurements. Sustained React rendering cost is not measured.
 
-See [STRATEGY.md](reports/STRATEGY.md) for the user-authorized short campaign and [REPORT.md](reports/REPORT.md) for decisions and observed results. The original long scenarios remain available. Short screens do not establish production p99, rare-cohort nonregression or long-term leak freedom.
+Protocol version `1` is the first canonical benchmark configuration. See [BASELINE.md](reports/BASELINE.md) for its baseline measurements and validation. Both short screening profiles and longer confirmation scenarios are available. Short screens do not establish production p99, rare-cohort nonregression or long-term leak freedom.
 
 ## Layout
 
@@ -13,12 +13,10 @@ See [STRATEGY.md](reports/STRATEGY.md) for the user-authorized short campaign an
 | `tests/` | Node unit tests and the CDP network calibration check |
 | `config/` | Frozen protocol, image reference, Prometheus scrape configuration and the benchmark-only versioned `documents` bucket lifecycle and policy (`config/minio/`) |
 | `docker/` | Compose project, generator image and API image |
-| `reports/` | Historical strategy, report and follow-up assessments |
+| `reports/` | Baseline measurements and validation |
 | `package.json`, `package-lock.json` | Generator dependencies |
 
-The `documents` bucket lifecycle and policy support a rejected storage experiment. They are mounted only by the benchmark `minio-init` service and are not production configuration.
-
-Historical reports quote the commands and file names that were current when they were written, such as `benchmark/compose.yaml`, `benchmark/evaluate.mjs` and `infra/minio/documents-policy.json`. Use the paths in this README for new runs.
+The `documents` bucket lifecycle and policy support optional versioned-document storage trials. They are mounted only by the benchmark `minio-init` service and are not production configuration.
 
 ## Run
 
@@ -65,7 +63,7 @@ The twelve weighted fixtures cover 16 KiB and 1 MiB documents, 64 MiB minus one 
 
 The protocol hash covers every `.mjs`, `.ts`, `.json`, `.yaml`, `.sh` and `*Dockerfile` file under the generator's `/bench` directory, recursively, keyed by its relative path and sorted by that path: source, tests, configuration including the `documents` bucket files, Docker files, the entry script and dependency locks. It excludes `node_modules/`, the `public/` build output, `reports/` and Markdown. Protocol, fixture and environment hashes must match across comparison sides.
 
-The directory reorganization changed both file contents (paths) and the hash input from top-level file names to nested relative paths. Runs produced from this layout have a different protocol hash from every earlier run, so the evaluator rejects comparisons that mix them. Earlier results stay valid within their own protocols but are not baselines for new runs; take fresh baselines. Instrumentation changes require fresh baselines. Keep superseded, interrupted and setup-only runs separate from acceptance evidence.
+Version numbers alone do not establish compatibility. Compare only runs with matching protocol, fixture and environment hashes. Changes to benchmark inputs or instrumentation require fresh baselines. Keep superseded, interrupted and setup-only runs separate from acceptance evidence.
 
 ## Slow connections and faults
 
@@ -99,12 +97,12 @@ Mixed-run service counters cannot establish cohort resource nonregression. Sampl
 
 ## Storage trials
 
-The approved `BENCHMARK_MINIO_COMPRESSION=off|on` toggle is a candidate setting, default `off`. Encryption compression stays off. Fixed document extensions and the exact `application/octet-stream` MIME type are eligible; JPEG, PNG and WebP remain excluded. Every run records server settings, environment overrides, process identity and versions before/after measurement. Drift, undeclared variables and missing provenance fail comparison.
+The `BENCHMARK_MINIO_COMPRESSION=off|on` toggle is a candidate setting, default `off`. Encryption compression stays off. Fixed document extensions and the exact `application/octet-stream` MIME type are eligible; JPEG, PNG and WebP remain excluded. Every run records server settings, environment overrides, process identity and versions before/after measurement. Drift, undeclared variables and missing provenance fail comparison.
 
 The identical preflight verifies raw document retrieval, HEAD, ranges, conditional GET, multipart and conditional worker-style copies, with CPU/network/storage deltas and stored-representation lengths. Those lengths include `xl.meta`; they are not allocated blocks or physical I/O. Probe objects are removed before warmup. Smaller stored bytes alone cannot justify adoption. Transparent storage compression does not reduce the client's upload bytes.
 
-The runtime trial accepts `BENCHMARK_MINIO_GOMAXPROCS=2` or an unset variable for the original host-derived default. It keeps the one-CPU quota fixed. Snapshots verify the effective runtime value, visible CPUs and Go version; each comparison side must use one mode and fixed runtime provenance must match across runs. Runtime instrumentation requires fresh controls. The trial failed its screen and is not an adopted production setting. See [CONFIDENCE_FOLLOWUP.md](reports/CONFIDENCE_FOLLOWUP.md).
+The runtime trial accepts `BENCHMARK_MINIO_GOMAXPROCS=2` or an unset variable for the original host-derived default. It keeps the one-CPU quota fixed. Snapshots verify the effective runtime value, visible CPUs and Go version; each comparison side must use one mode and fixed runtime provenance must match across runs. Runtime instrumentation requires fresh controls. This is an experimental setting and is not enabled by default.
 
 ## Iteration record
 
-Record each hypothesis, focused change, correctness evidence, matched measurements and retain/restore decision in `reports/REPORT.md` and the ignored candidate ledger. Fifteen candidates is a ceiling. Choose additional work from demonstrated bottlenecks, investigate broader data flow after two unsuccessful rounds, and stop when further screening would not change the decision under the authorized short strategy. Report unproved objectives explicitly.
+Keep hypotheses, focused changes, correctness evidence, matched measurements and retain/restore decisions with the ignored run artifacts. Freeze the evaluation before a campaign and keep its candidate budget and stopping rules. Choose changes from demonstrated bottlenecks and report unproved objectives explicitly.

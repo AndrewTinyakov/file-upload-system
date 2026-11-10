@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 1,
   "seed": 276197,
   "replicates": 3,
   "warmupSeconds": 30,
