@@ -4,7 +4,6 @@ import io.micrometer.core.instrument.Gauge
 import io.micrometer.core.instrument.MeterRegistry
 import org.jooq.DSLContext
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
-import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Component
 import java.util.concurrent.atomic.AtomicReference
 
@@ -34,7 +33,6 @@ class UploadPipelineBacklogMetrics(
             .register(registry)
     }
 
-    @Scheduled(fixedDelay = 1000)
     fun sample() {
         val record = database.fetchOne(
             """

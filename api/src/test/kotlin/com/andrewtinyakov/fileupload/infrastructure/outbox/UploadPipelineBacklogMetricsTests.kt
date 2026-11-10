@@ -14,13 +14,17 @@ class UploadPipelineBacklogMetricsTests {
         ApplicationContextRunner()
             .withBean(DSLContext::class.java, { Mockito.mock(DSLContext::class.java) })
             .withBean(SimpleMeterRegistry::class.java, { SimpleMeterRegistry() })
-            .withUserConfiguration(UploadPipelineBacklogMetrics::class.java)
+            .withUserConfiguration(
+                UploadPipelineBacklogMetrics::class.java,
+                UploadPipelineBacklogScheduler::class.java,
+            )
 
     @Test
     fun `backlog database sampler is absent by default`() {
         context.run {
             assertNull(it.startupFailure)
             assertEquals(0, it.getBeansOfType(UploadPipelineBacklogMetrics::class.java).size)
+            assertEquals(0, it.getBeansOfType(UploadPipelineBacklogScheduler::class.java).size)
             assertNull(it.getBean(SimpleMeterRegistry::class.java).find("file.upload.preparing").gauge())
         }
     }
@@ -30,6 +34,7 @@ class UploadPipelineBacklogMetricsTests {
         context.withPropertyValues("file-upload.monitoring.backlog-enabled=true").run {
             assertNull(it.startupFailure)
             assertEquals(1, it.getBeansOfType(UploadPipelineBacklogMetrics::class.java).size)
+            assertEquals(1, it.getBeansOfType(UploadPipelineBacklogScheduler::class.java).size)
             assertNotNull(it.getBean(SimpleMeterRegistry::class.java).find("file.upload.preparing").gauge())
         }
     }
