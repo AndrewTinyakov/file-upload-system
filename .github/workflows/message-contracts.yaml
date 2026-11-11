@@ -65,6 +65,9 @@ jobs:
       - name: Typecheck client
         run: npm run typecheck:client
 
+      - name: Test client uploads
+        run: npm run test:client
+
       - name: Test benchmark helpers
         run: >-
           node --test

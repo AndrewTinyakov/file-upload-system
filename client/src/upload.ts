@@ -9,6 +9,7 @@ import type { CompletedPart, FileAssetResponse as FileAsset, UploadInstructions 
 
 const userIdStorageKey = 'file-upload-system.user-id'
 const partBatchSize = 100
+const partConcurrency = 4
 const pollingDelayMs = 250
 const ulidAlphabet = '0123456789ABCDEFGHJKMNPQRSTVWXYZ'
 
@@ -91,8 +92,10 @@ async function uploadParts(
     throw new Error('Multipart upload details are missing')
   }
 
+  const partSize = session.partSize
   const completed: CompletedPart[] = []
   let uploadedBytes = 0
+  const loadedBytes = Array<number>(session.partCount).fill(0)
   const partNumbers = Array.from({ length: session.partCount }, (_, index) => index + 1)
 
   for (const batch of chunks(partNumbers, partBatchSize)) {
@@ -100,19 +103,41 @@ async function uploadParts(
       partNumbers: batch,
     })
 
-    for (const part of signed.parts) {
-      const start = (part.partNumber - 1) * session.partSize
-      const body = file.slice(start, Math.min(start + session.partSize, file.size))
-      const etag = await put(part.upload, body, (loaded) => onProgress((uploadedBytes + loaded) / file.size))
-      if (!etag) {
-        throw new Error(`Part ${part.partNumber} did not return an ETag`)
+    let nextPart = 0
+    let failed = false
+    const uploadNext = async (): Promise<void> => {
+      while (!failed && nextPart < signed.parts.length) {
+        const part = signed.parts[nextPart++]
+        const start = (part.partNumber - 1) * partSize
+        const body = file.slice(start, Math.min(start + partSize, file.size))
+        const updateProgress = (loaded: number) => {
+          uploadedBytes += loaded - loadedBytes[part.partNumber - 1]
+          loadedBytes[part.partNumber - 1] = loaded
+          onProgress(uploadedBytes / file.size)
+        }
+        try {
+          const etag = await put(part.upload, body, updateProgress)
+          if (!etag) {
+            throw new Error(`Part ${part.partNumber} did not return an ETag`)
+          }
+          updateProgress(body.size)
+          completed.push({ partNumber: part.partNumber, etag })
+        } catch (error) {
+          failed = true
+          throw error
+        }
       }
-      uploadedBytes += body.size
-      completed.push({ partNumber: part.partNumber, etag })
+    }
+    const results = await Promise.allSettled(
+      Array.from({ length: Math.min(partConcurrency, signed.parts.length) }, uploadNext),
+    )
+    const failure = results.find((result) => result.status === 'rejected')
+    if (failure?.status === 'rejected') {
+      throw failure.reason
     }
   }
 
-  return completed
+  return completed.sort((left, right) => left.partNumber - right.partNumber)
 }
 
 async function waitForAsset(
@@ -151,6 +176,7 @@ function put(
       }
     }
     request.onerror = () => reject(new Error('Storage upload failed'))
+    request.onabort = () => reject(new Error('Storage upload aborted'))
     request.onload = () => {
       if (request.status < 200 || request.status >= 300) {
         reject(new Error(`Storage upload returned ${request.status}`))
