@@ -5,6 +5,21 @@ import { tmpdir } from 'node:os';
 import { basename, join } from 'node:path';
 import { spawn, spawnSync } from 'node:child_process';
 import { setTimeout as sleep } from 'node:timers/promises';
+import { protocolSources } from '../src/protocol-sources.mjs';
+
+test('saved result snapshots do not change protocol inputs', async t => {
+  const root = await mkdtemp(join(tmpdir(), 'upload-protocol-'));
+  t.after(() => rm(root, { recursive: true, force: true }));
+  await mkdir(join(root, 'config'));
+  await writeFile(join(root, 'config/protocol.json'), '{"seed":1}');
+  const inputs = await protocolSources(root);
+  assert.deepEqual(inputs, [['config/protocol.json', '{"seed":1}']]);
+  await mkdir(join(root, 'results/run'), { recursive: true });
+  await writeFile(join(root, 'results/run/summary.json'), '{"offered":960}');
+  assert.deepEqual(await protocolSources(root), inputs);
+  await writeFile(join(root, 'config/protocol.json'), '{"seed":2}');
+  assert.notDeepEqual(await protocolSources(root), inputs);
+});
 
 async function runner(t) {
   const root = await mkdtemp(join(tmpdir(), 'upload runner '));

@@ -16,6 +16,10 @@ npm run bench -- stop
 startup, warmup and drainage take extra time. Names are automatic, and each run
 prints its results directory under `.local/upload-benchmark/`.
 
+Generated files include `summary.json`, per-upload `operations.jsonl`, and
+`resources.jsonl` samples for graphs. The [saved run](results/) contains those
+outputs and the recorded configuration. Comparisons also accept saved run paths.
+
 Runs reset the benchmark's Docker volumes. Run one at a time without other load.
 `stop` removes its containers and volumes, keeping saved results.
 
@@ -36,7 +40,7 @@ Changed benchmark inputs require fresh baselines; short runs may return
 `insufficient_evidence`.
 
 See `npm run bench -- --help`, [scenarios](config/protocol.json),
-[resource limits](docker/compose.yaml) and [run results](reports/BASELINE.md).
+and [resource limits](docker/compose.yaml).
 
 ## Checks
 
