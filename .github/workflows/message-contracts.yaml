@@ -70,6 +70,7 @@ jobs:
           node --test
           benchmark/tests/drain.test.mjs
           benchmark/tests/evaluate.test.mjs
+          benchmark/tests/runner.test.mjs
           benchmark/tests/storage-cleanup.test.mjs
           benchmark/tests/storage-settings.test.mjs
 

@@ -1,12 +1,12 @@
-# Protocol version 1 baseline
+# Protocol version 1 run results
 
-Fresh mixed-traffic baseline for the first canonical benchmark configuration. These are baseline observations of the existing upload behavior with retained monitoring, not evidence of a performance improvement. Earlier campaign reports are archived locally and excluded from this baseline.
+**The real CLI run failed the existing checks. A clean baseline was not established.** Three repeats were planned; the campaign stopped after the first returned exit code 1 with unexpected timeouts and incomplete durable work. Acceptance rules were preserved.
 
 ## Workload and provenance
 
-Three sequential `quick` repeats on 2026-11-10, each with 12 seconds of warmup, 120 seconds of independently scheduled arrivals at 8 files/second, and the existing 180-second drainage deadline. Each repeat recreated project volumes and verified empty queues and durable work before measurement. Seed 276197, all twelve weighted document/JPEG/PNG/WebP fixtures, fixed image references, replicas, resource limits and acceptance rules were preserved. Weights and deterministic arrivals are synthetic assumptions.
+Run on 2026-11-11 through the actual Node CLI, with automatically generated name `quick-20261111T142327496Z-94b8ef8d`. The `quick` scenario used 12 seconds of warmup, 120 measured seconds at 8 independently scheduled arrivals/second, a 120-second operation timeout and the existing 180-second drainage deadline. Project volumes, queues and durable work started empty. Seed 276197, twelve weighted document/JPEG/PNG/WebP fixtures, multipart boundaries, image references, replicas, quotas and acceptance rules were unchanged. The workload weights and deterministic arrivals are synthetic assumptions.
 
-Service source revision: `416feaa076f418c2d111d3551562f2fb6c7c22a1`. The benchmark configuration differs by its reset to version 1 and documentation cleanup; run archives preserve the actual sources. Storage compression is off and MinIO uses its original host-derived runtime setting. The Docker VM exposes 11 logical CPUs and 15.66 GiB RAM. Generator and services share that VM and Docker bridge; host interference is not isolated.
+Service source revision: `3956e3bb280e500c81f853aa8e352b732e9e069e`; the archived service patch is empty. The new CLI, helper tests, npm entrypoint and README are included in the source archive and published with this report. Compression was off and MinIO used its host-derived runtime setting. The generator and services shared the same Docker VM with 11 logical CPUs and 15.66 GiB RAM.
 
 | Service | CPU quota | Memory limit |
 | --- | --- | --- |
@@ -20,98 +20,97 @@ Service source revision: `416feaa076f418c2d111d3551562f2fb6c7c22a1`. The benchma
 | Grafana | 0.25 | 512 MiB |
 | Generator including Chromium | 2 | 8 GiB |
 
-All repeats matched protocol hash `bb70da6829d748765e7f54d18c3f1242aa3c60f4984cdabd51ec5d398e02410c`, fixture hash `f5ec95ee30aafbdb5d5981c255010f69173a9311b3b9deef18a0381256f874ee`, and environment hash `fcd0240c3215f3261e6e585d344db5546f38d241773f2972335569ad8978480d`. Version numbers alone do not establish compatibility; earlier artifacts labelled version 1 have different hashes and are not this baseline.
+Protocol hash: `dea10778046565f5f29dc8121687d1487602dfe98573399dc9636144b3e41ac8`. Fixture hash: `f5ec95ee30aafbdb5d5981c255010f69173a9311b3b9deef18a0381256f874ee`. Environment hash: `fcd0240c3215f3261e6e585d344db5546f38d241773f2972335569ad8978480d`. Future comparisons require matching hashes and fresh clean repeats. This run must not be accepted as a passing control.
 
-Reproduce from the repository root with unused labels:
+Host conditions were uncontrolled. 80 unrelated containers were initially observed. The captured pre-run sample recorded load averages of 18.44/26.80/24.99 and about 5.85 GiB of swap in use. The shared host was not isolated. Resource pressure was observed, but this run does not isolate its causal contribution from service behavior. Other projects were not stopped or reconfigured.
+
+To run the same scenario from the repository root:
 
 ```sh
-./benchmark/run.sh quick v1-baseline-20261110-r1
-./benchmark/run.sh quick v1-baseline-20261110-r2
-./benchmark/run.sh quick v1-baseline-20261110-r3
-docker compose -f benchmark/docker/compose.yaml down --volumes --remove-orphans
+npm run bench -- run --scenario quick
+npm run bench -- stop
 ```
 
-The recorded labels already exist locally; choose new ones when repeating. Raw operation journals, measurements, source archives and checksums stay in ignored `.local/upload-benchmark/`. They are not uploaded GitHub artifacts. This report includes the compact results needed for review.
+## Offered work and failure outcomes
 
-## Accounting and repeat variability
+| Outcome | Count |
+| --- | --- |
+| Offered / recorded | 960 / 960 |
+| Verified successes | 292 |
+| Generator capacity rejections | 656 |
+| Unexpected timeouts | 12 |
+| Other unexpected errors | 0 |
+| Expected injected faults | 0 |
+| Client operations without a terminal record | 0 |
+| Server sessions still incomplete at deadline | 8 |
 
-| Repeat | Offered / recorded | Successful | Generator rejected | Completed files/s | Successful input MiB/s | READY p99, s | Download p99, s |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| r1 | 960 / 960 | 957 | 3 | 6.434 | 97.901 | 31.275 | 31.477 |
-| r2 | 960 / 960 | 960 | 0 | 6.536 | 99.142 | 29.500 | 29.773 |
-| r3 | 960 / 960 | 960 | 0 | 6.506 | 98.687 | 29.806 | 30.056 |
+The fixed 128-inflight generator limit rejected offered work without dispatching it. Rejections are not completed uploads. Timeouts are unexpected outcomes, not injected faults. Complete client accounting does not mean that server-side work drained.
 
-Across 2880 offered operations: 2877 verified successes, 3 generator capacity rejections, 0 expected faults, 0 unexpected errors, 0 timeouts, and 0 unfinished operations. All queues and durable work drained with zero cleanup failures and empty diagnostics. Recorded retries: 0; API requests: 92174; PUT attempts: 6420; attempted upload bytes: 45807553598. Capacity rejections are offered work that the generator's fixed 128-inflight limit did not dispatch; they are not completed uploads.
+Timeouts occurred during uploading in 8 cases, preparation/polling in 1 and verified retrieval after READY in 3. At the final deadline, every Rabbit queue was empty and durable outbox/preparation counts were zero, but 8 sessions remained incomplete. Fixture cleanup reported 0 failures; that counter does not cover abandonment recovery for these sessions. Post-arrival observation lasted 182.879 seconds including final probes. Recovery of abandoned sessions was not established.
 
-Completed throughput divides verified successes and their original input bytes by time from measurement start through the later of measurement end and the final terminal operation. Successful latency distributions exclude rejected operations, which remain visible in the accounting above.
+Completed throughput was 1.796 verified files/s and 20.408 input MiB/s. Its denominator was 162.584 seconds from measurement start through the later of measurement end and the final terminal operation. Recorded retries: 0. API requests: 3298. PUT attempts: 630. Attempted upload bytes: 4667813193.
 
-| Repeat | Generator lag p50, ms | Generator lag p99, ms | Peak sampled queued messages | Post-arrival observation, s |
-| --- | --- | --- | --- | --- |
-| r1 | 3.300 | 101.100 | 98 | 41.516 |
-| r2 | 3.100 | 139.100 | 102 | 41.511 |
-| r3 | 3.000 | 94.900 | 97 | 42.430 |
+Generator lag p50/p99 was 24.000/1290.900 ms. Peak sampled queue depth was 50 messages. Broker head age was unavailable. Resource measurement coverage was complete, with no collection diagnostics.
 
-Post-arrival observation includes drainage and final provenance/storage probes, so it is not a pure queue-drain time. No fault, restart or load-reduction event is injected by `quick`; recovery time was not exercised.
-
-## Client-observed latency
+## Latency among verified successes
 
 | Endpoint | p50, s | p75, s | p90, s | p95, s | p99, s | p99 marginal 95% interval, s |
 | --- | --- | --- | --- | --- | --- | --- |
-| Scheduled arrival to READY | 5.849 | 14.175 | 23.765 | 28.013 | 30.039 | 29.776 to 30.451 |
-| Client start to READY | 5.836 | 14.159 | 23.711 | 28.008 | 30.034 | 29.773 to 30.449 |
-| Scheduled arrival to verified download | 6.189 | 14.653 | 24.696 | 28.308 | 30.418 | 30.126 to 30.869 |
-| Client start to verified download | 6.180 | 14.651 | 24.639 | 28.281 | 30.416 | 30.120 to 30.867 |
+| Scheduled arrival to READY | 39.152 | 56.857 | 67.867 | 72.106 | 87.590 | 77.071 to unbounded |
+| Client start to READY | 39.035 | 56.715 | 67.753 | 71.548 | 87.549 | 76.978 to unbounded |
+| Scheduled arrival to verified download | 54.293 | 68.759 | 88.021 | 104.447 | 114.231 | 109.280 to unbounded |
+| Client start to verified download | 54.237 | 68.735 | 87.977 | 104.442 | 114.031 | 109.269 to unbounded |
 
-2877 successful observations are pooled above. Quantiles use exact nearest rank on unrounded observations; archived histograms have 1 ms bins and displayed values are rounded. Intervals use binomial order statistics and assume independent observations. Queueing correlations and shared-host effects can make these marginal intervals optimistic. Repeat-to-repeat variability remains visible above and cannot be inferred from pooled intervals alone.
+These distributions include only the 292 verified successes, excluding rejected and timed-out work. They cannot establish the latency of all offered uploads. There are fewer than 1,000 successes, so even the global group is underpowered; the upper p99 confidence bound is unbounded. Quantiles use exact nearest rank on unrounded observations, archived histograms have 1 ms bins, and displayed values are rounded. Binomial order-statistic intervals assume independent observations; queueing correlations and host interference can make marginal uncertainty optimistic. There are no repeatability estimates from this single attempt.
 
-## Client stages and cohorts
+| Successful client stage | p50, s | p75, s | p90, s | p95, s | p99, s |
+| --- | --- | --- | --- | --- | --- |
+| creating | 1.839 | 4.289 | 14.653 | 22.979 | 26.157 |
+| preparing | 24.589 | 41.195 | 51.909 | 53.474 | 55.975 |
+| ready | 6.893 | 19.251 | 30.175 | 35.386 | 41.567 |
+| uploading | 5.693 | 14.023 | 21.381 | 36.200 | 76.367 |
 
-| Client stage | p50, s | p95, s | p99, s |
-| --- | --- | --- | --- |
-| creating | 0.019 | 0.173 | 0.356 |
-| preparing | 4.348 | 27.537 | 29.591 |
-| ready | 0.190 | 0.952 | 2.147 |
-| uploading | 0.130 | 2.924 | 7.094 |
+Preparation includes queueing, worker work and polling. The ready stage includes verified retrieval; these are client callbacks, not isolated worker CPU times.
 
-These stages use client callbacks. Preparing includes queueing, worker preparation and polling; it is not isolated worker CPU time. The ready stage includes verified retrieval.
-
-| Fixture cohort | Offered / successful | READY p50, s | READY p95, s | READY p99, s | Download p99, s | At least 1,000 successes |
+| Fixture cohort | Offered | Successful | Rejected | Timeouts | Download p50, s | Download p99, s |
 | --- | --- | --- | --- | --- | --- | --- |
-| jpeg-large.jpeg | 300 / 300 | 13.168 | 30.167 | 31.548 | 31.919 | no |
-| jpeg-small.jpeg | 261 / 261 | 11.947 | 28.659 | 29.774 | 29.832 | no |
-| noise-boundary.bin | 123 / 123 | 5.141 | 12.913 | 15.077 | 15.648 | no |
-| noise-large.bin | 54 / 54 | 13.224 | 26.710 | 29.732 | 31.197 | no |
-| noise-medium.bin | 417 / 417 | 1.258 | 3.762 | 4.889 | 4.947 | no |
-| png-alpha.png | 303 / 302 | 15.125 | 28.718 | 29.504 | 29.550 | no |
-| png-noise.png | 222 / 222 | 12.873 | 28.882 | 29.915 | 30.408 | no |
-| text-boundary-above.bin | 126 / 126 | 5.368 | 12.558 | 14.374 | 14.879 | no |
-| text-boundary-below.bin | 135 / 135 | 3.449 | 7.770 | 9.523 | 10.148 | no |
-| text-small.bin | 522 / 521 | 1.251 | 3.319 | 4.152 | 4.320 | no |
-| webp-large.webp | 123 / 123 | 17.662 | 30.029 | 32.129 | 32.374 | no |
-| webp-small.webp | 294 / 293 | 11.027 | 27.542 | 28.862 | 29.041 | no |
+| jpeg-large.jpeg | 100 | 29 | 71 | 0 | 74.947 | 115.186 |
+| jpeg-small.jpeg | 87 | 24 | 63 | 0 | 57.835 | 100.135 |
+| noise-boundary.bin | 41 | 12 | 24 | 5 | 41.948 | 115.403 |
+| noise-large.bin | 18 | 1 | 14 | 3 | 66.335 | 66.335 |
+| noise-medium.bin | 139 | 40 | 99 | 0 | 34.392 | 61.586 |
+| png-alpha.png | 101 | 37 | 64 | 0 | 60.692 | 104.576 |
+| png-noise.png | 74 | 18 | 56 | 0 | 73.078 | 106.486 |
+| text-boundary-above.bin | 42 | 9 | 29 | 4 | 49.163 | 113.692 |
+| text-boundary-below.bin | 45 | 19 | 26 | 0 | 66.544 | 110.606 |
+| text-small.bin | 174 | 49 | 125 | 0 | 15.442 | 63.535 |
+| webp-large.webp | 41 | 19 | 22 | 0 | 62.385 | 89.413 |
+| webp-small.webp | 98 | 35 | 63 | 0 | 55.913 | 101.168 |
 
-Cohort percentiles are descriptive. Cohorts below the frozen 1,000-success threshold remain insufficient evidence for tail-latency acceptance; this short mixed baseline cannot establish per-cohort resource nonregression.
+Every cohort is below 1,000 successes. Cohort percentiles are descriptive and do not establish tail or resource nonregression.
 
 ## Resource costs
 
-Each cell below reports the median across three repeats followed by the observed minimum and maximum. CPU and traffic totals include the measurement and drainage period, retries, failed attempts and object cleanup, then divide by successful uploads. Generator counters include Chromium and the Node harness.
-
 | Service | CPU seconds/success | Peak sampled memory, MiB | Network RX+TX MiB/success | Block reads+writes MiB/success |
 | --- | --- | --- | --- | --- |
-| api | 0.056 [0.054, 0.057] | 414.621 [410.941, 416.035] | 0.113 [0.112, 0.114] | 0.004 [0.002, 0.005] |
-| document-worker | 0.001 [0.001, 0.001] | 18.543 [15.504, 24.871] | 0.005 [0.005, 0.005] | 0.016 [0.013, 0.016] |
-| generator | 0.204 [0.201, 0.209] | 4003.871 [3830.488, 4070.055] | 30.119 [30.117, 30.193] | 0.202 [0.116, 0.232] |
-| grafana | 0.006 [0.004, 0.007] | 512.000 [511.996, 512.000] | 0.063 [0.061, 0.078] | 1.044 [0.928, 1.298] |
-| image-worker | 0.285 [0.284, 0.288] | 2047.914 [2007.352, 2047.996] | 2.966 [2.964, 2.975] | 0.015 [0.006, 0.587] |
-| minio | 0.122 [0.121, 0.128] | 1024.000 [1024.000, 1024.000] | 33.017 [33.015, 33.101] | 48.689 [47.810, 53.188] |
-| postgres | 0.009 [0.009, 0.010] | 91.906 [82.109, 108.734] | 0.024 [0.023, 0.024] | 0.100 [0.095, 0.103] |
-| prometheus | 0.001 [0.001, 0.002] | 78.559 [72.449, 97.289] | 0.019 [0.019, 0.020] | 0.070 [0.061, 0.085] |
-| rabbitmq | 0.018 [0.016, 0.018] | 234.262 [217.414, 243.988] | 0.009 [0.009, 0.009] | 0.048 [0.044, 0.052] |
+| api | 0.326 | 403.789 | 0.319 | 0.570 |
+| document-worker | 0.007 | 20.238 | 0.006 | 0.126 |
+| generator | 0.503 | 2779.637 | 27.138 | 13.764 |
+| grafana | 0.068 | 511.977 | 0.192 | 8.428 |
+| image-worker | 0.640 | 1741.734 | 2.880 | 1.614 |
+| minio | 0.322 | 1023.973 | 29.806 | 53.629 |
+| postgres | 0.055 | 101.371 | 0.016 | 0.850 |
+| prometheus | 0.019 | 92.336 | 0.116 | 1.277 |
+| rabbitmq | 0.163 | 234.148 | 0.034 | 0.380 |
 
-Total measured container CPU seconds per success by repeat: 0.709, 0.709, 0.696. These include generator and monitoring containers. Network figures are per-container interface counters and count both sides of inter-container transfers; they are not unique physical wire bytes. Block counters can omit cached/writeback I/O, and sampled memory can miss peaks and includes page cache. Queue head age is unavailable from this broker.
+Total measured container CPU cost was 2.102 seconds per verified success. Counters include measurement, deadline observation, retries, failed work and verified-object cleanup; generator counters include Chromium and Node. Network counters include both ends of inter-container transfers. Block counters may omit cached/writeback I/O; sampled memory can miss peaks and includes page cache. These are measured costs under a failed workload, not efficiency improvements.
 
-## Validation and limits
+## CLI, correctness and monitoring evidence
 
-Successful document downloads matched the original SHA-256, and image variants matched the frozen hashes, lengths, dimensions and content types. Every run passed the storage compatibility preflight and offered-operation accounting, completed queue/durable drainage and cleanup checks. No candidate comparison or improvement verdict is made.
+The new CLI built and started the actual Docker deployment, generated the run name, archived source/configuration, saved service logs and propagated the generator failure as exit code 1. Successful documents matched their original SHA-256; image variants matched the frozen bytes, sizes, dimensions and content types. The storage compatibility preflight passed. No performance candidate was enabled.
 
-This is a short mixed baseline, not a production capacity or high-load certification. Slow links, multipart fault injection, worker restarts, ramps, overload recovery and sustained resource growth were not rerun for this report. Their scenarios remain available. Separate confirmation and enough successful samples are required before making those claims or accepting a future performance candidate.
+All 34 dependency-free helper tests and 3 browser harness tests passed. Five Prometheus targets were up and Grafana reported a healthy database. The document worker had one startup restart before measurement; no project OOM was observed in the captured inspections. No restart fault was injected.
+
+Before teardown, the failed database state and service logs were saved locally. `npm run bench -- stop` then removed the benchmark containers and volumes. That reset removes local failed sessions and is not successful backlog drainage. Of the 80 unrelated containers initially observed, 75 remained at the final check with unchanged start times and no newly observed OOM; five were no longer present. Other projects were not targeted by the benchmark cleanup.
+
+Raw operation journals, source archives, metrics, browser evidence, database dump and artifact hashes remain in ignored `.local/upload-benchmark/`; they are not uploaded GitHub artifacts. No clean three-repeat baseline, performance improvement, fault/slow-link/ramp/overload recovery, sustained resource stability or production capacity is established. The immediate missing evidence is a clean repeated run with controlled background load and complete durable drainage.
