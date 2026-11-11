@@ -75,7 +75,10 @@ jobs:
           benchmark/tests/storage-settings.test.mjs
 
       - name: Install libvips
-        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends libvips-dev pkg-config
+        timeout-minutes: 2
+        run: |
+          sudo apt-get update --error-on=any
+          sudo apt-get install -y --no-install-recommends libvips-dev pkg-config
 
       - name: Test API units and check Kotlin style
         run: ./api/gradlew -p api unitTest ktlintCheck --no-daemon
