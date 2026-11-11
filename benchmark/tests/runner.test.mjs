@@ -26,7 +26,6 @@ async function runner(t) {
   t.after(() => rm(root, { recursive: true, force: true }));
   for (const directory of ['benchmark/config', 'benchmark/src', 'api', 'bin']) await mkdir(join(root, directory), { recursive: true });
   for (const name of ['cli.mjs', 'runner.mjs', 'evaluate.mjs', 'storage-settings.mjs', 'docker.mjs']) await copyFile(new URL(`../src/${name}`, import.meta.url), join(root, 'benchmark/src', name));
-  await copyFile(new URL('../run.sh', import.meta.url), join(root, 'benchmark/run.sh'));
   await copyFile(new URL('../config/protocol.json', import.meta.url), join(root, 'benchmark/config/protocol.json'));
   const mock = join(root, 'bin/mock.cjs');
   await writeFile(mock, `#!${process.execPath}
@@ -170,10 +169,3 @@ for (const phase of ['generator', 'logs']) {
     await readFile(join(cli.root, '.local/upload-benchmark/interrupted-services.log'));
   });
 }
-
-test('historical shell invocations forward to the Node runner', async t => {
-  const cli = await runner(t);
-  const result = spawnSync('bash', [join(cli.root, 'benchmark/run.sh'), 'quick', 'legacy'], { encoding: 'utf8', env: { ...cli.env, NODE_OPTIONS: `--import=${JSON.stringify(join(cli.root, 'fetch.mjs'))}` } });
-  assert.equal(result.status, 0, result.stderr);
-  assert.deepEqual(JSON.parse(await readFile(join(cli.root, '.local/upload-benchmark/legacy/summary.json'), 'utf8')), { verified: true });
-});
