@@ -7,6 +7,8 @@
     "npm": ">=11.5.1"
   },
   "scripts": {
+    "bench": "node benchmark/src/cli.mjs",
+    "format:kotlin": "./api/gradlew -p api ktlintFormat",
     "generate:openapi": "./api/gradlew -p api generateOpenApiDocs && npm run generate:openapi:types",
     "generate:openapi:types": "npm --prefix client run generate:api",
     "dev:client": "npm --prefix client run dev",

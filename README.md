@@ -51,6 +51,6 @@ npm run generate:openapi
 
 ## Checks
 
-Pull request CI runs contract validation and generated-model checks, client typechecking, benchmark helper tests, API unit tests and Kotlin lint, and Go vet and tests. It has a ten-minute timeout. It starts no Docker services and runs no browser, load, integration or race-detector suites.
+CI runs contract, type, lint and unit checks without Docker services.
 
-Run the API unit suite with `./api/gradlew -p api unitTest ktlintCheck`. The default `./api/gradlew -p api test` still includes the Testcontainers integration tests and requires Docker. Go integration tests run when `RABBITMQ_TEST_URL` or `S3_TEST_ENDPOINT` is set. The complete system suite remains available with `npm run test:system` after starting the local system as described in [local development](docs/local-development.md).
+Run API unit checks with `./api/gradlew -p api unitTest ktlintCheck`, or format Kotlin with `npm run format:kotlin`. See [local development](docs/local-development.md) for integration tests.

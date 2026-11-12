@@ -1,7 +1,7 @@
 import { readdir, readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 
-const excludedDirectories = new Set(['node_modules', 'public', 'reports']);
+const excludedDirectories = new Set(['node_modules', 'public', 'results']);
 const isProtocolInput = name => /\.(mjs|ts|json|yaml|sh)$/.test(name) || name.endsWith('Dockerfile');
 
 async function protocolPaths(root, prefix = '') {
