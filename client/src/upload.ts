@@ -10,6 +10,9 @@ import type { CompletedPart, FileAssetResponse as FileAsset, UploadInstructions 
 const userIdStorageKey = 'file-upload-system.user-id'
 const partBatchSize = 100
 const partConcurrency = 4
+const transferConcurrency = 4
+const waitingTransfers: Array<() => void> = []
+let activeTransfers = 0
 const pollingDelayMs = 250
 const ulidAlphabet = '0123456789ABCDEFGHJKMNPQRSTVWXYZ'
 
@@ -17,6 +20,7 @@ export type UploadPhase = 'creating' | 'uploading' | 'preparing' | 'ready'
 
 interface UploadOptions {
   file: File
+  signal?: AbortSignal
   onAsset: (asset: FileAsset) => void
   onEvent: (message: string) => void
   onPhase: (phase: UploadPhase) => void
@@ -34,7 +38,8 @@ export function getUserId(): string {
   return userId
 }
 
-export async function uploadFile({ file, onAsset, onEvent, onPhase, onProgress }: UploadOptions): Promise<void> {
+export async function uploadFile({ file, signal, onAsset, onEvent, onPhase, onProgress }: UploadOptions): Promise<void> {
+  signal?.throwIfAborted()
   const userId = getUserId()
   onPhase('creating')
   onEvent('Creating session')
@@ -55,16 +60,18 @@ export async function uploadFile({ file, onAsset, onEvent, onPhase, onProgress }
   onEvent('Session created')
   onPhase('uploading')
   onEvent(session.strategy === UploadSessionResponse.strategy.SINGLE ? 'Uploading file' : 'Uploading parts')
-  const parts = await uploadParts(userId, session, file, onProgress)
+  const parts = await uploadParts(userId, session, file, onProgress, signal)
+  signal?.throwIfAborted()
   onProgress(1)
   onEvent('Upload verified')
 
   onPhase('preparing')
   const accepted = await UploadSessionControllerService.complete(userId, session.sessionId, { parts })
+  signal?.throwIfAborted()
   onAsset(accepted)
   onEvent('Preparation queued')
 
-  const asset = await waitForAsset(userId, accepted.assetId, onAsset)
+  const asset = await waitForAsset(userId, accepted.assetId, onAsset, signal)
   if (asset.status === FileAssetResponse.status.READY) {
     onPhase('ready')
     onEvent('Ready')
@@ -79,12 +86,15 @@ async function uploadParts(
   session: UploadSessionResponse,
   file: File,
   onProgress: (progress: number) => void,
+  signal?: AbortSignal,
 ): Promise<CompletedPart[]> {
+  signal?.throwIfAborted()
   if (session.strategy === UploadSessionResponse.strategy.SINGLE) {
     if (!session.upload) {
       throw new Error('Upload instructions are missing')
     }
-    await put(session.upload, file, (loaded) => onProgress(loaded / file.size))
+    const instructions = session.upload
+    await withTransferSlot(() => put(instructions, file, (loaded) => onProgress(loaded / file.size), signal), signal)
     return []
   }
 
@@ -99,12 +109,21 @@ async function uploadParts(
   const partNumbers = Array.from({ length: session.partCount }, (_, index) => index + 1)
 
   for (const batch of chunks(partNumbers, partBatchSize)) {
+    signal?.throwIfAborted()
     const signed = await UploadSessionControllerService.presignParts(userId, session.sessionId, {
       partNumbers: batch,
     })
 
     let nextPart = 0
     let failed = false
+    let failure: unknown
+    const fail = (error: unknown): never => {
+      if (!failed) {
+        failed = true
+        failure = error
+      }
+      throw error
+    }
     const uploadNext = async (): Promise<void> => {
       while (!failed && nextPart < signed.parts.length) {
         const part = signed.parts[nextPart++]
@@ -116,24 +135,33 @@ async function uploadParts(
           onProgress(uploadedBytes / file.size)
         }
         try {
-          const etag = await put(part.upload, body, updateProgress)
-          if (!etag) {
-            throw new Error(`Part ${part.partNumber} did not return an ETag`)
-          }
+          const etag = await withTransferSlot(async () => {
+            if (failed) {
+              throw failure
+            }
+            try {
+              const etag = await put(part.upload, body, updateProgress, signal)
+              if (!etag) {
+                throw new Error(`Part ${part.partNumber} did not return an ETag`)
+              }
+              return etag
+            } catch (error) {
+              return fail(error)
+            }
+          }, signal)
           updateProgress(body.size)
           completed.push({ partNumber: part.partNumber, etag })
         } catch (error) {
-          failed = true
-          throw error
+          fail(error)
         }
       }
     }
     const results = await Promise.allSettled(
       Array.from({ length: Math.min(partConcurrency, signed.parts.length) }, uploadNext),
     )
-    const failure = results.find((result) => result.status === 'rejected')
-    if (failure?.status === 'rejected') {
-      throw failure.reason
+    const rejection = results.find((result) => result.status === 'rejected')
+    if (rejection?.status === 'rejected') {
+      throw rejection.reason
     }
   }
 
@@ -144,9 +172,12 @@ async function waitForAsset(
   userId: string,
   assetId: string,
   onAsset: (asset: FileAsset) => void,
+  signal?: AbortSignal,
 ): Promise<FileAsset> {
   for (;;) {
+    signal?.throwIfAborted()
     const asset = await FileAssetControllerService.getAsset(userId, assetId)
+    signal?.throwIfAborted()
     onAsset(asset)
     if (
       asset.status === FileAssetResponse.status.READY ||
@@ -159,12 +190,47 @@ async function waitForAsset(
   }
 }
 
+async function withTransferSlot<T>(operation: () => Promise<T>, signal?: AbortSignal): Promise<T> {
+  signal?.throwIfAborted()
+  if (activeTransfers < transferConcurrency) {
+    activeTransfers += 1
+  } else {
+    await new Promise<void>((resolve, reject) => {
+      const start = () => {
+        signal?.removeEventListener('abort', abort)
+        resolve()
+      }
+      const abort = () => {
+        const index = waitingTransfers.indexOf(start)
+        if (index >= 0) waitingTransfers.splice(index, 1)
+        reject(signal?.reason)
+      }
+      waitingTransfers.push(start)
+      signal?.addEventListener('abort', abort, { once: true })
+    })
+  }
+  try {
+    signal?.throwIfAborted()
+    return await operation()
+  } finally {
+    const next = waitingTransfers.shift()
+    if (next) {
+      next()
+    } else {
+      activeTransfers -= 1
+    }
+  }
+}
+
 function put(
   instructions: UploadInstructions,
   body: Blob,
   onProgress: (loaded: number) => void,
+  signal?: AbortSignal,
 ): Promise<string> {
-  return new Promise((resolve, reject) => {
+  let abort = () => {}
+  return new Promise<string>((resolve, reject) => {
+    signal?.throwIfAborted()
     const request = new XMLHttpRequest()
     request.open(instructions.method, instructions.url)
     Object.entries(instructions.headers)
@@ -176,7 +242,7 @@ function put(
       }
     }
     request.onerror = () => reject(new Error('Storage upload failed'))
-    request.onabort = () => reject(new Error('Storage upload aborted'))
+    request.onabort = () => reject(signal?.reason ?? new Error('Storage upload aborted'))
     request.onload = () => {
       if (request.status < 200 || request.status >= 300) {
         reject(new Error(`Storage upload returned ${request.status}`))
@@ -184,8 +250,10 @@ function put(
       }
       resolve(request.getResponseHeader('etag') ?? '')
     }
+    abort = () => request.abort()
+    signal?.addEventListener('abort', abort, { once: true })
     request.send(body)
-  })
+  }).finally(() => signal?.removeEventListener('abort', abort))
 }
 
 function chunks<T>(values: T[], size: number): T[][] {
