@@ -1,0 +1,3740 @@
+{
+  "services": [
+    {
+      "id": "d6a54c4bd22deb24b62aac237c7acaf46d7919f545a269b76c1fb58522129002",
+      "service": "generator",
+      "image": "sha256:a93bed07999d8d0ee3c631c188c5a2c02fd21dfbab17799540c60a824e129066"
+    },
+    {
+      "id": "23815a85b30ee58231d225232de8bab445b535c77455f144afbf3b6d2ea1152f",
+      "service": "document-worker",
+      "image": "sha256:82a194459c9263f2f898599c610510f2162fdc7e513a8bb107e0fedf30354dd6"
+    },
+    {
+      "id": "503d2dde38691648830672d5a6c0a6f73658997f6807082019fa4099951357b0",
+      "service": "api",
+      "image": "sha256:213dd66f5e4d402f043d5de03d0662b89080f2d15db3412ba67717492c4c41da"
+    },
+    {
+      "id": "d340b0e3595d0f63e02a4aac0c228e9ac23c8aaf790fae16d26f56170242ab3a",
+      "service": "image-worker",
+      "image": "sha256:15b0c4d36d6b91f4409d01d190f2f2851980907ff5c7524b2c101657848b355f"
+    },
+    {
+      "id": "3cbd6100024487604c6f6963beafd370d49e94b6fb43e715d824c3e2c8da0dd4",
+      "service": "minio",
+      "image": "sha256:8f08aee614800a237906bd48114d733e5ac5bfac4ccdf731f141b0e880d7a253"
+    },
+    {
+      "id": "7ac9053ab23d533859143f21bf41879830d8fe987d0f5a94a7a93c6a084231ed",
+      "service": "prometheus",
+      "image": "sha256:deeef2470dab312d1cade441c2ed31ccbd72c8e78e2fdd51d835e0b740af2b98"
+    },
+    {
+      "id": "d784876da0400c19d253f7b069fa53f535b9ddccb8824ddfbded9424cbe705b6",
+      "service": "rabbitmq",
+      "image": "sha256:03d95eace92b949b2fd9dc9fbd19c2d65cae25b600e2d6ff42456cce9f110c7c"
+    },
+    {
+      "id": "146a794ec581ff8ff1367b542a1837c2815c651dab6dc8bdf5802fcc88a4aa51",
+      "service": "grafana",
+      "image": "sha256:c446c4270dcd9a253979d484c258a10679a1b12ed518eef93a60341da018fd69"
+    },
+    {
+      "id": "c0decf0454c3e01681ca83ea47f73e9515863700d6882a40922dc01c4e726b79",
+      "service": "postgres",
+      "image": "sha256:500e6fec57b004d32e649abd2380a2c38081eb1de0393284fac6ad337f8aecf8"
+    }
+  ],
+  "environment": {
+    "cpuCount": 11,
+    "memory": 16818831360,
+    "kernel": "7.2.12-orbstack-00394-gbecdd6130068",
+    "architecture": "aarch64",
+    "settings": [
+      {
+        "service": "api",
+        "cpus": 1000000000,
+        "memory": 1073741824,
+        "image": "candidate"
+      },
+      {
+        "service": "document-worker",
+        "cpus": 500000000,
+        "memory": 268435456,
+        "image": "candidate"
+      },
+      {
+        "service": "generator",
+        "cpus": 2000000000,
+        "memory": 8589934592,
+        "image": "candidate"
+      },
+      {
+        "service": "grafana",
+        "cpus": 250000000,
+        "memory": 536870912,
+        "image": "sha256:c446c4270dcd9a253979d484c258a10679a1b12ed518eef93a60341da018fd69"
+      },
+      {
+        "service": "image-worker",
+        "cpus": 2000000000,
+        "memory": 2147483648,
+        "image": "candidate"
+      },
+      {
+        "service": "minio",
+        "cpus": 1000000000,
+        "memory": 1073741824,
+        "image": "sha256:8f08aee614800a237906bd48114d733e5ac5bfac4ccdf731f141b0e880d7a253"
+      },
+      {
+        "service": "postgres",
+        "cpus": 500000000,
+        "memory": 536870912,
+        "image": "sha256:500e6fec57b004d32e649abd2380a2c38081eb1de0393284fac6ad337f8aecf8"
+      },
+      {
+        "service": "prometheus",
+        "cpus": 250000000,
+        "memory": 268435456,
+        "image": "sha256:deeef2470dab312d1cade441c2ed31ccbd72c8e78e2fdd51d835e0b740af2b98"
+      },
+      {
+        "service": "rabbitmq",
+        "cpus": 500000000,
+        "memory": 536870912,
+        "image": "sha256:03d95eace92b949b2fd9dc9fbd19c2d65cae25b600e2d6ff42456cce9f110c7c"
+      }
+    ],
+    "chromium": "141.0.7390.37",
+    "node": "v24.11.1",
+    "clientDependencies": "2414c3876b0a8d355f02106dbe3627000f40153ec8fb997c7bfeaef8b680a26d",
+    "storageTrial": {
+      "version": 2,
+      "candidateSetting": "MINIO_COMPRESSION_ENABLE",
+      "runtimeTrial": {
+        "candidateSetting": "GOMAXPROCS",
+        "modes": [
+          "host",
+          "2"
+        ],
+        "baseline": "host"
+      },
+      "fixed": {
+        "allow_encryption": "off",
+        "extensions": ".txt,.log,.csv,.json,.tar,.xml,.bin",
+        "mime_types": "application/octet-stream"
+      }
+    },
+    "storageVersions": {
+      "server": "minio version RELEASE.2025-09-07T16-13-09Z (commit-id=07c3a429bfed433e49018cb0f78a52145d4bedeb)\nRuntime: go1.24.6 linux/arm64\nLicense: GNU AGPLv3 - https://www.gnu.org/licenses/agpl-3.0.html\nCopyright: 2015-2025 MinIO, Inc.",
+      "mc": "mc version RELEASE.2025-08-13T08-35-41Z (commit-id=7394ce0dd2a80935aded936b09fa12cbb3cb8096)\nRuntime: go1.24.6 linux/arm64\nCopyright (c) 2015-2025 MinIO, Inc.\nLicense GNU AGPLv3 <https://www.gnu.org/licenses/agpl-3.0.html>"
+    },
+    "documentStorage": {
+      "lifecycle": {
+        "Rules": [
+          {
+            "Expiration": {
+              "Days": 7
+            },
+            "Filter": {
+              "And": {
+                "Prefix": "documents/",
+                "Tags": [
+                  {
+                    "Key": "document-state",
+                    "Value": "pending"
+                  }
+                ]
+              }
+            },
+            "ID": "pending-document-retention",
+            "NoncurrentVersionExpiration": {
+              "NoncurrentDays": 7
+            },
+            "Status": "Enabled"
+          },
+          {
+            "Expiration": {
+              "ExpiredObjectDeleteMarker": true
+            },
+            "Filter": {
+              "Prefix": "documents/"
+            },
+            "ID": "document-delete-markers",
+            "Status": "Enabled"
+          }
+        ]
+      },
+      "policy": {
+        "Statement": [
+          {
+            "Action": [
+              "s3:GetObject",
+              "s3:GetObjectVersion"
+            ],
+            "Condition": {
+              "StringEquals": {
+                "s3:ExistingObjectTag/document-state": [
+                  "retained"
+                ]
+              }
+            },
+            "Effect": "Allow",
+            "Principal": {
+              "AWS": [
+                "*"
+              ]
+            },
+            "Resource": [
+              "arn:aws:s3:::documents/documents/*/original"
+            ]
+          }
+        ],
+        "Version": "2012-10-17"
+      },
+      "staleUploads": {
+        "stale_uploads_cleanup_interval": "6h",
+        "stale_uploads_expiry": "24h"
+      },
+      "versioning": "Enabled"
+    }
+  },
+  "storageBefore": {
+    "containerId": "3cbd6100024487604c6f6963beafd370d49e94b6fb43e715d824c3e2c8da0dd4",
+    "startedAt": "2026-11-12T09:21:34.764016568Z",
+    "image": "sha256:8f08aee614800a237906bd48114d733e5ac5bfac4ccdf731f141b0e880d7a253",
+    "serverVersion": "minio version RELEASE.2025-09-07T16-13-09Z (commit-id=07c3a429bfed433e49018cb0f78a52145d4bedeb)\nRuntime: go1.24.6 linux/arm64\nLicense: GNU AGPLv3 - https://www.gnu.org/licenses/agpl-3.0.html\nCopyright: 2015-2025 MinIO, Inc.",
+    "mcVersion": "mc version RELEASE.2025-08-13T08-35-41Z (commit-id=7394ce0dd2a80935aded936b09fa12cbb3cb8096)\nRuntime: go1.24.6 linux/arm64\nCopyright (c) 2015-2025 MinIO, Inc.\nLicense GNU AGPLv3 <https://www.gnu.org/licenses/agpl-3.0.html>",
+    "environment": [
+      "MINIO_COMPRESSION_ALLOW_ENCRYPTION=off",
+      "MINIO_COMPRESSION_ENABLE=off",
+      "MINIO_COMPRESSION_EXTENSIONS=.txt,.log,.csv,.json,.tar,.xml,.bin",
+      "MINIO_COMPRESSION_MIME_TYPES=application/octet-stream"
+    ],
+    "config": {
+      "status": "success",
+      "config": [
+        {
+          "subSystem": "compression",
+          "kv": [
+            {
+              "key": "enable",
+              "value": "off",
+              "envOverride": {
+                "name": "MINIO_COMPRESSION_ENABLE",
+                "value": "off"
+              }
+            },
+            {
+              "key": "allow_encryption",
+              "value": "off",
+              "envOverride": {
+                "name": "MINIO_COMPRESSION_ALLOW_ENCRYPTION",
+                "value": "off"
+              }
+            },
+            {
+              "key": "extensions",
+              "value": ".txt,.log,.csv,.json,.tar,.xml,.bin",
+              "envOverride": {
+                "name": "MINIO_COMPRESSION_EXTENSIONS",
+                "value": ".txt,.log,.csv,.json,.tar,.xml,.bin"
+              }
+            },
+            {
+              "key": "mime_types",
+              "value": "text/*,application/json,application/xml,binary/octet-stream",
+              "envOverride": {
+                "name": "MINIO_COMPRESSION_MIME_TYPES",
+                "value": "application/octet-stream"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "effective": {
+      "enable": "off",
+      "allow_encryption": "off",
+      "extensions": ".txt,.log,.csv,.json,.tar,.xml,.bin",
+      "mime_types": "application/octet-stream"
+    },
+    "hash": "4653cc8202b6003b8d49d4ce79c9038bed8afdd31d3cae248bec0e29249d2661",
+    "runtime": {
+      "mode": "host",
+      "gomaxprocs": 11,
+      "numCpu": 11,
+      "goVersion": "go1.24.6",
+      "environment": [
+        "GOMAXPROCS="
+      ]
+    },
+    "runtimeInfo": {
+      "status": "success",
+      "info": {
+        "mode": "online",
+        "deploymentID": "d1f9de60-5ccb-42ad-898d-775eeb994bf7",
+        "buckets": {
+          "count": 0
+        },
+        "objects": {
+          "count": 0
+        },
+        "versions": {
+          "count": 0
+        },
+        "deletemarkers": {
+          "count": 0
+        },
+        "usage": {
+          "size": 0
+        },
+        "services": {
+          "kms": {},
+          "ldap": {}
+        },
+        "backend": {
+          "backendType": "Erasure",
+          "onlineDisks": 1,
+          "offlineDisks": 0,
+          "standardSCParity": 0,
+          "rrSCParity": 0,
+          "totalSets": [
+            1
+          ],
+          "totalDrivesPerSet": [
+            1
+          ]
+        },
+        "servers": [
+          {
+            "state": "online",
+            "endpoint": "localhost:9000",
+            "uptime": 24,
+            "version": "2025-09-07T16:13:09Z",
+            "commitID": "07c3a429bfed433e49018cb0f78a52145d4bedeb",
+            "network": {
+              "localhost:9000": "online"
+            },
+            "drives": [
+              {
+                "endpoint": "/data",
+                "path": "/data",
+                "state": "ok",
+                "uuid": "6912ec61-1f4d-46f2-9c3f-4f7a7ad32043",
+                "major": 0,
+                "minor": 42,
+                "totalspace": 451575545856,
+                "usedspace": 314677370880,
+                "availspace": 136898174976,
+                "metrics": {},
+                "used_inodes": 0,
+                "local": true,
+                "pool_index": 0,
+                "set_index": 0,
+                "disk_index": 0
+              }
+            ],
+            "poolNumber": 1,
+            "poolNumbers": [
+              1
+            ],
+            "mem_stats": {
+              "Alloc": 270030832,
+              "TotalAlloc": 394872864,
+              "Mallocs": 255683,
+              "Frees": 192940,
+              "HeapAlloc": 270030832
+            },
+            "go_max_procs": 11,
+            "num_cpu": 11,
+            "runtime_version": "go1.24.6",
+            "gc_stats": {
+              "last_gc": "2026-11-12T09:21:58.986563271Z",
+              "num_gc": 8,
+              "pause_total": 1737739,
+              "pause": [
+                1101217,
+                32624,
+                132829,
+                126204,
+                106664
+              ],
+              "pause_end": [
+                "2026-11-12T09:21:35.336899339Z",
+                "2026-11-12T09:21:35.301179231Z",
+                "2026-11-12T09:21:35.134911686Z",
+                "2026-11-12T09:21:35.088471991Z",
+                "2026-11-12T09:21:35.087272445Z"
+              ]
+            },
+            "minio_env_vars": {
+              "MINIO_ACCESS_KEY_FILE": "access_key",
+              "MINIO_API_CORS_ALLOW_ORIGIN": "*",
+              "MINIO_API_STALE_UPLOADS_CLEANUP_INTERVAL": "6h",
+              "MINIO_API_STALE_UPLOADS_EXPIRY": "24h",
+              "MINIO_COMPRESSION_ALLOW_ENCRYPTION": "off",
+              "MINIO_COMPRESSION_ENABLE": "off",
+              "MINIO_COMPRESSION_EXTENSIONS": ".txt,.log,.csv,.json,.tar,.xml,.bin",
+              "MINIO_COMPRESSION_MIME_TYPES": "application/octet-stream",
+              "MINIO_CONFIG_ENV_FILE": "config.env",
+              "MINIO_ROOT_PASSWORD": "*** EXISTS, REDACTED ***",
+              "MINIO_ROOT_PASSWORD_FILE": "*** EXISTS, REDACTED ***",
+              "MINIO_ROOT_USER": "*** EXISTS, REDACTED ***",
+              "MINIO_ROOT_USER_FILE": "access_key",
+              "MINIO_SECRET_KEY_FILE": "secret_key",
+              "MINIO_UPDATE_MINISIGN_PUBKEY": "*** EXISTS, REDACTED ***"
+            },
+            "edition": "",
+            "is_leader": false,
+            "ilm_expiry_in_progress": false
+          }
+        ],
+        "pools": {
+          "0": {
+            "0": {
+              "id": 0,
+              "rawUsage": 314677370880,
+              "rawCapacity": 451575545856,
+              "usage": 0,
+              "objectsCount": 0,
+              "versionsCount": 0,
+              "deleteMarkersCount": 0,
+              "healDisks": 0
+            }
+          }
+        }
+      }
+    },
+    "runtimeEnvironment": [
+      "GOMAXPROCS="
+    ],
+    "documentStorage": {
+      "lifecycle": {
+        "Rules": [
+          {
+            "Expiration": {
+              "Days": 7
+            },
+            "Filter": {
+              "And": {
+                "Prefix": "documents/",
+                "Tags": [
+                  {
+                    "Key": "document-state",
+                    "Value": "pending"
+                  }
+                ]
+              }
+            },
+            "ID": "pending-document-retention",
+            "NoncurrentVersionExpiration": {
+              "NoncurrentDays": 7
+            },
+            "Status": "Enabled"
+          },
+          {
+            "Expiration": {
+              "ExpiredObjectDeleteMarker": true
+            },
+            "Filter": {
+              "Prefix": "documents/"
+            },
+            "ID": "document-delete-markers",
+            "Status": "Enabled"
+          }
+        ]
+      },
+      "policy": {
+        "Statement": [
+          {
+            "Action": [
+              "s3:GetObject",
+              "s3:GetObjectVersion"
+            ],
+            "Condition": {
+              "StringEquals": {
+                "s3:ExistingObjectTag/document-state": [
+                  "retained"
+                ]
+              }
+            },
+            "Effect": "Allow",
+            "Principal": {
+              "AWS": [
+                "*"
+              ]
+            },
+            "Resource": [
+              "arn:aws:s3:::documents/documents/*/original"
+            ]
+          }
+        ],
+        "Version": "2012-10-17"
+      },
+      "staleUploads": {
+        "stale_uploads_cleanup_interval": "6h",
+        "stale_uploads_expiry": "24h"
+      },
+      "versioning": "Enabled"
+    },
+    "documentStorageRaw": {
+      "versioning": "Enabled",
+      "lifecycle": {
+        "Rules": [
+          {
+            "Expiration": {
+              "Days": 7
+            },
+            "ID": "pending-document-retention",
+            "Filter": {
+              "And": {
+                "Prefix": "documents/",
+                "Tags": [
+                  {
+                    "Key": "document-state",
+                    "Value": "pending"
+                  }
+                ]
+              }
+            },
+            "NoncurrentVersionExpiration": {
+              "NoncurrentDays": 7
+            },
+            "Status": "Enabled"
+          },
+          {
+            "Expiration": {
+              "ExpiredObjectDeleteMarker": true
+            },
+            "ID": "document-delete-markers",
+            "Filter": {
+              "Prefix": "documents/"
+            },
+            "Status": "Enabled"
+          }
+        ]
+      },
+      "policy": {
+        "Statement": [
+          {
+            "Action": [
+              "s3:GetObject",
+              "s3:GetObjectVersion"
+            ],
+            "Condition": {
+              "StringEquals": {
+                "s3:ExistingObjectTag/document-state": [
+                  "retained"
+                ]
+              }
+            },
+            "Effect": "Allow",
+            "Principal": {
+              "AWS": [
+                "*"
+              ]
+            },
+            "Resource": [
+              "arn:aws:s3:::documents/documents/*/original"
+            ]
+          }
+        ],
+        "Version": "2012-10-17"
+      },
+      "staleUploads": {
+        "stale_uploads_expiry": "24h",
+        "stale_uploads_cleanup_interval": "6h"
+      }
+    },
+    "documentStorageHash": "a55e955cc0b51d44ddd024926a5103259085c7fa27392f35da4e880f27116775"
+  },
+  "storageProbe": {
+    "schemaVersion": 1,
+    "mode": "off",
+    "verified": true,
+    "status": "passed",
+    "startedAt": "2026-11-12T09:21:59.540Z",
+    "prefix": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c",
+    "endpoint": "http://minio:9000",
+    "transport": "node:http, raw response bytes without content decoding",
+    "compressionThreshold": 0.25,
+    "noiseSeed": "0x7a5c31e9",
+    "cases": [
+      {
+        "name": "text",
+        "contentType": "application/octet-stream",
+        "logicalBytes": 1048576,
+        "sha256": "49d9ccfedb637bb9ae7c9a5838164ebedaaf6a6e78ca86ca3f4a7d6672994db4",
+        "compressible": true,
+        "multipart": false,
+        "operations": [
+          {
+            "label": "PUT upload",
+            "method": "PUT",
+            "bucket": "uploads",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/text",
+            "requestHeaders": {
+              "content-type": "application/octet-stream"
+            },
+            "requestBytes": 1048576,
+            "status": 200,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "0",
+              "etag": "\"dc32db4bebfd5790d723a65160d92a11\"",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBB785BC94",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "x-amz-expiration": "expiry-date=\"Fri, 20 Nov 2026 00:00:00 GMT\", rule-id=\"temporary-upload-retention\"",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "durationMs": 15.489732000000004
+          },
+          {
+            "label": "uploads: HEAD",
+            "method": "HEAD",
+            "bucket": "uploads",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/text",
+            "requestHeaders": {},
+            "requestBytes": 0,
+            "status": 200,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "1048576",
+              "content-type": "application/octet-stream",
+              "etag": "\"dc32db4bebfd5790d723a65160d92a11\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBB85FD64F",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "x-amz-expiration": "expiry-date=\"Fri, 20 Nov 2026 00:00:00 GMT\", rule-id=\"temporary-upload-retention\"",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "durationMs": 0.6502300000011019
+          },
+          {
+            "label": "uploads: full GET with matching If-Match",
+            "method": "GET",
+            "bucket": "uploads",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/text",
+            "requestHeaders": {
+              "if-match": "\"dc32db4bebfd5790d723a65160d92a11\""
+            },
+            "requestBytes": 0,
+            "status": 200,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "1048576",
+              "content-type": "application/octet-stream",
+              "etag": "\"dc32db4bebfd5790d723a65160d92a11\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBB86B6A69",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "x-amz-expiration": "expiry-date=\"Fri, 20 Nov 2026 00:00:00 GMT\", rule-id=\"temporary-upload-retention\"",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 1048576,
+            "sha256": "49d9ccfedb637bb9ae7c9a5838164ebedaaf6a6e78ca86ca3f4a7d6672994db4",
+            "durationMs": 1.3739580000001297
+          },
+          {
+            "label": "uploads: GET with mismatched If-Match",
+            "method": "GET",
+            "bucket": "uploads",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/text",
+            "requestHeaders": {
+              "if-match": "\"compression-preflight-mismatch\""
+            },
+            "requestBytes": 0,
+            "status": 412,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "484",
+              "content-type": "application/xml",
+              "etag": "\"dc32db4bebfd5790d723a65160d92a11\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBB894B02B",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 484,
+            "sha256": "17b886f7080bb2f50aa3e43feae83d738fbbf2e063fe014ffb46346c7bca884f",
+            "durationMs": 0.43040299999847775
+          },
+          {
+            "label": "uploads: HEAD with matching If-Match",
+            "method": "HEAD",
+            "bucket": "uploads",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/text",
+            "requestHeaders": {
+              "if-match": "\"dc32db4bebfd5790d723a65160d92a11\""
+            },
+            "requestBytes": 0,
+            "status": 200,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "1048576",
+              "content-type": "application/octet-stream",
+              "etag": "\"dc32db4bebfd5790d723a65160d92a11\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBB89C60B1",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "x-amz-expiration": "expiry-date=\"Fri, 20 Nov 2026 00:00:00 GMT\", rule-id=\"temporary-upload-retention\"",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "durationMs": 0.4034449999999197
+          },
+          {
+            "label": "uploads: HEAD with mismatched If-Match",
+            "method": "HEAD",
+            "bucket": "uploads",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/text",
+            "requestHeaders": {
+              "if-match": "\"compression-preflight-mismatch\""
+            },
+            "requestBytes": 0,
+            "status": 412,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "484",
+              "content-type": "application/xml",
+              "etag": "\"dc32db4bebfd5790d723a65160d92a11\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBB8A3AA32",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "durationMs": 0.33132300000033865
+          },
+          {
+            "label": "uploads: prefix range",
+            "method": "GET",
+            "bucket": "uploads",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/text",
+            "requestHeaders": {
+              "range": "bytes=0-255",
+              "if-match": "\"dc32db4bebfd5790d723a65160d92a11\""
+            },
+            "requestBytes": 0,
+            "status": 206,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "256",
+              "content-range": "bytes 0-255/1048576",
+              "content-type": "application/octet-stream",
+              "etag": "\"dc32db4bebfd5790d723a65160d92a11\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBB8AA52BC",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "x-amz-expiration": "expiry-date=\"Fri, 20 Nov 2026 00:00:00 GMT\", rule-id=\"temporary-upload-retention\"",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 256,
+            "sha256": "f8ea81eaa9558cf3cae184bbc655878d02db42fe624212ebf0d74eeb87a4abb3",
+            "durationMs": 0.7074359999987792
+          },
+          {
+            "label": "uploads: middle range",
+            "method": "GET",
+            "bucket": "uploads",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/text",
+            "requestHeaders": {
+              "range": "bytes=524160-524415",
+              "if-match": "\"dc32db4bebfd5790d723a65160d92a11\""
+            },
+            "requestBytes": 0,
+            "status": 206,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "256",
+              "content-range": "bytes 524160-524415/1048576",
+              "content-type": "application/octet-stream",
+              "etag": "\"dc32db4bebfd5790d723a65160d92a11\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBB8C017A4",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "x-amz-expiration": "expiry-date=\"Fri, 20 Nov 2026 00:00:00 GMT\", rule-id=\"temporary-upload-retention\"",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 256,
+            "sha256": "b10d80d44f039623d6773faadb43b4dc6de42393123926890f6155f82ac64d51",
+            "durationMs": 0.7223530000010214
+          },
+          {
+            "label": "uploads: suffix range",
+            "method": "GET",
+            "bucket": "uploads",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/text",
+            "requestHeaders": {
+              "range": "bytes=-256",
+              "if-match": "\"dc32db4bebfd5790d723a65160d92a11\""
+            },
+            "requestBytes": 0,
+            "status": 206,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "256",
+              "content-range": "bytes 1048320-1048575/1048576",
+              "content-type": "application/octet-stream",
+              "etag": "\"dc32db4bebfd5790d723a65160d92a11\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBB8CC57F0",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "x-amz-expiration": "expiry-date=\"Fri, 20 Nov 2026 00:00:00 GMT\", rule-id=\"temporary-upload-retention\"",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 256,
+            "sha256": "98249399fbe0685fe6f3af29c9217ce7e364b60b83754f8b396eb0a7187b753d",
+            "durationMs": 0.7049369999986084
+          },
+          {
+            "label": "CopyObject with mismatched source ETag",
+            "method": "PUT",
+            "bucket": "assets",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/text",
+            "requestHeaders": {
+              "x-amz-copy-source": "/uploads/compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/text",
+              "x-amz-copy-source-if-match": "\"compression-preflight-mismatch\"",
+              "x-amz-metadata-directive": "REPLACE",
+              "content-type": "application/octet-stream"
+            },
+            "requestBytes": 0,
+            "status": 412,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "483",
+              "content-type": "application/xml",
+              "etag": "\"dc32db4bebfd5790d723a65160d92a11\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBB936B2F7",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 483,
+            "sha256": "6351a2c042eda841b67dcba74bd931111f149181f32c8059b86803b11e53b09b",
+            "durationMs": 0.6588130000000092
+          },
+          {
+            "label": "conditional CopyObject with REPLACE",
+            "method": "PUT",
+            "bucket": "assets",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/text",
+            "requestHeaders": {
+              "x-amz-copy-source": "/uploads/compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/text",
+              "x-amz-copy-source-if-match": "\"dc32db4bebfd5790d723a65160d92a11\"",
+              "x-amz-metadata-directive": "REPLACE",
+              "content-type": "application/octet-stream"
+            },
+            "requestBytes": 0,
+            "status": 200,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "232",
+              "content-type": "application/xml",
+              "etag": "\"dc32db4bebfd5790d723a65160d92a11\"",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-checksum-crc64nvme": "ybgHYhpOW28=",
+              "x-amz-checksum-type": "FULL_OBJECT",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBB93F9F90",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 232,
+            "sha256": "3b5564602c7dbeb3f86c479b62536fedb8fb11e0bd0c9f42af06866e67af3ad3",
+            "durationMs": 7.056407999998555
+          },
+          {
+            "label": "assets: HEAD",
+            "method": "HEAD",
+            "bucket": "assets",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/text",
+            "requestHeaders": {},
+            "requestBytes": 0,
+            "status": 200,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "1048576",
+              "content-type": "application/octet-stream",
+              "etag": "\"dc32db4bebfd5790d723a65160d92a11\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBB9AF46AA",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "durationMs": 0.4594440000000759
+          },
+          {
+            "label": "assets: full GET with matching If-Match",
+            "method": "GET",
+            "bucket": "assets",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/text",
+            "requestHeaders": {
+              "if-match": "\"dc32db4bebfd5790d723a65160d92a11\""
+            },
+            "requestBytes": 0,
+            "status": 200,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "1048576",
+              "content-type": "application/octet-stream",
+              "etag": "\"dc32db4bebfd5790d723a65160d92a11\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBB9B74239",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 1048576,
+            "sha256": "49d9ccfedb637bb9ae7c9a5838164ebedaaf6a6e78ca86ca3f4a7d6672994db4",
+            "durationMs": 1.1894219999994675
+          },
+          {
+            "label": "assets: GET with mismatched If-Match",
+            "method": "GET",
+            "bucket": "assets",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/text",
+            "requestHeaders": {
+              "if-match": "\"compression-preflight-mismatch\""
+            },
+            "requestBytes": 0,
+            "status": 412,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "482",
+              "content-type": "application/xml",
+              "etag": "\"dc32db4bebfd5790d723a65160d92a11\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBB9DF519A",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 482,
+            "sha256": "d8b5e5fd78587c67662b78a4143286de6837d46d0cd9f15a8a7c936db6b08135",
+            "durationMs": 0.5151509999996051
+          },
+          {
+            "label": "assets: HEAD with matching If-Match",
+            "method": "HEAD",
+            "bucket": "assets",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/text",
+            "requestHeaders": {
+              "if-match": "\"dc32db4bebfd5790d723a65160d92a11\""
+            },
+            "requestBytes": 0,
+            "status": 200,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "1048576",
+              "content-type": "application/octet-stream",
+              "etag": "\"dc32db4bebfd5790d723a65160d92a11\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBB9E676CF",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "durationMs": 0.3682379999991099
+          },
+          {
+            "label": "assets: HEAD with mismatched If-Match",
+            "method": "HEAD",
+            "bucket": "assets",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/text",
+            "requestHeaders": {
+              "if-match": "\"compression-preflight-mismatch\""
+            },
+            "requestBytes": 0,
+            "status": 412,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "482",
+              "content-type": "application/xml",
+              "etag": "\"dc32db4bebfd5790d723a65160d92a11\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBB9ED2947",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "durationMs": 0.36073899999973946
+          },
+          {
+            "label": "assets: prefix range",
+            "method": "GET",
+            "bucket": "assets",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/text",
+            "requestHeaders": {
+              "range": "bytes=0-255",
+              "if-match": "\"dc32db4bebfd5790d723a65160d92a11\""
+            },
+            "requestBytes": 0,
+            "status": 206,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "256",
+              "content-range": "bytes 0-255/1048576",
+              "content-type": "application/octet-stream",
+              "etag": "\"dc32db4bebfd5790d723a65160d92a11\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBB9F71590",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 256,
+            "sha256": "f8ea81eaa9558cf3cae184bbc655878d02db42fe624212ebf0d74eeb87a4abb3",
+            "durationMs": 1.4105399999989459
+          },
+          {
+            "label": "assets: middle range",
+            "method": "GET",
+            "bucket": "assets",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/text",
+            "requestHeaders": {
+              "range": "bytes=524160-524415",
+              "if-match": "\"dc32db4bebfd5790d723a65160d92a11\""
+            },
+            "requestBytes": 0,
+            "status": 206,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "256",
+              "content-range": "bytes 524160-524415/1048576",
+              "content-type": "application/octet-stream",
+              "etag": "\"dc32db4bebfd5790d723a65160d92a11\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBBA0C1C0C",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 256,
+            "sha256": "b10d80d44f039623d6773faadb43b4dc6de42393123926890f6155f82ac64d51",
+            "durationMs": 3.152777999999671
+          },
+          {
+            "label": "assets: suffix range",
+            "method": "GET",
+            "bucket": "assets",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/text",
+            "requestHeaders": {
+              "range": "bytes=-256",
+              "if-match": "\"dc32db4bebfd5790d723a65160d92a11\""
+            },
+            "requestBytes": 0,
+            "status": 206,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "256",
+              "content-range": "bytes 1048320-1048575/1048576",
+              "content-type": "application/octet-stream",
+              "etag": "\"dc32db4bebfd5790d723a65160d92a11\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBBA40C8FB",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 256,
+            "sha256": "98249399fbe0685fe6f3af29c9217ce7e364b60b83754f8b396eb0a7187b753d",
+            "durationMs": 1.1829219999999623
+          }
+        ],
+        "objects": [
+          {
+            "bucket": "uploads",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/text",
+            "logicalBytes": 1048576,
+            "sha256": "49d9ccfedb637bb9ae7c9a5838164ebedaaf6a6e78ca86ca3f4a7d6672994db4",
+            "contentType": "application/octet-stream",
+            "etag": "\"dc32db4bebfd5790d723a65160d92a11\"",
+            "physical": {
+              "bytes": 1048973,
+              "files": [
+                {
+                  "path": "text/36669aeb-06b6-4d43-953a-f3f1ac5a4a0a/part.1",
+                  "bytes": 1048608
+                },
+                {
+                  "path": "text/xl.meta",
+                  "bytes": 365
+                }
+              ],
+              "measure": "sum of regular-file lengths including xl.meta; excludes directory and filesystem allocation overhead",
+              "ratioToLogicalBytes": 1.0003786087036133
+            }
+          },
+          {
+            "bucket": "assets",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/text",
+            "logicalBytes": 1048576,
+            "sha256": "49d9ccfedb637bb9ae7c9a5838164ebedaaf6a6e78ca86ca3f4a7d6672994db4",
+            "contentType": "application/octet-stream",
+            "etag": "\"dc32db4bebfd5790d723a65160d92a11\"",
+            "physical": {
+              "bytes": 1049006,
+              "files": [
+                {
+                  "path": "text/7c291f8c-871c-4e13-85a4-d22fc509f193/part.1",
+                  "bytes": 1048608
+                },
+                {
+                  "path": "text/xl.meta",
+                  "bytes": 398
+                }
+              ],
+              "measure": "sum of regular-file lengths including xl.meta; excludes directory and filesystem allocation overhead",
+              "ratioToLogicalBytes": 1.0004100799560547
+            }
+          }
+        ],
+        "status": "passed",
+        "resourcesBefore": {
+          "service": "minio",
+          "at": 1794475319740,
+          "statsReadMs": 1794475319740,
+          "statsPreReadMs": -62135596800000,
+          "systemCpuSeconds": 679288.2,
+          "onlineCpus": 11,
+          "cpuPeriods": 49,
+          "cpuThrottledPeriods": 7,
+          "memoryMajorFaults": 55,
+          "cpuSeconds": 1.422038,
+          "peakMemoryBytes": 274169856,
+          "anonymousMemoryBytes": 201445376,
+          "networkRxBytes": 21219,
+          "networkTxBytes": 13171,
+          "storageReadBytes": 71651328,
+          "storageWriteBytes": 81920,
+          "throttledSeconds": 0.522532,
+          "memoryLimitBytes": 1073741824
+        },
+        "resourcesAfter": {
+          "service": "minio",
+          "at": 1794475319796,
+          "statsReadMs": 1794475319795,
+          "statsPreReadMs": -62135596800000,
+          "systemCpuSeconds": 679288.77,
+          "onlineCpus": 11,
+          "cpuPeriods": 50,
+          "cpuThrottledPeriods": 7,
+          "memoryMajorFaults": 55,
+          "cpuSeconds": 1.43915,
+          "peakMemoryBytes": 289062912,
+          "anonymousMemoryBytes": 214360064,
+          "networkRxBytes": 1085861,
+          "networkTxBytes": 2131883,
+          "storageReadBytes": 71651328,
+          "storageWriteBytes": 2203648,
+          "throttledSeconds": 0.522532,
+          "memoryLimitBytes": 1073741824
+        },
+        "resourceDelta": {
+          "cpuSeconds": 0.017112000000000016,
+          "networkRxBytes": 1064642,
+          "networkTxBytes": 2118712,
+          "storageReadBytes": 0,
+          "storageWriteBytes": 2121728,
+          "throttledSeconds": 0
+        },
+        "durationMs": 56.703919999999925
+      },
+      {
+        "name": "image-mime-exclusion",
+        "contentType": "image/png",
+        "logicalBytes": 1048576,
+        "sha256": "49d9ccfedb637bb9ae7c9a5838164ebedaaf6a6e78ca86ca3f4a7d6672994db4",
+        "compressible": false,
+        "multipart": false,
+        "operations": [
+          {
+            "label": "PUT upload",
+            "method": "PUT",
+            "bucket": "uploads",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/image-mime-exclusion",
+            "requestHeaders": {
+              "content-type": "image/png"
+            },
+            "requestBytes": 1048576,
+            "status": 200,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "0",
+              "etag": "\"dc32db4bebfd5790d723a65160d92a11\"",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBBAC643F8",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "x-amz-expiration": "expiry-date=\"Fri, 20 Nov 2026 00:00:00 GMT\", rule-id=\"temporary-upload-retention\"",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "durationMs": 6.716002000001026
+          },
+          {
+            "label": "uploads: HEAD",
+            "method": "HEAD",
+            "bucket": "uploads",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/image-mime-exclusion",
+            "requestHeaders": {},
+            "requestBytes": 0,
+            "status": 200,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "1048576",
+              "content-type": "image/png",
+              "etag": "\"dc32db4bebfd5790d723a65160d92a11\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBBB2D2A6B",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "x-amz-expiration": "expiry-date=\"Fri, 20 Nov 2026 00:00:00 GMT\", rule-id=\"temporary-upload-retention\"",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "durationMs": 0.45527799999945273
+          },
+          {
+            "label": "uploads: full GET with matching If-Match",
+            "method": "GET",
+            "bucket": "uploads",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/image-mime-exclusion",
+            "requestHeaders": {
+              "if-match": "\"dc32db4bebfd5790d723a65160d92a11\""
+            },
+            "requestBytes": 0,
+            "status": 200,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "1048576",
+              "content-type": "image/png",
+              "etag": "\"dc32db4bebfd5790d723a65160d92a11\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBBB3409F7",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "x-amz-expiration": "expiry-date=\"Fri, 20 Nov 2026 00:00:00 GMT\", rule-id=\"temporary-upload-retention\"",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 1048576,
+            "sha256": "49d9ccfedb637bb9ae7c9a5838164ebedaaf6a6e78ca86ca3f4a7d6672994db4",
+            "durationMs": 1.0862170000000333
+          },
+          {
+            "label": "uploads: GET with mismatched If-Match",
+            "method": "GET",
+            "bucket": "uploads",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/image-mime-exclusion",
+            "requestHeaders": {
+              "if-match": "\"compression-preflight-mismatch\""
+            },
+            "requestBytes": 0,
+            "status": 412,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "516",
+              "content-type": "application/xml",
+              "etag": "\"dc32db4bebfd5790d723a65160d92a11\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBBB5A8851",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 516,
+            "sha256": "103c2656213cb871d4895e16e40556ad6cd0417b3e3eec707f36ef61ce798635",
+            "durationMs": 0.5963570000003529
+          },
+          {
+            "label": "uploads: HEAD with matching If-Match",
+            "method": "HEAD",
+            "bucket": "uploads",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/image-mime-exclusion",
+            "requestHeaders": {
+              "if-match": "\"dc32db4bebfd5790d723a65160d92a11\""
+            },
+            "requestBytes": 0,
+            "status": 200,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "1048576",
+              "content-type": "image/png",
+              "etag": "\"dc32db4bebfd5790d723a65160d92a11\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBBB66AF8D",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "x-amz-expiration": "expiry-date=\"Fri, 20 Nov 2026 00:00:00 GMT\", rule-id=\"temporary-upload-retention\"",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "durationMs": 0.4014050000005227
+          },
+          {
+            "label": "uploads: HEAD with mismatched If-Match",
+            "method": "HEAD",
+            "bucket": "uploads",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/image-mime-exclusion",
+            "requestHeaders": {
+              "if-match": "\"compression-preflight-mismatch\""
+            },
+            "requestBytes": 0,
+            "status": 412,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "516",
+              "content-type": "application/xml",
+              "etag": "\"dc32db4bebfd5790d723a65160d92a11\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBBB6CF95D",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "durationMs": 0.27486599999974715
+          },
+          {
+            "label": "uploads: prefix range",
+            "method": "GET",
+            "bucket": "uploads",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/image-mime-exclusion",
+            "requestHeaders": {
+              "range": "bytes=0-255",
+              "if-match": "\"dc32db4bebfd5790d723a65160d92a11\""
+            },
+            "requestBytes": 0,
+            "status": 206,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "256",
+              "content-range": "bytes 0-255/1048576",
+              "content-type": "image/png",
+              "etag": "\"dc32db4bebfd5790d723a65160d92a11\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBBB726B33",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "x-amz-expiration": "expiry-date=\"Fri, 20 Nov 2026 00:00:00 GMT\", rule-id=\"temporary-upload-retention\"",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 256,
+            "sha256": "f8ea81eaa9558cf3cae184bbc655878d02db42fe624212ebf0d74eeb87a4abb3",
+            "durationMs": 0.6484390000005078
+          },
+          {
+            "label": "uploads: middle range",
+            "method": "GET",
+            "bucket": "uploads",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/image-mime-exclusion",
+            "requestHeaders": {
+              "range": "bytes=524160-524415",
+              "if-match": "\"dc32db4bebfd5790d723a65160d92a11\""
+            },
+            "requestBytes": 0,
+            "status": 206,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "256",
+              "content-range": "bytes 524160-524415/1048576",
+              "content-type": "image/png",
+              "etag": "\"dc32db4bebfd5790d723a65160d92a11\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBBB7E1F5D",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "x-amz-expiration": "expiry-date=\"Fri, 20 Nov 2026 00:00:00 GMT\", rule-id=\"temporary-upload-retention\"",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 256,
+            "sha256": "b10d80d44f039623d6773faadb43b4dc6de42393123926890f6155f82ac64d51",
+            "durationMs": 0.7445189999998547
+          },
+          {
+            "label": "uploads: suffix range",
+            "method": "GET",
+            "bucket": "uploads",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/image-mime-exclusion",
+            "requestHeaders": {
+              "range": "bytes=-256",
+              "if-match": "\"dc32db4bebfd5790d723a65160d92a11\""
+            },
+            "requestBytes": 0,
+            "status": 206,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "256",
+              "content-range": "bytes 1048320-1048575/1048576",
+              "content-type": "image/png",
+              "etag": "\"dc32db4bebfd5790d723a65160d92a11\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBBB8CB95E",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "x-amz-expiration": "expiry-date=\"Fri, 20 Nov 2026 00:00:00 GMT\", rule-id=\"temporary-upload-retention\"",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 256,
+            "sha256": "98249399fbe0685fe6f3af29c9217ce7e364b60b83754f8b396eb0a7187b753d",
+            "durationMs": 0.8458909999990283
+          },
+          {
+            "label": "CopyObject with mismatched source ETag",
+            "method": "PUT",
+            "bucket": "assets",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/image-mime-exclusion",
+            "requestHeaders": {
+              "x-amz-copy-source": "/uploads/compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/image-mime-exclusion",
+              "x-amz-copy-source-if-match": "\"compression-preflight-mismatch\"",
+              "x-amz-metadata-directive": "REPLACE",
+              "content-type": "image/png"
+            },
+            "requestBytes": 0,
+            "status": 412,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "515",
+              "content-type": "application/xml",
+              "etag": "\"dc32db4bebfd5790d723a65160d92a11\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBBBFF4967",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 515,
+            "sha256": "8bc816a976772b170e9d40dfe6970cb3ddf3e3089441f481b595fb195f69e88d",
+            "durationMs": 0.736851999999999
+          },
+          {
+            "label": "conditional CopyObject with REPLACE",
+            "method": "PUT",
+            "bucket": "assets",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/image-mime-exclusion",
+            "requestHeaders": {
+              "x-amz-copy-source": "/uploads/compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/image-mime-exclusion",
+              "x-amz-copy-source-if-match": "\"dc32db4bebfd5790d723a65160d92a11\"",
+              "x-amz-metadata-directive": "REPLACE",
+              "content-type": "image/png"
+            },
+            "requestBytes": 0,
+            "status": 200,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "232",
+              "content-type": "application/xml",
+              "etag": "\"dc32db4bebfd5790d723a65160d92a11\"",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-checksum-crc64nvme": "ybgHYhpOW28=",
+              "x-amz-checksum-type": "FULL_OBJECT",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBBC0B0344",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 232,
+            "sha256": "f7de42993ddc6f34498772a10b4f373ca398649d1fb3cb3cf583ba2e56bde925",
+            "durationMs": 11.31327599999895
+          },
+          {
+            "label": "assets: HEAD",
+            "method": "HEAD",
+            "bucket": "assets",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/image-mime-exclusion",
+            "requestHeaders": {},
+            "requestBytes": 0,
+            "status": 200,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "1048576",
+              "content-type": "image/png",
+              "etag": "\"dc32db4bebfd5790d723a65160d92a11\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBBCC742FA",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "durationMs": 1.39037400000052
+          },
+          {
+            "label": "assets: full GET with matching If-Match",
+            "method": "GET",
+            "bucket": "assets",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/image-mime-exclusion",
+            "requestHeaders": {
+              "if-match": "\"dc32db4bebfd5790d723a65160d92a11\""
+            },
+            "requestBytes": 0,
+            "status": 200,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "1048576",
+              "content-type": "image/png",
+              "etag": "\"dc32db4bebfd5790d723a65160d92a11\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBBCD0C814",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 1048576,
+            "sha256": "49d9ccfedb637bb9ae7c9a5838164ebedaaf6a6e78ca86ca3f4a7d6672994db4",
+            "durationMs": 1.126049000000421
+          },
+          {
+            "label": "assets: GET with mismatched If-Match",
+            "method": "GET",
+            "bucket": "assets",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/image-mime-exclusion",
+            "requestHeaders": {
+              "if-match": "\"compression-preflight-mismatch\""
+            },
+            "requestBytes": 0,
+            "status": 412,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "514",
+              "content-type": "application/xml",
+              "etag": "\"dc32db4bebfd5790d723a65160d92a11\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBBCF86875",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 514,
+            "sha256": "83fc1c3561fbf5379fafd273e43768ee42b6793fe22eb3ea78a76805027a60de",
+            "durationMs": 0.6528550000002724
+          },
+          {
+            "label": "assets: HEAD with matching If-Match",
+            "method": "HEAD",
+            "bucket": "assets",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/image-mime-exclusion",
+            "requestHeaders": {
+              "if-match": "\"dc32db4bebfd5790d723a65160d92a11\""
+            },
+            "requestBytes": 0,
+            "status": 200,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "1048576",
+              "content-type": "image/png",
+              "etag": "\"dc32db4bebfd5790d723a65160d92a11\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBBD017E65",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "durationMs": 0.30844900000010966
+          },
+          {
+            "label": "assets: HEAD with mismatched If-Match",
+            "method": "HEAD",
+            "bucket": "assets",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/image-mime-exclusion",
+            "requestHeaders": {
+              "if-match": "\"compression-preflight-mismatch\""
+            },
+            "requestBytes": 0,
+            "status": 412,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "514",
+              "content-type": "application/xml",
+              "etag": "\"dc32db4bebfd5790d723a65160d92a11\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBBD07B38A",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "durationMs": 0.38515499999994063
+          },
+          {
+            "label": "assets: prefix range",
+            "method": "GET",
+            "bucket": "assets",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/image-mime-exclusion",
+            "requestHeaders": {
+              "range": "bytes=0-255",
+              "if-match": "\"dc32db4bebfd5790d723a65160d92a11\""
+            },
+            "requestBytes": 0,
+            "status": 206,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "256",
+              "content-range": "bytes 0-255/1048576",
+              "content-type": "image/png",
+              "etag": "\"dc32db4bebfd5790d723a65160d92a11\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBBD1063C1",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 256,
+            "sha256": "f8ea81eaa9558cf3cae184bbc655878d02db42fe624212ebf0d74eeb87a4abb3",
+            "durationMs": 0.7802260000007664
+          },
+          {
+            "label": "assets: middle range",
+            "method": "GET",
+            "bucket": "assets",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/image-mime-exclusion",
+            "requestHeaders": {
+              "range": "bytes=524160-524415",
+              "if-match": "\"dc32db4bebfd5790d723a65160d92a11\""
+            },
+            "requestBytes": 0,
+            "status": 206,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "256",
+              "content-range": "bytes 524160-524415/1048576",
+              "content-type": "image/png",
+              "etag": "\"dc32db4bebfd5790d723a65160d92a11\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBBD1D9447",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 256,
+            "sha256": "b10d80d44f039623d6773faadb43b4dc6de42393123926890f6155f82ac64d51",
+            "durationMs": 0.728770000001532
+          },
+          {
+            "label": "assets: suffix range",
+            "method": "GET",
+            "bucket": "assets",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/image-mime-exclusion",
+            "requestHeaders": {
+              "range": "bytes=-256",
+              "if-match": "\"dc32db4bebfd5790d723a65160d92a11\""
+            },
+            "requestBytes": 0,
+            "status": 206,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "256",
+              "content-range": "bytes 1048320-1048575/1048576",
+              "content-type": "image/png",
+              "etag": "\"dc32db4bebfd5790d723a65160d92a11\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBBD298797",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 256,
+            "sha256": "98249399fbe0685fe6f3af29c9217ce7e364b60b83754f8b396eb0a7187b753d",
+            "durationMs": 0.6567299999987881
+          }
+        ],
+        "objects": [
+          {
+            "bucket": "uploads",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/image-mime-exclusion",
+            "logicalBytes": 1048576,
+            "sha256": "49d9ccfedb637bb9ae7c9a5838164ebedaaf6a6e78ca86ca3f4a7d6672994db4",
+            "contentType": "image/png",
+            "etag": "\"dc32db4bebfd5790d723a65160d92a11\"",
+            "physical": {
+              "bytes": 1048958,
+              "files": [
+                {
+                  "path": "image-mime-exclusion/ae14bd57-a771-4be4-952c-a2a0151e1c9b/part.1",
+                  "bytes": 1048608
+                },
+                {
+                  "path": "image-mime-exclusion/xl.meta",
+                  "bytes": 350
+                }
+              ],
+              "measure": "sum of regular-file lengths including xl.meta; excludes directory and filesystem allocation overhead",
+              "ratioToLogicalBytes": 1.0003643035888672
+            }
+          },
+          {
+            "bucket": "assets",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/image-mime-exclusion",
+            "logicalBytes": 1048576,
+            "sha256": "49d9ccfedb637bb9ae7c9a5838164ebedaaf6a6e78ca86ca3f4a7d6672994db4",
+            "contentType": "image/png",
+            "etag": "\"dc32db4bebfd5790d723a65160d92a11\"",
+            "physical": {
+              "bytes": 1048991,
+              "files": [
+                {
+                  "path": "image-mime-exclusion/e83d5944-c4c2-4d23-9a76-6456e52df01b/part.1",
+                  "bytes": 1048608
+                },
+                {
+                  "path": "image-mime-exclusion/xl.meta",
+                  "bytes": 383
+                }
+              ],
+              "measure": "sum of regular-file lengths including xl.meta; excludes directory and filesystem allocation overhead",
+              "ratioToLogicalBytes": 1.0003957748413086
+            }
+          }
+        ],
+        "status": "passed",
+        "resourcesBefore": {
+          "service": "minio",
+          "at": 1794475319797,
+          "statsReadMs": 1794475319796,
+          "statsPreReadMs": -62135596800000,
+          "systemCpuSeconds": 679288.79,
+          "onlineCpus": 11,
+          "cpuPeriods": 50,
+          "cpuThrottledPeriods": 7,
+          "memoryMajorFaults": 55,
+          "cpuSeconds": 1.43915,
+          "peakMemoryBytes": 289062912,
+          "anonymousMemoryBytes": 214360064,
+          "networkRxBytes": 1085861,
+          "networkTxBytes": 2131883,
+          "storageReadBytes": 71651328,
+          "storageWriteBytes": 2203648,
+          "throttledSeconds": 0.522532,
+          "memoryLimitBytes": 1073741824
+        },
+        "resourcesAfter": {
+          "service": "minio",
+          "at": 1794475319845,
+          "statsReadMs": 1794475319843,
+          "statsPreReadMs": -62135596800000,
+          "systemCpuSeconds": 679289.27,
+          "onlineCpus": 11,
+          "cpuPeriods": 50,
+          "cpuThrottledPeriods": 7,
+          "memoryMajorFaults": 55,
+          "cpuSeconds": 1.454972,
+          "peakMemoryBytes": 301711360,
+          "anonymousMemoryBytes": 224919552,
+          "networkRxBytes": 2149358,
+          "networkTxBytes": 4248745,
+          "storageReadBytes": 71651328,
+          "storageWriteBytes": 4325376,
+          "throttledSeconds": 0.522532,
+          "memoryLimitBytes": 1073741824
+        },
+        "resourceDelta": {
+          "cpuSeconds": 0.015822000000000003,
+          "networkRxBytes": 1063497,
+          "networkTxBytes": 2116862,
+          "storageReadBytes": 0,
+          "storageWriteBytes": 2121728,
+          "throttledSeconds": 0
+        },
+        "durationMs": 48.820496000000276
+      },
+      {
+        "name": "multipart-text",
+        "contentType": "application/octet-stream",
+        "logicalBytes": 6291456,
+        "sha256": "03b2012019e5eee606c3c10f32e380eea19ee825439215466a17a6e47d1fce5d",
+        "compressible": true,
+        "multipart": true,
+        "operations": [
+          {
+            "label": "initiate multipart upload",
+            "method": "POST",
+            "bucket": "uploads",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/multipart-text",
+            "query": {
+              "uploads": ""
+            },
+            "requestHeaders": {
+              "content-type": "application/octet-stream"
+            },
+            "requestBytes": 0,
+            "status": 200,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "403",
+              "content-type": "application/xml",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBBDD269C6",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 403,
+            "sha256": "bad1df04b4ef07c1c51ed5ab4046d0835ab11111f3820acf363e435c60e287c4",
+            "durationMs": 2.2028489999993326
+          },
+          {
+            "label": "upload part 1",
+            "method": "PUT",
+            "bucket": "uploads",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/multipart-text",
+            "query": {
+              "uploadId": "ZDFmOWRlNjAtNWNjYi00MmFkLTg5OGQtNzc1ZWViOTk0YmY3LjQxYTJkMTYwLTJkNWYtNDc3Mi1hZDNhLThmNzRhYjgzYWJiM3gxNzk0NDc1MzE5ODQ5NDAwNzM2",
+              "partNumber": 1
+            },
+            "requestHeaders": {},
+            "requestBytes": 5242880,
+            "status": 200,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "0",
+              "etag": "\"4b77bc1704e896c3828491c8011c4108\"",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBBE1567A3",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "durationMs": 17.03584999999839
+          },
+          {
+            "label": "upload part 2",
+            "method": "PUT",
+            "bucket": "uploads",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/multipart-text",
+            "query": {
+              "uploadId": "ZDFmOWRlNjAtNWNjYi00MmFkLTg5OGQtNzc1ZWViOTk0YmY3LjQxYTJkMTYwLTJkNWYtNDc3Mi1hZDNhLThmNzRhYjgzYWJiM3gxNzk0NDc1MzE5ODQ5NDAwNzM2",
+              "partNumber": 2
+            },
+            "requestHeaders": {},
+            "requestBytes": 1048576,
+            "status": 200,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "0",
+              "etag": "\"c4e2315a2e87ed982561e2330024ca03\"",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBBF2326F7",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "durationMs": 6.030606000000262
+          },
+          {
+            "label": "complete multipart upload",
+            "method": "POST",
+            "bucket": "uploads",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/multipart-text",
+            "query": {
+              "uploadId": "ZDFmOWRlNjAtNWNjYi00MmFkLTg5OGQtNzc1ZWViOTk0YmY3LjQxYTJkMTYwLTJkNWYtNDc3Mi1hZDNhLThmNzRhYjgzYWJiM3gxNzk0NDc1MzE5ODQ5NDAwNzM2"
+            },
+            "requestHeaders": {
+              "content-type": "application/xml"
+            },
+            "requestBytes": 243,
+            "status": 200,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "435",
+              "content-type": "application/xml",
+              "etag": "\"9d854a67a481aa72deac7042b9ee2e71-2\"",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBBF7FB7D3",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "x-amz-expiration": "expiry-date=\"Fri, 20 Nov 2026 00:00:00 GMT\", rule-id=\"temporary-upload-retention\"",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 435,
+            "sha256": "42f0f9687b83bb8d604a0674647675b7961ec02c28b1b321ec9d7b390abaa26e",
+            "durationMs": 1.758319999999003
+          },
+          {
+            "label": "uploads: HEAD",
+            "method": "HEAD",
+            "bucket": "uploads",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/multipart-text",
+            "requestHeaders": {},
+            "requestBytes": 0,
+            "status": 200,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "6291456",
+              "content-type": "application/octet-stream",
+              "etag": "\"9d854a67a481aa72deac7042b9ee2e71-2\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBBF9E42C2",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "x-amz-expiration": "expiry-date=\"Fri, 20 Nov 2026 00:00:00 GMT\", rule-id=\"temporary-upload-retention\"",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "durationMs": 0.4764439999999013
+          },
+          {
+            "label": "uploads: full GET with matching If-Match",
+            "method": "GET",
+            "bucket": "uploads",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/multipart-text",
+            "requestHeaders": {
+              "if-match": "\"9d854a67a481aa72deac7042b9ee2e71-2\""
+            },
+            "requestBytes": 0,
+            "status": 200,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "6291456",
+              "content-type": "application/octet-stream",
+              "etag": "\"9d854a67a481aa72deac7042b9ee2e71-2\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBBFA645CD",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "x-amz-expiration": "expiry-date=\"Fri, 20 Nov 2026 00:00:00 GMT\", rule-id=\"temporary-upload-retention\"",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 6291456,
+            "sha256": "03b2012019e5eee606c3c10f32e380eea19ee825439215466a17a6e47d1fce5d",
+            "durationMs": 4.477570000000924
+          },
+          {
+            "label": "uploads: GET with mismatched If-Match",
+            "method": "GET",
+            "bucket": "uploads",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/multipart-text",
+            "requestHeaders": {
+              "if-match": "\"compression-preflight-mismatch\""
+            },
+            "requestBytes": 0,
+            "status": 412,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "504",
+              "content-type": "application/xml",
+              "etag": "\"9d854a67a481aa72deac7042b9ee2e71-2\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBC09212CE",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 504,
+            "sha256": "c486fbb26153d4e8518fd1b98cac90690896f70cd7d4ca413a76ce0971cccc12",
+            "durationMs": 3.063114000000496
+          },
+          {
+            "label": "uploads: HEAD with matching If-Match",
+            "method": "HEAD",
+            "bucket": "uploads",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/multipart-text",
+            "requestHeaders": {
+              "if-match": "\"9d854a67a481aa72deac7042b9ee2e71-2\""
+            },
+            "requestBytes": 0,
+            "status": 200,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "6291456",
+              "content-type": "application/octet-stream",
+              "etag": "\"9d854a67a481aa72deac7042b9ee2e71-2\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBC0C0F1C8",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "x-amz-expiration": "expiry-date=\"Fri, 20 Nov 2026 00:00:00 GMT\", rule-id=\"temporary-upload-retention\"",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "durationMs": 0.4922759999990376
+          },
+          {
+            "label": "uploads: HEAD with mismatched If-Match",
+            "method": "HEAD",
+            "bucket": "uploads",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/multipart-text",
+            "requestHeaders": {
+              "if-match": "\"compression-preflight-mismatch\""
+            },
+            "requestBytes": 0,
+            "status": 412,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "504",
+              "content-type": "application/xml",
+              "etag": "\"9d854a67a481aa72deac7042b9ee2e71-2\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBC0C7FA05",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "durationMs": 0.2985740000003716
+          },
+          {
+            "label": "uploads: prefix range",
+            "method": "GET",
+            "bucket": "uploads",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/multipart-text",
+            "requestHeaders": {
+              "range": "bytes=0-255",
+              "if-match": "\"9d854a67a481aa72deac7042b9ee2e71-2\""
+            },
+            "requestBytes": 0,
+            "status": 206,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "256",
+              "content-range": "bytes 0-255/6291456",
+              "content-type": "application/octet-stream",
+              "etag": "\"9d854a67a481aa72deac7042b9ee2e71-2\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBC0CDF1A5",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "x-amz-expiration": "expiry-date=\"Fri, 20 Nov 2026 00:00:00 GMT\", rule-id=\"temporary-upload-retention\"",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 256,
+            "sha256": "f8ea81eaa9558cf3cae184bbc655878d02db42fe624212ebf0d74eeb87a4abb3",
+            "durationMs": 0.7118120000013732
+          },
+          {
+            "label": "uploads: middle range",
+            "method": "GET",
+            "bucket": "uploads",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/multipart-text",
+            "requestHeaders": {
+              "range": "bytes=3145600-3145855",
+              "if-match": "\"9d854a67a481aa72deac7042b9ee2e71-2\""
+            },
+            "requestBytes": 0,
+            "status": 206,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "256",
+              "content-range": "bytes 3145600-3145855/6291456",
+              "content-type": "application/octet-stream",
+              "etag": "\"9d854a67a481aa72deac7042b9ee2e71-2\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBC0DA3CD8",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "x-amz-expiration": "expiry-date=\"Fri, 20 Nov 2026 00:00:00 GMT\", rule-id=\"temporary-upload-retention\"",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 256,
+            "sha256": "7ee35580f7daca5ba8a93d5c1ae2fd4346585a2b757e732e10dd5f4f598f863f",
+            "durationMs": 0.7975169999990612
+          },
+          {
+            "label": "uploads: suffix range",
+            "method": "GET",
+            "bucket": "uploads",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/multipart-text",
+            "requestHeaders": {
+              "range": "bytes=-256",
+              "if-match": "\"9d854a67a481aa72deac7042b9ee2e71-2\""
+            },
+            "requestBytes": 0,
+            "status": 206,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "256",
+              "content-range": "bytes 6291200-6291455/6291456",
+              "content-type": "application/octet-stream",
+              "etag": "\"9d854a67a481aa72deac7042b9ee2e71-2\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBC0E7CAA0",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "x-amz-expiration": "expiry-date=\"Fri, 20 Nov 2026 00:00:00 GMT\", rule-id=\"temporary-upload-retention\"",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 256,
+            "sha256": "7e84b92a225b2a94f4b1d2382e5269f667eed8b388bb30d83dc7a87ad897790d",
+            "durationMs": 0.7052700000003824
+          },
+          {
+            "label": "uploads: multipart boundary range",
+            "method": "GET",
+            "bucket": "uploads",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/multipart-text",
+            "requestHeaders": {
+              "range": "bytes=5242752-5243007",
+              "if-match": "\"9d854a67a481aa72deac7042b9ee2e71-2\""
+            },
+            "requestBytes": 0,
+            "status": 206,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "256",
+              "content-range": "bytes 5242752-5243007/6291456",
+              "content-type": "application/octet-stream",
+              "etag": "\"9d854a67a481aa72deac7042b9ee2e71-2\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBC0F2D874",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "x-amz-expiration": "expiry-date=\"Fri, 20 Nov 2026 00:00:00 GMT\", rule-id=\"temporary-upload-retention\"",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 256,
+            "sha256": "98249399fbe0685fe6f3af29c9217ce7e364b60b83754f8b396eb0a7187b753d",
+            "durationMs": 1.0210110000007262
+          },
+          {
+            "label": "CopyObject with mismatched source ETag",
+            "method": "PUT",
+            "bucket": "assets",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/multipart-text",
+            "requestHeaders": {
+              "x-amz-copy-source": "/uploads/compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/multipart-text",
+              "x-amz-copy-source-if-match": "\"compression-preflight-mismatch\"",
+              "x-amz-metadata-directive": "REPLACE",
+              "content-type": "application/octet-stream"
+            },
+            "requestBytes": 0,
+            "status": 412,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "503",
+              "content-type": "application/xml",
+              "etag": "\"9d854a67a481aa72deac7042b9ee2e71-2\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBC250BB97",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 503,
+            "sha256": "a9fd19d1c129ddd451afbcdf9df55c9efebbd1e503eaf7e9f0a471708ec2a79f",
+            "durationMs": 3.8088410000000295
+          },
+          {
+            "label": "conditional CopyObject with REPLACE",
+            "method": "PUT",
+            "bucket": "assets",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/multipart-text",
+            "requestHeaders": {
+              "x-amz-copy-source": "/uploads/compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/multipart-text",
+              "x-amz-copy-source-if-match": "\"9d854a67a481aa72deac7042b9ee2e71-2\"",
+              "x-amz-metadata-directive": "REPLACE",
+              "content-type": "application/octet-stream"
+            },
+            "requestBytes": 0,
+            "status": 200,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "232",
+              "content-type": "application/xml",
+              "etag": "\"80521cfca7f6e810a14e07ce50f32a2b\"",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-checksum-crc64nvme": "wDTcKVRNK0E=",
+              "x-amz-checksum-type": "FULL_OBJECT",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBC2928D2B",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 232,
+            "sha256": "f0cedb3ed2ac20b9fecae39427d72df81e07f5ef7891facd505b6fa996fefff7",
+            "durationMs": 20.787360000000263
+          },
+          {
+            "label": "assets: HEAD",
+            "method": "HEAD",
+            "bucket": "assets",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/multipart-text",
+            "requestHeaders": {},
+            "requestBytes": 0,
+            "status": 200,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "6291456",
+              "content-type": "application/octet-stream",
+              "etag": "\"80521cfca7f6e810a14e07ce50f32a2b\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBC3CE93F3",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "durationMs": 0.47431800000049407
+          },
+          {
+            "label": "assets: full GET with matching If-Match",
+            "method": "GET",
+            "bucket": "assets",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/multipart-text",
+            "requestHeaders": {
+              "if-match": "\"80521cfca7f6e810a14e07ce50f32a2b\""
+            },
+            "requestBytes": 0,
+            "status": 200,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "6291456",
+              "content-type": "application/octet-stream",
+              "etag": "\"80521cfca7f6e810a14e07ce50f32a2b\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBC3D62DDA",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 6291456,
+            "sha256": "03b2012019e5eee606c3c10f32e380eea19ee825439215466a17a6e47d1fce5d",
+            "durationMs": 3.3006900000000314
+          },
+          {
+            "label": "assets: GET with mismatched If-Match",
+            "method": "GET",
+            "bucket": "assets",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/multipart-text",
+            "requestHeaders": {
+              "if-match": "\"compression-preflight-mismatch\""
+            },
+            "requestBytes": 0,
+            "status": 412,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "502",
+              "content-type": "application/xml",
+              "etag": "\"80521cfca7f6e810a14e07ce50f32a2b\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBC4806B08",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 502,
+            "sha256": "a8239706e21f1183d7c0294673fbc098ce02dda7d30392d8abcccee018889a10",
+            "durationMs": 0.6172310000001744
+          },
+          {
+            "label": "assets: HEAD with matching If-Match",
+            "method": "HEAD",
+            "bucket": "assets",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/multipart-text",
+            "requestHeaders": {
+              "if-match": "\"80521cfca7f6e810a14e07ce50f32a2b\""
+            },
+            "requestBytes": 0,
+            "status": 200,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "6291456",
+              "content-type": "application/octet-stream",
+              "etag": "\"80521cfca7f6e810a14e07ce50f32a2b\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBC4886067",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "durationMs": 0.38569599999937054
+          },
+          {
+            "label": "assets: HEAD with mismatched If-Match",
+            "method": "HEAD",
+            "bucket": "assets",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/multipart-text",
+            "requestHeaders": {
+              "if-match": "\"compression-preflight-mismatch\""
+            },
+            "requestBytes": 0,
+            "status": 412,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "502",
+              "content-type": "application/xml",
+              "etag": "\"80521cfca7f6e810a14e07ce50f32a2b\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBC48F2254",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "durationMs": 0.9030140000013489
+          },
+          {
+            "label": "assets: prefix range",
+            "method": "GET",
+            "bucket": "assets",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/multipart-text",
+            "requestHeaders": {
+              "range": "bytes=0-255",
+              "if-match": "\"80521cfca7f6e810a14e07ce50f32a2b\""
+            },
+            "requestBytes": 0,
+            "status": 206,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "256",
+              "content-range": "bytes 0-255/6291456",
+              "content-type": "application/octet-stream",
+              "etag": "\"80521cfca7f6e810a14e07ce50f32a2b\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBC49F70D8",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 256,
+            "sha256": "f8ea81eaa9558cf3cae184bbc655878d02db42fe624212ebf0d74eeb87a4abb3",
+            "durationMs": 0.6241890000001149
+          },
+          {
+            "label": "assets: middle range",
+            "method": "GET",
+            "bucket": "assets",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/multipart-text",
+            "requestHeaders": {
+              "range": "bytes=3145600-3145855",
+              "if-match": "\"80521cfca7f6e810a14e07ce50f32a2b\""
+            },
+            "requestBytes": 0,
+            "status": 206,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "256",
+              "content-range": "bytes 3145600-3145855/6291456",
+              "content-type": "application/octet-stream",
+              "etag": "\"80521cfca7f6e810a14e07ce50f32a2b\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBC4ABE274",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 256,
+            "sha256": "7ee35580f7daca5ba8a93d5c1ae2fd4346585a2b757e732e10dd5f4f598f863f",
+            "durationMs": 1.7562789999992674
+          },
+          {
+            "label": "assets: suffix range",
+            "method": "GET",
+            "bucket": "assets",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/multipart-text",
+            "requestHeaders": {
+              "range": "bytes=-256",
+              "if-match": "\"80521cfca7f6e810a14e07ce50f32a2b\""
+            },
+            "requestBytes": 0,
+            "status": 206,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "256",
+              "content-range": "bytes 6291200-6291455/6291456",
+              "content-type": "application/octet-stream",
+              "etag": "\"80521cfca7f6e810a14e07ce50f32a2b\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBC4C86492",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 256,
+            "sha256": "7e84b92a225b2a94f4b1d2382e5269f667eed8b388bb30d83dc7a87ad897790d",
+            "durationMs": 1.597074999999677
+          },
+          {
+            "label": "assets: multipart boundary range",
+            "method": "GET",
+            "bucket": "assets",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/multipart-text",
+            "requestHeaders": {
+              "range": "bytes=5242752-5243007",
+              "if-match": "\"80521cfca7f6e810a14e07ce50f32a2b\""
+            },
+            "requestBytes": 0,
+            "status": 206,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "256",
+              "content-range": "bytes 5242752-5243007/6291456",
+              "content-type": "application/octet-stream",
+              "etag": "\"80521cfca7f6e810a14e07ce50f32a2b\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBC4E44D0B",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 256,
+            "sha256": "98249399fbe0685fe6f3af29c9217ce7e364b60b83754f8b396eb0a7187b753d",
+            "durationMs": 1.1147989999990386
+          }
+        ],
+        "objects": [
+          {
+            "bucket": "uploads",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/multipart-text",
+            "logicalBytes": 6291456,
+            "sha256": "03b2012019e5eee606c3c10f32e380eea19ee825439215466a17a6e47d1fce5d",
+            "contentType": "application/octet-stream",
+            "etag": "\"9d854a67a481aa72deac7042b9ee2e71-2\"",
+            "physical": {
+              "bytes": 6292064,
+              "files": [
+                {
+                  "path": "multipart-text/c9ce1d14-bed8-4871-8498-709f9cf5d510/part.1",
+                  "bytes": 5243040
+                },
+                {
+                  "path": "multipart-text/c9ce1d14-bed8-4871-8498-709f9cf5d510/part.2",
+                  "bytes": 1048608
+                },
+                {
+                  "path": "multipart-text/xl.meta",
+                  "bytes": 416
+                }
+              ],
+              "measure": "sum of regular-file lengths including xl.meta; excludes directory and filesystem allocation overhead",
+              "ratioToLogicalBytes": 1.0000966389973958
+            }
+          },
+          {
+            "bucket": "assets",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/multipart-text",
+            "logicalBytes": 6291456,
+            "sha256": "03b2012019e5eee606c3c10f32e380eea19ee825439215466a17a6e47d1fce5d",
+            "contentType": "application/octet-stream",
+            "etag": "\"80521cfca7f6e810a14e07ce50f32a2b\"",
+            "physical": {
+              "bytes": 6292046,
+              "files": [
+                {
+                  "path": "multipart-text/c510547b-53b8-4da0-8d7b-633f739cff43/part.1",
+                  "bytes": 6291648
+                },
+                {
+                  "path": "multipart-text/xl.meta",
+                  "bytes": 398
+                }
+              ],
+              "measure": "sum of regular-file lengths including xl.meta; excludes directory and filesystem allocation overhead",
+              "ratioToLogicalBytes": 1.0000937779744465
+            }
+          }
+        ],
+        "status": "passed",
+        "parts": [
+          {
+            "partNumber": 1,
+            "bytes": 5242880,
+            "etag": "\"4b77bc1704e896c3828491c8011c4108\""
+          },
+          {
+            "partNumber": 2,
+            "bytes": 1048576,
+            "etag": "\"c4e2315a2e87ed982561e2330024ca03\""
+          }
+        ],
+        "resourcesBefore": {
+          "service": "minio",
+          "at": 1794475319848,
+          "statsReadMs": 1794475319848,
+          "statsPreReadMs": -62135596800000,
+          "systemCpuSeconds": 679289.31,
+          "onlineCpus": 11,
+          "cpuPeriods": 50,
+          "cpuThrottledPeriods": 7,
+          "memoryMajorFaults": 55,
+          "cpuSeconds": 1.454972,
+          "peakMemoryBytes": 301711360,
+          "anonymousMemoryBytes": 224919552,
+          "networkRxBytes": 2149358,
+          "networkTxBytes": 4248745,
+          "storageReadBytes": 71651328,
+          "storageWriteBytes": 4325376,
+          "throttledSeconds": 0.522532,
+          "memoryLimitBytes": 1073741824
+        },
+        "resourcesAfter": {
+          "service": "minio",
+          "at": 1794475319983,
+          "statsReadMs": 1794475319978,
+          "statsPreReadMs": -62135596800000,
+          "systemCpuSeconds": 679290.63,
+          "onlineCpus": 11,
+          "cpuPeriods": 51,
+          "cpuThrottledPeriods": 7,
+          "memoryMajorFaults": 55,
+          "cpuSeconds": 1.505444,
+          "peakMemoryBytes": 330899456,
+          "anonymousMemoryBytes": 241754112,
+          "networkRxBytes": 8470424,
+          "networkTxBytes": 16869007,
+          "storageReadBytes": 71651328,
+          "storageWriteBytes": 16953344,
+          "throttledSeconds": 0.522532,
+          "memoryLimitBytes": 1073741824
+        },
+        "resourceDelta": {
+          "cpuSeconds": 0.05047200000000007,
+          "networkRxBytes": 6321066,
+          "networkTxBytes": 12620262,
+          "storageReadBytes": 0,
+          "storageWriteBytes": 12627968,
+          "throttledSeconds": 0
+        },
+        "durationMs": 135.6778209999993
+      },
+      {
+        "name": "seeded-noise",
+        "contentType": "application/octet-stream",
+        "logicalBytes": 1048576,
+        "sha256": "1471cbde0f45e7a2994c565cc32e18742992f3cf7204187068a12c470596a3f3",
+        "compressible": false,
+        "multipart": false,
+        "operations": [
+          {
+            "label": "PUT upload",
+            "method": "PUT",
+            "bucket": "uploads",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/seeded-noise",
+            "requestHeaders": {
+              "content-type": "application/octet-stream"
+            },
+            "requestBytes": 1048576,
+            "status": 200,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "0",
+              "etag": "\"2378a6f64ecad63dd1cdef856c62377d\"",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBC5F544E4",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "x-amz-expiration": "expiry-date=\"Fri, 20 Nov 2026 00:00:00 GMT\", rule-id=\"temporary-upload-retention\"",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "durationMs": 7.162737999999081
+          },
+          {
+            "label": "uploads: HEAD",
+            "method": "HEAD",
+            "bucket": "uploads",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/seeded-noise",
+            "requestHeaders": {},
+            "requestBytes": 0,
+            "status": 200,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "1048576",
+              "content-type": "application/octet-stream",
+              "etag": "\"2378a6f64ecad63dd1cdef856c62377d\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBC6635280",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "x-amz-expiration": "expiry-date=\"Fri, 20 Nov 2026 00:00:00 GMT\", rule-id=\"temporary-upload-retention\"",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "durationMs": 0.4494859999995242
+          },
+          {
+            "label": "uploads: full GET with matching If-Match",
+            "method": "GET",
+            "bucket": "uploads",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/seeded-noise",
+            "requestHeaders": {
+              "if-match": "\"2378a6f64ecad63dd1cdef856c62377d\""
+            },
+            "requestBytes": 0,
+            "status": 200,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "1048576",
+              "content-type": "application/octet-stream",
+              "etag": "\"2378a6f64ecad63dd1cdef856c62377d\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBC669FC2D",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "x-amz-expiration": "expiry-date=\"Fri, 20 Nov 2026 00:00:00 GMT\", rule-id=\"temporary-upload-retention\"",
+              "date": "Thu, 12 Nov 2026 09:21:59 GMT"
+            },
+            "bytes": 1048576,
+            "sha256": "1471cbde0f45e7a2994c565cc32e18742992f3cf7204187068a12c470596a3f3",
+            "durationMs": 0.9500540000008186
+          },
+          {
+            "label": "uploads: GET with mismatched If-Match",
+            "method": "GET",
+            "bucket": "uploads",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/seeded-noise",
+            "requestHeaders": {
+              "if-match": "\"compression-preflight-mismatch\""
+            },
+            "requestBytes": 0,
+            "status": 412,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "500",
+              "content-type": "application/xml",
+              "etag": "\"2378a6f64ecad63dd1cdef856c62377d\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBC740772D",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "date": "Thu, 12 Nov 2026 09:22:00 GMT"
+            },
+            "bytes": 500,
+            "sha256": "2ad301afa70162d2e5fe1254febecef0d28e9c4c52eed7403c0780eac763f367",
+            "durationMs": 0.9340960000008636
+          },
+          {
+            "label": "uploads: HEAD with matching If-Match",
+            "method": "HEAD",
+            "bucket": "uploads",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/seeded-noise",
+            "requestHeaders": {
+              "if-match": "\"2378a6f64ecad63dd1cdef856c62377d\""
+            },
+            "requestBytes": 0,
+            "status": 200,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "1048576",
+              "content-type": "application/octet-stream",
+              "etag": "\"2378a6f64ecad63dd1cdef856c62377d\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBC74D6FB7",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "x-amz-expiration": "expiry-date=\"Fri, 20 Nov 2026 00:00:00 GMT\", rule-id=\"temporary-upload-retention\"",
+              "date": "Thu, 12 Nov 2026 09:22:00 GMT"
+            },
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "durationMs": 0.8311409999987518
+          },
+          {
+            "label": "uploads: HEAD with mismatched If-Match",
+            "method": "HEAD",
+            "bucket": "uploads",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/seeded-noise",
+            "requestHeaders": {
+              "if-match": "\"compression-preflight-mismatch\""
+            },
+            "requestBytes": 0,
+            "status": 412,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "500",
+              "content-type": "application/xml",
+              "etag": "\"2378a6f64ecad63dd1cdef856c62377d\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBC75BB639",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "date": "Thu, 12 Nov 2026 09:22:00 GMT"
+            },
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "durationMs": 0.6186059999999998
+          },
+          {
+            "label": "uploads: prefix range",
+            "method": "GET",
+            "bucket": "uploads",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/seeded-noise",
+            "requestHeaders": {
+              "range": "bytes=0-255",
+              "if-match": "\"2378a6f64ecad63dd1cdef856c62377d\""
+            },
+            "requestBytes": 0,
+            "status": 206,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "256",
+              "content-range": "bytes 0-255/1048576",
+              "content-type": "application/octet-stream",
+              "etag": "\"2378a6f64ecad63dd1cdef856c62377d\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBC76B50E4",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "x-amz-expiration": "expiry-date=\"Fri, 20 Nov 2026 00:00:00 GMT\", rule-id=\"temporary-upload-retention\"",
+              "date": "Thu, 12 Nov 2026 09:22:00 GMT"
+            },
+            "bytes": 256,
+            "sha256": "0afd9592ad576b09df98c0940e948eac7abad93f19be4b09d748ceb15c8cfb89",
+            "durationMs": 0.9367210000000341
+          },
+          {
+            "label": "uploads: middle range",
+            "method": "GET",
+            "bucket": "uploads",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/seeded-noise",
+            "requestHeaders": {
+              "range": "bytes=524160-524415",
+              "if-match": "\"2378a6f64ecad63dd1cdef856c62377d\""
+            },
+            "requestBytes": 0,
+            "status": 206,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "256",
+              "content-range": "bytes 524160-524415/1048576",
+              "content-type": "application/octet-stream",
+              "etag": "\"2378a6f64ecad63dd1cdef856c62377d\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBC77ABBB6",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "x-amz-expiration": "expiry-date=\"Fri, 20 Nov 2026 00:00:00 GMT\", rule-id=\"temporary-upload-retention\"",
+              "date": "Thu, 12 Nov 2026 09:22:00 GMT"
+            },
+            "bytes": 256,
+            "sha256": "d226a78f30e25896dd876943277a25b7d5646cdeda9a30be2753b4752c23ab8e",
+            "durationMs": 0.8568899999991118
+          },
+          {
+            "label": "uploads: suffix range",
+            "method": "GET",
+            "bucket": "uploads",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/seeded-noise",
+            "requestHeaders": {
+              "range": "bytes=-256",
+              "if-match": "\"2378a6f64ecad63dd1cdef856c62377d\""
+            },
+            "requestBytes": 0,
+            "status": 206,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "256",
+              "content-range": "bytes 1048320-1048575/1048576",
+              "content-type": "application/octet-stream",
+              "etag": "\"2378a6f64ecad63dd1cdef856c62377d\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBC788FDD3",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "x-amz-expiration": "expiry-date=\"Fri, 20 Nov 2026 00:00:00 GMT\", rule-id=\"temporary-upload-retention\"",
+              "date": "Thu, 12 Nov 2026 09:22:00 GMT"
+            },
+            "bytes": 256,
+            "sha256": "f4ed83cecf6b95000ed2429363e4d822a4c4dc9bab84474e423c8c6df7bc579b",
+            "durationMs": 0.6808959999998478
+          },
+          {
+            "label": "CopyObject with mismatched source ETag",
+            "method": "PUT",
+            "bucket": "assets",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/seeded-noise",
+            "requestHeaders": {
+              "x-amz-copy-source": "/uploads/compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/seeded-noise",
+              "x-amz-copy-source-if-match": "\"compression-preflight-mismatch\"",
+              "x-amz-metadata-directive": "REPLACE",
+              "content-type": "application/octet-stream"
+            },
+            "requestBytes": 0,
+            "status": 412,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "499",
+              "content-type": "application/xml",
+              "etag": "\"2378a6f64ecad63dd1cdef856c62377d\"",
+              "last-modified": "Thu, 12 Nov 2026 09:21:59 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBC7CF1B4E",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "date": "Thu, 12 Nov 2026 09:22:00 GMT"
+            },
+            "bytes": 499,
+            "sha256": "acc76a1c9ca48451f92988d501defdf752469e0120a459d7767cf1e2e57ecd98",
+            "durationMs": 0.5934809999998834
+          },
+          {
+            "label": "conditional CopyObject with REPLACE",
+            "method": "PUT",
+            "bucket": "assets",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/seeded-noise",
+            "requestHeaders": {
+              "x-amz-copy-source": "/uploads/compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/seeded-noise",
+              "x-amz-copy-source-if-match": "\"2378a6f64ecad63dd1cdef856c62377d\"",
+              "x-amz-metadata-directive": "REPLACE",
+              "content-type": "application/octet-stream"
+            },
+            "requestBytes": 0,
+            "status": 200,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "232",
+              "content-type": "application/xml",
+              "etag": "\"2378a6f64ecad63dd1cdef856c62377d\"",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-checksum-crc64nvme": "my7LEpucsRg=",
+              "x-amz-checksum-type": "FULL_OBJECT",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBC7D89B5C",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "date": "Thu, 12 Nov 2026 09:22:00 GMT"
+            },
+            "bytes": 232,
+            "sha256": "575743b3d54e1bd5e38bc576dff8c1349e5b13597758d2eb9b391b5fd30f68a0",
+            "durationMs": 7.5424760000005335
+          },
+          {
+            "label": "assets: HEAD",
+            "method": "HEAD",
+            "bucket": "assets",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/seeded-noise",
+            "requestHeaders": {},
+            "requestBytes": 0,
+            "status": 200,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "1048576",
+              "content-type": "application/octet-stream",
+              "etag": "\"2378a6f64ecad63dd1cdef856c62377d\"",
+              "last-modified": "Thu, 12 Nov 2026 09:22:00 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBC85178F4",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "date": "Thu, 12 Nov 2026 09:22:00 GMT"
+            },
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "durationMs": 0.6722289999997884
+          },
+          {
+            "label": "assets: full GET with matching If-Match",
+            "method": "GET",
+            "bucket": "assets",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/seeded-noise",
+            "requestHeaders": {
+              "if-match": "\"2378a6f64ecad63dd1cdef856c62377d\""
+            },
+            "requestBytes": 0,
+            "status": 200,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "1048576",
+              "content-type": "application/octet-stream",
+              "etag": "\"2378a6f64ecad63dd1cdef856c62377d\"",
+              "last-modified": "Thu, 12 Nov 2026 09:22:00 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBC85B2ACF",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "date": "Thu, 12 Nov 2026 09:22:00 GMT"
+            },
+            "bytes": 1048576,
+            "sha256": "1471cbde0f45e7a2994c565cc32e18742992f3cf7204187068a12c470596a3f3",
+            "durationMs": 1.3582490000007965
+          },
+          {
+            "label": "assets: GET with mismatched If-Match",
+            "method": "GET",
+            "bucket": "assets",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/seeded-noise",
+            "requestHeaders": {
+              "if-match": "\"compression-preflight-mismatch\""
+            },
+            "requestBytes": 0,
+            "status": 412,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "498",
+              "content-type": "application/xml",
+              "etag": "\"2378a6f64ecad63dd1cdef856c62377d\"",
+              "last-modified": "Thu, 12 Nov 2026 09:22:00 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBC935C5C4",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "date": "Thu, 12 Nov 2026 09:22:00 GMT"
+            },
+            "bytes": 498,
+            "sha256": "efbf68eb5c36f9816f574f84c8c45cabf826a8a5cd0108527d6063b6ff907194",
+            "durationMs": 0.7649770000007265
+          },
+          {
+            "label": "assets: HEAD with matching If-Match",
+            "method": "HEAD",
+            "bucket": "assets",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/seeded-noise",
+            "requestHeaders": {
+              "if-match": "\"2378a6f64ecad63dd1cdef856c62377d\""
+            },
+            "requestBytes": 0,
+            "status": 200,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "1048576",
+              "content-type": "application/octet-stream",
+              "etag": "\"2378a6f64ecad63dd1cdef856c62377d\"",
+              "last-modified": "Thu, 12 Nov 2026 09:22:00 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBC940E3B5",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "date": "Thu, 12 Nov 2026 09:22:00 GMT"
+            },
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "durationMs": 0.4182790000013483
+          },
+          {
+            "label": "assets: HEAD with mismatched If-Match",
+            "method": "HEAD",
+            "bucket": "assets",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/seeded-noise",
+            "requestHeaders": {
+              "if-match": "\"compression-preflight-mismatch\""
+            },
+            "requestBytes": 0,
+            "status": 412,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "498",
+              "content-type": "application/xml",
+              "etag": "\"2378a6f64ecad63dd1cdef856c62377d\"",
+              "last-modified": "Thu, 12 Nov 2026 09:22:00 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBC94B4504",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "date": "Thu, 12 Nov 2026 09:22:00 GMT"
+            },
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "durationMs": 0.5597739999993792
+          },
+          {
+            "label": "assets: prefix range",
+            "method": "GET",
+            "bucket": "assets",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/seeded-noise",
+            "requestHeaders": {
+              "range": "bytes=0-255",
+              "if-match": "\"2378a6f64ecad63dd1cdef856c62377d\""
+            },
+            "requestBytes": 0,
+            "status": 206,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "256",
+              "content-range": "bytes 0-255/1048576",
+              "content-type": "application/octet-stream",
+              "etag": "\"2378a6f64ecad63dd1cdef856c62377d\"",
+              "last-modified": "Thu, 12 Nov 2026 09:22:00 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBC95146BA",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "date": "Thu, 12 Nov 2026 09:22:00 GMT"
+            },
+            "bytes": 256,
+            "sha256": "0afd9592ad576b09df98c0940e948eac7abad93f19be4b09d748ceb15c8cfb89",
+            "durationMs": 0.7255189999996219
+          },
+          {
+            "label": "assets: middle range",
+            "method": "GET",
+            "bucket": "assets",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/seeded-noise",
+            "requestHeaders": {
+              "range": "bytes=524160-524415",
+              "if-match": "\"2378a6f64ecad63dd1cdef856c62377d\""
+            },
+            "requestBytes": 0,
+            "status": 206,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "256",
+              "content-range": "bytes 524160-524415/1048576",
+              "content-type": "application/octet-stream",
+              "etag": "\"2378a6f64ecad63dd1cdef856c62377d\"",
+              "last-modified": "Thu, 12 Nov 2026 09:22:00 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBC95D96D0",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "date": "Thu, 12 Nov 2026 09:22:00 GMT"
+            },
+            "bytes": 256,
+            "sha256": "d226a78f30e25896dd876943277a25b7d5646cdeda9a30be2753b4752c23ab8e",
+            "durationMs": 0.7704340000000229
+          },
+          {
+            "label": "assets: suffix range",
+            "method": "GET",
+            "bucket": "assets",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/seeded-noise",
+            "requestHeaders": {
+              "range": "bytes=-256",
+              "if-match": "\"2378a6f64ecad63dd1cdef856c62377d\""
+            },
+            "requestBytes": 0,
+            "status": 206,
+            "headers": {
+              "accept-ranges": "bytes",
+              "content-length": "256",
+              "content-range": "bytes 1048320-1048575/1048576",
+              "content-type": "application/octet-stream",
+              "etag": "\"2378a6f64ecad63dd1cdef856c62377d\"",
+              "last-modified": "Thu, 12 Nov 2026 09:22:00 GMT",
+              "server": "MinIO",
+              "strict-transport-security": "max-age=31536000; includeSubDomains",
+              "vary": "Origin, Accept-Encoding",
+              "x-amz-id-2": "dd9025bab4ad464b049177c95eb6ebf374d3b3fd1af9251148b658df7ac2e3e8",
+              "x-amz-request-id": "18E741CBC96A4D6E",
+              "x-content-type-options": "nosniff",
+              "x-ratelimit-limit": "304",
+              "x-ratelimit-remaining": "304",
+              "x-xss-protection": "1; mode=block",
+              "date": "Thu, 12 Nov 2026 09:22:00 GMT"
+            },
+            "bytes": 256,
+            "sha256": "f4ed83cecf6b95000ed2429363e4d822a4c4dc9bab84474e423c8c6df7bc579b",
+            "durationMs": 1.5372440000010101
+          }
+        ],
+        "objects": [
+          {
+            "bucket": "uploads",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/seeded-noise",
+            "logicalBytes": 1048576,
+            "sha256": "1471cbde0f45e7a2994c565cc32e18742992f3cf7204187068a12c470596a3f3",
+            "contentType": "application/octet-stream",
+            "etag": "\"2378a6f64ecad63dd1cdef856c62377d\"",
+            "physical": {
+              "bytes": 1048973,
+              "files": [
+                {
+                  "path": "seeded-noise/e148880a-2456-4c7f-8c2e-a147e257cdba/part.1",
+                  "bytes": 1048608
+                },
+                {
+                  "path": "seeded-noise/xl.meta",
+                  "bytes": 365
+                }
+              ],
+              "measure": "sum of regular-file lengths including xl.meta; excludes directory and filesystem allocation overhead",
+              "ratioToLogicalBytes": 1.0003786087036133
+            }
+          },
+          {
+            "bucket": "assets",
+            "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/seeded-noise",
+            "logicalBytes": 1048576,
+            "sha256": "1471cbde0f45e7a2994c565cc32e18742992f3cf7204187068a12c470596a3f3",
+            "contentType": "application/octet-stream",
+            "etag": "\"2378a6f64ecad63dd1cdef856c62377d\"",
+            "physical": {
+              "bytes": 1049006,
+              "files": [
+                {
+                  "path": "seeded-noise/3545eabd-433a-41f7-82a6-7f2efa194f7f/part.1",
+                  "bytes": 1048608
+                },
+                {
+                  "path": "seeded-noise/xl.meta",
+                  "bytes": 398
+                }
+              ],
+              "measure": "sum of regular-file lengths including xl.meta; excludes directory and filesystem allocation overhead",
+              "ratioToLogicalBytes": 1.0004100799560547
+            }
+          }
+        ],
+        "status": "passed",
+        "resourcesBefore": {
+          "service": "minio",
+          "at": 1794475319985,
+          "statsReadMs": 1794475319984,
+          "statsPreReadMs": -62135596800000,
+          "systemCpuSeconds": 679290.66,
+          "onlineCpus": 11,
+          "cpuPeriods": 51,
+          "cpuThrottledPeriods": 7,
+          "memoryMajorFaults": 55,
+          "cpuSeconds": 1.505444,
+          "peakMemoryBytes": 330899456,
+          "anonymousMemoryBytes": 241754112,
+          "networkRxBytes": 8470424,
+          "networkTxBytes": 16869007,
+          "storageReadBytes": 71651328,
+          "storageWriteBytes": 16953344,
+          "throttledSeconds": 0.522532,
+          "memoryLimitBytes": 1073741824
+        },
+        "resourcesAfter": {
+          "service": "minio",
+          "at": 1794475320052,
+          "statsReadMs": 1794475320051,
+          "statsPreReadMs": -62135596800000,
+          "systemCpuSeconds": 679291.31,
+          "onlineCpus": 11,
+          "cpuPeriods": 52,
+          "cpuThrottledPeriods": 7,
+          "memoryMajorFaults": 55,
+          "cpuSeconds": 1.52302,
+          "peakMemoryBytes": 342253568,
+          "anonymousMemoryBytes": 251236352,
+          "networkRxBytes": 9533402,
+          "networkTxBytes": 18985935,
+          "storageReadBytes": 71651328,
+          "storageWriteBytes": 19075072,
+          "throttledSeconds": 0.522532,
+          "memoryLimitBytes": 1073741824
+        },
+        "resourceDelta": {
+          "cpuSeconds": 0.017576000000000036,
+          "networkRxBytes": 1062978,
+          "networkTxBytes": 2116928,
+          "storageReadBytes": 0,
+          "storageWriteBytes": 2121728,
+          "throttledSeconds": 0
+        },
+        "durationMs": 68.10344400000031
+      }
+    ],
+    "cleanup": [
+      {
+        "action": "delete object",
+        "bucket": "uploads",
+        "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/text",
+        "status": 204,
+        "ok": true
+      },
+      {
+        "action": "delete object",
+        "bucket": "assets",
+        "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/text",
+        "status": 204,
+        "ok": true
+      },
+      {
+        "action": "delete object",
+        "bucket": "uploads",
+        "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/image-mime-exclusion",
+        "status": 204,
+        "ok": true
+      },
+      {
+        "action": "delete object",
+        "bucket": "assets",
+        "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/image-mime-exclusion",
+        "status": 204,
+        "ok": true
+      },
+      {
+        "action": "delete object",
+        "bucket": "uploads",
+        "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/multipart-text",
+        "status": 204,
+        "ok": true
+      },
+      {
+        "action": "delete object",
+        "bucket": "assets",
+        "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/multipart-text",
+        "status": 204,
+        "ok": true
+      },
+      {
+        "action": "delete object",
+        "bucket": "uploads",
+        "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/seeded-noise",
+        "status": 204,
+        "ok": true
+      },
+      {
+        "action": "delete object",
+        "bucket": "assets",
+        "key": "compression-preflight/e1e2cb57-ba4c-40f0-8502-f3e981c7051c/seeded-noise",
+        "status": 204,
+        "ok": true
+      }
+    ],
+    "resourcesBefore": {
+      "service": "minio",
+      "at": 1794475319542,
+      "statsReadMs": 1794475319540,
+      "statsPreReadMs": -62135596800000,
+      "systemCpuSeconds": 679286.23,
+      "onlineCpus": 11,
+      "cpuPeriods": 47,
+      "cpuThrottledPeriods": 7,
+      "memoryMajorFaults": 55,
+      "cpuSeconds": 1.234439,
+      "peakMemoryBytes": 280969216,
+      "anonymousMemoryBytes": 208396288,
+      "networkRxBytes": 21219,
+      "networkTxBytes": 13171,
+      "storageReadBytes": 71651328,
+      "storageWriteBytes": 81920,
+      "throttledSeconds": 0.522532,
+      "memoryLimitBytes": 1073741824
+    },
+    "versions": {
+      "node": "v24.11.1",
+      "image": "quay.io/minio/minio:RELEASE.2025-09-07T16-13-09Z",
+      "imageId": "sha256:8f08aee614800a237906bd48114d733e5ac5bfac4ccdf731f141b0e880d7a253",
+      "minio": "minio version RELEASE.2025-09-07T16-13-09Z (commit-id=07c3a429bfed433e49018cb0f78a52145d4bedeb)\nRuntime: go1.24.6 linux/arm64\nLicense: GNU AGPLv3 - https://www.gnu.org/licenses/agpl-3.0.html\nCopyright: 2015-2025 MinIO, Inc."
+    },
+    "resourcesAfter": {
+      "service": "minio",
+      "at": 1794475320057,
+      "statsReadMs": 1794475320057,
+      "statsPreReadMs": -62135596800000,
+      "systemCpuSeconds": 679291.38,
+      "onlineCpus": 11,
+      "cpuPeriods": 52,
+      "cpuThrottledPeriods": 7,
+      "memoryMajorFaults": 55,
+      "cpuSeconds": 1.526074,
+      "peakMemoryBytes": 342417408,
+      "anonymousMemoryBytes": 251236352,
+      "networkRxBytes": 9537914,
+      "networkTxBytes": 18989935,
+      "storageReadBytes": 71651328,
+      "storageWriteBytes": 19075072,
+      "throttledSeconds": 0.522532,
+      "memoryLimitBytes": 1073741824
+    },
+    "resourceDelta": {
+      "cpuSeconds": 0.29163499999999987,
+      "networkRxBytes": 9516695,
+      "networkTxBytes": 18976764,
+      "storageReadBytes": 0,
+      "storageWriteBytes": 18993152,
+      "throttledSeconds": 0
+    },
+    "finishedAt": "2026-11-12T09:22:00.057Z",
+    "durationMs": 517.4121050000012,
+    "totals": {
+      "objects": 8,
+      "logicalBytes": 18874368,
+      "representationBytes": 18878017
+    },
+    "artifact": "/results/canonical-candidate-budget-20261112-r3/compression-preflight.json"
+  },
+  "scenario": "quick",
+  "slowControlMs": 0,
+  "runLabel": "canonical-candidate-budget-20261112-r3"
+}
