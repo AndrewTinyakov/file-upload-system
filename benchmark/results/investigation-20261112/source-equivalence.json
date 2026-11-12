@@ -1,0 +1,59 @@
+{
+  "runs": [
+    {
+      "label": "v1-baseline-20261110-r1",
+      "hashes": {
+        "benchmark/src/run.mjs": "6abb4881a4b1588c5722358ba0091910716a0810c67fd4521a4a0e24db4ce56d",
+        "benchmark/src/browser.ts": "03568ebbb2c3ac3d897d0a8e6a4919bf4f9a9926624b80bdcf1c56ca90e81e85",
+        "benchmark/src/fixtures.mjs": "aacbeecb8704be9865877336bb2aaa736d3dcf1babab9ac35a508d97dbf94eb8",
+        "benchmark/src/storage.mjs": "66c315ecd65dd6c7e8a1ef0adcc6e3b22963b0f720079db6c45d0c47a00a8c13",
+        "benchmark/src/evaluate.mjs": "bffa1fb72892d9687d70dc5e719ef24cc430d79ee8fcc3896785e4fba1aa4e87",
+        "benchmark/config/protocol.json": "7087b36eb9e10203f65adc66132e77c4d855832f213db54e3cf4476ff9e94f4c",
+        "benchmark/docker/compose.yaml": "08b8e1d6b59a64dbefb35ee9ca3514a263e8f111b7438db34ea2cb0835da4b8b",
+        "benchmark/docker/generator.Dockerfile": "d5cbdbc5733b7302d65994d2bbcee1bf5612caf45635ff61e5155067cbe7d6de",
+        "client/src/upload.ts": "55fe05ca20c57d6292bc6f7f1e4a33ed025d55af6f0920330970e3c1bb18f724"
+      },
+      "images": {
+        "generator": "sha256:0915364a5bf50b88985949d1703937e510371a7c34b26bf688132380132cb94f",
+        "document-worker": "sha256:82a194459c9263f2f898599c610510f2162fdc7e513a8bb107e0fedf30354dd6",
+        "api": "sha256:213dd66f5e4d402f043d5de03d0662b89080f2d15db3412ba67717492c4c41da",
+        "image-worker": "sha256:15b0c4d36d6b91f4409d01d190f2f2851980907ff5c7524b2c101657848b355f",
+        "postgres": "sha256:500e6fec57b004d32e649abd2380a2c38081eb1de0393284fac6ad337f8aecf8",
+        "rabbitmq": "sha256:03d95eace92b949b2fd9dc9fbd19c2d65cae25b600e2d6ff42456cce9f110c7c",
+        "grafana": "sha256:c446c4270dcd9a253979d484c258a10679a1b12ed518eef93a60341da018fd69",
+        "prometheus": "sha256:deeef2470dab312d1cade441c2ed31ccbd72c8e78e2fdd51d835e0b740af2b98",
+        "minio": "sha256:8f08aee614800a237906bd48114d733e5ac5bfac4ccdf731f141b0e880d7a253"
+      },
+      "protocolHash": "bb70da6829d748765e7f54d18c3f1242aa3c60f4984cdabd51ec5d398e02410c"
+    },
+    {
+      "label": "quick-20261111T142327496Z-94b8ef8d",
+      "hashes": {
+        "benchmark/src/run.mjs": "6abb4881a4b1588c5722358ba0091910716a0810c67fd4521a4a0e24db4ce56d",
+        "benchmark/src/browser.ts": "03568ebbb2c3ac3d897d0a8e6a4919bf4f9a9926624b80bdcf1c56ca90e81e85",
+        "benchmark/src/fixtures.mjs": "aacbeecb8704be9865877336bb2aaa736d3dcf1babab9ac35a508d97dbf94eb8",
+        "benchmark/src/storage.mjs": "66c315ecd65dd6c7e8a1ef0adcc6e3b22963b0f720079db6c45d0c47a00a8c13",
+        "benchmark/src/evaluate.mjs": "bffa1fb72892d9687d70dc5e719ef24cc430d79ee8fcc3896785e4fba1aa4e87",
+        "benchmark/config/protocol.json": "7087b36eb9e10203f65adc66132e77c4d855832f213db54e3cf4476ff9e94f4c",
+        "benchmark/docker/compose.yaml": "08b8e1d6b59a64dbefb35ee9ca3514a263e8f111b7438db34ea2cb0835da4b8b",
+        "benchmark/docker/generator.Dockerfile": "d5cbdbc5733b7302d65994d2bbcee1bf5612caf45635ff61e5155067cbe7d6de",
+        "client/src/upload.ts": "55fe05ca20c57d6292bc6f7f1e4a33ed025d55af6f0920330970e3c1bb18f724"
+      },
+      "images": {
+        "generator": "sha256:a69b3b3334bc58daabfd8e96041c2158a4444622b328d3e9bc0049968f796574",
+        "document-worker": "sha256:82a194459c9263f2f898599c610510f2162fdc7e513a8bb107e0fedf30354dd6",
+        "image-worker": "sha256:15b0c4d36d6b91f4409d01d190f2f2851980907ff5c7524b2c101657848b355f",
+        "api": "sha256:213dd66f5e4d402f043d5de03d0662b89080f2d15db3412ba67717492c4c41da",
+        "grafana": "sha256:c446c4270dcd9a253979d484c258a10679a1b12ed518eef93a60341da018fd69",
+        "minio": "sha256:8f08aee614800a237906bd48114d733e5ac5bfac4ccdf731f141b0e880d7a253",
+        "rabbitmq": "sha256:03d95eace92b949b2fd9dc9fbd19c2d65cae25b600e2d6ff42456cce9f110c7c",
+        "postgres": "sha256:500e6fec57b004d32e649abd2380a2c38081eb1de0393284fac6ad337f8aecf8",
+        "prometheus": "sha256:deeef2470dab312d1cade441c2ed31ccbd72c8e78e2fdd51d835e0b740af2b98"
+      },
+      "protocolHash": "dea10778046565f5f29dc8121687d1487602dfe98573399dc9636144b3e41ac8"
+    }
+  ],
+  "measuredFilesEqual": true,
+  "nonGeneratorImagesEqual": true,
+  "meaning": "Protocol hashes differ despite matching measured files because hashing includes launcher/helper/test files. Generator image IDs differ; other images identical."
+}

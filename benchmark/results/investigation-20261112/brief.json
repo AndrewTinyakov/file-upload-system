@@ -1,0 +1,28 @@
+{
+  "request": "Deep investigation: restore Bash, rerun v0/v1/v2, determine cause, assess benchmark and production source changes; work until solved.",
+  "mode": "full-stop",
+  "base": "0612c6e963300b60e1ea68f2f1054bd01db8301d",
+  "definitions": {
+    "v0": "Restored Bash launcher, common current measured harness, unchanged PR1 client image",
+    "v1": "Current Node launcher, same harness and unchanged PR1 client image",
+    "v2": "Current Node launcher, same harness and PR2 shared-budget client image"
+  },
+  "primaryOrder": [
+    "v0-r1",
+    "v1-r1",
+    "v2-r1",
+    "v1-r2",
+    "v2-r2",
+    "v0-r2",
+    "v2-r3",
+    "v0-r3",
+    "v1-r3"
+  ],
+  "conditions": "Fixed image IDs, no builds during campaign, fresh project volumes, same quick workload/quotas/seed/cap128/normal12s warmup/120s8/s/timeouts/cleanup/evaluator, caffeinate, single exclusive project, unrelated workloads preserved and monitored. All runs retained, no replacement selection.",
+  "hypothesisPolicy": "Launcher and client comparisons change one variable. If historical fast results fail to reproduce, isolate service/host/harness differences with targeted controls rather than assign causality from pooled numbers.",
+  "limits": [
+    "Shared host cannot fully isolate unrelated contention.",
+    "Three quick repeats insufficient for1000 successes per cohort.",
+    "No merging or automatic merge."
+  ]
+}

@@ -1,0 +1,5241 @@
+{
+  "launcher": {
+    "verdict": "reject",
+    "reasons": [
+      "global: successfulFilesPerSecond regressed beyond baseline spread",
+      "global: successfulBytesPerSecond regressed beyond baseline spread",
+      "global: readyP95Ms regressed beyond baseline spread",
+      "global: readyP99Ms regressed beyond baseline spread",
+      "global: endP95Ms regressed beyond baseline spread",
+      "global: endP99Ms regressed beyond baseline spread",
+      "global: service.document-worker.networkTxBytesPerSuccessfulByte regressed beyond baseline spread",
+      "global: service.api.cpuSecondsPerSuccess regressed beyond baseline spread",
+      "global: service.api.peakAnonymousMemoryBytes regressed beyond baseline spread",
+      "global: service.api.networkRxBytesPerSuccessfulByte regressed beyond baseline spread",
+      "global: service.api.networkTxBytesPerSuccessfulByte regressed beyond baseline spread",
+      "global: service.api.storageWriteBytesPerSuccessfulByte regressed beyond baseline spread",
+      "global: service.postgres.cpuSecondsPerSuccess regressed beyond baseline spread",
+      "global: service.postgres.networkRxBytesPerSuccessfulByte regressed beyond baseline spread",
+      "global: service.postgres.networkTxBytesPerSuccessfulByte regressed beyond baseline spread",
+      "global: service.minio.cpuSecondsPerSuccess regressed beyond baseline spread",
+      "global: service.rabbitmq.networkTxBytesPerSuccessfulByte regressed beyond baseline spread",
+      "global: service.rabbitmq.storageWriteBytesPerSuccessfulByte regressed beyond baseline spread",
+      "global: service.prometheus.cpuSecondsPerSuccess regressed beyond baseline spread",
+      "global: service.prometheus.peakAnonymousMemoryBytes regressed beyond baseline spread",
+      "global: service.prometheus.networkRxBytesPerSuccessfulByte regressed beyond baseline spread",
+      "global: cpuSecondsPerSuccess regressed beyond baseline spread",
+      "cohort:jpeg-large.jpeg: readyP95Ms regressed beyond baseline spread",
+      "cohort:jpeg-large.jpeg: readyP99Ms regressed beyond baseline spread",
+      "cohort:jpeg-large.jpeg: endP95Ms regressed beyond baseline spread",
+      "cohort:jpeg-large.jpeg: endP99Ms regressed beyond baseline spread",
+      "cohort:jpeg-small.jpeg: successfulFilesPerSecond regressed beyond baseline spread",
+      "cohort:jpeg-small.jpeg: successfulBytesPerSecond regressed beyond baseline spread",
+      "cohort:jpeg-small.jpeg: generatorLagP95Ms regressed beyond baseline spread",
+      "cohort:jpeg-small.jpeg: readyP95Ms regressed beyond baseline spread",
+      "cohort:jpeg-small.jpeg: readyP99Ms regressed beyond baseline spread",
+      "cohort:jpeg-small.jpeg: endP95Ms regressed beyond baseline spread",
+      "cohort:jpeg-small.jpeg: endP99Ms regressed beyond baseline spread",
+      "cohort:noise-boundary.bin: successfulFilesPerSecond regressed beyond baseline spread",
+      "cohort:noise-boundary.bin: successfulBytesPerSecond regressed beyond baseline spread",
+      "cohort:noise-boundary.bin: readyP95Ms regressed beyond baseline spread",
+      "cohort:noise-boundary.bin: readyP99Ms regressed beyond baseline spread",
+      "cohort:noise-boundary.bin: endP95Ms regressed beyond baseline spread",
+      "cohort:noise-boundary.bin: endP99Ms regressed beyond baseline spread",
+      "cohort:noise-large.bin: successfulFilesPerSecond regressed beyond baseline spread",
+      "cohort:noise-large.bin: successfulBytesPerSecond regressed beyond baseline spread",
+      "cohort:noise-large.bin: generatorLagP95Ms regressed beyond baseline spread",
+      "cohort:noise-large.bin: generatorLagP99Ms regressed beyond baseline spread",
+      "cohort:noise-large.bin: endP95Ms regressed beyond baseline spread",
+      "cohort:noise-large.bin: endP99Ms regressed beyond baseline spread",
+      "cohort:noise-medium.bin: successfulFilesPerSecond regressed beyond baseline spread",
+      "cohort:noise-medium.bin: successfulBytesPerSecond regressed beyond baseline spread",
+      "cohort:noise-medium.bin: readyP95Ms regressed beyond baseline spread",
+      "cohort:noise-medium.bin: readyP99Ms regressed beyond baseline spread",
+      "cohort:noise-medium.bin: endP95Ms regressed beyond baseline spread",
+      "cohort:noise-medium.bin: endP99Ms regressed beyond baseline spread",
+      "cohort:png-alpha.png: errorFraction regressed beyond baseline spread",
+      "cohort:png-alpha.png: successfulFilesPerSecond regressed beyond baseline spread",
+      "cohort:png-alpha.png: successfulBytesPerSecond regressed beyond baseline spread",
+      "cohort:png-alpha.png: readyP95Ms regressed beyond baseline spread",
+      "cohort:png-alpha.png: readyP99Ms regressed beyond baseline spread",
+      "cohort:png-alpha.png: endP95Ms regressed beyond baseline spread",
+      "cohort:png-alpha.png: endP99Ms regressed beyond baseline spread",
+      "cohort:png-noise.png: successfulFilesPerSecond regressed beyond baseline spread",
+      "cohort:png-noise.png: successfulBytesPerSecond regressed beyond baseline spread",
+      "cohort:png-noise.png: generatorLagP95Ms regressed beyond baseline spread",
+      "cohort:png-noise.png: generatorLagP99Ms regressed beyond baseline spread",
+      "cohort:png-noise.png: readyP95Ms regressed beyond baseline spread",
+      "cohort:png-noise.png: readyP99Ms regressed beyond baseline spread",
+      "cohort:png-noise.png: endP95Ms regressed beyond baseline spread",
+      "cohort:png-noise.png: endP99Ms regressed beyond baseline spread",
+      "cohort:text-boundary-above.bin: successfulFilesPerSecond regressed beyond baseline spread",
+      "cohort:text-boundary-above.bin: successfulBytesPerSecond regressed beyond baseline spread",
+      "cohort:text-boundary-above.bin: readyP95Ms regressed beyond baseline spread",
+      "cohort:text-boundary-above.bin: readyP99Ms regressed beyond baseline spread",
+      "cohort:text-boundary-above.bin: endP95Ms regressed beyond baseline spread",
+      "cohort:text-boundary-above.bin: endP99Ms regressed beyond baseline spread",
+      "cohort:text-boundary-below.bin: successfulFilesPerSecond regressed beyond baseline spread",
+      "cohort:text-boundary-below.bin: successfulBytesPerSecond regressed beyond baseline spread",
+      "cohort:text-boundary-below.bin: readyP95Ms regressed beyond baseline spread",
+      "cohort:text-boundary-below.bin: readyP99Ms regressed beyond baseline spread",
+      "cohort:text-boundary-below.bin: endP95Ms regressed beyond baseline spread",
+      "cohort:text-boundary-below.bin: endP99Ms regressed beyond baseline spread",
+      "cohort:text-small.bin: errorFraction regressed beyond baseline spread",
+      "cohort:text-small.bin: successfulFilesPerSecond regressed beyond baseline spread",
+      "cohort:text-small.bin: successfulBytesPerSecond regressed beyond baseline spread",
+      "cohort:text-small.bin: readyP95Ms regressed beyond baseline spread",
+      "cohort:text-small.bin: readyP99Ms regressed beyond baseline spread",
+      "cohort:text-small.bin: endP95Ms regressed beyond baseline spread",
+      "cohort:text-small.bin: endP99Ms regressed beyond baseline spread",
+      "cohort:webp-large.webp: errorFraction regressed beyond baseline spread",
+      "cohort:webp-large.webp: successfulFilesPerSecond regressed beyond baseline spread",
+      "cohort:webp-large.webp: successfulBytesPerSecond regressed beyond baseline spread",
+      "cohort:webp-large.webp: readyP95Ms regressed beyond baseline spread",
+      "cohort:webp-large.webp: readyP99Ms regressed beyond baseline spread",
+      "cohort:webp-large.webp: endP95Ms regressed beyond baseline spread",
+      "cohort:webp-large.webp: endP99Ms regressed beyond baseline spread",
+      "cohort:webp-small.webp: successfulFilesPerSecond regressed beyond baseline spread",
+      "cohort:webp-small.webp: successfulBytesPerSecond regressed beyond baseline spread",
+      "cohort:webp-small.webp: readyP95Ms regressed beyond baseline spread",
+      "cohort:webp-small.webp: readyP99Ms regressed beyond baseline spread",
+      "cohort:webp-small.webp: endP95Ms regressed beyond baseline spread",
+      "cohort:webp-small.webp: endP99Ms regressed beyond baseline spread",
+      "cohort:jpeg-large.jpeg: baseline needs at least 1000 successful operations",
+      "cohort:jpeg-large.jpeg: candidate needs at least 1000 successful operations",
+      "cohort:jpeg-small.jpeg: baseline needs at least 1000 successful operations",
+      "cohort:jpeg-small.jpeg: candidate needs at least 1000 successful operations",
+      "cohort:noise-boundary.bin: baseline needs at least 1000 successful operations",
+      "cohort:noise-boundary.bin: candidate needs at least 1000 successful operations",
+      "cohort:noise-large.bin: baseline needs at least 1000 successful operations",
+      "cohort:noise-large.bin: candidate needs at least 1000 successful operations",
+      "cohort:noise-medium.bin: baseline needs at least 1000 successful operations",
+      "cohort:noise-medium.bin: candidate needs at least 1000 successful operations",
+      "cohort:png-alpha.png: baseline needs at least 1000 successful operations",
+      "cohort:png-alpha.png: candidate needs at least 1000 successful operations",
+      "cohort:png-noise.png: baseline needs at least 1000 successful operations",
+      "cohort:png-noise.png: candidate needs at least 1000 successful operations",
+      "cohort:text-boundary-above.bin: baseline needs at least 1000 successful operations",
+      "cohort:text-boundary-above.bin: candidate needs at least 1000 successful operations",
+      "cohort:text-boundary-below.bin: baseline needs at least 1000 successful operations",
+      "cohort:text-boundary-below.bin: candidate needs at least 1000 successful operations",
+      "cohort:text-small.bin: baseline needs at least 1000 successful operations",
+      "cohort:text-small.bin: candidate needs at least 1000 successful operations",
+      "cohort:webp-large.webp: baseline needs at least 1000 successful operations",
+      "cohort:webp-large.webp: candidate needs at least 1000 successful operations",
+      "cohort:webp-small.webp: baseline needs at least 1000 successful operations",
+      "cohort:webp-small.webp: candidate needs at least 1000 successful operations",
+      "Global p99 improvement does not exceed baseline spread and disjoint 95% quantile intervals"
+    ],
+    "method": {
+      "quantiles": "Exact nearest rank on unrounded observations",
+      "intervals": "Equal-tail 95% binomial order-statistic intervals, mode-centered probability recurrence",
+      "intervalAssumptions": "Marginal intervals assume independent observations; no simultaneous familywise coverage or proof of independent physical runs",
+      "allowance": "Baseline maximum minus minimum, applied beyond the observed baseline range to every candidate run",
+      "throughput": "Successes divided by time from measurement start through the later of measurement end and terminal completion",
+      "resourceAttribution": "Run-level service counters; cohort guards cover latency, errors, throughput and generator lag",
+      "minimumSuccessesPerGroup": 1000,
+      "minimumRunsPerSide": 3,
+      "improvement": "Both global p99 endpoints must have disjoint intervals beyond baseline spread; at least one resource cost must improve in every candidate run beyond baseline spread"
+    },
+    "groups": {
+      "global": {
+        "guards": [
+          {
+            "metric": "errorFraction",
+            "direction": "lower",
+            "baselineMedian": 0.028125,
+            "baselineRange": [
+              0.028125,
+              0.07083333333333333
+            ],
+            "allowance": 0.042708333333333334,
+            "limit": 0.11354166666666667,
+            "candidateWorst": 0.10729166666666666,
+            "pass": true
+          },
+          {
+            "metric": "successfulFilesPerSecond",
+            "direction": "higher",
+            "baselineMedian": 6.061619207396178,
+            "baselineRange": [
+              6.051929841044437,
+              6.126618085151774
+            ],
+            "allowance": 0.0746882441073371,
+            "limit": 5.9772415969371,
+            "candidateWorst": 5.466645492402206,
+            "pass": false
+          },
+          {
+            "metric": "successfulBytesPerSecond",
+            "direction": "higher",
+            "baselineMedian": 95364103.50458273,
+            "baselineRange": [
+              95017506.745124,
+              99343529.5502566
+            ],
+            "allowance": 4326022.805132598,
+            "limit": 90691483.9399914,
+            "candidateWorst": 82211589.89460586,
+            "pass": false
+          },
+          {
+            "metric": "generatorLagP95Ms",
+            "direction": "lower",
+            "baselineMedian": 39,
+            "baselineRange": [
+              37.39990234375,
+              51.5
+            ],
+            "allowance": 14.10009765625,
+            "limit": 65.60009765625,
+            "candidateWorst": 54.800048828125,
+            "pass": true
+          },
+          {
+            "metric": "generatorLagP99Ms",
+            "direction": "lower",
+            "baselineMedian": 113,
+            "baselineRange": [
+              112.800048828125,
+              487.300048828125
+            ],
+            "allowance": 374.5,
+            "limit": 861.800048828125,
+            "candidateWorst": 304.60009765625,
+            "pass": true
+          },
+          {
+            "metric": "readyP95Ms",
+            "direction": "lower",
+            "baselineMedian": 34538.699951171875,
+            "baselineRange": [
+              33673.89990234375,
+              35285.89990234375
+            ],
+            "allowance": 1612,
+            "limit": 36897.89990234375,
+            "candidateWorst": 43407.39990234375,
+            "pass": false
+          },
+          {
+            "metric": "readyP99Ms",
+            "direction": "lower",
+            "baselineMedian": 37965.60009765625,
+            "baselineRange": [
+              35609.5,
+              37999.800048828125
+            ],
+            "allowance": 2390.300048828125,
+            "limit": 40390.10009765625,
+            "candidateWorst": 45779.199951171875,
+            "pass": false
+          },
+          {
+            "metric": "endP95Ms",
+            "direction": "lower",
+            "baselineMedian": 35152.199951171875,
+            "baselineRange": [
+              34142.300048828125,
+              35702
+            ],
+            "allowance": 1559.699951171875,
+            "limit": 37261.699951171875,
+            "candidateWorst": 44021.89990234375,
+            "pass": false
+          },
+          {
+            "metric": "endP99Ms",
+            "direction": "lower",
+            "baselineMedian": 38494.599853515625,
+            "baselineRange": [
+              36572.2001953125,
+              38704.199951171875
+            ],
+            "allowance": 2131.999755859375,
+            "limit": 40836.19970703125,
+            "candidateWorst": 46320.89990234375,
+            "pass": false
+          },
+          {
+            "metric": "service.generator.cpuSecondsPerSuccess",
+            "direction": "lower",
+            "baselineMedian": 0.23772194962486606,
+            "baselineRange": [
+              0.2334447877813505,
+              0.24194773766816144
+            ],
+            "allowance": 0.00850294988681094,
+            "limit": 0.25045068755497235,
+            "candidateWorst": 0.2465254107351225,
+            "pass": true
+          },
+          {
+            "metric": "service.generator.peakMemoryBytes",
+            "direction": "lower",
+            "baselineMedian": 4583108608,
+            "baselineRange": [
+              4401655808,
+              4848349184
+            ],
+            "allowance": 446693376,
+            "limit": 5295042560,
+            "candidateWorst": 4427821056,
+            "pass": true
+          },
+          {
+            "metric": "service.generator.peakAnonymousMemoryBytes",
+            "direction": "lower",
+            "baselineMedian": 4442091520,
+            "baselineRange": [
+              4377280512,
+              4724781056
+            ],
+            "allowance": 347500544,
+            "limit": 5072281600,
+            "candidateWorst": 4322050048,
+            "pass": true
+          },
+          {
+            "metric": "service.generator.networkRxBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 0.978423234342276,
+            "baselineRange": [
+              0.9776700175876566,
+              0.9797702573556841
+            ],
+            "allowance": 0.002100239768027534,
+            "limit": 0.9818704971237117,
+            "candidateWorst": 0.9791682591844288,
+            "pass": true
+          },
+          {
+            "metric": "service.generator.networkTxBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 1.0061648884649956,
+            "baselineRange": [
+              1.0057162292162194,
+              1.00633682086866
+            ],
+            "allowance": 0.0006205916524406607,
+            "limit": 1.0069574125211007,
+            "candidateWorst": 1.0060365726950236,
+            "pass": true
+          },
+          {
+            "metric": "service.generator.storageReadBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 0.009264874314270572,
+            "baselineRange": [
+              0.0029905347234505334,
+              0.016330873132830114
+            ],
+            "allowance": 0.01334033840937958,
+            "limit": 0.029671211542209697,
+            "candidateWorst": 0.007818366425019511,
+            "pass": true
+          },
+          {
+            "metric": "service.generator.storageWriteBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 0.0955188046269395,
+            "baselineRange": [
+              0.08772958763668637,
+              0.11276147420799244
+            ],
+            "allowance": 0.025031886571306075,
+            "limit": 0.13779336077929852,
+            "candidateWorst": 0.10358598643291189,
+            "pass": true
+          },
+          {
+            "metric": "service.document-worker.cpuSecondsPerSuccess",
+            "direction": "lower",
+            "baselineMedian": 0.001155442658092176,
+            "baselineRange": [
+              0.0011201382636655947,
+              0.001235980941704036
+            ],
+            "allowance": 0.00011584267803844126,
+            "limit": 0.0013518236197424772,
+            "candidateWorst": 0.0012427116630669545,
+            "pass": true
+          },
+          {
+            "metric": "service.document-worker.peakMemoryBytes",
+            "direction": "lower",
+            "baselineMedian": 27480064,
+            "baselineRange": [
+              17321984,
+              29511680
+            ],
+            "allowance": 12189696,
+            "limit": 41701376,
+            "candidateWorst": 27459584,
+            "pass": true
+          },
+          {
+            "metric": "service.document-worker.peakAnonymousMemoryBytes",
+            "direction": "lower",
+            "baselineMedian": 10088448,
+            "baselineRange": [
+              9756672,
+              10121216
+            ],
+            "allowance": 364544,
+            "limit": 10485760,
+            "candidateWorst": 9895936,
+            "pass": true
+          },
+          {
+            "metric": "service.document-worker.networkRxBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 0.00013644954594174485,
+            "baselineRange": [
+              0.00013479351083211497,
+              0.00013922055305168579
+            ],
+            "allowance": 4.42704221957082e-06,
+            "limit": 0.0001436475952712566,
+            "candidateWorst": 0.00014252991706669596,
+            "pass": true
+          },
+          {
+            "metric": "service.document-worker.networkTxBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 0.00016291658042774432,
+            "baselineRange": [
+              0.00016090957384724038,
+              0.00016572234177320052
+            ],
+            "allowance": 4.812767925960133e-06,
+            "limit": 0.00017053510969916065,
+            "candidateWorst": 0.0001708775077834723,
+            "pass": false
+          },
+          {
+            "metric": "service.document-worker.storageReadBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 0.0013400849655111856,
+            "baselineRange": [
+              0.001117569796257209,
+              0.0013650934042242029
+            ],
+            "allowance": 0.00024752360796699395,
+            "limit": 0.0016126170121911968,
+            "candidateWorst": 0.0008090180857847037,
+            "pass": true
+          },
+          {
+            "metric": "service.document-worker.storageWriteBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 7.616465190743757e-06,
+            "baselineRange": [
+              0,
+              8.393077257229332e-06
+            ],
+            "allowance": 8.393077257229332e-06,
+            "limit": 1.6786154514458664e-05,
+            "candidateWorst": 0,
+            "pass": true
+          },
+          {
+            "metric": "service.api.cpuSecondsPerSuccess",
+            "direction": "lower",
+            "baselineMedian": 0.06371511575562701,
+            "baselineRange": [
+              0.062389817792068585,
+              0.06371768273542601
+            ],
+            "allowance": 0.001327864943357425,
+            "limit": 0.06504554767878343,
+            "candidateWorst": 0.06802336056009335,
+            "pass": false
+          },
+          {
+            "metric": "service.api.peakMemoryBytes",
+            "direction": "lower",
+            "baselineMedian": 428728320,
+            "baselineRange": [
+              411000832,
+              444227584
+            ],
+            "allowance": 33226752,
+            "limit": 477454336,
+            "candidateWorst": 455077888,
+            "pass": true
+          },
+          {
+            "metric": "service.api.peakAnonymousMemoryBytes",
+            "direction": "lower",
+            "baselineMedian": 408625152,
+            "baselineRange": [
+              407044096,
+              410988544
+            ],
+            "allowance": 3944448,
+            "limit": 414932992,
+            "candidateWorst": 424341504,
+            "pass": false
+          },
+          {
+            "metric": "service.api.networkRxBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 0.002415421024747804,
+            "baselineRange": [
+              0.002408508651443423,
+              0.0024824176726779123
+            ],
+            "allowance": 7.390902123448947e-05,
+            "limit": 0.0025563266939124018,
+            "candidateWorst": 0.002913432073854259,
+            "pass": false
+          },
+          {
+            "metric": "service.api.networkTxBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 0.0057804511601111976,
+            "baselineRange": [
+              0.005750379236746696,
+              0.0058195831603483255
+            ],
+            "allowance": 6.920392360162952e-05,
+            "limit": 0.005888787083949955,
+            "candidateWorst": 0.006814385737138754,
+            "pass": false
+          },
+          {
+            "metric": "service.api.storageReadBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 0.0005149902232818278,
+            "baselineRange": [
+              0.0004131696473707044,
+              0.0009503129410604824
+            ],
+            "allowance": 0.0005371432936897779,
+            "limit": 0.0014874562347502603,
+            "candidateWorst": 0.0009615874391959584,
+            "pass": true
+          },
+          {
+            "metric": "service.api.storageWriteBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 0,
+            "baselineRange": [
+              0,
+              0
+            ],
+            "allowance": 0,
+            "limit": 0,
+            "candidateWorst": 0.00025712675965794326,
+            "pass": false
+          },
+          {
+            "metric": "service.image-worker.cpuSecondsPerSuccess",
+            "direction": "lower",
+            "baselineMedian": 0.2882594705251875,
+            "baselineRange": [
+              0.28760518609865465,
+              0.2949991575562701
+            ],
+            "allowance": 0.007393971457615445,
+            "limit": 0.30239312901388554,
+            "candidateWorst": 0.2947394434072345,
+            "pass": true
+          },
+          {
+            "metric": "service.image-worker.peakMemoryBytes",
+            "direction": "lower",
+            "baselineMedian": 2147479552,
+            "baselineRange": [
+              2037538816,
+              2147483648
+            ],
+            "allowance": 109944832,
+            "limit": 2257428480,
+            "candidateWorst": 2147471360,
+            "pass": true
+          },
+          {
+            "metric": "service.image-worker.peakAnonymousMemoryBytes",
+            "direction": "lower",
+            "baselineMedian": 2142240768,
+            "baselineRange": [
+              2020864000,
+              2143268864
+            ],
+            "allowance": 122404864,
+            "limit": 2265673728,
+            "candidateWorst": 2133950464,
+            "pass": true
+          },
+          {
+            "metric": "service.image-worker.networkRxBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 0.11224001096195405,
+            "baselineRange": [
+              0.10792014418938156,
+              0.11433508868597811
+            ],
+            "allowance": 0.006414944496596547,
+            "limit": 0.12075003318257466,
+            "candidateWorst": 0.12044760222381878,
+            "pass": true
+          },
+          {
+            "metric": "service.image-worker.networkTxBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 0.08336162727568487,
+            "baselineRange": [
+              0.08052848156061586,
+              0.08563896153333092
+            ],
+            "allowance": 0.005110479972715062,
+            "limit": 0.09074944150604598,
+            "candidateWorst": 0.08903255599768581,
+            "pass": true
+          },
+          {
+            "metric": "service.image-worker.storageReadBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 0.0011693451830314028,
+            "baselineRange": [
+              0.000543991379200429,
+              0.007595857900144899
+            ],
+            "allowance": 0.00705186652094447,
+            "limit": 0.014647724421089369,
+            "candidateWorst": 0.009569246579309788,
+            "pass": true
+          },
+          {
+            "metric": "service.image-worker.storageWriteBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 0.0035083062935218606,
+            "baselineRange": [
+              0.0005105961087487064,
+              0.012538291847789065
+            ],
+            "allowance": 0.012027695739040358,
+            "limit": 0.024565987586829423,
+            "candidateWorst": 0.013436035789886412,
+            "pass": true
+          },
+          {
+            "metric": "service.postgres.cpuSecondsPerSuccess",
+            "direction": "lower",
+            "baselineMedian": 0.010410176848874596,
+            "baselineRange": [
+              0.010172350482315112,
+              0.010621065022421525
+            ],
+            "allowance": 0.0004487145401064138,
+            "limit": 0.01106977956252794,
+            "candidateWorst": 0.011627714119019838,
+            "pass": false
+          },
+          {
+            "metric": "service.postgres.peakMemoryBytes",
+            "direction": "lower",
+            "baselineMedian": 95408128,
+            "baselineRange": [
+              92233728,
+              108392448
+            ],
+            "allowance": 16158720,
+            "limit": 124551168,
+            "candidateWorst": 92323840,
+            "pass": true
+          },
+          {
+            "metric": "service.postgres.peakAnonymousMemoryBytes",
+            "direction": "lower",
+            "baselineMedian": 36028416,
+            "baselineRange": [
+              34951168,
+              36532224
+            ],
+            "allowance": 1581056,
+            "limit": 38113280,
+            "candidateWorst": 37834752,
+            "pass": true
+          },
+          {
+            "metric": "service.postgres.networkRxBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 0.0007158716070344559,
+            "baselineRange": [
+              0.0007072859080891402,
+              0.0007338063992125891
+            ],
+            "allowance": 2.6520491123448913e-05,
+            "limit": 0.000760326890336038,
+            "candidateWorst": 0.000832268814315686,
+            "pass": false
+          },
+          {
+            "metric": "service.postgres.networkTxBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 0.0010020770300088239,
+            "baselineRange": [
+              0.0009979281342824627,
+              0.0010316975412222773
+            ],
+            "allowance": 3.3769406939814645e-05,
+            "limit": 0.001065466948162092,
+            "candidateWorst": 0.0012059435972218504,
+            "pass": false
+          },
+          {
+            "metric": "service.postgres.storageReadBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 0.0032192685605991166,
+            "baselineRange": [
+              0.002330838777660881,
+              0.004619972020123838
+            ],
+            "allowance": 0.0022891332424629573,
+            "limit": 0.006909105262586796,
+            "candidateWorst": 0.0029716744944484974,
+            "pass": true
+          },
+          {
+            "metric": "service.postgres.storageWriteBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 0.004366836873608126,
+            "baselineRange": [
+              0.004344271282165472,
+              0.004508361510982555
+            ],
+            "allowance": 0.00016409022881708289,
+            "limit": 0.0046724517397996376,
+            "candidateWorst": 0.004599975921253067,
+            "pass": true
+          },
+          {
+            "metric": "service.grafana.cpuSecondsPerSuccess",
+            "direction": "lower",
+            "baselineMedian": 0.007030563772775992,
+            "baselineRange": [
+              0.004715418006430868,
+              0.007226065022421524
+            ],
+            "allowance": 0.0025106470159906562,
+            "limit": 0.009736712038412181,
+            "candidateWorst": 0.0058677915766738665,
+            "pass": true
+          },
+          {
+            "metric": "service.grafana.peakMemoryBytes",
+            "direction": "lower",
+            "baselineMedian": 536866816,
+            "baselineRange": [
+              536842240,
+              536870912
+            ],
+            "allowance": 28672,
+            "limit": 536899584,
+            "candidateWorst": 536850432,
+            "pass": true
+          },
+          {
+            "metric": "service.grafana.peakAnonymousMemoryBytes",
+            "direction": "lower",
+            "baselineMedian": 251580416,
+            "baselineRange": [
+              251351040,
+              256499712
+            ],
+            "allowance": 5148672,
+            "limit": 261648384,
+            "candidateWorst": 252243968,
+            "pass": true
+          },
+          {
+            "metric": "service.grafana.networkRxBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 0.003356422572893455,
+            "baselineRange": [
+              0.0022865839098317707,
+              0.004335463437657892
+            ],
+            "allowance": 0.0020488795278261213,
+            "limit": 0.006384342965484013,
+            "candidateWorst": 0.0034761239822323486,
+            "pass": true
+          },
+          {
+            "metric": "service.grafana.networkTxBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 1.206564919311163e-05,
+            "baselineRange": [
+              7.349471347151174e-06,
+              1.526658819431592e-05
+            ],
+            "allowance": 7.917116847164745e-06,
+            "limit": 2.3183705041480664e-05,
+            "candidateWorst": 1.1858216726331752e-05,
+            "pass": true
+          },
+          {
+            "metric": "service.grafana.storageReadBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 0.04712360912178321,
+            "baselineRange": [
+              0.0434045440814728,
+              0.07772075433410029
+            ],
+            "allowance": 0.034316210252627495,
+            "limit": 0.1120369645867278,
+            "candidateWorst": 0.04898014864266009,
+            "pass": true
+          },
+          {
+            "metric": "service.grafana.storageWriteBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 0.019621186095231415,
+            "baselineRange": [
+              0.009273889448434686,
+              0.020252495421694376
+            ],
+            "allowance": 0.01097860597325969,
+            "limit": 0.031231101394954067,
+            "candidateWorst": 0.01932393677982245,
+            "pass": true
+          },
+          {
+            "metric": "service.minio.cpuSecondsPerSuccess",
+            "direction": "lower",
+            "baselineMedian": 0.15094328831725615,
+            "baselineRange": [
+              0.14657256484458736,
+              0.1518821793721973
+            ],
+            "allowance": 0.005309614527609946,
+            "limit": 0.15719179389980725,
+            "candidateWorst": 0.16807943757292884,
+            "pass": false
+          },
+          {
+            "metric": "service.minio.peakMemoryBytes",
+            "direction": "lower",
+            "baselineMedian": 1073741824,
+            "baselineRange": [
+              1073741824,
+              1073741824
+            ],
+            "allowance": 0,
+            "limit": 1073741824,
+            "candidateWorst": 1073741824,
+            "pass": true
+          },
+          {
+            "metric": "service.minio.peakAnonymousMemoryBytes",
+            "direction": "lower",
+            "baselineMedian": 537718784,
+            "baselineRange": [
+              535015424,
+              571072512
+            ],
+            "allowance": 36057088,
+            "limit": 607129600,
+            "candidateWorst": 560443392,
+            "pass": true
+          },
+          {
+            "metric": "service.minio.networkRxBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 1.0885403796167348,
+            "baselineRange": [
+              1.085119958377613,
+              1.090680690511196
+            ],
+            "allowance": 0.005560732133583102,
+            "limit": 1.0962414226447792,
+            "candidateWorst": 1.093660980299365,
+            "pass": true
+          },
+          {
+            "metric": "service.minio.networkTxBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 1.0861271267657915,
+            "baselineRange": [
+              1.0839118683185505,
+              1.0889525999696335
+            ],
+            "allowance": 0.005040731651082986,
+            "limit": 1.0939933316207164,
+            "candidateWorst": 1.0920821265709588,
+            "pass": true
+          },
+          {
+            "metric": "service.minio.storageReadBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 1.8285944125260833,
+            "baselineRange": [
+              1.7169138752038868,
+              1.9449683805003688
+            ],
+            "allowance": 0.22805450529648197,
+            "limit": 2.1730228857968505,
+            "candidateWorst": 1.9414164370023064,
+            "pass": true
+          },
+          {
+            "metric": "service.minio.storageWriteBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 1.9864514065923282,
+            "baselineRange": [
+              1.9762840630140495,
+              2.0007349879676366
+            ],
+            "allowance": 0.02445092495358714,
+            "limit": 2.0251859129212235,
+            "candidateWorst": 1.9990572434733407,
+            "pass": true
+          },
+          {
+            "metric": "service.rabbitmq.cpuSecondsPerSuccess",
+            "direction": "lower",
+            "baselineMedian": 0.020676104260089683,
+            "baselineRange": [
+              0.018839594855305463,
+              0.021094171489817792
+            ],
+            "allowance": 0.0022545766345123293,
+            "limit": 0.02334874812433012,
+            "candidateWorst": 0.023276590431738624,
+            "pass": true
+          },
+          {
+            "metric": "service.rabbitmq.peakMemoryBytes",
+            "direction": "lower",
+            "baselineMedian": 229634048,
+            "baselineRange": [
+              221040640,
+              234405888
+            ],
+            "allowance": 13365248,
+            "limit": 247771136,
+            "candidateWorst": 228052992,
+            "pass": true
+          },
+          {
+            "metric": "service.rabbitmq.peakAnonymousMemoryBytes",
+            "direction": "lower",
+            "baselineMedian": 200388608,
+            "baselineRange": [
+              194813952,
+              201457664
+            ],
+            "allowance": 6643712,
+            "limit": 208101376,
+            "candidateWorst": 201379840,
+            "pass": true
+          },
+          {
+            "metric": "service.rabbitmq.networkRxBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 0.00022318847723255773,
+            "baselineRange": [
+              0.00021510897523134746,
+              0.0002262860906611106
+            ],
+            "allowance": 1.1177115429763151e-05,
+            "limit": 0.00023746320609087376,
+            "candidateWorst": 0.00022623324906773337,
+            "pass": true
+          },
+          {
+            "metric": "service.rabbitmq.networkTxBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 0.00039170660089099107,
+            "baselineRange": [
+              0.00038843880182545587,
+              0.0004024426034190683
+            ],
+            "allowance": 1.4003801593612405e-05,
+            "limit": 0.0004164464050126807,
+            "candidateWorst": 0.0004318064698673765,
+            "pass": false
+          },
+          {
+            "metric": "service.rabbitmq.storageReadBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 0.0005173675220279152,
+            "baselineRange": [
+              0.0003871645315431595,
+              0.0018053951911751452
+            ],
+            "allowance": 0.0014182306596319857,
+            "limit": 0.003223625850807131,
+            "candidateWorst": 0.0004948295225501607,
+            "pass": true
+          },
+          {
+            "metric": "service.rabbitmq.storageWriteBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 0.0016644905851463856,
+            "baselineRange": [
+              0.001660475574793145,
+              0.0016819320034908581
+            ],
+            "allowance": 2.145642869771317e-05,
+            "limit": 0.0017033884321885713,
+            "candidateWorst": 0.001747634903341897,
+            "pass": false
+          },
+          {
+            "metric": "service.prometheus.cpuSecondsPerSuccess",
+            "direction": "lower",
+            "baselineMedian": 0.0012326613076098609,
+            "baselineRange": [
+              0.0011832658092175777,
+              0.001400068385650224
+            ],
+            "allowance": 0.0002168025764326463,
+            "limit": 0.0016168709620828703,
+            "candidateWorst": 0.0020835565927654607,
+            "pass": false
+          },
+          {
+            "metric": "service.prometheus.peakMemoryBytes",
+            "direction": "lower",
+            "baselineMedian": 98607104,
+            "baselineRange": [
+              81657856,
+              101752832
+            ],
+            "allowance": 20094976,
+            "limit": 121847808,
+            "candidateWorst": 101208064,
+            "pass": true
+          },
+          {
+            "metric": "service.prometheus.peakAnonymousMemoryBytes",
+            "direction": "lower",
+            "baselineMedian": 35475456,
+            "baselineRange": [
+              33218560,
+              35663872
+            ],
+            "allowance": 2445312,
+            "limit": 38109184,
+            "candidateWorst": 42549248,
+            "pass": false
+          },
+          {
+            "metric": "service.prometheus.networkRxBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 0.001275987566288216,
+            "baselineRange": [
+              0.0012743545594314676,
+              0.0013032530617292709
+            ],
+            "allowance": 2.8898502297803252e-05,
+            "limit": 0.0013321515640270741,
+            "candidateWorst": 0.0015134292580892758,
+            "pass": false
+          },
+          {
+            "metric": "service.prometheus.networkTxBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 9.914027814618835e-05,
+            "baselineRange": [
+              9.238441449882978e-05,
+              0.0001073538010484977
+            ],
+            "allowance": 1.4969386549667924e-05,
+            "limit": 0.00012232318759816563,
+            "candidateWorst": 9.82909936489652e-05,
+            "pass": true
+          },
+          {
+            "metric": "service.prometheus.storageReadBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 0.005219915124379346,
+            "baselineRange": [
+              0.003382410134663421,
+              0.0065009444044153855
+            ],
+            "allowance": 0.0031185342697519648,
+            "limit": 0.009619478674167351,
+            "candidateWorst": 0.006644444976208227,
+            "pass": true
+          },
+          {
+            "metric": "service.prometheus.storageWriteBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 0.00020828102886995427,
+            "baselineRange": [
+              0.00014264521878206384,
+              0.00021415884227317424
+            ],
+            "allowance": 7.15136234911104e-05,
+            "limit": 0.0002856724657642846,
+            "candidateWorst": 0.00018242270131264756,
+            "pass": true
+          },
+          {
+            "metric": "cpuSecondsPerSuccess",
+            "direction": "lower",
+            "baselineMedian": 0.7792235637727761,
+            "baselineRange": [
+              0.7757763719185424,
+              0.7863120695067264
+            ],
+            "allowance": 0.010535697588183957,
+            "limit": 0.7968477670949103,
+            "candidateWorst": 0.8208860501750292,
+            "pass": false
+          },
+          {
+            "metric": "recoveryMs",
+            "direction": "lower",
+            "baselineMedian": 0,
+            "baselineRange": [
+              0,
+              0
+            ],
+            "allowance": 0,
+            "limit": 0,
+            "candidateWorst": 0,
+            "pass": true
+          },
+          {
+            "metric": "queuePeak",
+            "direction": "lower",
+            "baselineMedian": 109,
+            "baselineRange": [
+              104,
+              111
+            ],
+            "allowance": 7,
+            "limit": 118,
+            "candidateWorst": 113,
+            "pass": true
+          },
+          {
+            "metric": "queueAgePeakSeconds",
+            "direction": "lower",
+            "baselineMedian": 0,
+            "baselineRange": [
+              0,
+              0
+            ],
+            "allowance": 0,
+            "limit": 0,
+            "candidateWorst": 0,
+            "pass": true
+          }
+        ],
+        "p99Improvement": {
+          "scheduledToReadyOrEnd": false,
+          "scheduledToEnd": false,
+          "baselineReadySpreadMs": 2390.300048828125,
+          "baselineEndSpreadMs": 2131.999755859375
+        }
+      },
+      "cohort:jpeg-large.jpeg": {
+        "guards": [
+          {
+            "metric": "errorFraction",
+            "direction": "lower",
+            "baselineMedian": 0.06,
+            "baselineRange": [
+              0.02,
+              0.12
+            ],
+            "allowance": 0.09999999999999999,
+            "limit": 0.21999999999999997,
+            "candidateWorst": 0.11,
+            "pass": true
+          },
+          {
+            "metric": "successfulFilesPerSecond",
+            "direction": "higher",
+            "baselineMedian": 0.6180205590456185,
+            "baselineRange": [
+              0.5980072760659907,
+              0.6361178635527182
+            ],
+            "allowance": 0.038110587486727465,
+            "limit": 0.5598966885792632,
+            "candidateWorst": 0.5677146427348848,
+            "pass": true
+          },
+          {
+            "metric": "successfulBytesPerSecond",
+            "direction": "higher",
+            "baselineMedian": 4224224.906885998,
+            "baselineRange": [
+              4087432.35655134,
+              4347921.575754821
+            ],
+            "allowance": 260489.21920348145,
+            "limit": 3826943.1373478584,
+            "candidateWorst": 3880379.5419814982,
+            "pass": true
+          },
+          {
+            "metric": "generatorLagP95Ms",
+            "direction": "lower",
+            "baselineMedian": 37.699951171875,
+            "baselineRange": [
+              30.699951171875,
+              49.10009765625
+            ],
+            "allowance": 18.400146484375,
+            "limit": 67.500244140625,
+            "candidateWorst": 61.699951171875,
+            "pass": true
+          },
+          {
+            "metric": "generatorLagP99Ms",
+            "direction": "lower",
+            "baselineMedian": 58.800048828125,
+            "baselineRange": [
+              52.099853515625,
+              128.800048828125
+            ],
+            "allowance": 76.7001953125,
+            "limit": 205.500244140625,
+            "candidateWorst": 199.60009765625,
+            "pass": true
+          },
+          {
+            "metric": "readyP95Ms",
+            "direction": "lower",
+            "baselineMedian": 37837.699951171875,
+            "baselineRange": [
+              34753.900146484375,
+              38220.7998046875
+            ],
+            "allowance": 3466.899658203125,
+            "limit": 41687.699462890625,
+            "candidateWorst": 45234.89990234375,
+            "pass": false
+          },
+          {
+            "metric": "readyP99Ms",
+            "direction": "lower",
+            "baselineMedian": 38516.699951171875,
+            "baselineRange": [
+              35803.900146484375,
+              38871.199951171875
+            ],
+            "allowance": 3067.2998046875,
+            "limit": 41938.499755859375,
+            "candidateWorst": 46249.10009765625,
+            "pass": false
+          },
+          {
+            "metric": "endP95Ms",
+            "direction": "lower",
+            "baselineMedian": 38510.099853515625,
+            "baselineRange": [
+              35546.60009765625,
+              38658
+            ],
+            "allowance": 3111.39990234375,
+            "limit": 41769.39990234375,
+            "candidateWorst": 45769.89990234375,
+            "pass": false
+          },
+          {
+            "metric": "endP99Ms",
+            "direction": "lower",
+            "baselineMedian": 39138.800048828125,
+            "baselineRange": [
+              36621.2001953125,
+              39163.099853515625
+            ],
+            "allowance": 2541.899658203125,
+            "limit": 41704.99951171875,
+            "candidateWorst": 46699.10009765625,
+            "pass": false
+          }
+        ],
+        "p99Improvement": {
+          "scheduledToReadyOrEnd": false,
+          "scheduledToEnd": false,
+          "baselineReadySpreadMs": 3067.2998046875,
+          "baselineEndSpreadMs": 2541.899658203125
+        }
+      },
+      "cohort:jpeg-small.jpeg": {
+        "guards": [
+          {
+            "metric": "errorFraction",
+            "direction": "lower",
+            "baselineMedian": 0.034482758620689655,
+            "baselineRange": [
+              0.011494252873563218,
+              0.06896551724137931
+            ],
+            "allowance": 0.05747126436781609,
+            "limit": 0.12643678160919541,
+            "candidateWorst": 0.12643678160919541,
+            "pass": true
+          },
+          {
+            "metric": "successfulFilesPerSecond",
+            "direction": "higher",
+            "baselineMedian": 0.5548819334552704,
+            "baselineRange": [
+              0.5533010008889041,
+              0.5602795671868338
+            ],
+            "allowance": 0.0069785662979297,
+            "limit": 0.5463224345909744,
+            "candidateWorst": 0.4856608636255071,
+            "pass": false
+          },
+          {
+            "metric": "successfulBytesPerSecond",
+            "direction": "higher",
+            "baselineMedian": 140683.10076244888,
+            "baselineRange": [
+              140282.27586237006,
+              142051.60062584828
+            ],
+            "allowance": 1769.3247634782165,
+            "limit": 138512.95109889185,
+            "candidateWorst": 123132.9983810202,
+            "pass": false
+          },
+          {
+            "metric": "generatorLagP95Ms",
+            "direction": "lower",
+            "baselineMedian": 30.5,
+            "baselineRange": [
+              28.39990234375,
+              34.5
+            ],
+            "allowance": 6.10009765625,
+            "limit": 40.60009765625,
+            "candidateWorst": 41,
+            "pass": false
+          },
+          {
+            "metric": "generatorLagP99Ms",
+            "direction": "lower",
+            "baselineMedian": 386.2998046875,
+            "baselineRange": [
+              84.2001953125,
+              1382.5
+            ],
+            "allowance": 1298.2998046875,
+            "limit": 2680.7998046875,
+            "candidateWorst": 646.400146484375,
+            "pass": true
+          },
+          {
+            "metric": "readyP95Ms",
+            "direction": "lower",
+            "baselineMedian": 35155.5,
+            "baselineRange": [
+              32965.800048828125,
+              35253.5
+            ],
+            "allowance": 2287.699951171875,
+            "limit": 37541.199951171875,
+            "candidateWorst": 43058.60009765625,
+            "pass": false
+          },
+          {
+            "metric": "readyP99Ms",
+            "direction": "lower",
+            "baselineMedian": 36529.39990234375,
+            "baselineRange": [
+              34516.199951171875,
+              37000.699951171875
+            ],
+            "allowance": 2484.5,
+            "limit": 39485.199951171875,
+            "candidateWorst": 45000.89990234375,
+            "pass": false
+          },
+          {
+            "metric": "endP95Ms",
+            "direction": "lower",
+            "baselineMedian": 35534.89990234375,
+            "baselineRange": [
+              33358.900146484375,
+              35722.099853515625
+            ],
+            "allowance": 2363.19970703125,
+            "limit": 38085.299560546875,
+            "candidateWorst": 43132,
+            "pass": false
+          },
+          {
+            "metric": "endP99Ms",
+            "direction": "lower",
+            "baselineMedian": 36589.599853515625,
+            "baselineRange": [
+              34848.10009765625,
+              37234
+            ],
+            "allowance": 2385.89990234375,
+            "limit": 39619.89990234375,
+            "candidateWorst": 45214.5,
+            "pass": false
+          }
+        ],
+        "p99Improvement": {
+          "scheduledToReadyOrEnd": false,
+          "scheduledToEnd": false,
+          "baselineReadySpreadMs": 2484.5,
+          "baselineEndSpreadMs": 2385.89990234375
+        }
+      },
+      "cohort:noise-boundary.bin": {
+        "guards": [
+          {
+            "metric": "errorFraction",
+            "direction": "lower",
+            "baselineMedian": 0.04878048780487805,
+            "baselineRange": [
+              0,
+              0.0975609756097561
+            ],
+            "allowance": 0.0975609756097561,
+            "limit": 0.1951219512195122,
+            "candidateWorst": 0.17073170731707318,
+            "pass": true
+          },
+          {
+            "metric": "successfulFilesPerSecond",
+            "direction": "higher",
+            "baselineMedian": 0.29372357867517174,
+            "baselineRange": [
+              0.27929734815744844,
+              0.29779911934656317
+            ],
+            "allowance": 0.018501771189114724,
+            "limit": 0.2607955769683337,
+            "candidateWorst": 0.23578445140239737,
+            "pass": false
+          },
+          {
+            "metric": "successfulBytesPerSecond",
+            "direction": "higher",
+            "baselineMedian": 19711455.6949054,
+            "baselineRange": [
+              18743327.75305886,
+              19984960.599548277
+            ],
+            "allowance": 1241632.8464894183,
+            "limit": 17501694.90656944,
+            "candidateWorst": 15823226.682478094,
+            "pass": false
+          },
+          {
+            "metric": "generatorLagP95Ms",
+            "direction": "lower",
+            "baselineMedian": 29.699951171875,
+            "baselineRange": [
+              12.099853515625,
+              36.699951171875
+            ],
+            "allowance": 24.60009765625,
+            "limit": 61.300048828125,
+            "candidateWorst": 37.5,
+            "pass": true
+          },
+          {
+            "metric": "generatorLagP99Ms",
+            "direction": "lower",
+            "baselineMedian": 59,
+            "baselineRange": [
+              40.5,
+              85.5
+            ],
+            "allowance": 45,
+            "limit": 130.5,
+            "candidateWorst": 98.800048828125,
+            "pass": true
+          },
+          {
+            "metric": "readyP95Ms",
+            "direction": "lower",
+            "baselineMedian": 13772.5,
+            "baselineRange": [
+              13001.2001953125,
+              18142.39990234375
+            ],
+            "allowance": 5141.19970703125,
+            "limit": 23283.599609375,
+            "candidateWorst": 24797.2998046875,
+            "pass": false
+          },
+          {
+            "metric": "readyP99Ms",
+            "direction": "lower",
+            "baselineMedian": 14346.5,
+            "baselineRange": [
+              13483.900146484375,
+              19029.5
+            ],
+            "allowance": 5545.599853515625,
+            "limit": 24575.099853515625,
+            "candidateWorst": 25765.199951171875,
+            "pass": false
+          },
+          {
+            "metric": "endP95Ms",
+            "direction": "lower",
+            "baselineMedian": 14621.10009765625,
+            "baselineRange": [
+              14101.300048828125,
+              19302.699951171875
+            ],
+            "allowance": 5201.39990234375,
+            "limit": 24504.099853515625,
+            "candidateWorst": 26374.199951171875,
+            "pass": false
+          },
+          {
+            "metric": "endP99Ms",
+            "direction": "lower",
+            "baselineMedian": 15543.89990234375,
+            "baselineRange": [
+              14772.7001953125,
+              20049.800048828125
+            ],
+            "allowance": 5277.099853515625,
+            "limit": 25326.89990234375,
+            "candidateWorst": 26901.7998046875,
+            "pass": false
+          }
+        ],
+        "p99Improvement": {
+          "scheduledToReadyOrEnd": false,
+          "scheduledToEnd": false,
+          "baselineReadySpreadMs": 5545.599853515625,
+          "baselineEndSpreadMs": 5277.099853515625
+        }
+      },
+      "cohort:noise-large.bin": {
+        "guards": [
+          {
+            "metric": "errorFraction",
+            "direction": "lower",
+            "baselineMedian": 0,
+            "baselineRange": [
+              0,
+              0.1111111111111111
+            ],
+            "allowance": 0.1111111111111111,
+            "limit": 0.2222222222222222,
+            "candidateWorst": 0.2222222222222222,
+            "pass": true
+          },
+          {
+            "metric": "successfulFilesPerSecond",
+            "direction": "higher",
+            "baselineMedian": 0.11821619648283532,
+            "baselineRange": [
+              0.11366324548206463,
+              0.12306985453155882
+            ],
+            "allowance": 0.009406609049494183,
+            "limit": 0.10425663643257045,
+            "candidateWorst": 0.09453302044635616,
+            "pass": false
+          },
+          {
+            "metric": "successfulBytesPerSecond",
+            "direction": "higher",
+            "baselineMedian": 31733418.609455496,
+            "baselineRange": [
+              30511245.13141796,
+              33036312.521032657
+            ],
+            "allowance": 2525067.3896146975,
+            "limit": 27986177.741803262,
+            "candidateWorst": 25376014.45057494,
+            "pass": false
+          },
+          {
+            "metric": "generatorLagP95Ms",
+            "direction": "lower",
+            "baselineMedian": 72.5,
+            "baselineRange": [
+              36.199951171875,
+              82.2001953125
+            ],
+            "allowance": 46.000244140625,
+            "limit": 128.200439453125,
+            "candidateWorst": 188.39990234375,
+            "pass": false
+          },
+          {
+            "metric": "generatorLagP99Ms",
+            "direction": "lower",
+            "baselineMedian": 72.5,
+            "baselineRange": [
+              36.199951171875,
+              82.2001953125
+            ],
+            "allowance": 46.000244140625,
+            "limit": 128.200439453125,
+            "candidateWorst": 188.39990234375,
+            "pass": false
+          },
+          {
+            "metric": "readyP95Ms",
+            "direction": "lower",
+            "baselineMedian": 40006.39990234375,
+            "baselineRange": [
+              36939.5,
+              46658.5
+            ],
+            "allowance": 9719,
+            "limit": 56377.5,
+            "candidateWorst": 48616.599853515625,
+            "pass": true
+          },
+          {
+            "metric": "readyP99Ms",
+            "direction": "lower",
+            "baselineMedian": 40006.39990234375,
+            "baselineRange": [
+              36939.5,
+              46658.5
+            ],
+            "allowance": 9719,
+            "limit": 56377.5,
+            "candidateWorst": 48616.599853515625,
+            "pass": true
+          },
+          {
+            "metric": "endP95Ms",
+            "direction": "lower",
+            "baselineMedian": 41431.699951171875,
+            "baselineRange": [
+              39702.5,
+              47746.099853515625
+            ],
+            "allowance": 8043.599853515625,
+            "limit": 55789.69970703125,
+            "candidateWorst": 56070.099853515625,
+            "pass": false
+          },
+          {
+            "metric": "endP99Ms",
+            "direction": "lower",
+            "baselineMedian": 41431.699951171875,
+            "baselineRange": [
+              39702.5,
+              47746.099853515625
+            ],
+            "allowance": 8043.599853515625,
+            "limit": 55789.69970703125,
+            "candidateWorst": 56070.099853515625,
+            "pass": false
+          }
+        ],
+        "p99Improvement": {
+          "scheduledToReadyOrEnd": false,
+          "scheduledToEnd": false,
+          "baselineReadySpreadMs": 9719,
+          "baselineEndSpreadMs": 8043.599853515625
+        }
+      },
+      "cohort:noise-medium.bin": {
+        "guards": [
+          {
+            "metric": "errorFraction",
+            "direction": "lower",
+            "baselineMedian": 0.03597122302158273,
+            "baselineRange": [
+              0.007194244604316547,
+              0.06474820143884892
+            ],
+            "allowance": 0.05755395683453238,
+            "limit": 0.1223021582733813,
+            "candidateWorst": 0.07913669064748201,
+            "pass": true
+          },
+          {
+            "metric": "successfulFilesPerSecond",
+            "direction": "higher",
+            "baselineMedian": 1.0722444717395565,
+            "baselineRange": [
+              1.0438798915576446,
+              1.0839980676556185
+            ],
+            "allowance": 0.04011817609797386,
+            "limit": 1.0037617154596707,
+            "candidateWorst": 0.9576250897773523,
+            "pass": false
+          },
+          {
+            "metric": "successfulBytesPerSecond",
+            "direction": "higher",
+            "baselineMedian": 1124329.8191987772,
+            "baselineRange": [
+              1094587.4011699487,
+              1136654.3577900578
+            ],
+            "allowance": 42066.956620109035,
+            "limit": 1052520.4445498397,
+            "candidateWorst": 1004142.686138377,
+            "pass": false
+          },
+          {
+            "metric": "generatorLagP95Ms",
+            "direction": "lower",
+            "baselineMedian": 54.60009765625,
+            "baselineRange": [
+              35,
+              82.300048828125
+            ],
+            "allowance": 47.300048828125,
+            "limit": 129.60009765625,
+            "candidateWorst": 82.300048828125,
+            "pass": true
+          },
+          {
+            "metric": "generatorLagP99Ms",
+            "direction": "lower",
+            "baselineMedian": 200.5,
+            "baselineRange": [
+              98.199951171875,
+              396.5
+            ],
+            "allowance": 298.300048828125,
+            "limit": 694.800048828125,
+            "candidateWorst": 474.60009765625,
+            "pass": true
+          },
+          {
+            "metric": "readyP95Ms",
+            "direction": "lower",
+            "baselineMedian": 3864.39990234375,
+            "baselineRange": [
+              3462.099853515625,
+              5914.10009765625
+            ],
+            "allowance": 2452.000244140625,
+            "limit": 8366.100341796875,
+            "candidateWorst": 12485.5,
+            "pass": false
+          },
+          {
+            "metric": "readyP99Ms",
+            "direction": "lower",
+            "baselineMedian": 7222.800048828125,
+            "baselineRange": [
+              6412.199951171875,
+              8823
+            ],
+            "allowance": 2410.800048828125,
+            "limit": 11233.800048828125,
+            "candidateWorst": 16498.39990234375,
+            "pass": false
+          },
+          {
+            "metric": "endP95Ms",
+            "direction": "lower",
+            "baselineMedian": 3933.2998046875,
+            "baselineRange": [
+              3575.800048828125,
+              6030.5
+            ],
+            "allowance": 2454.699951171875,
+            "limit": 8485.199951171875,
+            "candidateWorst": 12722.10009765625,
+            "pass": false
+          },
+          {
+            "metric": "endP99Ms",
+            "direction": "lower",
+            "baselineMedian": 7422.300048828125,
+            "baselineRange": [
+              6516.300048828125,
+              8859
+            ],
+            "allowance": 2342.699951171875,
+            "limit": 11201.699951171875,
+            "candidateWorst": 16558.2998046875,
+            "pass": false
+          }
+        ],
+        "p99Improvement": {
+          "scheduledToReadyOrEnd": false,
+          "scheduledToEnd": false,
+          "baselineReadySpreadMs": 2410.800048828125,
+          "baselineEndSpreadMs": 2342.699951171875
+        }
+      },
+      "cohort:png-alpha.png": {
+        "guards": [
+          {
+            "metric": "errorFraction",
+            "direction": "lower",
+            "baselineMedian": 0.0297029702970297,
+            "baselineRange": [
+              0.019801980198019802,
+              0.0594059405940594
+            ],
+            "allowance": 0.0396039603960396,
+            "limit": 0.099009900990099,
+            "candidateWorst": 0.10891089108910891,
+            "pass": false
+          },
+          {
+            "metric": "successfulFilesPerSecond",
+            "direction": "higher",
+            "baselineMedian": 0.6487967545476311,
+            "baselineRange": [
+              0.6420074658350357,
+              0.6500913080707671
+            ],
+            "allowance": 0.008083842235731442,
+            "limit": 0.6339236235993042,
+            "candidateWorst": 0.5758323176291064,
+            "pass": false
+          },
+          {
+            "metric": "successfulBytesPerSecond",
+            "direction": "higher",
+            "baselineMedian": 27958.598543721066,
+            "baselineRange": [
+              27666.027725229193,
+              28014.384738693563
+            ],
+            "allowance": 348.35701346437054,
+            "limit": 27317.670711764822,
+            "candidateWorst": 24814.34206359108,
+            "pass": false
+          },
+          {
+            "metric": "generatorLagP95Ms",
+            "direction": "lower",
+            "baselineMedian": 68,
+            "baselineRange": [
+              53.39990234375,
+              97.900146484375
+            ],
+            "allowance": 44.500244140625,
+            "limit": 142.400390625,
+            "candidateWorst": 84.300048828125,
+            "pass": true
+          },
+          {
+            "metric": "generatorLagP99Ms",
+            "direction": "lower",
+            "baselineMedian": 281.599853515625,
+            "baselineRange": [
+              113,
+              881.300048828125
+            ],
+            "allowance": 768.300048828125,
+            "limit": 1649.60009765625,
+            "candidateWorst": 392.300048828125,
+            "pass": true
+          },
+          {
+            "metric": "readyP95Ms",
+            "direction": "lower",
+            "baselineMedian": 35098.10009765625,
+            "baselineRange": [
+              33795.5,
+              36116.39990234375
+            ],
+            "allowance": 2320.89990234375,
+            "limit": 38437.2998046875,
+            "candidateWorst": 43892.7998046875,
+            "pass": false
+          },
+          {
+            "metric": "readyP99Ms",
+            "direction": "lower",
+            "baselineMedian": 36913.199951171875,
+            "baselineRange": [
+              34509,
+              37245.2001953125
+            ],
+            "allowance": 2736.2001953125,
+            "limit": 39981.400390625,
+            "candidateWorst": 45779.199951171875,
+            "pass": false
+          },
+          {
+            "metric": "endP95Ms",
+            "direction": "lower",
+            "baselineMedian": 35802.60009765625,
+            "baselineRange": [
+              34071.10009765625,
+              36315.800048828125
+            ],
+            "allowance": 2244.699951171875,
+            "limit": 38560.5,
+            "candidateWorst": 44105.89990234375,
+            "pass": false
+          },
+          {
+            "metric": "endP99Ms",
+            "direction": "lower",
+            "baselineMedian": 37107.599853515625,
+            "baselineRange": [
+              35012.800048828125,
+              37276.10009765625
+            ],
+            "allowance": 2263.300048828125,
+            "limit": 39539.400146484375,
+            "candidateWorst": 45917.89990234375,
+            "pass": false
+          }
+        ],
+        "p99Improvement": {
+          "scheduledToReadyOrEnd": false,
+          "scheduledToEnd": false,
+          "baselineReadySpreadMs": 2736.2001953125,
+          "baselineEndSpreadMs": 2263.300048828125
+        }
+      },
+      "cohort:png-noise.png": {
+        "guards": [
+          {
+            "metric": "errorFraction",
+            "direction": "lower",
+            "baselineMedian": 0.02702702702702703,
+            "baselineRange": [
+              0.013513513513513514,
+              0.05405405405405406
+            ],
+            "allowance": 0.04054054054054054,
+            "limit": 0.0945945945945946,
+            "candidateWorst": 0.06756756756756757,
+            "pass": true
+          },
+          {
+            "metric": "successfulFilesPerSecond",
+            "direction": "higher",
+            "baselineMedian": 0.4815328701421093,
+            "baselineRange": [
+              0.4787949588146872,
+              0.4890088474715672
+            ],
+            "allowance": 0.01021388865688,
+            "limit": 0.4685810701578072,
+            "candidateWorst": 0.44186073304327267,
+            "pass": false
+          },
+          {
+            "metric": "successfulBytesPerSecond",
+            "direction": "higher",
+            "baselineMedian": 5335530.587167094,
+            "baselineRange": [
+              5305193.697334214,
+              5418366.688674596
+            ],
+            "allowance": 113172.99134038202,
+            "limit": 5192020.705993832,
+            "candidateWorst": 4895951.247782306,
+            "pass": false
+          },
+          {
+            "metric": "generatorLagP95Ms",
+            "direction": "lower",
+            "baselineMedian": 37.800048828125,
+            "baselineRange": [
+              33,
+              44.800048828125
+            ],
+            "allowance": 11.800048828125,
+            "limit": 56.60009765625,
+            "candidateWorst": 65.300048828125,
+            "pass": false
+          },
+          {
+            "metric": "generatorLagP99Ms",
+            "direction": "lower",
+            "baselineMedian": 63.10009765625,
+            "baselineRange": [
+              38.7998046875,
+              70.2001953125
+            ],
+            "allowance": 31.400390625,
+            "limit": 101.6005859375,
+            "candidateWorst": 631.800048828125,
+            "pass": false
+          },
+          {
+            "metric": "readyP95Ms",
+            "direction": "lower",
+            "baselineMedian": 36332.5,
+            "baselineRange": [
+              35384.60009765625,
+              36529.300048828125
+            ],
+            "allowance": 1144.699951171875,
+            "limit": 37674,
+            "candidateWorst": 44816.39990234375,
+            "pass": false
+          },
+          {
+            "metric": "readyP99Ms",
+            "direction": "lower",
+            "baselineMedian": 37302.400146484375,
+            "baselineRange": [
+              36018.400146484375,
+              39043
+            ],
+            "allowance": 3024.599853515625,
+            "limit": 42067.599853515625,
+            "candidateWorst": 46539.5,
+            "pass": false
+          },
+          {
+            "metric": "endP95Ms",
+            "direction": "lower",
+            "baselineMedian": 36842.099853515625,
+            "baselineRange": [
+              35885.2001953125,
+              37109.599853515625
+            ],
+            "allowance": 1224.399658203125,
+            "limit": 38333.99951171875,
+            "candidateWorst": 45535.699951171875,
+            "pass": false
+          },
+          {
+            "metric": "endP99Ms",
+            "direction": "lower",
+            "baselineMedian": 37601,
+            "baselineRange": [
+              36896.300048828125,
+              39362.599853515625
+            ],
+            "allowance": 2466.2998046875,
+            "limit": 41828.899658203125,
+            "candidateWorst": 47070.39990234375,
+            "pass": false
+          }
+        ],
+        "p99Improvement": {
+          "scheduledToReadyOrEnd": false,
+          "scheduledToEnd": false,
+          "baselineReadySpreadMs": 3024.599853515625,
+          "baselineEndSpreadMs": 2466.2998046875
+        }
+      },
+      "cohort:text-boundary-above.bin": {
+        "guards": [
+          {
+            "metric": "errorFraction",
+            "direction": "lower",
+            "baselineMedian": 0.047619047619047616,
+            "baselineRange": [
+              0.023809523809523808,
+              0.11904761904761904
+            ],
+            "allowance": 0.09523809523809523,
+            "limit": 0.21428571428571427,
+            "candidateWorst": 0.14285714285714285,
+            "pass": true
+          },
+          {
+            "metric": "successfulFilesPerSecond",
+            "direction": "higher",
+            "baselineMedian": 0.2925153176105212,
+            "baselineRange": [
+              0.2747165036057366,
+              0.2929967190644433
+            ],
+            "allowance": 0.018280215458706728,
+            "limit": 0.25643628814702984,
+            "candidateWorst": 0.24962660037955445,
+            "pass": false
+          },
+          {
+            "metric": "successfulBytesPerSecond",
+            "direction": "higher",
+            "baselineMedian": 19630370.95995659,
+            "baselineRange": [
+              18435912.75374939,
+              19662677.265138652
+            ],
+            "allowance": 1226764.511389263,
+            "limit": 17209148.242360126,
+            "candidateWorst": 16752157.825280467,
+            "pass": false
+          },
+          {
+            "metric": "generatorLagP95Ms",
+            "direction": "lower",
+            "baselineMedian": 30.099853515625,
+            "baselineRange": [
+              22.099853515625,
+              44
+            ],
+            "allowance": 21.900146484375,
+            "limit": 65.900146484375,
+            "candidateWorst": 34.10009765625,
+            "pass": true
+          },
+          {
+            "metric": "generatorLagP99Ms",
+            "direction": "lower",
+            "baselineMedian": 86.800048828125,
+            "baselineRange": [
+              75.900146484375,
+              136.300048828125
+            ],
+            "allowance": 60.39990234375,
+            "limit": 196.699951171875,
+            "candidateWorst": 73.400146484375,
+            "pass": true
+          },
+          {
+            "metric": "readyP95Ms",
+            "direction": "lower",
+            "baselineMedian": 14397.7001953125,
+            "baselineRange": [
+              13334.89990234375,
+              18370.099853515625
+            ],
+            "allowance": 5035.199951171875,
+            "limit": 23405.2998046875,
+            "candidateWorst": 28641.10009765625,
+            "pass": false
+          },
+          {
+            "metric": "readyP99Ms",
+            "direction": "lower",
+            "baselineMedian": 15328.39990234375,
+            "baselineRange": [
+              14587,
+              19470.5
+            ],
+            "allowance": 4883.5,
+            "limit": 24354,
+            "candidateWorst": 29129.89990234375,
+            "pass": false
+          },
+          {
+            "metric": "endP95Ms",
+            "direction": "lower",
+            "baselineMedian": 15504.7001953125,
+            "baselineRange": [
+              14069.599853515625,
+              19443.800048828125
+            ],
+            "allowance": 5374.2001953125,
+            "limit": 24818.000244140625,
+            "candidateWorst": 29728.800048828125,
+            "pass": false
+          },
+          {
+            "metric": "endP99Ms",
+            "direction": "lower",
+            "baselineMedian": 16771.300048828125,
+            "baselineRange": [
+              15704,
+              20539.60009765625
+            ],
+            "allowance": 4835.60009765625,
+            "limit": 25375.2001953125,
+            "candidateWorst": 29834.699951171875,
+            "pass": false
+          }
+        ],
+        "p99Improvement": {
+          "scheduledToReadyOrEnd": false,
+          "scheduledToEnd": false,
+          "baselineReadySpreadMs": 4883.5,
+          "baselineEndSpreadMs": 4835.60009765625
+        }
+      },
+      "cohort:text-boundary-below.bin": {
+        "guards": [
+          {
+            "metric": "errorFraction",
+            "direction": "lower",
+            "baselineMedian": 0.044444444444444446,
+            "baselineRange": [
+              0,
+              0.044444444444444446
+            ],
+            "allowance": 0.044444444444444446,
+            "limit": 0.08888888888888889,
+            "candidateWorst": 0.08888888888888889,
+            "pass": true
+          },
+          {
+            "metric": "successfulFilesPerSecond",
+            "direction": "higher",
+            "baselineMedian": 0.33353785175694595,
+            "baselineRange": [
+              0.3328407289341257,
+              0.35833333333333334
+            ],
+            "allowance": 0.02549260439920764,
+            "limit": 0.30734812453491805,
+            "candidateWorst": 0.28492740991707144,
+            "pass": false
+          },
+          {
+            "metric": "successfulBytesPerSecond",
+            "direction": "higher",
+            "baselineMedian": 22383345.998871196,
+            "baselineRange": [
+              22336562.878860377,
+              24047342.575
+            ],
+            "allowance": 1710779.6961396225,
+            "limit": 20625783.182720754,
+            "candidateWorst": 19121154.51706959,
+            "pass": false
+          },
+          {
+            "metric": "generatorLagP95Ms",
+            "direction": "lower",
+            "baselineMedian": 67.2998046875,
+            "baselineRange": [
+              43.5,
+              82.7001953125
+            ],
+            "allowance": 39.2001953125,
+            "limit": 121.900390625,
+            "candidateWorst": 66.800048828125,
+            "pass": true
+          },
+          {
+            "metric": "generatorLagP99Ms",
+            "direction": "lower",
+            "baselineMedian": 210.39990234375,
+            "baselineRange": [
+              75,
+              487.300048828125
+            ],
+            "allowance": 412.300048828125,
+            "limit": 899.60009765625,
+            "candidateWorst": 329,
+            "pass": true
+          },
+          {
+            "metric": "readyP95Ms",
+            "direction": "lower",
+            "baselineMedian": 8594.099853515625,
+            "baselineRange": [
+              7175.39990234375,
+              10191.60009765625
+            ],
+            "allowance": 3016.2001953125,
+            "limit": 13207.80029296875,
+            "candidateWorst": 15972.599853515625,
+            "pass": false
+          },
+          {
+            "metric": "readyP99Ms",
+            "direction": "lower",
+            "baselineMedian": 10617,
+            "baselineRange": [
+              7542.800048828125,
+              14626.300048828125
+            ],
+            "allowance": 7083.5,
+            "limit": 21709.800048828125,
+            "candidateWorst": 23235.2998046875,
+            "pass": false
+          },
+          {
+            "metric": "endP95Ms",
+            "direction": "lower",
+            "baselineMedian": 9967.39990234375,
+            "baselineRange": [
+              8241.89990234375,
+              11290.10009765625
+            ],
+            "allowance": 3048.2001953125,
+            "limit": 14338.30029296875,
+            "candidateWorst": 17205.099853515625,
+            "pass": false
+          },
+          {
+            "metric": "endP99Ms",
+            "direction": "lower",
+            "baselineMedian": 11871.39990234375,
+            "baselineRange": [
+              8679.699951171875,
+              15825.800048828125
+            ],
+            "allowance": 7146.10009765625,
+            "limit": 22971.900146484375,
+            "candidateWorst": 24522.2998046875,
+            "pass": false
+          }
+        ],
+        "p99Improvement": {
+          "scheduledToReadyOrEnd": false,
+          "scheduledToEnd": false,
+          "baselineReadySpreadMs": 7083.5,
+          "baselineEndSpreadMs": 7146.10009765625
+        }
+      },
+      "cohort:text-small.bin": {
+        "guards": [
+          {
+            "metric": "errorFraction",
+            "direction": "lower",
+            "baselineMedian": 0.04597701149425287,
+            "baselineRange": [
+              0.028735632183908046,
+              0.07471264367816093
+            ],
+            "allowance": 0.04597701149425288,
+            "limit": 0.12068965517241381,
+            "candidateWorst": 0.14367816091954022,
+            "pass": false
+          },
+          {
+            "metric": "successfulFilesPerSecond",
+            "direction": "higher",
+            "baselineMedian": 1.2893997718886905,
+            "baselineRange": [
+              1.281013452378317,
+              1.3450819728211185
+            ],
+            "allowance": 0.06406852044280154,
+            "limit": 1.2169449319355155,
+            "candidateWorst": 1.1158566225677524,
+            "pass": false
+          },
+          {
+            "metric": "successfulBytesPerSecond",
+            "direction": "higher",
+            "baselineMedian": 21125.525862624305,
+            "baselineRange": [
+              20988.124403766345,
+              22037.823042701206
+            ],
+            "allowance": 1049.6986389348604,
+            "limit": 19938.425764831485,
+            "candidateWorst": 18282.194904150056,
+            "pass": false
+          },
+          {
+            "metric": "generatorLagP95Ms",
+            "direction": "lower",
+            "baselineMedian": 35.300048828125,
+            "baselineRange": [
+              35.099853515625,
+              71.2001953125
+            ],
+            "allowance": 36.100341796875,
+            "limit": 107.300537109375,
+            "candidateWorst": 50.800048828125,
+            "pass": true
+          },
+          {
+            "metric": "generatorLagP99Ms",
+            "direction": "lower",
+            "baselineMedian": 111.599853515625,
+            "baselineRange": [
+              66.89990234375,
+              908.5
+            ],
+            "allowance": 841.60009765625,
+            "limit": 1750.10009765625,
+            "candidateWorst": 189.2998046875,
+            "pass": true
+          },
+          {
+            "metric": "readyP95Ms",
+            "direction": "lower",
+            "baselineMedian": 5218.199951171875,
+            "baselineRange": [
+              3882.900146484375,
+              5986.5
+            ],
+            "allowance": 2103.599853515625,
+            "limit": 8090.099853515625,
+            "candidateWorst": 12547.199951171875,
+            "pass": false
+          },
+          {
+            "metric": "readyP99Ms",
+            "direction": "lower",
+            "baselineMedian": 7605.300048828125,
+            "baselineRange": [
+              5656.5,
+              9672.800048828125
+            ],
+            "allowance": 4016.300048828125,
+            "limit": 13689.10009765625,
+            "candidateWorst": 16304.39990234375,
+            "pass": false
+          },
+          {
+            "metric": "endP95Ms",
+            "direction": "lower",
+            "baselineMedian": 5280.800048828125,
+            "baselineRange": [
+              3978,
+              6053.900146484375
+            ],
+            "allowance": 2075.900146484375,
+            "limit": 8129.80029296875,
+            "candidateWorst": 12619.39990234375,
+            "pass": false
+          },
+          {
+            "metric": "endP99Ms",
+            "direction": "lower",
+            "baselineMedian": 7682.300048828125,
+            "baselineRange": [
+              5768.900146484375,
+              9710.89990234375
+            ],
+            "allowance": 3941.999755859375,
+            "limit": 13652.899658203125,
+            "candidateWorst": 16319.89990234375,
+            "pass": false
+          }
+        ],
+        "p99Improvement": {
+          "scheduledToReadyOrEnd": false,
+          "scheduledToEnd": false,
+          "baselineReadySpreadMs": 4016.300048828125,
+          "baselineEndSpreadMs": 3941.999755859375
+        }
+      },
+      "cohort:webp-large.webp": {
+        "guards": [
+          {
+            "metric": "errorFraction",
+            "direction": "lower",
+            "baselineMedian": 0.04878048780487805,
+            "baselineRange": [
+              0,
+              0.04878048780487805
+            ],
+            "allowance": 0.04878048780487805,
+            "limit": 0.0975609756097561,
+            "candidateWorst": 0.12195121951219512,
+            "pass": false
+          },
+          {
+            "metric": "successfulFilesPerSecond",
+            "direction": "higher",
+            "baselineMedian": 0.2654319768423494,
+            "baselineRange": [
+              0.2629680325271228,
+              0.2659476135935926
+            ],
+            "allowance": 0.002979581066469783,
+            "limit": 0.259988451460653,
+            "candidateWorst": 0.23290765154280257,
+            "pass": false
+          },
+          {
+            "metric": "successfulBytesPerSecond",
+            "direction": "higher",
+            "baselineMedian": 1093285.1150961847,
+            "baselineRange": [
+              1083136.399495641,
+              1095408.9661545127
+            ],
+            "allowance": 12272.566658871714,
+            "limit": 1070863.8328367693,
+            "candidateWorst": 959320.9968631341,
+            "pass": false
+          },
+          {
+            "metric": "generatorLagP95Ms",
+            "direction": "lower",
+            "baselineMedian": 27,
+            "baselineRange": [
+              14.099853515625,
+              45.800048828125
+            ],
+            "allowance": 31.7001953125,
+            "limit": 77.500244140625,
+            "candidateWorst": 41.60009765625,
+            "pass": true
+          },
+          {
+            "metric": "generatorLagP99Ms",
+            "direction": "lower",
+            "baselineMedian": 98.199951171875,
+            "baselineRange": [
+              56.39990234375,
+              150.7001953125
+            ],
+            "allowance": 94.30029296875,
+            "limit": 245.00048828125,
+            "candidateWorst": 67.60009765625,
+            "pass": true
+          },
+          {
+            "metric": "readyP95Ms",
+            "direction": "lower",
+            "baselineMedian": 36720.39990234375,
+            "baselineRange": [
+              35883.400146484375,
+              36896.099853515625
+            ],
+            "allowance": 1012.69970703125,
+            "limit": 37908.799560546875,
+            "candidateWorst": 44924.39990234375,
+            "pass": false
+          },
+          {
+            "metric": "readyP99Ms",
+            "direction": "lower",
+            "baselineMedian": 38798.5,
+            "baselineRange": [
+              36021.300048828125,
+              39525.5
+            ],
+            "allowance": 3504.199951171875,
+            "limit": 43029.699951171875,
+            "candidateWorst": 45310.599853515625,
+            "pass": false
+          },
+          {
+            "metric": "endP95Ms",
+            "direction": "lower",
+            "baselineMedian": 37124,
+            "baselineRange": [
+              36624.800048828125,
+              37264.599853515625
+            ],
+            "allowance": 639.7998046875,
+            "limit": 37904.399658203125,
+            "candidateWorst": 45739,
+            "pass": false
+          },
+          {
+            "metric": "endP99Ms",
+            "direction": "lower",
+            "baselineMedian": 39308,
+            "baselineRange": [
+              36791.2001953125,
+              39843.5
+            ],
+            "allowance": 3052.2998046875,
+            "limit": 42895.7998046875,
+            "candidateWorst": 45785.89990234375,
+            "pass": false
+          }
+        ],
+        "p99Improvement": {
+          "scheduledToReadyOrEnd": false,
+          "scheduledToEnd": false,
+          "baselineReadySpreadMs": 3504.199951171875,
+          "baselineEndSpreadMs": 3052.2998046875
+        }
+      },
+      "cohort:webp-small.webp": {
+        "guards": [
+          {
+            "metric": "errorFraction",
+            "direction": "lower",
+            "baselineMedian": 0.02040816326530612,
+            "baselineRange": [
+              0.02040816326530612,
+              0.05102040816326531
+            ],
+            "allowance": 0.030612244897959186,
+            "limit": 0.0816326530612245,
+            "candidateWorst": 0.030612244897959183,
+            "pass": true
+          },
+          {
+            "metric": "successfulFilesPerSecond",
+            "direction": "higher",
+            "baselineMedian": 0.6488687387663395,
+            "baselineRange": [
+              0.643990162628381,
+              0.6554294569166937
+            ],
+            "allowance": 0.011439294288312696,
+            "limit": 0.6325508683400684,
+            "candidateWorst": 0.6076278402902627,
+            "pass": false
+          },
+          {
+            "metric": "successfulBytesPerSecond",
+            "direction": "higher",
+            "baselineMedian": 616.4253018280225,
+            "baselineRange": [
+              611.790654496962,
+              622.6579840708591
+            ],
+            "allowance": 10.86732957389711,
+            "limit": 600.9233249230649,
+            "candidateWorst": 577.2464482757496,
+            "pass": false
+          },
+          {
+            "metric": "generatorLagP95Ms",
+            "direction": "lower",
+            "baselineMedian": 51.5,
+            "baselineRange": [
+              25.699951171875,
+              58.800048828125
+            ],
+            "allowance": 33.10009765625,
+            "limit": 91.900146484375,
+            "candidateWorst": 61.89990234375,
+            "pass": true
+          },
+          {
+            "metric": "generatorLagP99Ms",
+            "direction": "lower",
+            "baselineMedian": 228,
+            "baselineRange": [
+              81.199951171875,
+              1867.89990234375
+            ],
+            "allowance": 1786.699951171875,
+            "limit": 3654.599853515625,
+            "candidateWorst": 660.60009765625,
+            "pass": true
+          },
+          {
+            "metric": "readyP95Ms",
+            "direction": "lower",
+            "baselineMedian": 34393.800048828125,
+            "baselineRange": [
+              33481.5,
+              35392.2998046875
+            ],
+            "allowance": 1910.7998046875,
+            "limit": 37303.099609375,
+            "candidateWorst": 44312.2998046875,
+            "pass": false
+          },
+          {
+            "metric": "readyP99Ms",
+            "direction": "lower",
+            "baselineMedian": 36314.2998046875,
+            "baselineRange": [
+              34126.2001953125,
+              37000.199951171875
+            ],
+            "allowance": 2873.999755859375,
+            "limit": 39874.19970703125,
+            "candidateWorst": 45120.300048828125,
+            "pass": false
+          },
+          {
+            "metric": "endP95Ms",
+            "direction": "lower",
+            "baselineMedian": 34758.2001953125,
+            "baselineRange": [
+              33890,
+              35693.099853515625
+            ],
+            "allowance": 1803.099853515625,
+            "limit": 37496.19970703125,
+            "candidateWorst": 44418.099853515625,
+            "pass": false
+          },
+          {
+            "metric": "endP99Ms",
+            "direction": "lower",
+            "baselineMedian": 36325.7998046875,
+            "baselineRange": [
+              34433.39990234375,
+              37317.300048828125
+            ],
+            "allowance": 2883.900146484375,
+            "limit": 40201.2001953125,
+            "candidateWorst": 45233.89990234375,
+            "pass": false
+          }
+        ],
+        "p99Improvement": {
+          "scheduledToReadyOrEnd": false,
+          "scheduledToEnd": false,
+          "baselineReadySpreadMs": 2873.999755859375,
+          "baselineEndSpreadMs": 2883.900146484375
+        }
+      }
+    }
+  },
+  "client": {
+    "verdict": "reject",
+    "reasons": [
+      "global: service.generator.storageReadBytesPerSuccessfulByte regressed beyond baseline spread",
+      "global: service.document-worker.storageReadBytesPerSuccessfulByte regressed beyond baseline spread",
+      "global: service.prometheus.networkTxBytesPerSuccessfulByte regressed beyond baseline spread",
+      "global: service.rabbitmq.storageWriteBytesPerSuccessfulByte regressed beyond baseline spread",
+      "global: service.grafana.cpuSecondsPerSuccess regressed beyond baseline spread",
+      "global: service.grafana.networkRxBytesPerSuccessfulByte regressed beyond baseline spread",
+      "cohort:jpeg-small.jpeg: generatorLagP95Ms regressed beyond baseline spread",
+      "cohort:text-boundary-above.bin: generatorLagP95Ms regressed beyond baseline spread",
+      "cohort:webp-large.webp: generatorLagP99Ms regressed beyond baseline spread",
+      "cohort:webp-small.webp: errorFraction regressed beyond baseline spread",
+      "cohort:jpeg-large.jpeg: baseline needs at least 1000 successful operations",
+      "cohort:jpeg-large.jpeg: candidate needs at least 1000 successful operations",
+      "cohort:jpeg-small.jpeg: baseline needs at least 1000 successful operations",
+      "cohort:jpeg-small.jpeg: candidate needs at least 1000 successful operations",
+      "cohort:noise-boundary.bin: baseline needs at least 1000 successful operations",
+      "cohort:noise-boundary.bin: candidate needs at least 1000 successful operations",
+      "cohort:noise-large.bin: baseline needs at least 1000 successful operations",
+      "cohort:noise-large.bin: candidate needs at least 1000 successful operations",
+      "cohort:noise-medium.bin: baseline needs at least 1000 successful operations",
+      "cohort:noise-medium.bin: candidate needs at least 1000 successful operations",
+      "cohort:png-alpha.png: baseline needs at least 1000 successful operations",
+      "cohort:png-alpha.png: candidate needs at least 1000 successful operations",
+      "cohort:png-noise.png: baseline needs at least 1000 successful operations",
+      "cohort:png-noise.png: candidate needs at least 1000 successful operations",
+      "cohort:text-boundary-above.bin: baseline needs at least 1000 successful operations",
+      "cohort:text-boundary-above.bin: candidate needs at least 1000 successful operations",
+      "cohort:text-boundary-below.bin: baseline needs at least 1000 successful operations",
+      "cohort:text-boundary-below.bin: candidate needs at least 1000 successful operations",
+      "cohort:text-small.bin: baseline needs at least 1000 successful operations",
+      "cohort:text-small.bin: candidate needs at least 1000 successful operations",
+      "cohort:webp-large.webp: baseline needs at least 1000 successful operations",
+      "cohort:webp-large.webp: candidate needs at least 1000 successful operations",
+      "cohort:webp-small.webp: baseline needs at least 1000 successful operations",
+      "cohort:webp-small.webp: candidate needs at least 1000 successful operations",
+      "Global p99 improvement does not exceed baseline spread and disjoint 95% quantile intervals",
+      "No CPU or network/storage cost improvement exceeds baseline run-to-run spread"
+    ],
+    "method": {
+      "quantiles": "Exact nearest rank on unrounded observations",
+      "intervals": "Equal-tail 95% binomial order-statistic intervals, mode-centered probability recurrence",
+      "intervalAssumptions": "Marginal intervals assume independent observations; no simultaneous familywise coverage or proof of independent physical runs",
+      "allowance": "Baseline maximum minus minimum, applied beyond the observed baseline range to every candidate run",
+      "throughput": "Successes divided by time from measurement start through the later of measurement end and terminal completion",
+      "resourceAttribution": "Run-level service counters; cohort guards cover latency, errors, throughput and generator lag",
+      "minimumSuccessesPerGroup": 1000,
+      "minimumRunsPerSide": 3,
+      "improvement": "Both global p99 endpoints must have disjoint intervals beyond baseline spread; at least one resource cost must improve in every candidate run beyond baseline spread"
+    },
+    "groups": {
+      "global": {
+        "guards": [
+          {
+            "metric": "errorFraction",
+            "direction": "lower",
+            "baselineMedian": 0.0375,
+            "baselineRange": [
+              0.035416666666666666,
+              0.10729166666666666
+            ],
+            "allowance": 0.071875,
+            "limit": 0.17916666666666664,
+            "candidateWorst": 0.071875,
+            "pass": true
+          },
+          {
+            "metric": "successfulFilesPerSecond",
+            "direction": "higher",
+            "baselineMedian": 6.14539852709825,
+            "baselineRange": [
+              5.466645492402206,
+              6.181307219646677
+            ],
+            "allowance": 0.7146617272444713,
+            "limit": 4.751983765157735,
+            "candidateWorst": 5.925076582962795,
+            "pass": true
+          },
+          {
+            "metric": "successfulBytesPerSecond",
+            "direction": "higher",
+            "baselineMedian": 97516556.20722064,
+            "baselineRange": [
+              82211589.89460586,
+              98467520.08757964
+            ],
+            "allowance": 16255930.192973778,
+            "limit": 65955659.70163208,
+            "candidateWorst": 95364510.17036377,
+            "pass": true
+          },
+          {
+            "metric": "generatorLagP95Ms",
+            "direction": "lower",
+            "baselineMedian": 42.60009765625,
+            "baselineRange": [
+              34.699951171875,
+              54.800048828125
+            ],
+            "allowance": 20.10009765625,
+            "limit": 74.900146484375,
+            "candidateWorst": 48.199951171875,
+            "pass": true
+          },
+          {
+            "metric": "generatorLagP99Ms",
+            "direction": "lower",
+            "baselineMedian": 187.699951171875,
+            "baselineRange": [
+              184.199951171875,
+              304.60009765625
+            ],
+            "allowance": 120.400146484375,
+            "limit": 425.000244140625,
+            "candidateWorst": 145.199951171875,
+            "pass": true
+          },
+          {
+            "metric": "readyP95Ms",
+            "direction": "lower",
+            "baselineMedian": 34108.5,
+            "baselineRange": [
+              32561.10009765625,
+              43407.39990234375
+            ],
+            "allowance": 10846.2998046875,
+            "limit": 54253.69970703125,
+            "candidateWorst": 34982.599853515625,
+            "pass": true
+          },
+          {
+            "metric": "readyP99Ms",
+            "direction": "lower",
+            "baselineMedian": 35779.699951171875,
+            "baselineRange": [
+              35180.199951171875,
+              45779.199951171875
+            ],
+            "allowance": 10599,
+            "limit": 56378.199951171875,
+            "candidateWorst": 36859.39990234375,
+            "pass": true
+          },
+          {
+            "metric": "endP95Ms",
+            "direction": "lower",
+            "baselineMedian": 34322.800048828125,
+            "baselineRange": [
+              33155.800048828125,
+              44021.89990234375
+            ],
+            "allowance": 10866.099853515625,
+            "limit": 54887.999755859375,
+            "candidateWorst": 35249.699951171875,
+            "pass": true
+          },
+          {
+            "metric": "endP99Ms",
+            "direction": "lower",
+            "baselineMedian": 36607.400146484375,
+            "baselineRange": [
+              35718.2001953125,
+              46320.89990234375
+            ],
+            "allowance": 10602.69970703125,
+            "limit": 56923.599609375,
+            "candidateWorst": 37184.89990234375,
+            "pass": true
+          },
+          {
+            "metric": "service.generator.cpuSecondsPerSuccess",
+            "direction": "lower",
+            "baselineMedian": 0.24085706587473005,
+            "baselineRange": [
+              0.2343852932900433,
+              0.2465254107351225
+            ],
+            "allowance": 0.012140117445079202,
+            "limit": 0.2586655281802017,
+            "candidateWorst": 0.24816150280583615,
+            "pass": true
+          },
+          {
+            "metric": "service.generator.peakMemoryBytes",
+            "direction": "lower",
+            "baselineMedian": 4053565440,
+            "baselineRange": [
+              3986063360,
+              4427821056
+            ],
+            "allowance": 441757696,
+            "limit": 4869578752,
+            "candidateWorst": 4355665920,
+            "pass": true
+          },
+          {
+            "metric": "service.generator.peakAnonymousMemoryBytes",
+            "direction": "lower",
+            "baselineMedian": 3982766080,
+            "baselineRange": [
+              3850264576,
+              4322050048
+            ],
+            "allowance": 471785472,
+            "limit": 4793835520,
+            "candidateWorst": 4284665856,
+            "pass": true
+          },
+          {
+            "metric": "service.generator.networkRxBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 0.9779138102149872,
+            "baselineRange": [
+              0.976136083733751,
+              0.9791682591844288
+            ],
+            "allowance": 0.0030321754506777987,
+            "limit": 0.9822004346351066,
+            "candidateWorst": 0.9791670387985918,
+            "pass": true
+          },
+          {
+            "metric": "service.generator.networkTxBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 1.0056686853015642,
+            "baselineRange": [
+              1.005536870601137,
+              1.0060365726950236
+            ],
+            "allowance": 0.0004997020938866115,
+            "limit": 1.0065362747889102,
+            "candidateWorst": 1.0057081665509562,
+            "pass": true
+          },
+          {
+            "metric": "service.generator.storageReadBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 0.0062857218772968265,
+            "baselineRange": [
+              0.005880112926283284,
+              0.007818366425019511
+            ],
+            "allowance": 0.0019382534987362268,
+            "limit": 0.009756619923755738,
+            "candidateWorst": 0.014311806989358168,
+            "pass": false
+          },
+          {
+            "metric": "service.generator.storageWriteBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 0.10045992736520767,
+            "baselineRange": [
+              0.09661229169599805,
+              0.10358598643291189
+            ],
+            "allowance": 0.006973694736913838,
+            "limit": 0.11055968116982573,
+            "candidateWorst": 0.11030970150656651,
+            "pass": true
+          },
+          {
+            "metric": "service.api.cpuSecondsPerSuccess",
+            "direction": "lower",
+            "baselineMedian": 0.06294819546436285,
+            "baselineRange": [
+              0.06287297294372295,
+              0.06802336056009335
+            ],
+            "allowance": 0.005150387616370405,
+            "limit": 0.07317374817646376,
+            "candidateWorst": 0.06505145698324023,
+            "pass": true
+          },
+          {
+            "metric": "service.api.peakMemoryBytes",
+            "direction": "lower",
+            "baselineMedian": 442028032,
+            "baselineRange": [
+              419135488,
+              455077888
+            ],
+            "allowance": 35942400,
+            "limit": 491020288,
+            "candidateWorst": 447057920,
+            "pass": true
+          },
+          {
+            "metric": "service.api.peakAnonymousMemoryBytes",
+            "direction": "lower",
+            "baselineMedian": 422723584,
+            "baselineRange": [
+              415637504,
+              424341504
+            ],
+            "allowance": 8704000,
+            "limit": 433045504,
+            "candidateWorst": 428650496,
+            "pass": true
+          },
+          {
+            "metric": "service.api.networkRxBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 0.0024791203868211897,
+            "baselineRange": [
+              0.0023515096400013123,
+              0.002913432073854259
+            ],
+            "allowance": 0.0005619224338529469,
+            "limit": 0.003475354507707206,
+            "candidateWorst": 0.0026495224606456697,
+            "pass": true
+          },
+          {
+            "metric": "service.api.networkTxBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 0.005914434273513071,
+            "baselineRange": [
+              0.00561635525130152,
+              0.006814385737138754
+            ],
+            "allowance": 0.0011980304858372334,
+            "limit": 0.008012416222975986,
+            "candidateWorst": 0.006052251465834484,
+            "pass": true
+          },
+          {
+            "metric": "service.api.storageReadBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 0.0007900218047648971,
+            "baselineRange": [
+              5.148515263527683e-05,
+              0.0009615874391959584
+            ],
+            "allowance": 0.0009101022865606816,
+            "limit": 0.00187168972575664,
+            "candidateWorst": 0.0009838505286613067,
+            "pass": true
+          },
+          {
+            "metric": "service.api.storageWriteBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 2.4862779570040964e-05,
+            "baselineRange": [
+              0,
+              0.00025712675965794326
+            ],
+            "allowance": 0.00025712675965794326,
+            "limit": 0.0005142535193158865,
+            "candidateWorst": 5.746790471152493e-07,
+            "pass": true
+          },
+          {
+            "metric": "service.image-worker.cpuSecondsPerSuccess",
+            "direction": "lower",
+            "baselineMedian": 0.2927527727272728,
+            "baselineRange": [
+              0.28649719114470845,
+              0.2947394434072345
+            ],
+            "allowance": 0.008242252262526062,
+            "limit": 0.3029816956697606,
+            "candidateWorst": 0.2923865140291807,
+            "pass": true
+          },
+          {
+            "metric": "service.image-worker.peakMemoryBytes",
+            "direction": "lower",
+            "baselineMedian": 2147303424,
+            "baselineRange": [
+              2070081536,
+              2147471360
+            ],
+            "allowance": 77389824,
+            "limit": 2224861184,
+            "candidateWorst": 2147483648,
+            "pass": true
+          },
+          {
+            "metric": "service.image-worker.peakAnonymousMemoryBytes",
+            "direction": "lower",
+            "baselineMedian": 2131628032,
+            "baselineRange": [
+              2063224832,
+              2133950464
+            ],
+            "allowance": 70725632,
+            "limit": 2204676096,
+            "candidateWorst": 2145976320,
+            "pass": true
+          },
+          {
+            "metric": "service.image-worker.networkRxBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 0.11282970644505755,
+            "baselineRange": [
+              0.11176189176102484,
+              0.12044760222381878
+            ],
+            "allowance": 0.008685710462793941,
+            "limit": 0.1291333126866127,
+            "candidateWorst": 0.11507135521291778,
+            "pass": true
+          },
+          {
+            "metric": "service.image-worker.networkTxBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 0.0840267060522756,
+            "baselineRange": [
+              0.08348136247109401,
+              0.08903255599768581
+            ],
+            "allowance": 0.005551193526591794,
+            "limit": 0.0945837495242776,
+            "candidateWorst": 0.08497537628239754,
+            "pass": true
+          },
+          {
+            "metric": "service.image-worker.storageReadBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 0.0018272746198611004,
+            "baselineRange": [
+              0.0005248051574012017,
+              0.009569246579309788
+            ],
+            "allowance": 0.009044441421908586,
+            "limit": 0.018613688001218376,
+            "candidateWorst": 0.007790495619347655,
+            "pass": true
+          },
+          {
+            "metric": "service.image-worker.storageWriteBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 0.0009746768305603699,
+            "baselineRange": [
+              0.0003209919375427456,
+              0.013436035789886412
+            ],
+            "allowance": 0.013115043852343666,
+            "limit": 0.02655107964223008,
+            "candidateWorst": 0.015132481678824663,
+            "pass": true
+          },
+          {
+            "metric": "service.document-worker.cpuSecondsPerSuccess",
+            "direction": "lower",
+            "baselineMedian": 0.0011510373395565926,
+            "baselineRange": [
+              0.0011219848484848487,
+              0.0012427116630669545
+            ],
+            "allowance": 0.0001207268145821058,
+            "limit": 0.0013634384776490603,
+            "candidateWorst": 0.0012386689113355778,
+            "pass": true
+          },
+          {
+            "metric": "service.document-worker.peakMemoryBytes",
+            "direction": "lower",
+            "baselineMedian": 15421440,
+            "baselineRange": [
+              14495744,
+              27459584
+            ],
+            "allowance": 12963840,
+            "limit": 40423424,
+            "candidateWorst": 27037696,
+            "pass": true
+          },
+          {
+            "metric": "service.document-worker.peakAnonymousMemoryBytes",
+            "direction": "lower",
+            "baselineMedian": 9666560,
+            "baselineRange": [
+              9469952,
+              9895936
+            ],
+            "allowance": 425984,
+            "limit": 10321920,
+            "candidateWorst": 9895936,
+            "pass": true
+          },
+          {
+            "metric": "service.document-worker.networkRxBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 0.00013798418442378797,
+            "baselineRange": [
+              0.0001342891321953612,
+              0.00014252991706669596
+            ],
+            "allowance": 8.240784871334743e-06,
+            "limit": 0.0001507707019380307,
+            "candidateWorst": 0.00013640106393239545,
+            "pass": true
+          },
+          {
+            "metric": "service.document-worker.networkTxBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 0.00016440375221820174,
+            "baselineRange": [
+              0.0001599160788133792,
+              0.0001708775077834723
+            ],
+            "allowance": 1.0961428970093095e-05,
+            "limit": 0.0001818389367535654,
+            "candidateWorst": 0.0001619663222073267,
+            "pass": true
+          },
+          {
+            "metric": "service.document-worker.storageReadBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 0.0005931131302692946,
+            "baselineRange": [
+              0.0005819093486122956,
+              0.0008090180857847037
+            ],
+            "allowance": 0.00022710873717240803,
+            "limit": 0.0010361268229571118,
+            "candidateWorst": 0.0013956080659193828,
+            "pass": false
+          },
+          {
+            "metric": "service.document-worker.storageWriteBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 0,
+            "baselineRange": [
+              0,
+              0
+            ],
+            "allowance": 0,
+            "limit": 0,
+            "candidateWorst": 0,
+            "pass": true
+          },
+          {
+            "metric": "service.prometheus.cpuSecondsPerSuccess",
+            "direction": "lower",
+            "baselineMedian": 0.0014172489177489175,
+            "baselineRange": [
+              0.001156607991360691,
+              0.0020835565927654607
+            ],
+            "allowance": 0.0009269486014047697,
+            "limit": 0.0030105051941702304,
+            "candidateWorst": 0.0013187240223463687,
+            "pass": true
+          },
+          {
+            "metric": "service.prometheus.peakMemoryBytes",
+            "direction": "lower",
+            "baselineMedian": 76296192,
+            "baselineRange": [
+              69148672,
+              101208064
+            ],
+            "allowance": 32059392,
+            "limit": 133267456,
+            "candidateWorst": 101429248,
+            "pass": true
+          },
+          {
+            "metric": "service.prometheus.peakAnonymousMemoryBytes",
+            "direction": "lower",
+            "baselineMedian": 39157760,
+            "baselineRange": [
+              38760448,
+              42549248
+            ],
+            "allowance": 3788800,
+            "limit": 46338048,
+            "candidateWorst": 40366080,
+            "pass": true
+          },
+          {
+            "metric": "service.prometheus.networkRxBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 0.0013107949513890681,
+            "baselineRange": [
+              0.0012662038917383416,
+              0.0015134292580892758
+            ],
+            "allowance": 0.0002472253663509342,
+            "limit": 0.00176065462444021,
+            "candidateWorst": 0.001311209797511926,
+            "pass": true
+          },
+          {
+            "metric": "service.prometheus.networkTxBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 9.497938576888006e-05,
+            "baselineRange": [
+              9.48914461194505e-05,
+              9.82909936489652e-05
+            ],
+            "allowance": 3.3995475295147006e-06,
+            "limit": 0.0001016905411784799,
+            "candidateWorst": 0.00010556002459321585,
+            "pass": false
+          },
+          {
+            "metric": "service.prometheus.storageReadBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 0.004372776276515182,
+            "baselineRange": [
+              0.0030483127079102604,
+              0.006644444976208227
+            ],
+            "allowance": 0.003596132268297967,
+            "limit": 0.010240577244506194,
+            "candidateWorst": 0.005797936906345749,
+            "pass": true
+          },
+          {
+            "metric": "service.prometheus.storageWriteBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 0.00015113217693699056,
+            "baselineRange": [
+              0.00013855966854137548,
+              0.00018242270131264756
+            ],
+            "allowance": 4.3863032771272075e-05,
+            "limit": 0.00022628573408391963,
+            "candidateWorst": 0.0001597607750980393,
+            "pass": true
+          },
+          {
+            "metric": "service.postgres.cpuSecondsPerSuccess",
+            "direction": "lower",
+            "baselineMedian": 0.010416958874458876,
+            "baselineRange": [
+              0.010128328293736503,
+              0.011627714119019838
+            ],
+            "allowance": 0.0014993858252833354,
+            "limit": 0.013127099944303174,
+            "candidateWorst": 0.010582351955307262,
+            "pass": true
+          },
+          {
+            "metric": "service.postgres.peakMemoryBytes",
+            "direction": "lower",
+            "baselineMedian": 90669056,
+            "baselineRange": [
+              87613440,
+              92323840
+            ],
+            "allowance": 4710400,
+            "limit": 97034240,
+            "candidateWorst": 94515200,
+            "pass": true
+          },
+          {
+            "metric": "service.postgres.peakAnonymousMemoryBytes",
+            "direction": "lower",
+            "baselineMedian": 36573184,
+            "baselineRange": [
+              36089856,
+              37834752
+            ],
+            "allowance": 1744896,
+            "limit": 39579648,
+            "candidateWorst": 37433344,
+            "pass": true
+          },
+          {
+            "metric": "service.postgres.networkRxBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 0.000726803626330847,
+            "baselineRange": [
+              0.000699889554920579,
+              0.000832268814315686
+            ],
+            "allowance": 0.00013237925939510703,
+            "limit": 0.000964648073710793,
+            "candidateWorst": 0.000763226598460955,
+            "pass": true
+          },
+          {
+            "metric": "service.postgres.networkTxBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 0.0010268314185539976,
+            "baselineRange": [
+              0.000977623559088802,
+              0.0012059435972218504
+            ],
+            "allowance": 0.00022832003813304854,
+            "limit": 0.001434263635354899,
+            "candidateWorst": 0.0010936550546883248,
+            "pass": true
+          },
+          {
+            "metric": "service.postgres.storageReadBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 0.0027511084629861056,
+            "baselineRange": [
+              0.0023635498774602086,
+              0.0029716744944484974
+            ],
+            "allowance": 0.0006081246169882888,
+            "limit": 0.0035797991114367863,
+            "candidateWorst": 0.002207931311323992,
+            "pass": true
+          },
+          {
+            "metric": "service.postgres.storageWriteBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 0.004344561212059293,
+            "baselineRange": [
+              0.00426008503960277,
+              0.004599975921253067
+            ],
+            "allowance": 0.00033989088165029685,
+            "limit": 0.004939866802903364,
+            "candidateWorst": 0.004377617641400411,
+            "pass": true
+          },
+          {
+            "metric": "service.minio.cpuSecondsPerSuccess",
+            "direction": "lower",
+            "baselineMedian": 0.15018238444924403,
+            "baselineRange": [
+              0.14617075432900434,
+              0.16807943757292884
+            ],
+            "allowance": 0.021908683243924504,
+            "limit": 0.18998812081685335,
+            "candidateWorst": 0.15156088215488217,
+            "pass": true
+          },
+          {
+            "metric": "service.minio.peakMemoryBytes",
+            "direction": "lower",
+            "baselineMedian": 1073741824,
+            "baselineRange": [
+              1073737728,
+              1073741824
+            ],
+            "allowance": 4096,
+            "limit": 1073745920,
+            "candidateWorst": 1073741824,
+            "pass": true
+          },
+          {
+            "metric": "service.minio.peakAnonymousMemoryBytes",
+            "direction": "lower",
+            "baselineMedian": 558026752,
+            "baselineRange": [
+              523345920,
+              560443392
+            ],
+            "allowance": 37097472,
+            "limit": 597540864,
+            "candidateWorst": 565309440,
+            "pass": true
+          },
+          {
+            "metric": "service.minio.networkRxBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 1.088475875960979,
+            "baselineRange": [
+              1.0879884551427956,
+              1.093660980299365
+            ],
+            "allowance": 0.0056725251565694634,
+            "limit": 1.0993335054559346,
+            "candidateWorst": 1.089488003066344,
+            "pass": true
+          },
+          {
+            "metric": "service.minio.networkTxBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 1.0870935150398373,
+            "baselineRange": [
+              1.087043797739666,
+              1.0920821265709588
+            ],
+            "allowance": 0.005038328831292738,
+            "limit": 1.0971204554022516,
+            "candidateWorst": 1.0885362156054061,
+            "pass": true
+          },
+          {
+            "metric": "service.minio.storageReadBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 1.903443281537827,
+            "baselineRange": [
+              1.870495825250981,
+              1.9414164370023064
+            ],
+            "allowance": 0.07092061175132547,
+            "limit": 2.012337048753632,
+            "candidateWorst": 1.9998503272553818,
+            "pass": true
+          },
+          {
+            "metric": "service.minio.storageWriteBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 1.9836020002999344,
+            "baselineRange": [
+              1.9769979512410503,
+              1.9990572434733407
+            ],
+            "allowance": 0.022059292232290417,
+            "limit": 2.021116535705631,
+            "candidateWorst": 1.9883291617188152,
+            "pass": true
+          },
+          {
+            "metric": "service.rabbitmq.cpuSecondsPerSuccess",
+            "direction": "lower",
+            "baselineMedian": 0.02080962987012987,
+            "baselineRange": [
+              0.020370113390928726,
+              0.023276590431738624
+            ],
+            "allowance": 0.002906477040809898,
+            "limit": 0.026183067472548522,
+            "candidateWorst": 0.02121596184062851,
+            "pass": true
+          },
+          {
+            "metric": "service.rabbitmq.peakMemoryBytes",
+            "direction": "lower",
+            "baselineMedian": 227180544,
+            "baselineRange": [
+              225796096,
+              228052992
+            ],
+            "allowance": 2256896,
+            "limit": 230309888,
+            "candidateWorst": 225460224,
+            "pass": true
+          },
+          {
+            "metric": "service.rabbitmq.peakAnonymousMemoryBytes",
+            "direction": "lower",
+            "baselineMedian": 200486912,
+            "baselineRange": [
+              200437760,
+              201379840
+            ],
+            "allowance": 942080,
+            "limit": 202321920,
+            "candidateWorst": 200634368,
+            "pass": true
+          },
+          {
+            "metric": "service.rabbitmq.networkRxBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 0.00021677708899068334,
+            "baselineRange": [
+              0.00021653596982115244,
+              0.00022623324906773337
+            ],
+            "allowance": 9.697279246580936e-06,
+            "limit": 0.0002359305283143143,
+            "candidateWorst": 0.0002264443093336653,
+            "pass": true
+          },
+          {
+            "metric": "service.rabbitmq.networkTxBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 0.00039560992415475495,
+            "baselineRange": [
+              0.00038209596064743583,
+              0.0004318064698673765
+            ],
+            "allowance": 4.971050921994069e-05,
+            "limit": 0.0004815169790873172,
+            "candidateWorst": 0.0003940348620800083,
+            "pass": true
+          },
+          {
+            "metric": "service.rabbitmq.storageReadBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 0.00040478839996617254,
+            "baselineRange": [
+              0.0003401514909081863,
+              0.0004948295225501607
+            ],
+            "allowance": 0.0001546780316419744,
+            "limit": 0.0006495075541921351,
+            "candidateWorst": 0.0005950801532878406,
+            "pass": true
+          },
+          {
+            "metric": "service.rabbitmq.storageWriteBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 0.001686318370845237,
+            "baselineRange": [
+              0.0016560287336090205,
+              0.001747634903341897
+            ],
+            "allowance": 9.160616973287656e-05,
+            "limit": 0.0018392410730747736,
+            "candidateWorst": 0.0020340764872644247,
+            "pass": false
+          },
+          {
+            "metric": "service.grafana.cpuSecondsPerSuccess",
+            "direction": "lower",
+            "baselineMedian": 0.005715306277056276,
+            "baselineRange": [
+              0.005379499416569428,
+              0.0058677915766738665
+            ],
+            "allowance": 0.0004882921601044388,
+            "limit": 0.006356083736778305,
+            "candidateWorst": 0.006591717318435755,
+            "pass": false
+          },
+          {
+            "metric": "service.grafana.peakMemoryBytes",
+            "direction": "lower",
+            "baselineMedian": 536834048,
+            "baselineRange": [
+              536780800,
+              536850432
+            ],
+            "allowance": 69632,
+            "limit": 536920064,
+            "candidateWorst": 536870912,
+            "pass": true
+          },
+          {
+            "metric": "service.grafana.peakAnonymousMemoryBytes",
+            "direction": "lower",
+            "baselineMedian": 248561664,
+            "baselineRange": [
+              241061888,
+              252243968
+            ],
+            "allowance": 11182080,
+            "limit": 263426048,
+            "candidateWorst": 241655808,
+            "pass": true
+          },
+          {
+            "metric": "service.grafana.networkRxBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 0.003427338637808282,
+            "baselineRange": [
+              0.0032226992840044214,
+              0.0034761239822323486
+            ],
+            "allowance": 0.0002534246982279272,
+            "limit": 0.003729548680460276,
+            "candidateWorst": 0.004131139778620391,
+            "pass": false
+          },
+          {
+            "metric": "service.grafana.networkTxBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 1.0665528093431747e-05,
+            "baselineRange": [
+              8.756367873959436e-06,
+              1.1858216726331752e-05
+            ],
+            "allowance": 3.1018488523723153e-06,
+            "limit": 1.4960065578704067e-05,
+            "candidateWorst": 1.4179588580581503e-05,
+            "pass": true
+          },
+          {
+            "metric": "service.grafana.storageReadBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 0.03737071319328831,
+            "baselineRange": [
+              0.036679675347208895,
+              0.04898014864266009
+            ],
+            "allowance": 0.012300473295451197,
+            "limit": 0.06128062193811129,
+            "candidateWorst": 0.046038816522591584,
+            "pass": true
+          },
+          {
+            "metric": "service.grafana.storageWriteBytesPerSuccessfulByte",
+            "direction": "lower",
+            "baselineMedian": 0.01666243868836376,
+            "baselineRange": [
+              0.015450681038874444,
+              0.01932393677982245
+            ],
+            "allowance": 0.003873255740948005,
+            "limit": 0.023197192520770453,
+            "candidateWorst": 0.0192310596326647,
+            "pass": true
+          },
+          {
+            "metric": "cpuSecondsPerSuccess",
+            "direction": "lower",
+            "baselineMedian": 0.779250389848812,
+            "baselineRange": [
+              0.7756629220779221,
+              0.8208860501750292
+            ],
+            "allowance": 0.04522312809710716,
+            "limit": 0.8661091782721364,
+            "candidateWorst": 0.7963973961840628,
+            "pass": true
+          },
+          {
+            "metric": "recoveryMs",
+            "direction": "lower",
+            "baselineMedian": 0,
+            "baselineRange": [
+              0,
+              0
+            ],
+            "allowance": 0,
+            "limit": 0,
+            "candidateWorst": 0,
+            "pass": true
+          },
+          {
+            "metric": "queuePeak",
+            "direction": "lower",
+            "baselineMedian": 110,
+            "baselineRange": [
+              107,
+              113
+            ],
+            "allowance": 6,
+            "limit": 119,
+            "candidateWorst": 114,
+            "pass": true
+          },
+          {
+            "metric": "queueAgePeakSeconds",
+            "direction": "lower",
+            "baselineMedian": 0,
+            "baselineRange": [
+              0,
+              0
+            ],
+            "allowance": 0,
+            "limit": 0,
+            "candidateWorst": 0,
+            "pass": true
+          }
+        ],
+        "p99Improvement": {
+          "scheduledToReadyOrEnd": false,
+          "scheduledToEnd": false,
+          "baselineReadySpreadMs": 10599,
+          "baselineEndSpreadMs": 10602.69970703125
+        }
+      },
+      "cohort:jpeg-large.jpeg": {
+        "guards": [
+          {
+            "metric": "errorFraction",
+            "direction": "lower",
+            "baselineMedian": 0.03,
+            "baselineRange": [
+              0.03,
+              0.11
+            ],
+            "allowance": 0.08,
+            "limit": 0.19,
+            "candidateWorst": 0.08,
+            "pass": true
+          },
+          {
+            "metric": "successfulFilesPerSecond",
+            "direction": "higher",
+            "baselineMedian": 0.6451338280611798,
+            "baselineRange": [
+              0.5677146427348848,
+              0.647501944174652
+            ],
+            "allowance": 0.0797873014397672,
+            "limit": 0.4879273412951176,
+            "candidateWorst": 0.6174774299908099,
+            "pass": true
+          },
+          {
+            "metric": "successfulBytesPerSecond",
+            "direction": "higher",
+            "baselineMedian": 4409546.4865750335,
+            "baselineRange": [
+              3880379.5419814982,
+              4425732.768604834
+            ],
+            "allowance": 545353.2266233354,
+            "limit": 3335026.315358163,
+            "candidateWorst": 4220512.572001024,
+            "pass": true
+          },
+          {
+            "metric": "generatorLagP95Ms",
+            "direction": "lower",
+            "baselineMedian": 60,
+            "baselineRange": [
+              27.699951171875,
+              61.699951171875
+            ],
+            "allowance": 34,
+            "limit": 95.699951171875,
+            "candidateWorst": 47.800048828125,
+            "pass": true
+          },
+          {
+            "metric": "generatorLagP99Ms",
+            "direction": "lower",
+            "baselineMedian": 108.10009765625,
+            "baselineRange": [
+              58.89990234375,
+              199.60009765625
+            ],
+            "allowance": 140.7001953125,
+            "limit": 340.30029296875,
+            "candidateWorst": 327.400146484375,
+            "pass": true
+          },
+          {
+            "metric": "readyP95Ms",
+            "direction": "lower",
+            "baselineMedian": 36706.699951171875,
+            "baselineRange": [
+              35036,
+              45234.89990234375
+            ],
+            "allowance": 10198.89990234375,
+            "limit": 55433.7998046875,
+            "candidateWorst": 36563.5,
+            "pass": true
+          },
+          {
+            "metric": "readyP99Ms",
+            "direction": "lower",
+            "baselineMedian": 37518,
+            "baselineRange": [
+              36806.10009765625,
+              46249.10009765625
+            ],
+            "allowance": 9443,
+            "limit": 55692.10009765625,
+            "candidateWorst": 38132.39990234375,
+            "pass": true
+          },
+          {
+            "metric": "endP95Ms",
+            "direction": "lower",
+            "baselineMedian": 36994.60009765625,
+            "baselineRange": [
+              35658.5,
+              45769.89990234375
+            ],
+            "allowance": 10111.39990234375,
+            "limit": 55881.2998046875,
+            "candidateWorst": 36867.5,
+            "pass": true
+          },
+          {
+            "metric": "endP99Ms",
+            "direction": "lower",
+            "baselineMedian": 37771.10009765625,
+            "baselineRange": [
+              37065.300048828125,
+              46699.10009765625
+            ],
+            "allowance": 9633.800048828125,
+            "limit": 56332.900146484375,
+            "candidateWorst": 38424.2998046875,
+            "pass": true
+          }
+        ],
+        "p99Improvement": {
+          "scheduledToReadyOrEnd": false,
+          "scheduledToEnd": false,
+          "baselineReadySpreadMs": 9443,
+          "baselineEndSpreadMs": 9633.800048828125
+        }
+      },
+      "cohort:jpeg-small.jpeg": {
+        "guards": [
+          {
+            "metric": "errorFraction",
+            "direction": "lower",
+            "baselineMedian": 0.06896551724137931,
+            "baselineRange": [
+              0.04597701149425287,
+              0.12643678160919541
+            ],
+            "allowance": 0.08045977011494254,
+            "limit": 0.20689655172413796,
+            "candidateWorst": 0.06896551724137931,
+            "pass": true
+          },
+          {
+            "metric": "successfulFilesPerSecond",
+            "direction": "higher",
+            "baselineMedian": 0.5415328985961186,
+            "baselineRange": [
+              0.4856608636255071,
+              0.5548940650122653
+            ],
+            "allowance": 0.06923320138675826,
+            "limit": 0.41642766223874883,
+            "candidateWorst": 0.5405008641340976,
+            "pass": true
+          },
+          {
+            "metric": "successfulBytesPerSecond",
+            "direction": "higher",
+            "baselineMedian": 137298.62651136413,
+            "baselineRange": [
+              123132.9983810202,
+              140686.1765610147
+            ],
+            "allowance": 17553.178179994502,
+            "limit": 105579.8202010257,
+            "candidateWorst": 137036.96758996672,
+            "pass": true
+          },
+          {
+            "metric": "generatorLagP95Ms",
+            "direction": "lower",
+            "baselineMedian": 40.300048828125,
+            "baselineRange": [
+              32,
+              41
+            ],
+            "allowance": 9,
+            "limit": 50,
+            "candidateWorst": 50.5,
+            "pass": false
+          },
+          {
+            "metric": "generatorLagP99Ms",
+            "direction": "lower",
+            "baselineMedian": 197,
+            "baselineRange": [
+              136.199951171875,
+              646.400146484375
+            ],
+            "allowance": 510.2001953125,
+            "limit": 1156.600341796875,
+            "candidateWorst": 174.5,
+            "pass": true
+          },
+          {
+            "metric": "readyP95Ms",
+            "direction": "lower",
+            "baselineMedian": 34471.7001953125,
+            "baselineRange": [
+              32557,
+              43058.60009765625
+            ],
+            "allowance": 10501.60009765625,
+            "limit": 53560.2001953125,
+            "candidateWorst": 34994.89990234375,
+            "pass": true
+          },
+          {
+            "metric": "readyP99Ms",
+            "direction": "lower",
+            "baselineMedian": 35421.300048828125,
+            "baselineRange": [
+              34593.900146484375,
+              45000.89990234375
+            ],
+            "allowance": 10406.999755859375,
+            "limit": 55407.899658203125,
+            "candidateWorst": 36032.699951171875,
+            "pass": true
+          },
+          {
+            "metric": "endP95Ms",
+            "direction": "lower",
+            "baselineMedian": 34824.60009765625,
+            "baselineRange": [
+              32808.5,
+              43132
+            ],
+            "allowance": 10323.5,
+            "limit": 53455.5,
+            "candidateWorst": 35061.099853515625,
+            "pass": true
+          },
+          {
+            "metric": "endP99Ms",
+            "direction": "lower",
+            "baselineMedian": 35495.300048828125,
+            "baselineRange": [
+              34729.900146484375,
+              45214.5
+            ],
+            "allowance": 10484.599853515625,
+            "limit": 55699.099853515625,
+            "candidateWorst": 36313.599853515625,
+            "pass": true
+          }
+        ],
+        "p99Improvement": {
+          "scheduledToReadyOrEnd": false,
+          "scheduledToEnd": false,
+          "baselineReadySpreadMs": 10406.999755859375,
+          "baselineEndSpreadMs": 10484.599853515625
+        }
+      },
+      "cohort:noise-boundary.bin": {
+        "guards": [
+          {
+            "metric": "errorFraction",
+            "direction": "lower",
+            "baselineMedian": 0.07317073170731707,
+            "baselineRange": [
+              0.07317073170731707,
+              0.17073170731707318
+            ],
+            "allowance": 0.09756097560975611,
+            "limit": 0.2682926829268293,
+            "candidateWorst": 0.17073170731707318,
+            "pass": true
+          },
+          {
+            "metric": "successfulFilesPerSecond",
+            "direction": "higher",
+            "baselineMedian": 0.28320631271470814,
+            "baselineRange": [
+              0.23578445140239737,
+              0.2880402649970438
+            ],
+            "allowance": 0.052255813594646455,
+            "limit": 0.18352863780775092,
+            "candidateWorst": 0.2560572608049475,
+            "pass": true
+          },
+          {
+            "metric": "successfulBytesPerSecond",
+            "direction": "higher",
+            "baselineMedian": 19005653.92391282,
+            "baselineRange": [
+              15823226.682478094,
+              19330054.970210575
+            ],
+            "allowance": 3506828.28773248,
+            "limit": 12316398.394745614,
+            "candidateWorst": 17183711.891571753,
+            "pass": true
+          },
+          {
+            "metric": "generatorLagP95Ms",
+            "direction": "lower",
+            "baselineMedian": 34.699951171875,
+            "baselineRange": [
+              12.60009765625,
+              37.5
+            ],
+            "allowance": 24.89990234375,
+            "limit": 62.39990234375,
+            "candidateWorst": 18.599853515625,
+            "pass": true
+          },
+          {
+            "metric": "generatorLagP99Ms",
+            "direction": "lower",
+            "baselineMedian": 59.60009765625,
+            "baselineRange": [
+              16.400146484375,
+              98.800048828125
+            ],
+            "allowance": 82.39990234375,
+            "limit": 181.199951171875,
+            "candidateWorst": 73.7001953125,
+            "pass": true
+          },
+          {
+            "metric": "readyP95Ms",
+            "direction": "lower",
+            "baselineMedian": 16984.800048828125,
+            "baselineRange": [
+              12288.900146484375,
+              24797.2998046875
+            ],
+            "allowance": 12508.399658203125,
+            "limit": 37305.699462890625,
+            "candidateWorst": 15823.2998046875,
+            "pass": true
+          },
+          {
+            "metric": "readyP99Ms",
+            "direction": "lower",
+            "baselineMedian": 17098.10009765625,
+            "baselineRange": [
+              12336.199951171875,
+              25765.199951171875
+            ],
+            "allowance": 13429,
+            "limit": 39194.199951171875,
+            "candidateWorst": 17905.599853515625,
+            "pass": true
+          },
+          {
+            "metric": "endP95Ms",
+            "direction": "lower",
+            "baselineMedian": 17740.199951171875,
+            "baselineRange": [
+              13552,
+              26374.199951171875
+            ],
+            "allowance": 12822.199951171875,
+            "limit": 39196.39990234375,
+            "candidateWorst": 16533.7998046875,
+            "pass": true
+          },
+          {
+            "metric": "endP99Ms",
+            "direction": "lower",
+            "baselineMedian": 17803.800048828125,
+            "baselineRange": [
+              13608,
+              26901.7998046875
+            ],
+            "allowance": 13293.7998046875,
+            "limit": 40195.599609375,
+            "candidateWorst": 18551.599853515625,
+            "pass": true
+          }
+        ],
+        "p99Improvement": {
+          "scheduledToReadyOrEnd": false,
+          "scheduledToEnd": false,
+          "baselineReadySpreadMs": 13429,
+          "baselineEndSpreadMs": 13293.7998046875
+        }
+      },
+      "cohort:noise-large.bin": {
+        "guards": [
+          {
+            "metric": "errorFraction",
+            "direction": "lower",
+            "baselineMedian": 0.05555555555555555,
+            "baselineRange": [
+              0,
+              0.2222222222222222
+            ],
+            "allowance": 0.2222222222222222,
+            "limit": 0.4444444444444444,
+            "candidateWorst": 0.05555555555555555,
+            "pass": true
+          },
+          {
+            "metric": "successfulFilesPerSecond",
+            "direction": "higher",
+            "baselineMedian": 0.11970667635226258,
+            "baselineRange": [
+              0.09453302044635616,
+              0.12166042139154885
+            ],
+            "allowance": 0.027127400945192698,
+            "limit": 0.06740561950116346,
+            "candidateWorst": 0.12256342120638845,
+            "pass": true
+          },
+          {
+            "metric": "successfulBytesPerSecond",
+            "direction": "higher",
+            "baselineMedian": 32133516.25286402,
+            "baselineRange": [
+              25376014.45057494,
+              32657970.69339257
+            ],
+            "allowance": 7281956.242817633,
+            "limit": 18094058.207757305,
+            "candidateWorst": 32900367.860456955,
+            "pass": true
+          },
+          {
+            "metric": "generatorLagP95Ms",
+            "direction": "lower",
+            "baselineMedian": 56.5,
+            "baselineRange": [
+              19.5,
+              188.39990234375
+            ],
+            "allowance": 168.89990234375,
+            "limit": 357.2998046875,
+            "candidateWorst": 70.5,
+            "pass": true
+          },
+          {
+            "metric": "generatorLagP99Ms",
+            "direction": "lower",
+            "baselineMedian": 56.5,
+            "baselineRange": [
+              19.5,
+              188.39990234375
+            ],
+            "allowance": 168.89990234375,
+            "limit": 357.2998046875,
+            "candidateWorst": 70.5,
+            "pass": true
+          },
+          {
+            "metric": "readyP95Ms",
+            "direction": "lower",
+            "baselineMedian": 42279.300048828125,
+            "baselineRange": [
+              35837,
+              48616.599853515625
+            ],
+            "allowance": 12779.599853515625,
+            "limit": 61396.19970703125,
+            "candidateWorst": 35730.5,
+            "pass": true
+          },
+          {
+            "metric": "readyP99Ms",
+            "direction": "lower",
+            "baselineMedian": 42279.300048828125,
+            "baselineRange": [
+              35837,
+              48616.599853515625
+            ],
+            "allowance": 12779.599853515625,
+            "limit": 61396.19970703125,
+            "candidateWorst": 35730.5,
+            "pass": true
+          },
+          {
+            "metric": "endP95Ms",
+            "direction": "lower",
+            "baselineMedian": 43703.800048828125,
+            "baselineRange": [
+              36906.900146484375,
+              56070.099853515625
+            ],
+            "allowance": 19163.19970703125,
+            "limit": 75233.29956054688,
+            "candidateWorst": 36214.2998046875,
+            "pass": true
+          },
+          {
+            "metric": "endP99Ms",
+            "direction": "lower",
+            "baselineMedian": 43703.800048828125,
+            "baselineRange": [
+              36906.900146484375,
+              56070.099853515625
+            ],
+            "allowance": 19163.19970703125,
+            "limit": 75233.29956054688,
+            "candidateWorst": 36214.2998046875,
+            "pass": true
+          }
+        ],
+        "p99Improvement": {
+          "scheduledToReadyOrEnd": false,
+          "scheduledToEnd": false,
+          "baselineReadySpreadMs": 12779.599853515625,
+          "baselineEndSpreadMs": 19163.19970703125
+        }
+      },
+      "cohort:noise-medium.bin": {
+        "guards": [
+          {
+            "metric": "errorFraction",
+            "direction": "lower",
+            "baselineMedian": 0.050359712230215826,
+            "baselineRange": [
+              0.014388489208633094,
+              0.07913669064748201
+            ],
+            "allowance": 0.0647482014388489,
+            "limit": 0.14388489208633093,
+            "candidateWorst": 0.06474820143884892,
+            "pass": true
+          },
+          {
+            "metric": "successfulFilesPerSecond",
+            "direction": "higher",
+            "baselineMedian": 1.0475359098484247,
+            "baselineRange": [
+              0.9576250897773523,
+              1.1032310156451461
+            ],
+            "allowance": 0.14560592586779386,
+            "limit": 0.8120191639095584,
+            "candidateWorst": 1.0136676187680214,
+            "pass": true
+          },
+          {
+            "metric": "successfulBytesPerSecond",
+            "direction": "higher",
+            "baselineMedian": 1098421.0142052218,
+            "baselineRange": [
+              1004142.686138377,
+              1156821.5654611248
+            ],
+            "allowance": 152678.87932274782,
+            "limit": 851463.8068156291,
+            "candidateWorst": 1062907.5370172968,
+            "pass": true
+          },
+          {
+            "metric": "generatorLagP95Ms",
+            "direction": "lower",
+            "baselineMedian": 39.5,
+            "baselineRange": [
+              20.89990234375,
+              82.300048828125
+            ],
+            "allowance": 61.400146484375,
+            "limit": 143.7001953125,
+            "candidateWorst": 53.900146484375,
+            "pass": true
+          },
+          {
+            "metric": "generatorLagP99Ms",
+            "direction": "lower",
+            "baselineMedian": 407.900146484375,
+            "baselineRange": [
+              80,
+              474.60009765625
+            ],
+            "allowance": 394.60009765625,
+            "limit": 869.2001953125,
+            "candidateWorst": 123.60009765625,
+            "pass": true
+          },
+          {
+            "metric": "readyP95Ms",
+            "direction": "lower",
+            "baselineMedian": 4777.300048828125,
+            "baselineRange": [
+              3440,
+              12485.5
+            ],
+            "allowance": 9045.5,
+            "limit": 21531,
+            "candidateWorst": 8629.900146484375,
+            "pass": true
+          },
+          {
+            "metric": "readyP99Ms",
+            "direction": "lower",
+            "baselineMedian": 6301.199951171875,
+            "baselineRange": [
+              4227.10009765625,
+              16498.39990234375
+            ],
+            "allowance": 12271.2998046875,
+            "limit": 28769.69970703125,
+            "candidateWorst": 12396.5,
+            "pass": true
+          },
+          {
+            "metric": "endP95Ms",
+            "direction": "lower",
+            "baselineMedian": 5043.800048828125,
+            "baselineRange": [
+              3596.39990234375,
+              12722.10009765625
+            ],
+            "allowance": 9125.7001953125,
+            "limit": 21847.80029296875,
+            "candidateWorst": 8816.10009765625,
+            "pass": true
+          },
+          {
+            "metric": "endP99Ms",
+            "direction": "lower",
+            "baselineMedian": 6431.7001953125,
+            "baselineRange": [
+              4418.199951171875,
+              16558.2998046875
+            ],
+            "allowance": 12140.099853515625,
+            "limit": 28698.399658203125,
+            "candidateWorst": 12471.199951171875,
+            "pass": true
+          }
+        ],
+        "p99Improvement": {
+          "scheduledToReadyOrEnd": false,
+          "scheduledToEnd": false,
+          "baselineReadySpreadMs": 12271.2998046875,
+          "baselineEndSpreadMs": 12140.099853515625
+        }
+      },
+      "cohort:png-alpha.png": {
+        "guards": [
+          {
+            "metric": "errorFraction",
+            "direction": "lower",
+            "baselineMedian": 0.0594059405940594,
+            "baselineRange": [
+              0.009900990099009901,
+              0.10891089108910891
+            ],
+            "allowance": 0.09900990099009901,
+            "limit": 0.20792079207920794,
+            "candidateWorst": 0.0891089108910891,
+            "pass": true
+          },
+          {
+            "metric": "successfulFilesPerSecond",
+            "direction": "higher",
+            "baselineMedian": 0.6328258068302576,
+            "baselineRange": [
+              0.5758323176291064,
+              0.6686525647840754
+            ],
+            "allowance": 0.09282024715496906,
+            "limit": 0.4830120704741373,
+            "candidateWorst": 0.6130076221496445,
+            "pass": true
+          },
+          {
+            "metric": "successfulBytesPerSecond",
+            "direction": "higher",
+            "baselineMedian": 27270.362493736287,
+            "baselineRange": [
+              24814.34206359108,
+              28814.244974240162
+            ],
+            "allowance": 3999.9029106490816,
+            "limit": 20814.439152942,
+            "candidateWorst": 26416.33746129463,
+            "pass": true
+          },
+          {
+            "metric": "generatorLagP95Ms",
+            "direction": "lower",
+            "baselineMedian": 60.2001953125,
+            "baselineRange": [
+              20.300048828125,
+              84.300048828125
+            ],
+            "allowance": 64,
+            "limit": 148.300048828125,
+            "candidateWorst": 49.39990234375,
+            "pass": true
+          },
+          {
+            "metric": "generatorLagP99Ms",
+            "direction": "lower",
+            "baselineMedian": 156.900146484375,
+            "baselineRange": [
+              36.300048828125,
+              392.300048828125
+            ],
+            "allowance": 356,
+            "limit": 748.300048828125,
+            "candidateWorst": 276.199951171875,
+            "pass": true
+          },
+          {
+            "metric": "readyP95Ms",
+            "direction": "lower",
+            "baselineMedian": 34224.5,
+            "baselineRange": [
+              32768.60009765625,
+              43892.7998046875
+            ],
+            "allowance": 11124.19970703125,
+            "limit": 55016.99951171875,
+            "candidateWorst": 34729.099853515625,
+            "pass": true
+          },
+          {
+            "metric": "readyP99Ms",
+            "direction": "lower",
+            "baselineMedian": 35523.10009765625,
+            "baselineRange": [
+              35160.800048828125,
+              45779.199951171875
+            ],
+            "allowance": 10618.39990234375,
+            "limit": 56397.599853515625,
+            "candidateWorst": 36749.2998046875,
+            "pass": true
+          },
+          {
+            "metric": "endP95Ms",
+            "direction": "lower",
+            "baselineMedian": 34393.300048828125,
+            "baselineRange": [
+              33203.60009765625,
+              44105.89990234375
+            ],
+            "allowance": 10902.2998046875,
+            "limit": 55008.19970703125,
+            "candidateWorst": 34765.199951171875,
+            "pass": true
+          },
+          {
+            "metric": "endP99Ms",
+            "direction": "lower",
+            "baselineMedian": 35561.400146484375,
+            "baselineRange": [
+              35207.800048828125,
+              45917.89990234375
+            ],
+            "allowance": 10710.099853515625,
+            "limit": 56627.999755859375,
+            "candidateWorst": 36952.199951171875,
+            "pass": true
+          }
+        ],
+        "p99Improvement": {
+          "scheduledToReadyOrEnd": false,
+          "scheduledToEnd": false,
+          "baselineReadySpreadMs": 10618.39990234375,
+          "baselineEndSpreadMs": 10710.099853515625
+        }
+      },
+      "cohort:png-noise.png": {
+        "guards": [
+          {
+            "metric": "errorFraction",
+            "direction": "lower",
+            "baselineMedian": 0.04054054054054054,
+            "baselineRange": [
+              0.013513513513513514,
+              0.06756756756756757
+            ],
+            "allowance": 0.05405405405405406,
+            "limit": 0.12162162162162163,
+            "candidateWorst": 0.06756756756756757,
+            "pass": true
+          },
+          {
+            "metric": "successfulFilesPerSecond",
+            "direction": "higher",
+            "baselineMedian": 0.48865516710855217,
+            "baselineRange": [
+              0.44186073304327267,
+              0.49398864521874647
+            ],
+            "allowance": 0.0521279121754738,
+            "limit": 0.38973282086779887,
+            "candidateWorst": 0.46678076863233237,
+            "pass": true
+          },
+          {
+            "metric": "successfulBytesPerSecond",
+            "direction": "higher",
+            "baselineMedian": 5414447.802733559,
+            "baselineRange": [
+              4895951.247782306,
+              5473544.361571858
+            ],
+            "allowance": 577593.1137895519,
+            "limit": 4318358.133992754,
+            "candidateWorst": 5172072.817799907,
+            "pass": true
+          },
+          {
+            "metric": "generatorLagP95Ms",
+            "direction": "lower",
+            "baselineMedian": 51.300048828125,
+            "baselineRange": [
+              20.60009765625,
+              65.300048828125
+            ],
+            "allowance": 44.699951171875,
+            "limit": 110,
+            "candidateWorst": 41.199951171875,
+            "pass": true
+          },
+          {
+            "metric": "generatorLagP99Ms",
+            "direction": "lower",
+            "baselineMedian": 373.300048828125,
+            "baselineRange": [
+              125.599853515625,
+              631.800048828125
+            ],
+            "allowance": 506.2001953125,
+            "limit": 1138.000244140625,
+            "candidateWorst": 93.400146484375,
+            "pass": true
+          },
+          {
+            "metric": "readyP95Ms",
+            "direction": "lower",
+            "baselineMedian": 35299,
+            "baselineRange": [
+              33588,
+              44816.39990234375
+            ],
+            "allowance": 11228.39990234375,
+            "limit": 56044.7998046875,
+            "candidateWorst": 36849.5,
+            "pass": true
+          },
+          {
+            "metric": "readyP99Ms",
+            "direction": "lower",
+            "baselineMedian": 35624.800048828125,
+            "baselineRange": [
+              35373.5,
+              46539.5
+            ],
+            "allowance": 11166,
+            "limit": 57705.5,
+            "candidateWorst": 37857.699951171875,
+            "pass": true
+          },
+          {
+            "metric": "endP95Ms",
+            "direction": "lower",
+            "baselineMedian": 35735,
+            "baselineRange": [
+              34175.199951171875,
+              45535.699951171875
+            ],
+            "allowance": 11360.5,
+            "limit": 56896.199951171875,
+            "candidateWorst": 37184.89990234375,
+            "pass": true
+          },
+          {
+            "metric": "endP99Ms",
+            "direction": "lower",
+            "baselineMedian": 36198.400146484375,
+            "baselineRange": [
+              35807.60009765625,
+              47070.39990234375
+            ],
+            "allowance": 11262.7998046875,
+            "limit": 58333.19970703125,
+            "candidateWorst": 38231.699951171875,
+            "pass": true
+          }
+        ],
+        "p99Improvement": {
+          "scheduledToReadyOrEnd": false,
+          "scheduledToEnd": false,
+          "baselineReadySpreadMs": 11166,
+          "baselineEndSpreadMs": 11262.7998046875
+        }
+      },
+      "cohort:text-boundary-above.bin": {
+        "guards": [
+          {
+            "metric": "errorFraction",
+            "direction": "lower",
+            "baselineMedian": 0.07142857142857142,
+            "baselineRange": [
+              0.023809523809523808,
+              0.14285714285714285
+            ],
+            "allowance": 0.11904761904761904,
+            "limit": 0.26190476190476186,
+            "candidateWorst": 0.09523809523809523,
+            "pass": true
+          },
+          {
+            "metric": "successfulFilesPerSecond",
+            "direction": "higher",
+            "baselineMedian": 0.29503233651851063,
+            "baselineRange": [
+              0.24962660037955445,
+              0.29833022369575984
+            ],
+            "allowance": 0.0487036233162054,
+            "limit": 0.20092297706334905,
+            "candidateWorst": 0.2821395985252195,
+            "pass": true
+          },
+          {
+            "metric": "successfulBytesPerSecond",
+            "direction": "higher",
+            "baselineMedian": 19799285.2420553,
+            "baselineRange": [
+              16752157.825280467,
+              20020602.707418546
+            ],
+            "allowance": 3268444.882138079,
+            "limit": 13483712.943142388,
+            "candidateWorst": 18934068.228583157,
+            "pass": true
+          },
+          {
+            "metric": "generatorLagP95Ms",
+            "direction": "lower",
+            "baselineMedian": 19.699951171875,
+            "baselineRange": [
+              13.900146484375,
+              34.10009765625
+            ],
+            "allowance": 20.199951171875,
+            "limit": 54.300048828125,
+            "candidateWorst": 55.89990234375,
+            "pass": false
+          },
+          {
+            "metric": "generatorLagP99Ms",
+            "direction": "lower",
+            "baselineMedian": 36.5,
+            "baselineRange": [
+              19.300048828125,
+              73.400146484375
+            ],
+            "allowance": 54.10009765625,
+            "limit": 127.500244140625,
+            "candidateWorst": 78,
+            "pass": true
+          },
+          {
+            "metric": "readyP95Ms",
+            "direction": "lower",
+            "baselineMedian": 16479.60009765625,
+            "baselineRange": [
+              12249.300048828125,
+              28641.10009765625
+            ],
+            "allowance": 16391.800048828125,
+            "limit": 45032.900146484375,
+            "candidateWorst": 19014.599853515625,
+            "pass": true
+          },
+          {
+            "metric": "readyP99Ms",
+            "direction": "lower",
+            "baselineMedian": 17673.89990234375,
+            "baselineRange": [
+              16735.800048828125,
+              29129.89990234375
+            ],
+            "allowance": 12394.099853515625,
+            "limit": 41523.999755859375,
+            "candidateWorst": 21092.89990234375,
+            "pass": true
+          },
+          {
+            "metric": "endP95Ms",
+            "direction": "lower",
+            "baselineMedian": 17434,
+            "baselineRange": [
+              12810.89990234375,
+              29728.800048828125
+            ],
+            "allowance": 16917.900146484375,
+            "limit": 46646.7001953125,
+            "candidateWorst": 20343.099853515625,
+            "pass": true
+          },
+          {
+            "metric": "endP99Ms",
+            "direction": "lower",
+            "baselineMedian": 18689.89990234375,
+            "baselineRange": [
+              17682.60009765625,
+              29834.699951171875
+            ],
+            "allowance": 12152.099853515625,
+            "limit": 41986.7998046875,
+            "candidateWorst": 21879.099853515625,
+            "pass": true
+          }
+        ],
+        "p99Improvement": {
+          "scheduledToReadyOrEnd": false,
+          "scheduledToEnd": false,
+          "baselineReadySpreadMs": 12394.099853515625,
+          "baselineEndSpreadMs": 12152.099853515625
+        }
+      },
+      "cohort:text-boundary-below.bin": {
+        "guards": [
+          {
+            "metric": "errorFraction",
+            "direction": "lower",
+            "baselineMedian": 0.022222222222222223,
+            "baselineRange": [
+              0,
+              0.08888888888888889
+            ],
+            "allowance": 0.08888888888888889,
+            "limit": 0.17777777777777778,
+            "candidateWorst": 0.044444444444444446,
+            "pass": true
+          },
+          {
+            "metric": "successfulFilesPerSecond",
+            "direction": "higher",
+            "baselineMedian": 0.32861791496345544,
+            "baselineRange": [
+              0.28492740991707144,
+              0.3481506234913579
+            ],
+            "allowance": 0.06322321357428645,
+            "limit": 0.221704196342785,
+            "candidateWorst": 0.3284631667977075,
+            "pass": true
+          },
+          {
+            "metric": "successfulBytesPerSecond",
+            "direction": "higher",
+            "baselineMedian": 22053174.634628184,
+            "baselineRange": [
+              19121154.51706959,
+              23363992.49524612
+            ],
+            "allowance": 4242837.97817653,
+            "limit": 14878316.538893059,
+            "candidateWorst": 22042789.6611735,
+            "pass": true
+          },
+          {
+            "metric": "generatorLagP95Ms",
+            "direction": "lower",
+            "baselineMedian": 62,
+            "baselineRange": [
+              23.400146484375,
+              66.800048828125
+            ],
+            "allowance": 43.39990234375,
+            "limit": 110.199951171875,
+            "candidateWorst": 50.5,
+            "pass": true
+          },
+          {
+            "metric": "generatorLagP99Ms",
+            "direction": "lower",
+            "baselineMedian": 187.5,
+            "baselineRange": [
+              63.300048828125,
+              329
+            ],
+            "allowance": 265.699951171875,
+            "limit": 594.699951171875,
+            "candidateWorst": 184.800048828125,
+            "pass": true
+          },
+          {
+            "metric": "readyP95Ms",
+            "direction": "lower",
+            "baselineMedian": 7942.300048828125,
+            "baselineRange": [
+              6727.199951171875,
+              15972.599853515625
+            ],
+            "allowance": 9245.39990234375,
+            "limit": 25217.999755859375,
+            "candidateWorst": 12905.7001953125,
+            "pass": true
+          },
+          {
+            "metric": "readyP99Ms",
+            "direction": "lower",
+            "baselineMedian": 13646.60009765625,
+            "baselineRange": [
+              8600.800048828125,
+              23235.2998046875
+            ],
+            "allowance": 14634.499755859375,
+            "limit": 37869.799560546875,
+            "candidateWorst": 13744.699951171875,
+            "pass": true
+          },
+          {
+            "metric": "endP95Ms",
+            "direction": "lower",
+            "baselineMedian": 9213.699951171875,
+            "baselineRange": [
+              8083,
+              17205.099853515625
+            ],
+            "allowance": 9122.099853515625,
+            "limit": 26327.19970703125,
+            "candidateWorst": 14453.10009765625,
+            "pass": true
+          },
+          {
+            "metric": "endP99Ms",
+            "direction": "lower",
+            "baselineMedian": 14520.10009765625,
+            "baselineRange": [
+              9880.400146484375,
+              24522.2998046875
+            ],
+            "allowance": 14641.899658203125,
+            "limit": 39164.199462890625,
+            "candidateWorst": 14903,
+            "pass": true
+          }
+        ],
+        "p99Improvement": {
+          "scheduledToReadyOrEnd": false,
+          "scheduledToEnd": false,
+          "baselineReadySpreadMs": 14634.499755859375,
+          "baselineEndSpreadMs": 14641.899658203125
+        }
+      },
+      "cohort:text-small.bin": {
+        "guards": [
+          {
+            "metric": "errorFraction",
+            "direction": "lower",
+            "baselineMedian": 0.05172413793103448,
+            "baselineRange": [
+              0.040229885057471264,
+              0.14367816091954022
+            ],
+            "allowance": 0.10344827586206895,
+            "limit": 0.24712643678160917,
+            "candidateWorst": 0.10919540229885058,
+            "pass": true
+          },
+          {
+            "metric": "successfulFilesPerSecond",
+            "direction": "higher",
+            "baselineMedian": 1.2787406632575644,
+            "baselineRange": [
+              1.1158566225677524,
+              1.341653189354581
+            ],
+            "allowance": 0.2257965667868287,
+            "limit": 0.8900600557809237,
+            "candidateWorst": 1.1930565656328083,
+            "pass": true
+          },
+          {
+            "metric": "successfulBytesPerSecond",
+            "direction": "higher",
+            "baselineMedian": 20950.887026811935,
+            "baselineRange": [
+              18282.194904150056,
+              21981.645854385457
+            ],
+            "allowance": 3699.4509502354013,
+            "limit": 14582.743953914654,
+            "candidateWorst": 19547.03877132793,
+            "pass": true
+          },
+          {
+            "metric": "generatorLagP95Ms",
+            "direction": "lower",
+            "baselineMedian": 43,
+            "baselineRange": [
+              40.60009765625,
+              50.800048828125
+            ],
+            "allowance": 10.199951171875,
+            "limit": 61,
+            "candidateWorst": 46.39990234375,
+            "pass": true
+          },
+          {
+            "metric": "generatorLagP99Ms",
+            "direction": "lower",
+            "baselineMedian": 127.5,
+            "baselineRange": [
+              127.5,
+              189.2998046875
+            ],
+            "allowance": 61.7998046875,
+            "limit": 251.099609375,
+            "candidateWorst": 88,
+            "pass": true
+          },
+          {
+            "metric": "readyP95Ms",
+            "direction": "lower",
+            "baselineMedian": 5287.5,
+            "baselineRange": [
+              5129.699951171875,
+              12547.199951171875
+            ],
+            "allowance": 7417.5,
+            "limit": 19964.699951171875,
+            "candidateWorst": 8996.199951171875,
+            "pass": true
+          },
+          {
+            "metric": "readyP99Ms",
+            "direction": "lower",
+            "baselineMedian": 8329.10009765625,
+            "baselineRange": [
+              6137.300048828125,
+              16304.39990234375
+            ],
+            "allowance": 10167.099853515625,
+            "limit": 26471.499755859375,
+            "candidateWorst": 12635.2998046875,
+            "pass": true
+          },
+          {
+            "metric": "endP95Ms",
+            "direction": "lower",
+            "baselineMedian": 5346.699951171875,
+            "baselineRange": [
+              5218.5,
+              12619.39990234375
+            ],
+            "allowance": 7400.89990234375,
+            "limit": 20020.2998046875,
+            "candidateWorst": 9068.10009765625,
+            "pass": true
+          },
+          {
+            "metric": "endP99Ms",
+            "direction": "lower",
+            "baselineMedian": 8399.699951171875,
+            "baselineRange": [
+              6195.699951171875,
+              16319.89990234375
+            ],
+            "allowance": 10124.199951171875,
+            "limit": 26444.099853515625,
+            "candidateWorst": 12669.39990234375,
+            "pass": true
+          }
+        ],
+        "p99Improvement": {
+          "scheduledToReadyOrEnd": false,
+          "scheduledToEnd": false,
+          "baselineReadySpreadMs": 10167.099853515625,
+          "baselineEndSpreadMs": 10124.199951171875
+        }
+      },
+      "cohort:webp-large.webp": {
+        "guards": [
+          {
+            "metric": "errorFraction",
+            "direction": "lower",
+            "baselineMedian": 0.07317073170731707,
+            "baselineRange": [
+              0.04878048780487805,
+              0.12195121951219512
+            ],
+            "allowance": 0.07317073170731707,
+            "limit": 0.1951219512195122,
+            "candidateWorst": 0.12195121951219512,
+            "pass": true
+          },
+          {
+            "metric": "successfulFilesPerSecond",
+            "direction": "higher",
+            "baselineMedian": 0.25888274365783936,
+            "baselineRange": [
+              0.23290765154280257,
+              0.2679364566445539
+            ],
+            "allowance": 0.035028805101751326,
+            "limit": 0.19787884644105125,
+            "candidateWorst": 0.2409790172639168,
+            "pass": true
+          },
+          {
+            "metric": "successfulBytesPerSecond",
+            "direction": "higher",
+            "baselineMedian": 1066309.544024838,
+            "baselineRange": [
+              959320.9968631341,
+              1103600.7919086865
+            ],
+            "allowance": 144279.79504555243,
+            "limit": 815041.2018175817,
+            "candidateWorst": 992566.0644181743,
+            "pass": true
+          },
+          {
+            "metric": "generatorLagP95Ms",
+            "direction": "lower",
+            "baselineMedian": 38.10009765625,
+            "baselineRange": [
+              25.60009765625,
+              41.60009765625
+            ],
+            "allowance": 16,
+            "limit": 57.60009765625,
+            "candidateWorst": 50.199951171875,
+            "pass": true
+          },
+          {
+            "metric": "generatorLagP99Ms",
+            "direction": "lower",
+            "baselineMedian": 62.39990234375,
+            "baselineRange": [
+              34.89990234375,
+              67.60009765625
+            ],
+            "allowance": 32.7001953125,
+            "limit": 100.30029296875,
+            "candidateWorst": 102.39990234375,
+            "pass": false
+          },
+          {
+            "metric": "readyP95Ms",
+            "direction": "lower",
+            "baselineMedian": 35525.39990234375,
+            "baselineRange": [
+              33803,
+              44924.39990234375
+            ],
+            "allowance": 11121.39990234375,
+            "limit": 56045.7998046875,
+            "candidateWorst": 37107.800048828125,
+            "pass": true
+          },
+          {
+            "metric": "readyP99Ms",
+            "direction": "lower",
+            "baselineMedian": 37528.800048828125,
+            "baselineRange": [
+              36167.300048828125,
+              45310.599853515625
+            ],
+            "allowance": 9143.2998046875,
+            "limit": 54453.899658203125,
+            "candidateWorst": 39298.10009765625,
+            "pass": true
+          },
+          {
+            "metric": "endP95Ms",
+            "direction": "lower",
+            "baselineMedian": 36069.60009765625,
+            "baselineRange": [
+              34454.39990234375,
+              45739
+            ],
+            "allowance": 11284.60009765625,
+            "limit": 57023.60009765625,
+            "candidateWorst": 38306.2001953125,
+            "pass": true
+          },
+          {
+            "metric": "endP99Ms",
+            "direction": "lower",
+            "baselineMedian": 37785.60009765625,
+            "baselineRange": [
+              36557.89990234375,
+              45785.89990234375
+            ],
+            "allowance": 9228,
+            "limit": 55013.89990234375,
+            "candidateWorst": 40194.800048828125,
+            "pass": true
+          }
+        ],
+        "p99Improvement": {
+          "scheduledToReadyOrEnd": false,
+          "scheduledToEnd": false,
+          "baselineReadySpreadMs": 9143.2998046875,
+          "baselineEndSpreadMs": 9228
+        }
+      },
+      "cohort:webp-small.webp": {
+        "guards": [
+          {
+            "metric": "errorFraction",
+            "direction": "lower",
+            "baselineMedian": 0.01020408163265306,
+            "baselineRange": [
+              0,
+              0.030612244897959183
+            ],
+            "allowance": 0.030612244897959183,
+            "limit": 0.061224489795918366,
+            "candidateWorst": 0.07142857142857142,
+            "pass": false
+          },
+          {
+            "metric": "successfulFilesPerSecond",
+            "direction": "higher",
+            "baselineMedian": 0.6553509406425888,
+            "baselineRange": [
+              0.6076278402902627,
+              0.6556410815778798
+            ],
+            "allowance": 0.04801324128761708,
+            "limit": 0.5596145990026457,
+            "candidateWorst": 0.6119206166831221,
+            "pass": true
+          },
+          {
+            "metric": "successfulBytesPerSecond",
+            "direction": "higher",
+            "baselineMedian": 622.5833936104593,
+            "baselineRange": [
+              577.2464482757496,
+              622.8590274989858
+            ],
+            "allowance": 45.61257922323625,
+            "limit": 531.6338690525133,
+            "candidateWorst": 581.3245858489661,
+            "pass": true
+          },
+          {
+            "metric": "generatorLagP95Ms",
+            "direction": "lower",
+            "baselineMedian": 42.60009765625,
+            "baselineRange": [
+              36.10009765625,
+              61.89990234375
+            ],
+            "allowance": 25.7998046875,
+            "limit": 87.69970703125,
+            "candidateWorst": 48.300048828125,
+            "pass": true
+          },
+          {
+            "metric": "generatorLagP99Ms",
+            "direction": "lower",
+            "baselineMedian": 393.39990234375,
+            "baselineRange": [
+              184.199951171875,
+              660.60009765625
+            ],
+            "allowance": 476.400146484375,
+            "limit": 1137.000244140625,
+            "candidateWorst": 172.5,
+            "pass": true
+          },
+          {
+            "metric": "readyP95Ms",
+            "direction": "lower",
+            "baselineMedian": 34108.5,
+            "baselineRange": [
+              32605.60009765625,
+              44312.2998046875
+            ],
+            "allowance": 11706.69970703125,
+            "limit": 56018.99951171875,
+            "candidateWorst": 34982.599853515625,
+            "pass": true
+          },
+          {
+            "metric": "readyP99Ms",
+            "direction": "lower",
+            "baselineMedian": 35174,
+            "baselineRange": [
+              34479.300048828125,
+              45120.300048828125
+            ],
+            "allowance": 10641,
+            "limit": 55761.300048828125,
+            "candidateWorst": 36564.800048828125,
+            "pass": true
+          },
+          {
+            "metric": "endP95Ms",
+            "direction": "lower",
+            "baselineMedian": 34312.10009765625,
+            "baselineRange": [
+              32975,
+              44418.099853515625
+            ],
+            "allowance": 11443.099853515625,
+            "limit": 55861.19970703125,
+            "candidateWorst": 35134,
+            "pass": true
+          },
+          {
+            "metric": "endP99Ms",
+            "direction": "lower",
+            "baselineMedian": 35190.10009765625,
+            "baselineRange": [
+              34564.89990234375,
+              45233.89990234375
+            ],
+            "allowance": 10669,
+            "limit": 55902.89990234375,
+            "candidateWorst": 37096.900146484375,
+            "pass": true
+          }
+        ],
+        "p99Improvement": {
+          "scheduledToReadyOrEnd": false,
+          "scheduledToEnd": false,
+          "baselineReadySpreadMs": 10641,
+          "baselineEndSpreadMs": 10669
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,608 @@
+{
+  "method": {
+    "scope": "Read-only file analysis. No Docker commands, tests, builds or tracked-file edits. One audit artifact only. Snapshot taken while historical-runtime campaign was in progress.",
+    "sources": [
+      "campaign.json",
+      "analysis.json",
+      "built-runtime-equivalence.json",
+      "source-equivalence.json",
+      "historical-pressure.json",
+      "launcher-comparison.json",
+      "client-comparison.json",
+      "../investigation-20261112-{v0,v1,v2}-r{1,2,3}/operations.jsonl",
+      "../investigation-20261112-{v0,v1,v2}-r{1,2,3}/lifecycle.jsonl",
+      "historical-runtime/vm-counters.jsonl"
+    ],
+    "hostCounters": "Difference campaign before/after vm_stat cumulative counters, multiplied by observed 16384-byte macOS page size. Nominal page-event volumes may count the same memory repeatedly. Windows include launcher startup and cleanup, not just120s measured load.",
+    "linuxCounters": "Difference first/last successful existing vm-counters samples. Linux page counters use4096 bytes, inferred from nr_free_pages and MemFree agreement; pgpgin/out use KiB. Linux interval covers only part of historical old-r1 and all VM workloads. PSI unavailable is missing data, not zero stalls.",
+    "admission": "Count raw operation outcomes; aggregate successful cohorts. Lifecycle slot lifetime includes cleanup because pending.delete follows cleanup. Mean occupancy integrates measured lifecycle intervals clipped to measurement window and excludes unrecorded warmup lifecycle slots.",
+    "statistics": "Descriptive numbers only. Preserve existing evaluator rejection and insufficient-cohort guards. No causal significance claim from three shared-host runs."
+  },
+  "primary": {
+    "v0": {
+      "runs": 3,
+      "success": 2758,
+      "rejected": 122,
+      "medianFilesPerSecond": 6.061619207396178,
+      "filesPerSecondRange": [
+        6.051929841044437,
+        6.126618085151774
+      ],
+      "medianP99Seconds": 38.49459985351562,
+      "medianCpuSecondsPerSuccess": 0.7792235637727761,
+      "p99RunRange": [
+        36.5722001953125,
+        38.70419995117187
+      ]
+    },
+    "v1": {
+      "runs": 3,
+      "success": 2707,
+      "rejected": 173,
+      "medianFilesPerSecond": 6.14539852709825,
+      "filesPerSecondRange": [
+        5.466645492402206,
+        6.181307219646677
+      ],
+      "medianP99Seconds": 36.60740014648437,
+      "medianCpuSecondsPerSuccess": 0.779250389848812,
+      "p99RunRange": [
+        35.7182001953125,
+        46.32089990234375
+      ]
+    },
+    "v2": {
+      "runs": 3,
+      "success": 2705,
+      "rejected": 175,
+      "medianFilesPerSecond": 5.964230677281941,
+      "filesPerSecondRange": [
+        5.925076582962795,
+        6.165993370375764
+      ],
+      "medianP99Seconds": 36.803,
+      "medianCpuSecondsPerSuccess": 0.7852470491620113,
+      "p99RunRange": [
+        34.889199951171875,
+        37.18489990234375
+      ]
+    }
+  },
+  "hostWindows": [
+    {
+      "label": "investigation-20261112-v0-r1",
+      "seconds": 225.314,
+      "nominalMiB": {
+        "Swapins": 5.03125,
+        "Swapouts": 0.0,
+        "Pageins": 8403.84375,
+        "Pageouts": 22.8125,
+        "Compressions": 53767.015625,
+        "Decompressions": 37629.125
+      },
+      "beforeLoad1m": 3.546875,
+      "afterLoad1m": 6.0703125
+    },
+    {
+      "label": "investigation-20261112-v1-r1",
+      "seconds": 240.323,
+      "nominalMiB": {
+        "Swapins": 1.0625,
+        "Swapouts": 0.0,
+        "Pageins": 8471.234375,
+        "Pageouts": 22.734375,
+        "Compressions": 36299.15625,
+        "Decompressions": 31492.03125
+      },
+      "beforeLoad1m": 6.0703125,
+      "afterLoad1m": 6.4658203125
+    },
+    {
+      "label": "investigation-20261112-v2-r1",
+      "seconds": 225.304,
+      "nominalMiB": {
+        "Swapins": 3.609375,
+        "Swapouts": 0.0,
+        "Pageins": 7121.203125,
+        "Pageouts": 32.234375,
+        "Compressions": 41809.21875,
+        "Decompressions": 36828.09375
+      },
+      "beforeLoad1m": 6.4658203125,
+      "afterLoad1m": 6.5234375
+    },
+    {
+      "label": "investigation-20261112-v1-r2",
+      "seconds": 240.327,
+      "nominalMiB": {
+        "Swapins": 1.671875,
+        "Swapouts": 0.0,
+        "Pageins": 7165.921875,
+        "Pageouts": 26.65625,
+        "Compressions": 40706.40625,
+        "Decompressions": 36668.359375
+      },
+      "beforeLoad1m": 6.5234375,
+      "afterLoad1m": 6.09033203125
+    },
+    {
+      "label": "investigation-20261112-v2-r2",
+      "seconds": 225.345,
+      "nominalMiB": {
+        "Swapins": 7.890625,
+        "Swapouts": 0.0,
+        "Pageins": 6732.125,
+        "Pageouts": 17.46875,
+        "Compressions": 40506.546875,
+        "Decompressions": 35321.21875
+      },
+      "beforeLoad1m": 6.09033203125,
+      "afterLoad1m": 5.71630859375
+    },
+    {
+      "label": "investigation-20261112-v0-r2",
+      "seconds": 240.36,
+      "nominalMiB": {
+        "Swapins": 1.75,
+        "Swapouts": 0.0,
+        "Pageins": 7495.1875,
+        "Pageouts": 13.125,
+        "Compressions": 38893.8125,
+        "Decompressions": 34529.203125
+      },
+      "beforeLoad1m": 5.71630859375,
+      "afterLoad1m": 5.7119140625
+    },
+    {
+      "label": "investigation-20261112-v2-r3",
+      "seconds": 240.328,
+      "nominalMiB": {
+        "Swapins": 2.078125,
+        "Swapouts": 0.0,
+        "Pageins": 7006.484375,
+        "Pageouts": 22.46875,
+        "Compressions": 40175.296875,
+        "Decompressions": 35851.015625
+      },
+      "beforeLoad1m": 5.7119140625,
+      "afterLoad1m": 6.3681640625
+    },
+    {
+      "label": "investigation-20261112-v0-r3",
+      "seconds": 240.385,
+      "nominalMiB": {
+        "Swapins": 1.734375,
+        "Swapouts": 0.0,
+        "Pageins": 7968.578125,
+        "Pageouts": 22.78125,
+        "Compressions": 36542.484375,
+        "Decompressions": 32174.9375
+      },
+      "beforeLoad1m": 6.3681640625,
+      "afterLoad1m": 5.5615234375
+    },
+    {
+      "label": "investigation-20261112-v1-r3",
+      "seconds": 240.347,
+      "nominalMiB": {
+        "Swapins": 0.1875,
+        "Swapouts": 0.0,
+        "Pageins": 7849.265625,
+        "Pageouts": 21.8125,
+        "Compressions": 37403.0,
+        "Decompressions": 32193.65625
+      },
+      "beforeLoad1m": 5.5615234375,
+      "afterLoad1m": 6.31982421875
+    }
+  ],
+  "admission": [
+    {
+      "label": "investigation-20261112-v0-r1",
+      "offered": 960,
+      "outcomes": {
+        "success": 892,
+        "rejected": 68
+      },
+      "rejectErrors": {
+        "Generator inflight capacity reached": 68
+      },
+      "meanSlotSeconds": 12.666261210762332,
+      "meanPostResultSlotMs": 157.01569506726457,
+      "meanMeasuredSlotOccupancy": 81.38045833333334,
+      "firstRejectScheduledSeconds": 92.999
+    },
+    {
+      "label": "investigation-20261112-v1-r1",
+      "offered": 960,
+      "outcomes": {
+        "success": 857,
+        "rejected": 103
+      },
+      "rejectErrors": {
+        "Generator inflight capacity reached": 103
+      },
+      "meanSlotSeconds": 14.549997666277713,
+      "meanPostResultSlotMs": 165.8436406067678,
+      "meanMeasuredSlotOccupancy": 82.32771666666666,
+      "firstRejectScheduledSeconds": 70.999
+    },
+    {
+      "label": "investigation-20261112-v2-r1",
+      "offered": 960,
+      "outcomes": {
+        "success": 891,
+        "rejected": 69
+      },
+      "rejectErrors": {
+        "Generator inflight capacity reached": 69
+      },
+      "meanSlotSeconds": 13.813812570145902,
+      "meanPostResultSlotMs": 176.77890011223346,
+      "meanMeasuredSlotOccupancy": 87.55823333333333,
+      "firstRejectScheduledSeconds": 64.874
+    },
+    {
+      "label": "investigation-20261112-v1-r2",
+      "offered": 960,
+      "outcomes": {
+        "success": 924,
+        "rejected": 36
+      },
+      "rejectErrors": {
+        "Generator inflight capacity reached": 36
+      },
+      "meanSlotSeconds": 12.283902597402598,
+      "meanPostResultSlotMs": 120.35714285714286,
+      "meanMeasuredSlotOccupancy": 79.134,
+      "firstRejectScheduledSeconds": 93.499
+    },
+    {
+      "label": "investigation-20261112-v2-r2",
+      "offered": 960,
+      "outcomes": {
+        "success": 919,
+        "rejected": 41
+      },
+      "rejectErrors": {
+        "Generator inflight capacity reached": 41
+      },
+      "meanSlotSeconds": 12.19664853101197,
+      "meanPostResultSlotMs": 127.27094668117519,
+      "meanMeasuredSlotOccupancy": 78.83300833333334,
+      "firstRejectScheduledSeconds": 92.249
+    },
+    {
+      "label": "investigation-20261112-v0-r2",
+      "offered": 960,
+      "outcomes": {
+        "success": 933,
+        "rejected": 27
+      },
+      "rejectErrors": {
+        "Generator inflight capacity reached": 27
+      },
+      "meanSlotSeconds": 11.437002143622722,
+      "meanPostResultSlotMs": 108.73097534833869,
+      "meanMeasuredSlotOccupancy": 71.061725,
+      "firstRejectScheduledSeconds": 110.124
+    },
+    {
+      "label": "investigation-20261112-v2-r3",
+      "offered": 960,
+      "outcomes": {
+        "success": 895,
+        "rejected": 65
+      },
+      "rejectErrors": {
+        "Generator inflight capacity reached": 65
+      },
+      "meanSlotSeconds": 12.022373184357543,
+      "meanPostResultSlotMs": 147.0927374301676,
+      "meanMeasuredSlotOccupancy": 74.27455833333333,
+      "firstRejectScheduledSeconds": 91.749
+    },
+    {
+      "label": "investigation-20261112-v0-r3",
+      "offered": 960,
+      "outcomes": {
+        "success": 933,
+        "rejected": 27
+      },
+      "rejectErrors": {
+        "Generator inflight capacity reached": 27
+      },
+      "meanSlotSeconds": 11.862068595927118,
+      "meanPostResultSlotMs": 134.83494105037514,
+      "meanMeasuredSlotOccupancy": 74.32849166666666,
+      "firstRejectScheduledSeconds": 99.249
+    },
+    {
+      "label": "investigation-20261112-v1-r3",
+      "offered": 960,
+      "outcomes": {
+        "success": 926,
+        "rejected": 34
+      },
+      "rejectErrors": {
+        "Generator inflight capacity reached": 34
+      },
+      "meanSlotSeconds": 11.41704535637149,
+      "meanPostResultSlotMs": 115.17494600431965,
+      "meanMeasuredSlotOccupancy": 72.397375,
+      "firstRejectScheduledSeconds": 109.999
+    }
+  ],
+  "cohortSuccessfulCounts": {
+    "v0": {
+      "jpeg-large.jpeg": 280,
+      "jpeg-small.jpeg": 251,
+      "noise-boundary.bin": 117,
+      "noise-large.bin": 52,
+      "noise-medium.bin": 402,
+      "png-alpha.png": 292,
+      "png-noise.png": 215,
+      "text-boundary-above.bin": 118,
+      "text-boundary-below.bin": 131,
+      "text-small.bin": 496,
+      "webp-large.webp": 119,
+      "webp-small.webp": 285
+    },
+    "v1": {
+      "jpeg-large.jpeg": 283,
+      "jpeg-small.jpeg": 240,
+      "noise-boundary.bin": 110,
+      "noise-large.bin": 49,
+      "noise-medium.bin": 397,
+      "png-alpha.png": 285,
+      "png-noise.png": 213,
+      "text-boundary-above.bin": 116,
+      "text-boundary-below.bin": 130,
+      "text-small.bin": 481,
+      "webp-large.webp": 113,
+      "webp-small.webp": 290
+    },
+    "v2": {
+      "jpeg-large.jpeg": 283,
+      "jpeg-small.jpeg": 248,
+      "noise-boundary.bin": 109,
+      "noise-large.bin": 52,
+      "noise-medium.bin": 396,
+      "png-alpha.png": 283,
+      "png-noise.png": 216,
+      "text-boundary-above.bin": 117,
+      "text-boundary-below.bin": 131,
+      "text-small.bin": 478,
+      "webp-large.webp": 113,
+      "webp-small.webp": 279
+    }
+  },
+  "evaluator": {
+    "launcher-comparison.json": {
+      "verdict": "reject",
+      "reasonCount": 123,
+      "insufficientCohortReasons": 24,
+      "reasons": [
+        "global: successfulFilesPerSecond regressed beyond baseline spread",
+        "global: successfulBytesPerSecond regressed beyond baseline spread",
+        "global: readyP95Ms regressed beyond baseline spread",
+        "global: readyP99Ms regressed beyond baseline spread",
+        "global: endP95Ms regressed beyond baseline spread",
+        "global: endP99Ms regressed beyond baseline spread",
+        "global: service.document-worker.networkTxBytesPerSuccessfulByte regressed beyond baseline spread",
+        "global: service.api.cpuSecondsPerSuccess regressed beyond baseline spread",
+        "global: service.api.peakAnonymousMemoryBytes regressed beyond baseline spread",
+        "global: service.api.networkRxBytesPerSuccessfulByte regressed beyond baseline spread",
+        "global: service.api.networkTxBytesPerSuccessfulByte regressed beyond baseline spread",
+        "global: service.api.storageWriteBytesPerSuccessfulByte regressed beyond baseline spread",
+        "global: service.postgres.cpuSecondsPerSuccess regressed beyond baseline spread",
+        "global: service.postgres.networkRxBytesPerSuccessfulByte regressed beyond baseline spread",
+        "global: service.postgres.networkTxBytesPerSuccessfulByte regressed beyond baseline spread",
+        "global: service.minio.cpuSecondsPerSuccess regressed beyond baseline spread",
+        "global: service.rabbitmq.networkTxBytesPerSuccessfulByte regressed beyond baseline spread",
+        "global: service.rabbitmq.storageWriteBytesPerSuccessfulByte regressed beyond baseline spread",
+        "global: service.prometheus.cpuSecondsPerSuccess regressed beyond baseline spread",
+        "global: service.prometheus.peakAnonymousMemoryBytes regressed beyond baseline spread",
+        "global: service.prometheus.networkRxBytesPerSuccessfulByte regressed beyond baseline spread",
+        "global: cpuSecondsPerSuccess regressed beyond baseline spread",
+        "cohort:jpeg-large.jpeg: readyP95Ms regressed beyond baseline spread",
+        "cohort:jpeg-large.jpeg: readyP99Ms regressed beyond baseline spread",
+        "cohort:jpeg-large.jpeg: endP95Ms regressed beyond baseline spread",
+        "cohort:jpeg-large.jpeg: endP99Ms regressed beyond baseline spread",
+        "cohort:jpeg-small.jpeg: successfulFilesPerSecond regressed beyond baseline spread",
+        "cohort:jpeg-small.jpeg: successfulBytesPerSecond regressed beyond baseline spread",
+        "cohort:jpeg-small.jpeg: generatorLagP95Ms regressed beyond baseline spread",
+        "cohort:jpeg-small.jpeg: readyP95Ms regressed beyond baseline spread",
+        "cohort:jpeg-small.jpeg: readyP99Ms regressed beyond baseline spread",
+        "cohort:jpeg-small.jpeg: endP95Ms regressed beyond baseline spread",
+        "cohort:jpeg-small.jpeg: endP99Ms regressed beyond baseline spread",
+        "cohort:noise-boundary.bin: successfulFilesPerSecond regressed beyond baseline spread",
+        "cohort:noise-boundary.bin: successfulBytesPerSecond regressed beyond baseline spread",
+        "cohort:noise-boundary.bin: readyP95Ms regressed beyond baseline spread",
+        "cohort:noise-boundary.bin: readyP99Ms regressed beyond baseline spread",
+        "cohort:noise-boundary.bin: endP95Ms regressed beyond baseline spread",
+        "cohort:noise-boundary.bin: endP99Ms regressed beyond baseline spread",
+        "cohort:noise-large.bin: successfulFilesPerSecond regressed beyond baseline spread",
+        "cohort:noise-large.bin: successfulBytesPerSecond regressed beyond baseline spread",
+        "cohort:noise-large.bin: generatorLagP95Ms regressed beyond baseline spread",
+        "cohort:noise-large.bin: generatorLagP99Ms regressed beyond baseline spread",
+        "cohort:noise-large.bin: endP95Ms regressed beyond baseline spread",
+        "cohort:noise-large.bin: endP99Ms regressed beyond baseline spread",
+        "cohort:noise-medium.bin: successfulFilesPerSecond regressed beyond baseline spread",
+        "cohort:noise-medium.bin: successfulBytesPerSecond regressed beyond baseline spread",
+        "cohort:noise-medium.bin: readyP95Ms regressed beyond baseline spread",
+        "cohort:noise-medium.bin: readyP99Ms regressed beyond baseline spread",
+        "cohort:noise-medium.bin: endP95Ms regressed beyond baseline spread",
+        "cohort:noise-medium.bin: endP99Ms regressed beyond baseline spread",
+        "cohort:png-alpha.png: errorFraction regressed beyond baseline spread",
+        "cohort:png-alpha.png: successfulFilesPerSecond regressed beyond baseline spread",
+        "cohort:png-alpha.png: successfulBytesPerSecond regressed beyond baseline spread",
+        "cohort:png-alpha.png: readyP95Ms regressed beyond baseline spread",
+        "cohort:png-alpha.png: readyP99Ms regressed beyond baseline spread",
+        "cohort:png-alpha.png: endP95Ms regressed beyond baseline spread",
+        "cohort:png-alpha.png: endP99Ms regressed beyond baseline spread",
+        "cohort:png-noise.png: successfulFilesPerSecond regressed beyond baseline spread",
+        "cohort:png-noise.png: successfulBytesPerSecond regressed beyond baseline spread",
+        "cohort:png-noise.png: generatorLagP95Ms regressed beyond baseline spread",
+        "cohort:png-noise.png: generatorLagP99Ms regressed beyond baseline spread",
+        "cohort:png-noise.png: readyP95Ms regressed beyond baseline spread",
+        "cohort:png-noise.png: readyP99Ms regressed beyond baseline spread",
+        "cohort:png-noise.png: endP95Ms regressed beyond baseline spread",
+        "cohort:png-noise.png: endP99Ms regressed beyond baseline spread",
+        "cohort:text-boundary-above.bin: successfulFilesPerSecond regressed beyond baseline spread",
+        "cohort:text-boundary-above.bin: successfulBytesPerSecond regressed beyond baseline spread",
+        "cohort:text-boundary-above.bin: readyP95Ms regressed beyond baseline spread",
+        "cohort:text-boundary-above.bin: readyP99Ms regressed beyond baseline spread",
+        "cohort:text-boundary-above.bin: endP95Ms regressed beyond baseline spread",
+        "cohort:text-boundary-above.bin: endP99Ms regressed beyond baseline spread",
+        "cohort:text-boundary-below.bin: successfulFilesPerSecond regressed beyond baseline spread",
+        "cohort:text-boundary-below.bin: successfulBytesPerSecond regressed beyond baseline spread",
+        "cohort:text-boundary-below.bin: readyP95Ms regressed beyond baseline spread",
+        "cohort:text-boundary-below.bin: readyP99Ms regressed beyond baseline spread",
+        "cohort:text-boundary-below.bin: endP95Ms regressed beyond baseline spread",
+        "cohort:text-boundary-below.bin: endP99Ms regressed beyond baseline spread",
+        "cohort:text-small.bin: errorFraction regressed beyond baseline spread",
+        "cohort:text-small.bin: successfulFilesPerSecond regressed beyond baseline spread",
+        "cohort:text-small.bin: successfulBytesPerSecond regressed beyond baseline spread",
+        "cohort:text-small.bin: readyP95Ms regressed beyond baseline spread",
+        "cohort:text-small.bin: readyP99Ms regressed beyond baseline spread",
+        "cohort:text-small.bin: endP95Ms regressed beyond baseline spread",
+        "cohort:text-small.bin: endP99Ms regressed beyond baseline spread",
+        "cohort:webp-large.webp: errorFraction regressed beyond baseline spread",
+        "cohort:webp-large.webp: successfulFilesPerSecond regressed beyond baseline spread",
+        "cohort:webp-large.webp: successfulBytesPerSecond regressed beyond baseline spread",
+        "cohort:webp-large.webp: readyP95Ms regressed beyond baseline spread",
+        "cohort:webp-large.webp: readyP99Ms regressed beyond baseline spread",
+        "cohort:webp-large.webp: endP95Ms regressed beyond baseline spread",
+        "cohort:webp-large.webp: endP99Ms regressed beyond baseline spread",
+        "cohort:webp-small.webp: successfulFilesPerSecond regressed beyond baseline spread",
+        "cohort:webp-small.webp: successfulBytesPerSecond regressed beyond baseline spread",
+        "cohort:webp-small.webp: readyP95Ms regressed beyond baseline spread",
+        "cohort:webp-small.webp: readyP99Ms regressed beyond baseline spread",
+        "cohort:webp-small.webp: endP95Ms regressed beyond baseline spread",
+        "cohort:webp-small.webp: endP99Ms regressed beyond baseline spread",
+        "cohort:jpeg-large.jpeg: baseline needs at least 1000 successful operations",
+        "cohort:jpeg-large.jpeg: candidate needs at least 1000 successful operations",
+        "cohort:jpeg-small.jpeg: baseline needs at least 1000 successful operations",
+        "cohort:jpeg-small.jpeg: candidate needs at least 1000 successful operations",
+        "cohort:noise-boundary.bin: baseline needs at least 1000 successful operations",
+        "cohort:noise-boundary.bin: candidate needs at least 1000 successful operations",
+        "cohort:noise-large.bin: baseline needs at least 1000 successful operations",
+        "cohort:noise-large.bin: candidate needs at least 1000 successful operations",
+        "cohort:noise-medium.bin: baseline needs at least 1000 successful operations",
+        "cohort:noise-medium.bin: candidate needs at least 1000 successful operations",
+        "cohort:png-alpha.png: baseline needs at least 1000 successful operations",
+        "cohort:png-alpha.png: candidate needs at least 1000 successful operations",
+        "cohort:png-noise.png: baseline needs at least 1000 successful operations",
+        "cohort:png-noise.png: candidate needs at least 1000 successful operations",
+        "cohort:text-boundary-above.bin: baseline needs at least 1000 successful operations",
+        "cohort:text-boundary-above.bin: candidate needs at least 1000 successful operations",
+        "cohort:text-boundary-below.bin: baseline needs at least 1000 successful operations",
+        "cohort:text-boundary-below.bin: candidate needs at least 1000 successful operations",
+        "cohort:text-small.bin: baseline needs at least 1000 successful operations",
+        "cohort:text-small.bin: candidate needs at least 1000 successful operations",
+        "cohort:webp-large.webp: baseline needs at least 1000 successful operations",
+        "cohort:webp-large.webp: candidate needs at least 1000 successful operations",
+        "cohort:webp-small.webp: baseline needs at least 1000 successful operations",
+        "cohort:webp-small.webp: candidate needs at least 1000 successful operations",
+        "Global p99 improvement does not exceed baseline spread and disjoint 95% quantile intervals"
+      ]
+    },
+    "client-comparison.json": {
+      "verdict": "reject",
+      "reasonCount": 36,
+      "insufficientCohortReasons": 24,
+      "reasons": [
+        "global: service.generator.storageReadBytesPerSuccessfulByte regressed beyond baseline spread",
+        "global: service.document-worker.storageReadBytesPerSuccessfulByte regressed beyond baseline spread",
+        "global: service.prometheus.networkTxBytesPerSuccessfulByte regressed beyond baseline spread",
+        "global: service.rabbitmq.storageWriteBytesPerSuccessfulByte regressed beyond baseline spread",
+        "global: service.grafana.cpuSecondsPerSuccess regressed beyond baseline spread",
+        "global: service.grafana.networkRxBytesPerSuccessfulByte regressed beyond baseline spread",
+        "cohort:jpeg-small.jpeg: generatorLagP95Ms regressed beyond baseline spread",
+        "cohort:text-boundary-above.bin: generatorLagP95Ms regressed beyond baseline spread",
+        "cohort:webp-large.webp: generatorLagP99Ms regressed beyond baseline spread",
+        "cohort:webp-small.webp: errorFraction regressed beyond baseline spread",
+        "cohort:jpeg-large.jpeg: baseline needs at least 1000 successful operations",
+        "cohort:jpeg-large.jpeg: candidate needs at least 1000 successful operations",
+        "cohort:jpeg-small.jpeg: baseline needs at least 1000 successful operations",
+        "cohort:jpeg-small.jpeg: candidate needs at least 1000 successful operations",
+        "cohort:noise-boundary.bin: baseline needs at least 1000 successful operations",
+        "cohort:noise-boundary.bin: candidate needs at least 1000 successful operations",
+        "cohort:noise-large.bin: baseline needs at least 1000 successful operations",
+        "cohort:noise-large.bin: candidate needs at least 1000 successful operations",
+        "cohort:noise-medium.bin: baseline needs at least 1000 successful operations",
+        "cohort:noise-medium.bin: candidate needs at least 1000 successful operations",
+        "cohort:png-alpha.png: baseline needs at least 1000 successful operations",
+        "cohort:png-alpha.png: candidate needs at least 1000 successful operations",
+        "cohort:png-noise.png: baseline needs at least 1000 successful operations",
+        "cohort:png-noise.png: candidate needs at least 1000 successful operations",
+        "cohort:text-boundary-above.bin: baseline needs at least 1000 successful operations",
+        "cohort:text-boundary-above.bin: candidate needs at least 1000 successful operations",
+        "cohort:text-boundary-below.bin: baseline needs at least 1000 successful operations",
+        "cohort:text-boundary-below.bin: candidate needs at least 1000 successful operations",
+        "cohort:text-small.bin: baseline needs at least 1000 successful operations",
+        "cohort:text-small.bin: candidate needs at least 1000 successful operations",
+        "cohort:webp-large.webp: baseline needs at least 1000 successful operations",
+        "cohort:webp-large.webp: candidate needs at least 1000 successful operations",
+        "cohort:webp-small.webp: baseline needs at least 1000 successful operations",
+        "cohort:webp-small.webp: candidate needs at least 1000 successful operations",
+        "Global p99 improvement does not exceed baseline spread and disjoint 95% quantile intervals",
+        "No CPU or network/storage cost improvement exceeds baseline run-to-run spread"
+      ]
+    }
+  },
+  "partialLinuxVM": {
+    "samples": 7,
+    "startMs": 1794488424315,
+    "endMs": 1794488515943,
+    "seconds": 91.628,
+    "deltaCounters": {
+      "pgmajfault": 53240,
+      "pgscan_direct": 9468243,
+      "pgsteal_direct": 8082589,
+      "pgscan_proactive": 552960,
+      "workingset_refault_file": 4450819,
+      "pswpin": 30525,
+      "pswpout": 41336,
+      "pgpgin": 18013008,
+      "pgpgout": 17590904,
+      "allocstall_normal": 6,
+      "allocstall_movable": 29,
+      "oom_kill": 0
+    },
+    "nominalMiB": {
+      "pgscan_direct": 36985.32421875,
+      "pgsteal_direct": 31572.61328125,
+      "workingset_refault_file": 17386.01171875,
+      "pswpin": 119.23828125,
+      "pswpout": 161.46875
+    },
+    "availableMiBRange": [
+      2221.375,
+      2933.83203125
+    ]
+  },
+  "conclusions": {
+    "established": [
+      "Primary v0/v1 use the same generator image. The only intended primary variable is launcher; v2 changes client generator image. All960 offers retained per run. Original and first Node built bundle, runner, browser source, upload source and both lockfiles match, with10 common runtime layers. This rules out the listed changed source or bundle as explanation for their historical difference.",
+      "All primary rejections are generator128-slot admission failures. They are not API rejection responses. Slots remain occupied through client completion and cleanup. Aggregate p99 is conditional on success and excludes rejected offers.",
+      "Both primary evaluator verdicts are reject. Three repeats provide49\u2013496 successes per fixture cohort, well below1000. The experiment cannot certify cohort tails or performance acceptance.",
+      "Host compression and Linux direct-reclaim/refault counters prove active host/VM memory churn in the observed intervals. They do not identify which workload caused it. macOS existing occupied swap alone does not establish current swap I/O."
+    ],
+    "plausibleOnly": [
+      "Shared-host contention contributed to the historical cliff. Files provide active reclaim/compression evidence and service CPU-rate reductions, but no randomized host intervention or historical PSI/stall accounting establishes its causal share.",
+      "MinIO quota/runtime saturation contributes to losses. Its one-CPU neighborhood and throttling support testing it, but cgroup throttled seconds and service major faults alone do not establish a bottleneck or justify quota/GOMAXPROCS changes.",
+      "A launcher change has small effects on startup or shared-host timing. Primary spread does not reproduce the historical cliff, but failed guards prevent declaring launcher performance equivalence."
+    ],
+    "misleadingInterpretations": [
+      "Historical Bash versus later Node timing alone proves the launcher caused the cliff.",
+      "Different image IDs prove browser/runtime dependencies differ, despite matching common runtime layers and measured files.",
+      "Lower success p99 or CPU per success proves broad improvement when admission and successful fixture population differ.",
+      "6.4GiB occupied macOS swap proves heavy current swap I/O; primary swap-out delta was zero.",
+      "Absent PSI means no pressure, or large accumulated major-fault counts directly measure current stall duration.",
+      "A pooled/global p99 or a better median overrides failed per-run and per-cohort evaluator guards."
+    ],
+    "smallestRecommendation": "Keep performance acceptance rejected and retain the current production upload implementation while gathering discriminating evidence. Finish the frozen historical-runtime comparison without selective reruns; use a low-rate equal-admission multipart diagnostic to assess client mechanism. For an acceptance claim, run the existing evaluator on enough successful operations per cohort under documented host conditions. Do not change production source, quotas or acceptance thresholds from this attribution evidence alone."
+  }
+}

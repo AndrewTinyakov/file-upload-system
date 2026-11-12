@@ -35,7 +35,8 @@ window.fetch = async (input, options) => {
       operation.assetId = body.assetId;
       const alphabet = '0123456789ABCDEFGHJKMNPQRSTVWXYZ';
       const suffix = body.assetId.slice(-2).split('').reduce((total: number, char: string) => total * 32 + alphabet.indexOf(char), 0);
-      operation.sampled = suffix % 100 === 0;
+      operation.serverTraceSampled = suffix % 100 === 0;
+      operation.sampled ||= operation.serverTraceSampled;
       if (body.upload) operation.sourceUrl = body.upload.url.split('?')[0];
       routes.set(`/api/v1/assets/${body.assetId}`, operation);
       for (const suffix of ['', '/complete', '/parts', '/abort']) routes.set(`/api/v1/upload-sessions/${body.sessionId}${suffix}`, operation);

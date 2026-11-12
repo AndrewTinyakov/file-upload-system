@@ -1,0 +1,344 @@
+[
+  {
+    "label": "v1-baseline-20261110-r1",
+    "outcomes": {
+      "success": 957,
+      "rejected": 3
+    },
+    "services": {
+      "api": {
+        "seconds": 160.117,
+        "majorFaults": 5,
+        "cpuSeconds": 54.027680000000004,
+        "throttledSeconds": 1.6326840000000011,
+        "cpuPerSecond": 0.33742625704953255,
+        "peakMiB": 416.03515625
+      },
+      "minio": {
+        "seconds": 160.116,
+        "majorFaults": 265,
+        "cpuSeconds": 122.52038999999999,
+        "throttledSeconds": 392.384045,
+        "cpuPerSecond": 0.7651976691898372,
+        "peakMiB": 1024.0
+      },
+      "image-worker": {
+        "seconds": 160.117,
+        "majorFaults": 19,
+        "cpuSeconds": 271.493365,
+        "throttledSeconds": 411.304409,
+        "cpuPerSecond": 1.6955936284092257,
+        "peakMiB": 2047.9140625
+      },
+      "generator": {
+        "seconds": 160.115,
+        "majorFaults": 38182,
+        "cpuSeconds": 195.485341,
+        "throttledSeconds": 44.858617,
+        "cpuPerSecond": 1.220905855166599,
+        "peakMiB": 3830.48828125
+      },
+      "grafana": {
+        "seconds": 160.116,
+        "majorFaults": 1009,
+        "cpuSeconds": 6.9732259999999995,
+        "throttledSeconds": 31.229428,
+        "cpuPerSecond": 0.0435510879612281,
+        "peakMiB": 512.0
+      }
+    }
+  },
+  {
+    "label": "v1-baseline-20261110-r2",
+    "outcomes": {
+      "success": 960
+    },
+    "services": {
+      "api": {
+        "seconds": 160.456,
+        "majorFaults": 4,
+        "cpuSeconds": 55.08548699999999,
+        "throttledSeconds": 1.3120830000000012,
+        "cpuPerSecond": 0.34330587201475793,
+        "peakMiB": 410.94140625
+      },
+      "minio": {
+        "seconds": 160.457,
+        "majorFaults": 690,
+        "cpuSeconds": 116.811523,
+        "throttledSeconds": 367.35799000000003,
+        "cpuPerSecond": 0.7279926896302437,
+        "peakMiB": 1024.0
+      },
+      "image-worker": {
+        "seconds": 160.456,
+        "majorFaults": 16679,
+        "cpuSeconds": 274.011935,
+        "throttledSeconds": 450.179623,
+        "cpuPerSecond": 1.707707627013013,
+        "peakMiB": 2047.99609375
+      },
+      "generator": {
+        "seconds": 160.46,
+        "majorFaults": 37363,
+        "cpuSeconds": 200.84831300000002,
+        "throttledSeconds": 60.546479000000005,
+        "cpuPerSecond": 1.2517033092359466,
+        "peakMiB": 4070.0546875
+      },
+      "grafana": {
+        "seconds": 160.455,
+        "majorFaults": 650,
+        "cpuSeconds": 5.379781000000001,
+        "throttledSeconds": 16.737344000000004,
+        "cpuPerSecond": 0.033528285188993805,
+        "peakMiB": 511.99609375
+      }
+    }
+  },
+  {
+    "label": "v1-baseline-20261110-r3",
+    "outcomes": {
+      "success": 960
+    },
+    "services": {
+      "api": {
+        "seconds": 160.574,
+        "majorFaults": 3,
+        "cpuSeconds": 52.157409,
+        "throttledSeconds": 1.4199289999999998,
+        "cpuPerSecond": 0.32481851981018095,
+        "peakMiB": 414.62109375
+      },
+      "minio": {
+        "seconds": 160.574,
+        "majorFaults": 715,
+        "cpuSeconds": 116.471913,
+        "throttledSeconds": 306.02162699999997,
+        "cpuPerSecond": 0.7253472729084409,
+        "peakMiB": 1024.0
+      },
+      "image-worker": {
+        "seconds": 160.573,
+        "majorFaults": 7,
+        "cpuSeconds": 276.930597,
+        "throttledSeconds": 450.013779,
+        "cpuPerSecond": 1.7246398647344197,
+        "peakMiB": 2007.3515625
+      },
+      "generator": {
+        "seconds": 160.574,
+        "majorFaults": 38529,
+        "cpuSeconds": 193.318169,
+        "throttledSeconds": 39.107887,
+        "cpuPerSecond": 1.203919495061467,
+        "peakMiB": 4003.87109375
+      },
+      "grafana": {
+        "seconds": 160.574,
+        "majorFaults": 915,
+        "cpuSeconds": 3.636894,
+        "throttledSeconds": 8.370155,
+        "cpuPerSecond": 0.022649333017798645,
+        "peakMiB": 512.0
+      }
+    }
+  },
+  {
+    "label": "quick-20261111T142327496Z-94b8ef8d",
+    "outcomes": {
+      "success": 292,
+      "rejected": 656,
+      "timeout": 12
+    },
+    "services": {
+      "api": {
+        "seconds": 300.662,
+        "majorFaults": 6543,
+        "cpuSeconds": 95.15540800000001,
+        "throttledSeconds": 3.883459000000002,
+        "cpuPerSecond": 0.31648631353479995,
+        "peakMiB": 403.7890625
+      },
+      "minio": {
+        "seconds": 300.661,
+        "majorFaults": 10285,
+        "cpuSeconds": 93.921707,
+        "throttledSeconds": 64.68752099999999,
+        "cpuPerSecond": 0.31238407043148264,
+        "peakMiB": 1023.97265625
+      },
+      "image-worker": {
+        "seconds": 300.66,
+        "majorFaults": 13198,
+        "cpuSeconds": 186.818922,
+        "throttledSeconds": 47.380035,
+        "cpuPerSecond": 0.621362741967671,
+        "peakMiB": 1741.734375
+      },
+      "generator": {
+        "seconds": 300.665,
+        "majorFaults": 71211,
+        "cpuSeconds": 146.965361,
+        "throttledSeconds": 14.85124,
+        "cpuPerSecond": 0.4888010277218831,
+        "peakMiB": 2779.63671875
+      },
+      "grafana": {
+        "seconds": 300.662,
+        "majorFaults": 11264,
+        "cpuSeconds": 19.905343,
+        "throttledSeconds": 54.146405,
+        "cpuPerSecond": 0.06620505085444785,
+        "peakMiB": 511.9765625
+      }
+    }
+  },
+  {
+    "label": "canonical-baseline-20261112-control-r1",
+    "outcomes": {
+      "success": 682,
+      "rejected": 278
+    },
+    "services": {
+      "api": {
+        "seconds": 173.002,
+        "majorFaults": 10,
+        "cpuSeconds": 59.325624000000005,
+        "throttledSeconds": 2.8711459999999995,
+        "cpuPerSecond": 0.3429187177026855,
+        "peakMiB": 404.8828125
+      },
+      "minio": {
+        "seconds": 173.003,
+        "majorFaults": 14926,
+        "cpuSeconds": 159.993584,
+        "throttledSeconds": 699.2727699999999,
+        "cpuPerSecond": 0.9248023675890014,
+        "peakMiB": 1024.0
+      },
+      "image-worker": {
+        "seconds": 173.001,
+        "majorFaults": 17,
+        "cpuSeconds": 201.722997,
+        "throttledSeconds": 142.277659,
+        "cpuPerSecond": 1.1660221443806682,
+        "peakMiB": 1793.48828125
+      },
+      "generator": {
+        "seconds": 173.002,
+        "majorFaults": 45223,
+        "cpuSeconds": 206.06998099999998,
+        "throttledSeconds": 35.85401400000001,
+        "cpuPerSecond": 1.1911421891076401,
+        "peakMiB": 3939.95703125
+      },
+      "grafana": {
+        "seconds": 173.001,
+        "majorFaults": 1092,
+        "cpuSeconds": 4.934863,
+        "throttledSeconds": 15.381549000000001,
+        "cpuPerSecond": 0.028525054768469546,
+        "peakMiB": 511.9765625
+      }
+    }
+  },
+  {
+    "label": "canonical-baseline-20261112-control-r2",
+    "outcomes": {
+      "success": 795,
+      "rejected": 165
+    },
+    "services": {
+      "api": {
+        "seconds": 160.175,
+        "majorFaults": 4,
+        "cpuSeconds": 58.59808100000001,
+        "throttledSeconds": 1.3425290000000007,
+        "cpuPerSecond": 0.3658378710785079,
+        "peakMiB": 417.89453125
+      },
+      "minio": {
+        "seconds": 160.175,
+        "majorFaults": 19884,
+        "cpuSeconds": 145.522273,
+        "throttledSeconds": 643.385619,
+        "cpuPerSecond": 0.9085205119400656,
+        "peakMiB": 1024.0
+      },
+      "image-worker": {
+        "seconds": 160.174,
+        "majorFaults": 9,
+        "cpuSeconds": 231.011569,
+        "throttledSeconds": 204.47923699999998,
+        "cpuPerSecond": 1.442253855182489,
+        "peakMiB": 1917.5703125
+      },
+      "generator": {
+        "seconds": 160.176,
+        "majorFaults": 42416,
+        "cpuSeconds": 216.752514,
+        "throttledSeconds": 42.183555000000005,
+        "cpuPerSecond": 1.3532146763560085,
+        "peakMiB": 4101.22265625
+      },
+      "grafana": {
+        "seconds": 160.173,
+        "majorFaults": 311,
+        "cpuSeconds": 5.654692,
+        "throttledSeconds": 17.821492000000003,
+        "cpuPerSecond": 0.03530365292527454,
+        "peakMiB": 511.953125
+      }
+    }
+  },
+  {
+    "label": "canonical-baseline-20261112-control-r3",
+    "outcomes": {
+      "success": 760,
+      "rejected": 200
+    },
+    "services": {
+      "api": {
+        "seconds": 169.155,
+        "majorFaults": 7,
+        "cpuSeconds": 59.523314,
+        "throttledSeconds": 2.2244910000000004,
+        "cpuPerSecond": 0.35188622269516123,
+        "peakMiB": 413.59765625
+      },
+      "minio": {
+        "seconds": 169.156,
+        "majorFaults": 4428,
+        "cpuSeconds": 153.723765,
+        "throttledSeconds": 731.073273,
+        "cpuPerSecond": 0.9087692130341223,
+        "peakMiB": 1024.0
+      },
+      "image-worker": {
+        "seconds": 169.156,
+        "majorFaults": 17,
+        "cpuSeconds": 228.782174,
+        "throttledSeconds": 187.50753699999999,
+        "cpuPerSecond": 1.352492220199106,
+        "peakMiB": 1884.7109375
+      },
+      "generator": {
+        "seconds": 169.156,
+        "majorFaults": 42749,
+        "cpuSeconds": 218.680511,
+        "throttledSeconds": 45.795004,
+        "cpuPerSecond": 1.2927741906878856,
+        "peakMiB": 4672.59375
+      },
+      "grafana": {
+        "seconds": 169.156,
+        "majorFaults": 259,
+        "cpuSeconds": 5.029861,
+        "throttledSeconds": 14.733416000000002,
+        "cpuPerSecond": 0.029735043391898603,
+        "peakMiB": 511.98828125
+      }
+    }
+  }
+]

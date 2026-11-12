@@ -151,7 +151,7 @@ try {
       lifecycle.clientEndMs = result.endMs;
       if (result.outcome === 'expected_fault') result.expectedFault = result.injected;
       result.generatorLagMs = Math.max(0, result.startMs - scheduledMs);
-      if (result.sampled) traceStream.write(`${JSON.stringify({ id, sessionId: result.sessionId, assetId: result.assetId, spans: result.spans })}\n`);
+      if (result.sampled) traceStream.write(`${JSON.stringify({ id, sessionId: result.sessionId, assetId: result.assetId, serverTraceSampled: result.serverTraceSampled, spans: result.spans })}\n`);
       delete result.spans;
       delete result.reference;
       delete result.referenceVariants;
@@ -324,12 +324,12 @@ try {
     readyMs: distribution(completed.filter(operation => operation.outcome === 'success').map(operation => operation.readyMs - operation.scheduledMs)),
     downloadableMs: distribution(completed.filter(operation => operation.outcome === 'success').map(operation => operation.endMs - operation.scheduledMs)),
     clientJsHeapPeakBytes: browserSamples.reduce((peak, sample) => Math.max(peak, sample.jsHeapUsedBytes ?? 0), 0),
-    clientPutConcurrencyPeak: browserSamples.reduce((peak, sample) => Math.max(peak, sample.peakActivePuts ?? 0), 0),
+    clientPutConcurrencyPeakPerPage: browserSamples.reduce((peak, sample) => Math.max(peak, sample.peakActivePuts ?? 0), 0),
     cleanupFailures, cleanupObjects, diagnostics,
     clientTasksUnsettledAtReturn: completed.filter(operation => operation.clientTaskSettled === false).length,
     clientPutsActiveAtReturn: completed.reduce((sum, operation) => sum + (operation.activePutsAtReturn ?? 0), 0),
     resourceEvidence: { peakMemory: 'one-second requested samples, includes page cache', generatorNetwork: 'isolated Docker bridge counters', queueAge: finalQueues.some(queue => queue.headTimestamp !== null) ? 'broker timestamp' : 'unavailable' },
-    limitations: ['clientTaskSettled covers upload and download verification; production uploadFile does not consume signal, and the cancellation send guard covers requests associated before route teardown', 'Docker storage counters may omit cached/overlay writes; zero is not proof of no physical I/O', 'Memory sampling can miss transient peaks; actual sample cadence is archived', 'Queue head age is unavailable when the broker omits head_message_timestamp', 'Cleanup removes verified benchmark objects; production retention is unverified', 'Marginal p99 intervals assume independent samples; correlated queueing can widen uncertainty', 'Worker restart counter resets can omit CPU/IO between the final pre-stop sample and termination'],
+    limitations: ['clientTaskSettled covers upload and download verification; production signal handling depends on the tested revision, and the benchmark additionally routes deadlines to API fetches and associated PUTs before route teardown', 'Docker storage counters may omit cached/overlay writes; zero is not proof of no physical I/O', 'Memory sampling can miss transient peaks; actual sample cadence is archived', 'Queue head age is unavailable when the broker omits head_message_timestamp', 'Cleanup removes verified benchmark objects; production retention is unverified', 'Marginal p99 intervals assume independent samples; correlated queueing can widen uncertainty', 'Worker restart counter resets can omit CPU/IO between the final pre-stop sample and termination'],
   };
   await writeFile(`${directory}/summary.json`, JSON.stringify(summary, null, 2));
   const prometheus = await fetch(`http://prometheus:9090/api/v1/query?query=${encodeURIComponent('up')}`);

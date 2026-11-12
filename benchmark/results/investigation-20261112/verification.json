@@ -1,0 +1,121 @@
+{
+  "runCommand": "BENCHMARK_REUSE_BUILD=1 COHORT=text-small.bin bash benchmark/legacy-bash/run.sh smoke investigation-verified-20261112-smoke",
+  "runExitCode": 0,
+  "sourceHead": "0612c6e963300b60e1ea68f2f1054bd01db8301d",
+  "launcherSha256": "3acc2dd8204a6a567bde4fd6f1f06e2ca4ac25bddd119b83c7bf259b03bbf9ca",
+  "candidateGeneratorImage": "sha256:719a0710afe4e23cf4836651e831d947a408e507072c4f086bcd0d3a6bda2aeb",
+  "summary": {
+    "scenario": "smoke:text-small.bin",
+    "offered": 10,
+    "recorded": 10,
+    "outcomes": {
+      "success": 10
+    },
+    "drained": true,
+    "durableBacklogDrained": true,
+    "unfinishedServerUploads": 0,
+    "clientTasksUnsettledAtReturn": 0,
+    "clientPutsActiveAtReturn": 0,
+    "clientPutConcurrencyPeakPerPage": 1,
+    "cleanupFailures": 0,
+    "diagnostics": [],
+    "limitations": [
+      "clientTaskSettled covers upload and download verification; production signal handling depends on the tested revision, and the benchmark additionally routes deadlines to API fetches and associated PUTs before route teardown",
+      "Docker storage counters may omit cached/overlay writes; zero is not proof of no physical I/O",
+      "Memory sampling can miss transient peaks; actual sample cadence is archived",
+      "Queue head age is unavailable when the broker omits head_message_timestamp",
+      "Cleanup removes verified benchmark objects; production retention is unverified",
+      "Marginal p99 intervals assume independent samples; correlated queueing can widen uncertainty",
+      "Worker restart counter resets can omit CPU/IO between the final pre-stop sample and termination"
+    ]
+  },
+  "allOperationIdsUniqueAndOffered": true,
+  "downloadVerification": "All 10 real browser operations returned success after READY, variant length, and SHA256 checks against text-small.bin; production browser implementation inspected at benchmark/src/browser.ts lines 174-197. No independent packet or content capture.",
+  "liveQueueObservation": {
+    "argv": [
+      "docker",
+      "compose",
+      "-f",
+      "benchmark/docker/compose.yaml",
+      "exec",
+      "-T",
+      "rabbitmq",
+      "rabbitmqctl",
+      "list_queues",
+      "-q",
+      "-p",
+      "file_upload",
+      "name",
+      "messages_ready",
+      "messages_unacknowledged"
+    ],
+    "exitCode": 0,
+    "stdout": "name\tmessages_ready\tmessages_unacknowledged\nbackend.asset-events\t0\t0\nbackend.asset-cleanups-dead\t0\t0\nbackend.multipart-aborts\t0\t0\ndocument.jobs\t0\t0\nimage.jobs\t0\t0\nbackend.preparation-dead\t0\t0\nbackend.asset-cleanups\t0\t0\nbackend.multipart-aborts-dead\t0\t0\n",
+    "stderr": ""
+  },
+  "liveDatabaseObservation": {
+    "argv": [
+      "docker",
+      "compose",
+      "-f",
+      "benchmark/docker/compose.yaml",
+      "exec",
+      "-T",
+      "postgres",
+      "psql",
+      "-U",
+      "file_upload",
+      "-d",
+      "file_upload",
+      "-At",
+      "-c",
+      "SELECT 'unpublished_outbox',count(*) FROM outbox_messages WHERE published_at IS NULL UNION ALL SELECT 'preparing_assets',count(*) FROM file_assets WHERE status='PREPARING' UNION ALL SELECT 'created_uploads',count(*) FROM upload_sessions WHERE status='CREATED';"
+    ],
+    "exitCode": 0,
+    "stdout": "unpublished_outbox|0\npreparing_assets|0\ncreated_uploads|0\n",
+    "stderr": ""
+  },
+  "duplicateInvocation": {
+    "argv": [
+      "bash",
+      "benchmark/legacy-bash/run.sh",
+      "smoke",
+      "investigation-verified-20261112-smoke"
+    ],
+    "exitCode": 1,
+    "stdout": "",
+    "stderr": "Result name already used: investigation-verified-20261112-smoke\n",
+    "allOriginalEvidenceBytesUnchanged": true,
+    "originalEvidenceFileCount": 25,
+    "runningContainerIdsUnchanged": true
+  },
+  "limits": [
+    "Smoke is a small normal-path text cohort and does not independently exercise cancellation, retry, multipart or image processing.",
+    "Download verification is the actual shipped browser checksum path; no separate network capture was taken.",
+    "This check establishes caller behavior, not performance attribution."
+  ],
+  "allNineOtherImageRefsEqualCampaignFrozenImages": true,
+  "archive": {
+    "membersVerified": 205,
+    "runs": 21,
+    "newCampaignRuns": 17,
+    "operationsIndependentlyCounted": 18252
+  },
+  "localChecks": {
+    "benchmarkTests": 45,
+    "clientTests": 11,
+    "clientTypecheck": "pass",
+    "bashSyntax": "pass",
+    "shellcheck": "pass",
+    "sourceReviews": "Round5 both perspectives, round6 focused dependency change; no findings"
+  },
+  "verifiedSourceSha256": {
+    ".github/workflows/message-contracts.yaml": "9068e0b037e5c7eb0143b3f2399e466d823885613277e7640b1d071cc25c2378",
+    "benchmark/src/browser.ts": "884017d15024cfaedf6379d4566d145c8b66e65fc318b67fa0843637c44e7aed",
+    "benchmark/src/run.mjs": "120fa0eca461d52ea52693cbf56395d4dd1064674a0c89238ad71652030b9102",
+    "benchmark/tests/browser.test.mjs": "28dd1d75061b7cde34186b43e358f4e1252667b3f7f67b7117b1159f1816293d",
+    "benchmark/tests/runner.test.mjs": "ab0d747013d7d585c430810d2f213c70d0c5241c074a8b94b45646984a23f17e",
+    "benchmark/legacy-bash/run.sh": "3acc2dd8204a6a567bde4fd6f1f06e2ca4ac25bddd119b83c7bf259b03bbf9ca",
+    "benchmark/legacy-bash/run-original.sh": "b0fb22d8f9141aa416667d0987148cb5cf81af785948968457935b39374c9b7e"
+  }
+}

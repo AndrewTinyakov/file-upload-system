@@ -68,9 +68,13 @@ jobs:
       - name: Test client uploads
         run: npm run test:client
 
+      - name: Install benchmark tooling
+        run: npm ci --prefix benchmark --ignore-scripts
+
       - name: Test benchmark helpers
         run: >-
           node --test
+          benchmark/tests/browser.test.mjs
           benchmark/tests/drain.test.mjs
           benchmark/tests/evaluate.test.mjs
           benchmark/tests/runner.test.mjs

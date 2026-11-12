@@ -1,0 +1,86 @@
+{
+  "previousReviewRounds": "Rounds1-3 client correctness/simplicity, round4 CI mirror. Those areas unchanged.",
+  "investigationChecks": [
+    {
+      "kind": "independent source audit",
+      "outcome": "No production slot leak or oversubscription defect found; per-page scope, UI stress mismatch and partial API cancellation limits identified."
+    },
+    {
+      "kind": "independent measurement audit",
+      "outcome": "Measured runtime source and nine non-generator images identical in historical Bash and first Node; host IO/memory stalls and conditional success populations are confounders."
+    },
+    {
+      "kind": "independent Bash orchestration verification",
+      "candidateSha256": "2d11c18c34ed5a10dd26e2e9be95944286594f0d44f973fa16c318934dfafc43",
+      "outcome": "Core orchestration/failure propagation passed. Early image-failure label reuse can overwrite sidecars.",
+      "evidence": "/private/var/folders/y6/fm262sgd3yz5p9hrjtwdtf5r0000gn/T/bash-launcher-verification-usguu37u"
+    },
+    {
+      "kind": "built runtime equivalence",
+      "outcome": "Copied files from stopped original/first-Node image containers. Built browser bundle, run.mjs, browser.ts, protocol, both dependency locks and upload.ts are byte-identical. Containers were never started. Node/Chromium base layers shared.",
+      "evidence": "built-runtime-equivalence.json"
+    }
+  ],
+  "findings": [
+    {
+      "id": "INV-1",
+      "severity": "P2",
+      "finding": "Bash label can be reused after pre-head failure and overwrite diagnostic artifacts",
+      "disposition": "fixed; focused tests and independent reviews pass",
+      "fix": "Reserve label atomically before external commands and reject existing sidecars."
+    },
+    {
+      "id": "INV-2",
+      "severity": "P2",
+      "finding": "PUT concurrency peak summary is page maximum but broad name implies benchmark total",
+      "disposition": "fixed; focused tests and independent reviews pass"
+    },
+    {
+      "id": "INV-3",
+      "severity": "P2",
+      "finding": "traceEvery selection overwritten by random asset ID suffix",
+      "disposition": "fixed; focused tests and independent reviews pass",
+      "fix": "Preserve scheduled sampling and union it with existing asset-ID selection, retain API/worker trace correlation, report serverTraceSampled separately; regressions exercise both selectors at browser seam.",
+      "newEvidence": "API SampledUploadTrace.kt and workers upload_trace.go use the same asset-ID suffix rule. Removing suffix selection outright would reduce joined traces."
+    },
+    {
+      "id": "INV-4",
+      "severity": "P3",
+      "finding": "Raw summary limitation incorrectly says every production revision ignores supplied signal",
+      "disposition": "fixed; focused tests and independent reviews pass"
+    }
+  ],
+  "reviewRound5": {
+    "reason": "New Bash restoration, accepted benchmark defects and CI seam-test coverage require focused review beyond earlier client and CI rounds.",
+    "candidate": "prepared-fixes-snapshot.json, seven overlays on0612c6e plus restored Bash directory",
+    "specCorrectness": "No actionable findings; reviewed all seven hashes, caller behavior, archive equality and INV1-4 fixes.",
+    "standardsSimplicity": "No actionable findings or optional changes; scoped fixes, existing mechanisms, no new code comments.",
+    "executionStatus": "45 benchmark tests and11 client tests pass; red-to-green regressions confirmed; independent actual Bash smoke and archive verification passed"
+  },
+  "reviewRound6": {
+    "reason": "Final CI install mode change after reproducible host Sharp lifecycle failure",
+    "candidate": "CI benchmark dependency install uses --ignore-scripts",
+    "specCorrectness": "No findings; lock installs optional @esbuild/linux-x64 executable directly, selected tests require neither Sharp nor Chromium setup",
+    "standardsSimplicity": "Unchanged from round5 except README scope clarification and install flag; no new general review"
+  },
+  "localVerification": {
+    "benchmarkTests": 45,
+    "clientTests": 11,
+    "clientTypecheck": "passed",
+    "bashSyntax": "passed",
+    "shellcheck": "passed",
+    "diffCheck": "passed",
+    "initialDependencyInstall": "Failed in existing Sharp lifecycle/global libvips setup; --ignore-scripts installation and real esbuild tests passed",
+    "newGeneratorImage": "sha256:719a0710afe4e23cf4836651e831d947a408e507072c4f086bcd0d3a6bda2aeb"
+  },
+  "independentVerification": {
+    "run": "investigation-verified-20261112-smoke",
+    "successes": 10,
+    "allChecksPassed": true,
+    "duplicateEvidenceFilesUnchanged": 25,
+    "archiveMembersHashed": 205,
+    "archiveOperationsCounted": 18252,
+    "unrelatedContainersPreserved": 58,
+    "source": "verification.smoke.json, verification.archive.json, verification.fixture.json, verification.cleanup.json"
+  }
+}

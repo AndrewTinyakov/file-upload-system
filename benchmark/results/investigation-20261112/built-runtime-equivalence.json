@@ -1,0 +1,27 @@
+{
+  "old": {
+    "image": "sha256:0915364a5bf50b88985949d1703937e510371a7c34b26bf688132380132cb94f",
+    "hashes": {
+      "/bench/public/browser.js": "90136a7b809abab5ea36696108e422e9744aabb071021c308d58e1c0e8ceefbf",
+      "/bench/src/run.mjs": "6abb4881a4b1588c5722358ba0091910716a0810c67fd4521a4a0e24db4ce56d",
+      "/bench/src/browser.ts": "03568ebbb2c3ac3d897d0a8e6a4919bf4f9a9926624b80bdcf1c56ca90e81e85",
+      "/bench/config/protocol.json": "7087b36eb9e10203f65adc66132e77c4d855832f213db54e3cf4476ff9e94f4c",
+      "/bench/package-lock.json": "2d0abf70793819b6ddfea6305fb528436dfe5a90aa97808f8e33ed8f9824dbb0",
+      "/src/client/src/upload.ts": "55fe05ca20c57d6292bc6f7f1e4a33ed025d55af6f0920330970e3c1bb18f724",
+      "/src/package-lock.json": "2414c3876b0a8d355f02106dbe3627000f40153ec8fb997c7bfeaef8b680a26d"
+    }
+  },
+  "firstNode": {
+    "image": "sha256:a69b3b3334bc58daabfd8e96041c2158a4444622b328d3e9bc0049968f796574",
+    "hashes": {
+      "/bench/public/browser.js": "90136a7b809abab5ea36696108e422e9744aabb071021c308d58e1c0e8ceefbf",
+      "/bench/src/run.mjs": "6abb4881a4b1588c5722358ba0091910716a0810c67fd4521a4a0e24db4ce56d",
+      "/bench/src/browser.ts": "03568ebbb2c3ac3d897d0a8e6a4919bf4f9a9926624b80bdcf1c56ca90e81e85",
+      "/bench/config/protocol.json": "7087b36eb9e10203f65adc66132e77c4d855832f213db54e3cf4476ff9e94f4c",
+      "/bench/package-lock.json": "2d0abf70793819b6ddfea6305fb528436dfe5a90aa97808f8e33ed8f9824dbb0",
+      "/src/client/src/upload.ts": "55fe05ca20c57d6292bc6f7f1e4a33ed025d55af6f0920330970e3c1bb18f724",
+      "/src/package-lock.json": "2414c3876b0a8d355f02106dbe3627000f40153ec8fb997c7bfeaef8b680a26d"
+    }
+  },
+  "allMeasuredFilesAndBundleEqual": true
+}
