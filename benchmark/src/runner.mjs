@@ -94,7 +94,7 @@ export async function runBenchmark(root, { scenario = 'smoke', name, signal, reu
     await exec('git', ['diff', '--binary', 'HEAD', '--', 'client', 'api', 'workers', 'benchmark'], { output: `${results}-source.patch` });
     await exec('tar', ['--exclude=node_modules', '--exclude=build', '--exclude=.gradle', '--exclude=.local', '-czf', `${results}-sources.tar.gz`, 'api/src', 'api/build.gradle.kts', 'client/src', 'client/package.json', 'workers', 'contracts', 'benchmark', 'package.json', 'package-lock.json', 'infra']);
     await exec('docker', [...compose, 'config'], { output: `${results}-compose.yaml` });
-    await exec('docker', [...compose, 'run', '--rm', '--no-build', '--pull', 'never', 'generator'], { env: { ...process.env, SCENARIO: scenario, RUN_LABEL: name } });
+    await exec('docker', [...compose, 'run', '--rm', '--pull', 'never', 'generator'], { env: { ...process.env, SCENARIO: scenario, RUN_LABEL: name } });
   } finally {
     try { await command(root, 'docker', [...compose, 'logs', '--no-color'], { output: `${results}-services.log` }); }
     catch (error) { process.stderr.write(`Could not save service logs: ${error.message}\n`); }
