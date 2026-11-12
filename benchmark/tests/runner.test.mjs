@@ -36,6 +36,11 @@ const args = process.argv.slice(2);
 fs.appendFileSync(process.env.RUNNER_LOG, JSON.stringify({ command, args, scenario: process.env.SCENARIO, name: process.env.RUN_LABEL }) + '\\n');
 if (process.env.FAIL_COMMAND === command) process.exit(7);
 if (command === 'git' && args[0] === 'rev-parse') console.log('fixture-head');
+if (command === 'docker' && args.includes('--images')) console.log('fixture-image');
+if (command === 'docker' && args.includes('inspect')) {
+  if (process.env.MISSING_IMAGES) process.exit(1);
+  console.log(JSON.stringify('sha256:fixture-image'));
+}
 if (command === 'docker' && args.includes('logs') && process.env.HOLD_LOGS) setTimeout(() => {}, 1000);
 if (command === 'docker' && args.includes('run')) {
   if (process.env.HOLD_GENERATOR) setInterval(() => {}, 1000);
@@ -54,7 +59,7 @@ if (command === 'docker' && args.includes('run')) {
     return new Response('{}');
   };`);
   const log = join(root, 'calls.jsonl');
-  const env = { ...process.env, PATH: `${join(root, 'bin')}:${process.env.PATH}`, RUNNER_LOG: log, BENCHMARK_MINIO_COMPRESSION: 'off', BENCHMARK_MINIO_GOMAXPROCS: '', FAIL_COMMAND: '', HOLD_GENERATOR: '', HOLD_LOGS: '' };
+  const env = { ...process.env, PATH: `${join(root, 'bin')}:${process.env.PATH}`, RUNNER_LOG: log, BENCHMARK_MINIO_COMPRESSION: 'off', BENCHMARK_MINIO_GOMAXPROCS: '', FAIL_COMMAND: '', HOLD_GENERATOR: '', HOLD_LOGS: '', MISSING_IMAGES: '' };
   const commandArgs = ['--import', preload, join(root, 'benchmark/src/cli.mjs')];
   return {
     root, env, commandArgs,
@@ -169,3 +174,30 @@ for (const phase of ['generator', 'logs']) {
     await readFile(join(cli.root, '.local/upload-benchmark/interrupted-services.log'));
   });
 }
+
+test('matched repeats reuse built images but reset project volumes and preserve workload options', async t => {
+  const cli = await runner(t);
+  assert.equal(cli.run('run', '--scenario', 'quick', '--name', 'repeat-2', '--reuse-build').status, 0);
+  const calls = await cli.calls();
+  assert.equal(calls.some(call => call.command === 'gradlew' || call.args.includes('build')), false);
+  const dockerCalls = calls.filter(call => call.command === 'docker');
+  const down = dockerCalls.findIndex(call => call.args.includes('down'));
+  const up = dockerCalls.findIndex(call => call.args.includes('up'));
+  const run = dockerCalls.findIndex(call => call.args.includes('run'));
+  assert.ok(down >= 0 && down < up && up < run);
+  assert.ok(dockerCalls[down].args.includes('--volumes'));
+  assert.ok(dockerCalls[up].args.includes('--no-build'));
+  assert.deepEqual(dockerCalls[up].args.slice(dockerCalls[up].args.indexOf('--pull'), dockerCalls[up].args.indexOf('--pull') + 2), ['--pull', 'never']);
+  assert.equal(dockerCalls[run].scenario, 'quick');
+  assert.equal(dockerCalls[run].name, 'repeat-2');
+  const provenance = JSON.parse(await readFile(join(cli.root, '.local/upload-benchmark/repeat-2-provenance.json'), 'utf8'));
+  assert.equal(provenance.buildMode, 'reused-local-images');
+  assert.equal(provenance.currentSourceHead, 'fixture-head');
+  assert.deepEqual(provenance.images, [{ reference: 'fixture-image', id: 'sha256:fixture-image' }]);
+  cli.env.MISSING_IMAGES = '1';
+  const missing = cli.run('run', '--name', 'missing-images', '--reuse-build');
+  assert.equal(missing.status, 1);
+  assert.match(missing.stderr, /Required local benchmark images are missing/);
+  const laterCalls = (await cli.calls()).slice(calls.length);
+  assert.equal(laterCalls.some(call => call.args.includes('down')), false);
+});

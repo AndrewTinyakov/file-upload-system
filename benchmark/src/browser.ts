@@ -66,15 +66,18 @@ XMLHttpRequest.prototype.open = function(method: string, url: string | URL, ...a
 XMLHttpRequest.prototype.send = function(body) {
   const operation = (this as any).benchmarkOperation;
   if (!operation) return nativeSend.call(this, body);
+  if (operation.done || operation.controller.signal.aborted) throw new DOMException('Operation aborted', 'AbortError');
   operation.requests++;
   operation.putAttempts++;
-  operation.activeRequest = this;
+  const activeRequests: Set<XMLHttpRequest> = operation.activeRequests;
+  activeRequests.add(this);
   activePuts++;
   peakActivePuts = Math.max(peakActivePuts, activePuts);
   let released = false;
   const release = () => {
     if (released) return;
     released = true;
+    activeRequests.delete(this);
     activePuts--;
   };
   this.addEventListener('readystatechange', () => {
@@ -133,13 +136,14 @@ async function prepare(manifest: any[]) {
 async function run(input: any) {
   const cached = files.get(input.fixture);
   if (!cached) throw new Error(`Missing fixture ${input.fixture}`);
-  const operation: any = { ...input, requests: 0, apiRequests: 0, pollRequests: 0, putAttempts: 0, attemptedUploadBytes: 0, retries: 0, spans: [], stageMs: {}, startMs: now(), controller: new AbortController() };
+  const operation: any = { ...input, requests: 0, apiRequests: 0, pollRequests: 0, putAttempts: 0, attemptedUploadBytes: 0, retries: 0, spans: [], stageMs: {}, startMs: now(), controller: new AbortController(), activeRequests: new Set<XMLHttpRequest>() };
   operations.set(input.id, operation);
   let asset: any;
   let stageAt = operation.startMs;
   let stage = 'creating';
   let timer: ReturnType<typeof setTimeout>;
   let runningTask: Promise<void> | undefined;
+  let clientTaskSettled = false;
   let abortTask: Promise<unknown> | undefined;
   let deadlineTask: Promise<never> | undefined;
   try {
@@ -189,7 +193,7 @@ async function run(input: any) {
           }
         }
       }
-    })();
+    })().finally(() => { clientTaskSettled = true; });
     abortTask = (async () => {
       if (!operation.interrupt && !operation.cancel) return new Promise(() => {});
       const deadline = now() + input.timeoutMs;
@@ -213,13 +217,15 @@ async function run(input: any) {
     clearTimeout(timer!);
     operation.done = true;
     operation.controller.abort();
-    operation.activeRequest?.abort();
+    for (const request of operation.activeRequests) request.abort();
     await Promise.race([runningTask?.catch(() => {}), sleep(1000)]);
+    operation.clientTaskSettled = clientTaskSettled;
+    operation.activePutsAtReturn = operation.activeRequests.size;
     operation.endMs = now();
     operation.stageMs[stage] = operation.endMs - stageAt;
     operations.delete(input.id);
     for (const [key, value] of routes) if (value === operation) routes.delete(key);
-    delete operation.activeRequest;
+    delete operation.activeRequests;
     delete operation.controller;
     delete operation.retry;
     delete operation.sourceUrl;

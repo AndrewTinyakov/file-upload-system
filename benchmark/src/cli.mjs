@@ -5,13 +5,13 @@ import { runBenchmark, scenarios, stopBenchmark } from './runner.mjs';
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
 const usage = {
-  run: 'run [--scenario <scenario>] [--name <name>]\n\nDefaults to the smoke check. Run names are generated automatically.',
+  run: 'run [--scenario <scenario>] [--name <name>] [--reuse-build]\n\nDefaults to the smoke check. Run names are generated automatically. --reuse-build uses existing local images for matched repeats.',
   list: 'list\n\nList scenarios and their measured durations.',
   compare: 'compare --baseline <run1,run2,run3> --candidate <run4,run5,run6> [--output <file>]\n\nAccepts run names or paths. Requires three matching repeats per side.',
   stop: 'stop\n\nRemove the benchmark containers and volumes. Saved results are preserved.',
 };
 const options = {
-  run: { scenario: { type: 'string', default: 'smoke' }, name: { type: 'string' } },
+  run: { scenario: { type: 'string', default: 'smoke' }, name: { type: 'string' }, 'reuse-build': { type: 'boolean', default: false } },
   list: {},
   compare: { baseline: { type: 'string' }, candidate: { type: 'string' }, output: { type: 'string' } },
   stop: {},
@@ -52,7 +52,7 @@ async function main(args = process.argv.slice(2)) {
   const terminate = () => { exitCode = 143; controller.abort(); };
   process.once('SIGINT', interrupt);
   process.once('SIGTERM', terminate);
-  try { return await runBenchmark(root, { ...values, signal: controller.signal }); }
+  try { return await runBenchmark(root, { scenario: values.scenario, name: values.name, reuseBuild: values['reuse-build'], signal: controller.signal }); }
   catch (error) { if (exitCode) error.exitCode = exitCode; throw error; }
   finally {
     process.removeListener('SIGINT', interrupt);

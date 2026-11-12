@@ -58,6 +58,7 @@ const browserSamples = [];
 const resourceStream = createWriteStream(`${directory}/resources.jsonl`);
 const operationStream = createWriteStream(`${directory}/operations.jsonl`);
 const traceStream = createWriteStream(`${directory}/traces.jsonl`);
+const lifecycleStream = createWriteStream(`${directory}/lifecycle.jsonl`);
 const dispatchFile = openSync(`${directory}/dispatches.jsonl`, 'wx');
 const diagnostics = [];
 let monitoring = false;
@@ -107,7 +108,7 @@ try {
     process.exitCode = 0;
     await browser.close();
     server.close();
-    for (const stream of [resourceStream, operationStream, traceStream]) stream.end();
+    for (const stream of [resourceStream, operationStream, traceStream, lifecycleStream]) stream.end();
     closeSync(dispatchFile);
     process.exit(0);
   }
@@ -141,10 +142,13 @@ try {
       return;
     }
     const target = scenario.slowEvery ? pages[(faults.slow || faults.interrupt || faults.cancel) ? pages.length - 1 : ordinal % (pages.length - 1)] : pages[ordinal % pages.length];
+    const lifecycle = { id, scheduledMs, admittedMs: Date.now(), cleanupObjects: 0 };
     const task = (async () => {
       let result;
       try { result = await target.page.evaluate(input => window.benchmark.run(input), base); }
       catch (error) { result = { ...base, outcome: 'error', endMs: Date.now(), error: error.message }; }
+      lifecycle.resultReceivedMs = Date.now();
+      lifecycle.clientEndMs = result.endMs;
       if (result.outcome === 'expected_fault') result.expectedFault = result.injected;
       result.generatorLagMs = Math.max(0, result.startMs - scheduledMs);
       if (result.sampled) traceStream.write(`${JSON.stringify({ id, sessionId: result.sessionId, assetId: result.assetId, spans: result.spans })}\n`);
@@ -154,11 +158,17 @@ try {
       const cleanupUrls = result.cleanupUrls ?? [];
       delete result.cleanupUrls;
       if (measured) record(result);
+      lifecycle.cleanupStartedMs = Date.now();
       for (const url of cleanupUrls) {
-        try { await removeFixture(url); cleanupObjects++; }
+        try { await removeFixture(url); cleanupObjects++; lifecycle.cleanupObjects++; }
         catch (error) { cleanupFailures++; diagnostics.push(error.message); }
       }
-    })().finally(() => pending.delete(id));
+      lifecycle.cleanupFinishedMs = Date.now();
+    })().finally(() => {
+      pending.delete(id);
+      lifecycle.slotReleasedMs = Date.now();
+      if (measured) lifecycleStream.write(`${JSON.stringify(lifecycle)}\n`);
+    });
     pending.set(id, { task, base, measured });
   }
   async function arrivals(segments, measured) {
@@ -316,8 +326,10 @@ try {
     clientJsHeapPeakBytes: browserSamples.reduce((peak, sample) => Math.max(peak, sample.jsHeapUsedBytes ?? 0), 0),
     clientPutConcurrencyPeak: browserSamples.reduce((peak, sample) => Math.max(peak, sample.peakActivePuts ?? 0), 0),
     cleanupFailures, cleanupObjects, diagnostics,
+    clientTasksUnsettledAtReturn: completed.filter(operation => operation.clientTaskSettled === false).length,
+    clientPutsActiveAtReturn: completed.reduce((sum, operation) => sum + (operation.activePutsAtReturn ?? 0), 0),
     resourceEvidence: { peakMemory: 'one-second requested samples, includes page cache', generatorNetwork: 'isolated Docker bridge counters', queueAge: finalQueues.some(queue => queue.headTimestamp !== null) ? 'broker timestamp' : 'unavailable' },
-    limitations: ['Docker storage counters may omit cached/overlay writes; zero is not proof of no physical I/O', 'Memory sampling can miss transient peaks; actual sample cadence is archived', 'Queue head age is unavailable when the broker omits head_message_timestamp', 'Cleanup removes verified benchmark objects; production retention is unverified', 'Marginal p99 intervals assume independent samples; correlated queueing can widen uncertainty', 'Worker restart counter resets can omit CPU/IO between the final pre-stop sample and termination'],
+    limitations: ['clientTaskSettled covers upload and download verification; production uploadFile does not consume signal, and the cancellation send guard covers requests associated before route teardown', 'Docker storage counters may omit cached/overlay writes; zero is not proof of no physical I/O', 'Memory sampling can miss transient peaks; actual sample cadence is archived', 'Queue head age is unavailable when the broker omits head_message_timestamp', 'Cleanup removes verified benchmark objects; production retention is unverified', 'Marginal p99 intervals assume independent samples; correlated queueing can widen uncertainty', 'Worker restart counter resets can omit CPU/IO between the final pre-stop sample and termination'],
   };
   await writeFile(`${directory}/summary.json`, JSON.stringify(summary, null, 2));
   const prometheus = await fetch(`http://prometheus:9090/api/v1/query?query=${encodeURIComponent('up')}`);
@@ -337,6 +349,6 @@ try {
   if (monitorTask) await monitorTask.catch(() => {});
   await browser.close();
   await new Promise(resolve => server.close(resolve));
-  for (const stream of [resourceStream, operationStream, traceStream]) await new Promise(resolve => stream.end(resolve));
+  for (const stream of [resourceStream, operationStream, traceStream, lifecycleStream]) await new Promise(resolve => stream.end(resolve));
   closeSync(dispatchFile);
 }
