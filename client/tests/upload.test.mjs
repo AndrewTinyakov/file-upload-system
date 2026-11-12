@@ -7,7 +7,7 @@ import { stripTypeScriptTypes } from 'node:module'
 const source = readFileSync(new URL('../src/upload.ts', import.meta.url), 'utf8')
 const compiled = stripTypeScriptTypes(source)
 
-async function scenario({ count = 12, failPart, missingEtag, abortPart, failSession, uploads = 1, cancelSession, holdSession, single = false } = {}) {
+async function scenario({ count = 12, failPart, missingEtag, abortPart, failSession, uploads = 1, cancelSession, holdSession, single = false, singleSessions = [], waitForFirstParts = false } = {}) {
   const progress = []
   const sent = []
   const signed = []
@@ -19,6 +19,8 @@ async function scenario({ count = 12, failPart, missingEtag, abortPart, failSess
   const settledAt = []
   const finishedAt = []
   const activeBySession = new Map()
+  let firstPartsStarted
+  const firstParts = new Promise(resolve => { firstPartsStarted = resolve })
   const api = {
     CreateUploadSessionRequest: { handlingMode: { DOCUMENT: 'DOCUMENT' } },
     UploadSessionResponse: { strategy: { SINGLE: 'SINGLE' } },
@@ -26,7 +28,7 @@ async function scenario({ count = 12, failPart, missingEtag, abortPart, failSess
     UploadSessionControllerService: {
       create: async () => {
         const sessionId = String(++sessionNumber)
-        return { sessionId, strategy: single ? 'SINGLE' : 'MULTIPART', partSize: 4, partCount: count, upload: { method: 'PUT', url: `${sessionId}/1`, headers: {} } }
+        return { sessionId, strategy: single || singleSessions.includes(Number(sessionId)) ? 'SINGLE' : 'MULTIPART', partSize: 4, partCount: count, upload: { method: 'PUT', url: `${sessionId}/1`, headers: {} } }
       },
       presignParts: async (_owner, id, { partNumbers }) => {
         signed.push(partNumbers)
@@ -56,6 +58,7 @@ async function scenario({ count = 12, failPart, missingEtag, abortPart, failSess
       activeBySession.set(this.session, (activeBySession.get(this.session) ?? 0) + 1)
       peak = Math.max(peak, active)
       sent.push({ session: this.session, part: this.part, bytes: body.size })
+      if (this.session === '1' && activeBySession.get('1') === 4) firstPartsStarted()
       this.upload.onprogress?.({ lengthComputable: true, loaded: body.size / 2 })
       this.timer = setTimeout(() => {
         if (this.finished) return
@@ -87,7 +90,8 @@ async function scenario({ count = 12, failPart, missingEtag, abortPart, failSess
   await module.link(() => dependency)
   await module.evaluate()
   const started = performance.now()
-  const results = await Promise.allSettled(Array.from({ length: uploads }, (_, index) => {
+  const results = await Promise.allSettled(Array.from({ length: uploads }, async (_, index) => {
+    if (waitForFirstParts && index > 0) await firstParts
     const controller = new AbortController()
     if (index + 1 === cancelSession) setTimeout(() => controller.abort(), 10)
     return module.namespace.uploadFile({ file: new File([new Uint8Array(count * 4 - 1)], 'test.bin'), signal: controller.signal, onAsset() {}, onEvent() {}, onPhase() {}, onProgress: value => progress.push(value) })
@@ -137,16 +141,26 @@ test('single uploads still send one PUT with an empty completion list', async ()
 })
 
 for (const single of [false, true]) {
-  test(`simultaneous ${single ? 'single' : 'multipart'} uploads share four transfer slots`, { timeout: 3000 }, async () => {
+  test(`simultaneous ${single ? 'single uploads start directly' : 'multipart uploads share four transfer slots'}`, { timeout: 3000 }, async () => {
     const result = await scenario({ uploads: 8, single, count: single ? 1 : 12 })
     assert.equal(result.error, undefined)
     assert.equal(result.completions.length, 8)
     assert.equal(result.active, 0)
     assert.ok(result.peak > 1)
-    assert.ok(result.peak <= 4, `Observed ${result.peak} simultaneous PUTs`)
+    if (single) assert.equal(result.peak, 8)
+    else assert.ok(result.peak <= 4, `Observed ${result.peak} simultaneous PUTs`)
     for (const { body } of result.completions) assert.equal(body.parts.length, single ? 0 : 12)
   })
 }
+
+test('a single upload finishes while all multipart slots remain occupied', { timeout: 3000 }, async () => {
+  const result = await scenario({ count: 4, uploads: 2, singleSessions: [2], waitForFirstParts: true, holdSession: 1 })
+  assert.equal(result.error, undefined)
+  assert.equal(result.peak, 5)
+  assert.ok(result.settledAt[1] < result.finishedAt.find(value => value.session === '1').at)
+  assert.equal(result.completions.find(value => value.id === '2').body.parts.length, 0)
+  assert.equal(result.active, 0)
+})
 
 test('a failed upload releases shared slots and skips its queued parts while other uploads finish', { timeout: 3000 }, async () => {
   const result = await scenario({ uploads: 3, failPart: 2, failSession: 1 })

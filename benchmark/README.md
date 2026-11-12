@@ -44,8 +44,9 @@ The [restored Bash launcher](legacy-bash/) is available for controlled launcher
 comparisons. Both launchers start the same Node and Chromium load generator.
 
 `clientPutConcurrencyPeakPerPage` is the largest PUT peak observed on any one
-page. With the candidate's four-slot budget in each page's module, four benchmark
-pages can use up to sixteen PUTs together. Older summaries call this per-page value
+page. The hybrid candidate limits multipart PUTs to four per page, so four benchmark
+pages can use up to sixteen multipart PUTs together. SINGLE uploads start directly
+and can raise the total beyond that limit. Older summaries call this per-page value
 `clientPutConcurrencyPeak`.
 
 Client traces include operations selected by `traceEvery` and operations selected

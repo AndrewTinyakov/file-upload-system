@@ -1,0 +1,4228 @@
+{
+  "runs": [
+    {
+      "side": "v1",
+      "repeat": 1,
+      "label": "hybrid-20261112-v1-r1",
+      "offered": 960,
+      "outcomes": {
+        "success": 924,
+        "rejected": 36
+      },
+      "filesPerSecond": 6.1166330715229025,
+      "inputMiBPerSecond": 91.87889428663301,
+      "p99Seconds": 37.02840014648437,
+      "cpuSecondsPerSuccess": 0.7724356764069265,
+      "protocolHash": "ff19160c7c28c43e771cc04dac610bfbc6fd5d55884907b8d74a47f495237de1",
+      "fixtureHash": "f5ec95ee30aafbdb5d5981c255010f69173a9311b3b9deef18a0381256f874ee",
+      "environmentHash": "fcd0240c3215f3261e6e585d344db5546f38d241773f2972335569ad8978480d",
+      "checks": {
+        "drained": true,
+        "durableBacklogDrained": true,
+        "unfinishedServerUploads": 0,
+        "cleanupFailures": 0,
+        "diagnostics": [],
+        "measurementCoverageComplete": true,
+        "clientTasksUnsettledAtReturn": 0,
+        "clientPutsActiveAtReturn": 0,
+        "clientPutConcurrencyPeakPerPage": 8
+      },
+      "cohorts": {
+        "jpeg-large.jpeg": {
+          "offered": 100,
+          "success": 95,
+          "outcomes": {
+            "success": 95,
+            "rejected": 5
+          },
+          "meanStageMs": {
+            "creating": 71.15686163651316,
+            "uploading": 380.5305201480263,
+            "preparing": 17512.420004111842,
+            "ready": 756.7473530016447
+          },
+          "uploadStageMs": {
+            "p50": 333.199951171875,
+            "p95": 783.89990234375,
+            "p99": 2067.300048828125
+          },
+          "downloadableMs": {
+            "p50": 15841.10009765625,
+            "p95": 36866.5,
+            "p99": 37587.400146484375
+          }
+        },
+        "jpeg-small.jpeg": {
+          "offered": 87,
+          "success": 85,
+          "outcomes": {
+            "success": 85,
+            "rejected": 2
+          },
+          "meanStageMs": {
+            "creating": 59.88236155790441,
+            "uploading": 178.3188160615809,
+            "preparing": 16931.190596277575,
+            "ready": 409.0729377297794
+          },
+          "uploadStageMs": {
+            "p50": 151.699951171875,
+            "p95": 477,
+            "p99": 963
+          },
+          "downloadableMs": {
+            "p50": 15178.2001953125,
+            "p95": 33748.39990234375,
+            "p99": 35450.099853515625
+          }
+        },
+        "noise-boundary.bin": {
+          "offered": 41,
+          "success": 35,
+          "outcomes": {
+            "success": 35,
+            "rejected": 6
+          },
+          "meanStageMs": {
+            "creating": 169.43717215401784,
+            "uploading": 3086.891441127232,
+            "preparing": 3159.5742606026784,
+            "ready": 795.2028529575892
+          },
+          "uploadStageMs": {
+            "p50": 2889.60009765625,
+            "p95": 6489,
+            "p99": 7499.89990234375
+          },
+          "downloadableMs": {
+            "p50": 7122.900146484375,
+            "p95": 14208.400146484375,
+            "p99": 14538.400146484375
+          }
+        },
+        "noise-large.bin": {
+          "offered": 18,
+          "success": 18,
+          "outcomes": {
+            "success": 18
+          },
+          "meanStageMs": {
+            "creating": 184.14999728732639,
+            "uploading": 12698.555555555555,
+            "preparing": 9715.344455295139,
+            "ready": 3187.6277669270835
+          },
+          "uploadStageMs": {
+            "p50": 13604.89990234375,
+            "p95": 24070.89990234375,
+            "p99": 24070.89990234375
+          },
+          "downloadableMs": {
+            "p50": 25454.5,
+            "p95": 44065.60009765625,
+            "p99": 44065.60009765625
+          }
+        },
+        "noise-medium.bin": {
+          "offered": 139,
+          "success": 134,
+          "outcomes": {
+            "success": 134,
+            "rejected": 5
+          },
+          "meanStageMs": {
+            "creating": 66.76416380013993,
+            "uploading": 203.7283552938433,
+            "preparing": 1532.6298536613806,
+            "ready": 92.04924717234142
+          },
+          "uploadStageMs": {
+            "p50": 168,
+            "p95": 472.699951171875,
+            "p99": 876.599853515625
+          },
+          "downloadableMs": {
+            "p50": 1755.39990234375,
+            "p95": 3825.900146484375,
+            "p99": 4510.199951171875
+          }
+        },
+        "png-alpha.png": {
+          "offered": 101,
+          "success": 95,
+          "outcomes": {
+            "success": 95,
+            "rejected": 6
+          },
+          "meanStageMs": {
+            "creating": 64.57578895970394,
+            "uploading": 162.4599917763158,
+            "preparing": 17644.968428762335,
+            "ready": 342.9578921669408
+          },
+          "uploadStageMs": {
+            "p50": 94,
+            "p95": 584.5,
+            "p99": 1400.699951171875
+          },
+          "downloadableMs": {
+            "p50": 18291.599853515625,
+            "p95": 34245.39990234375,
+            "p99": 35614
+          }
+        },
+        "png-noise.png": {
+          "offered": 74,
+          "success": 74,
+          "outcomes": {
+            "success": 74
+          },
+          "meanStageMs": {
+            "creating": 63.179720491976354,
+            "uploading": 413.4067679740287,
+            "preparing": 16915.213524070947,
+            "ready": 633.0243117873733
+          },
+          "uploadStageMs": {
+            "p50": 377.39990234375,
+            "p95": 1023.099853515625,
+            "p99": 1642.60009765625
+          },
+          "downloadableMs": {
+            "p50": 15987.10009765625,
+            "p95": 36370,
+            "p99": 37350.400146484375
+          }
+        },
+        "text-boundary-above.bin": {
+          "offered": 42,
+          "success": 39,
+          "outcomes": {
+            "success": 39,
+            "rejected": 3
+          },
+          "meanStageMs": {
+            "creating": 152.59488306290064,
+            "uploading": 3645.053867437901,
+            "preparing": 3455.576929336939,
+            "ready": 899.5691919571315
+          },
+          "uploadStageMs": {
+            "p50": 3765.5,
+            "p95": 7478,
+            "p99": 7677.199951171875
+          },
+          "downloadableMs": {
+            "p50": 7849.199951171875,
+            "p95": 14136.60009765625,
+            "p99": 15170.39990234375
+          }
+        },
+        "text-boundary-below.bin": {
+          "offered": 45,
+          "success": 44,
+          "outcomes": {
+            "success": 44,
+            "rejected": 1
+          },
+          "meanStageMs": {
+            "creating": 56.78408536044034,
+            "uploading": 1485.4909335049715,
+            "preparing": 2670.6363580877132,
+            "ready": 852.4045243696733
+          },
+          "uploadStageMs": {
+            "p50": 1333.300048828125,
+            "p95": 4324.10009765625,
+            "p99": 4835
+          },
+          "downloadableMs": {
+            "p50": 5472.5,
+            "p95": 9799.60009765625,
+            "p99": 10428.5
+          }
+        },
+        "text-small.bin": {
+          "offered": 174,
+          "success": 171,
+          "outcomes": {
+            "success": 171,
+            "rejected": 3
+          },
+          "meanStageMs": {
+            "creating": 66.43918185763889,
+            "uploading": 156.73567565561038,
+            "preparing": 1580.1134511490313,
+            "ready": 74.9356782255117
+          },
+          "uploadStageMs": {
+            "p50": 154.60009765625,
+            "p95": 367.800048828125,
+            "p99": 623.89990234375
+          },
+          "downloadableMs": {
+            "p50": 1707.10009765625,
+            "p95": 3660.300048828125,
+            "p99": 4084.60009765625
+          }
+        },
+        "webp-large.webp": {
+          "offered": 41,
+          "success": 40,
+          "outcomes": {
+            "success": 40,
+            "rejected": 1
+          },
+          "meanStageMs": {
+            "creating": 78.38250122070312,
+            "uploading": 292.6800048828125,
+            "preparing": 20148.160021972657,
+            "ready": 800.1074951171875
+          },
+          "uploadStageMs": {
+            "p50": 271.39990234375,
+            "p95": 678.39990234375,
+            "p99": 899.10009765625
+          },
+          "downloadableMs": {
+            "p50": 21424.699951171875,
+            "p95": 34965.2001953125,
+            "p99": 36280.5
+          }
+        },
+        "webp-small.webp": {
+          "offered": 98,
+          "success": 94,
+          "outcomes": {
+            "success": 94,
+            "rejected": 4
+          },
+          "meanStageMs": {
+            "creating": 52.8723456200133,
+            "uploading": 128.90318265874336,
+            "preparing": 14660.795776367188,
+            "ready": 284.7212537400266
+          },
+          "uploadStageMs": {
+            "p50": 78.099853515625,
+            "p95": 293.599853515625,
+            "p99": 958.800048828125
+          },
+          "downloadableMs": {
+            "p50": 13439.5,
+            "p95": 34236.699951171875,
+            "p99": 35316.199951171875
+          }
+        }
+      },
+      "services": {
+        "generator": {
+          "cpuSeconds": 213.680598,
+          "networkRxBytes": 14227087762,
+          "networkTxBytes": 14634619936,
+          "storageReadBytes": 168185856,
+          "storageWriteBytes": 1374081024,
+          "throttledSeconds": 47.356033999999994,
+          "peakMemoryBytes": 4354260992,
+          "peakAnonymousMemoryBytes": 4227788800,
+          "majorFaultDelta": 41440,
+          "sampleSeconds": 160.879
+        },
+        "document-worker": {
+          "cpuSeconds": 0.9944989999999999,
+          "networkRxBytes": 2005025,
+          "networkTxBytes": 2390037,
+          "storageReadBytes": 13090816,
+          "storageWriteBytes": 20480,
+          "throttledSeconds": 0,
+          "peakMemoryBytes": 19120128,
+          "peakAnonymousMemoryBytes": 10395648,
+          "majorFaultDelta": 7,
+          "sampleSeconds": 160.881
+        },
+        "image-worker": {
+          "cpuSeconds": 267.269911,
+          "networkRxBytes": 1666065938,
+          "networkTxBytes": 1236971342,
+          "storageReadBytes": 17485824,
+          "storageWriteBytes": 42749952,
+          "throttledSeconds": 314.516201,
+          "peakMemoryBytes": 2147459072,
+          "peakAnonymousMemoryBytes": 2141396992,
+          "majorFaultDelta": 994,
+          "sampleSeconds": 160.879
+        },
+        "api": {
+          "cpuSeconds": 58.17368,
+          "networkRxBytes": 34083124,
+          "networkTxBytes": 80614461,
+          "storageReadBytes": 3543040,
+          "storageWriteBytes": 6139904,
+          "throttledSeconds": 2.072285000000001,
+          "peakMemoryBytes": 432549888,
+          "peakAnonymousMemoryBytes": 414793728,
+          "majorFaultDelta": 7,
+          "sampleSeconds": 160.884
+        },
+        "rabbitmq": {
+          "cpuSeconds": 18.438775999999997,
+          "networkRxBytes": 3219623,
+          "networkTxBytes": 5690248,
+          "storageReadBytes": 17215488,
+          "storageWriteBytes": 24739840,
+          "throttledSeconds": 9.859067,
+          "peakMemoryBytes": 229187584,
+          "peakAnonymousMemoryBytes": 200433664,
+          "majorFaultDelta": 51,
+          "sampleSeconds": 160.88
+        },
+        "prometheus": {
+          "cpuSeconds": 1.2286910000000002,
+          "networkRxBytes": 18182863,
+          "networkTxBytes": 1426905,
+          "storageReadBytes": 75751424,
+          "storageWriteBytes": 2088960,
+          "throttledSeconds": 0.5681960000000001,
+          "peakMemoryBytes": 85098496,
+          "peakAnonymousMemoryBytes": 41361408,
+          "majorFaultDelta": 25,
+          "sampleSeconds": 160.879
+        },
+        "minio": {
+          "cpuSeconds": 138.026102,
+          "networkRxBytes": 15855924875,
+          "networkTxBytes": 15840859620,
+          "storageReadBytes": 25133441024,
+          "storageWriteBytes": 28863213568,
+          "throttledSeconds": 490.81185000000005,
+          "peakMemoryBytes": 1073741824,
+          "peakAnonymousMemoryBytes": 543825920,
+          "majorFaultDelta": 22144,
+          "sampleSeconds": 160.882
+        },
+        "grafana": {
+          "cpuSeconds": 6.736745000000001,
+          "networkRxBytes": 81787264,
+          "networkTxBytes": 261298,
+          "storageReadBytes": 1037488128,
+          "storageWriteBytes": 376123392,
+          "throttledSeconds": 19.399383999999998,
+          "peakMemoryBytes": 536870912,
+          "peakAnonymousMemoryBytes": 242520064,
+          "majorFaultDelta": 6374,
+          "sampleSeconds": 160.881
+        },
+        "postgres": {
+          "cpuSeconds": 9.181563,
+          "networkRxBytes": 10192487,
+          "networkTxBytes": 14189148,
+          "storageReadBytes": 69230592,
+          "storageWriteBytes": 63664128,
+          "throttledSeconds": 0.592252,
+          "peakMemoryBytes": 99762176,
+          "peakAnonymousMemoryBytes": 35926016,
+          "majorFaultDelta": 180,
+          "sampleSeconds": 160.883
+        }
+      }
+    },
+    {
+      "side": "v2",
+      "repeat": 1,
+      "label": "hybrid-20261112-v2-r1",
+      "offered": 960,
+      "outcomes": {
+        "success": 888,
+        "rejected": 72
+      },
+      "filesPerSecond": 5.966402696746935,
+      "inputMiBPerSecond": 92.04133263172709,
+      "p99Seconds": 36.20710009765625,
+      "cpuSecondsPerSuccess": 0.7898202657657658,
+      "protocolHash": "ff19160c7c28c43e771cc04dac610bfbc6fd5d55884907b8d74a47f495237de1",
+      "fixtureHash": "f5ec95ee30aafbdb5d5981c255010f69173a9311b3b9deef18a0381256f874ee",
+      "environmentHash": "fcd0240c3215f3261e6e585d344db5546f38d241773f2972335569ad8978480d",
+      "checks": {
+        "drained": true,
+        "durableBacklogDrained": true,
+        "unfinishedServerUploads": 0,
+        "cleanupFailures": 0,
+        "diagnostics": [],
+        "measurementCoverageComplete": true,
+        "clientTasksUnsettledAtReturn": 0,
+        "clientPutsActiveAtReturn": 0,
+        "clientPutConcurrencyPeakPerPage": 4
+      },
+      "cohorts": {
+        "jpeg-large.jpeg": {
+          "offered": 100,
+          "success": 94,
+          "outcomes": {
+            "success": 94,
+            "rejected": 6
+          },
+          "meanStageMs": {
+            "creating": 58.0617052443484,
+            "uploading": 566.398933572972,
+            "preparing": 19356.492553710938,
+            "ready": 738.1138214760638
+          },
+          "uploadStageMs": {
+            "p50": 435.699951171875,
+            "p95": 1936.800048828125,
+            "p99": 2590.2998046875
+          },
+          "downloadableMs": {
+            "p50": 18821.89990234375,
+            "p95": 35935.89990234375,
+            "p99": 36365.199951171875
+          }
+        },
+        "jpeg-small.jpeg": {
+          "offered": 87,
+          "success": 85,
+          "outcomes": {
+            "success": 85,
+            "rejected": 2
+          },
+          "meanStageMs": {
+            "creating": 56.01646369485294,
+            "uploading": 288.885888671875,
+            "preparing": 19322.73882410386,
+            "ready": 392.7623506433824
+          },
+          "uploadStageMs": {
+            "p50": 207.60009765625,
+            "p95": 1313.699951171875,
+            "p99": 2237.10009765625
+          },
+          "downloadableMs": {
+            "p50": 18177.2001953125,
+            "p95": 33951.7998046875,
+            "p99": 35048.800048828125
+          }
+        },
+        "noise-boundary.bin": {
+          "offered": 41,
+          "success": 34,
+          "outcomes": {
+            "success": 34,
+            "rejected": 7
+          },
+          "meanStageMs": {
+            "creating": 127.45586799172794,
+            "uploading": 1456.314718807445,
+            "preparing": 4259.297061695772,
+            "ready": 912.2058536305148
+          },
+          "uploadStageMs": {
+            "p50": 1271.900146484375,
+            "p95": 3686.89990234375,
+            "p99": 5358.2001953125
+          },
+          "downloadableMs": {
+            "p50": 5953,
+            "p95": 13683.5,
+            "p99": 15694.099853515625
+          }
+        },
+        "noise-large.bin": {
+          "offered": 18,
+          "success": 18,
+          "outcomes": {
+            "success": 18
+          },
+          "meanStageMs": {
+            "creating": 133.50002712673611,
+            "uploading": 7105.283311631944,
+            "preparing": 8971.527791341146,
+            "ready": 2771.3555772569443
+          },
+          "uploadStageMs": {
+            "p50": 5902,
+            "p95": 18935.599853515625,
+            "p99": 18935.599853515625
+          },
+          "downloadableMs": {
+            "p50": 18577.300048828125,
+            "p95": 33259.5,
+            "p99": 33259.5
+          }
+        },
+        "noise-medium.bin": {
+          "offered": 139,
+          "success": 129,
+          "outcomes": {
+            "success": 129,
+            "rejected": 10
+          },
+          "meanStageMs": {
+            "creating": 71.81239401647287,
+            "uploading": 267.98837209302326,
+            "preparing": 2402.5185982164485,
+            "ready": 115.55737493943798
+          },
+          "uploadStageMs": {
+            "p50": 224.300048828125,
+            "p95": 664.599853515625,
+            "p99": 804.10009765625
+          },
+          "downloadableMs": {
+            "p50": 2176.800048828125,
+            "p95": 7624.2998046875,
+            "p99": 8351.199951171875
+          }
+        },
+        "png-alpha.png": {
+          "offered": 101,
+          "success": 91,
+          "outcomes": {
+            "success": 91,
+            "rejected": 10
+          },
+          "meanStageMs": {
+            "creating": 71.45167088770604,
+            "uploading": 310.4428469479739,
+            "preparing": 19692.52967247596,
+            "ready": 334.78463040865387
+          },
+          "uploadStageMs": {
+            "p50": 224.400146484375,
+            "p95": 899.39990234375,
+            "p99": 2526
+          },
+          "downloadableMs": {
+            "p50": 21343.800048828125,
+            "p95": 34394.400146484375,
+            "p99": 35884.800048828125
+          }
+        },
+        "png-noise.png": {
+          "offered": 74,
+          "success": 72,
+          "outcomes": {
+            "success": 72,
+            "rejected": 2
+          },
+          "meanStageMs": {
+            "creating": 70.50415378146701,
+            "uploading": 539.0555589463976,
+            "preparing": 18785.597222222223,
+            "ready": 658.4319593641493
+          },
+          "uploadStageMs": {
+            "p50": 432.400146484375,
+            "p95": 1340.599853515625,
+            "p99": 2240.099853515625
+          },
+          "downloadableMs": {
+            "p50": 18694.7998046875,
+            "p95": 36153.199951171875,
+            "p99": 36703.10009765625
+          }
+        },
+        "text-boundary-above.bin": {
+          "offered": 42,
+          "success": 40,
+          "outcomes": {
+            "success": 40,
+            "rejected": 2
+          },
+          "meanStageMs": {
+            "creating": 157.4299743652344,
+            "uploading": 2254.6550048828126,
+            "preparing": 4903.192492675781,
+            "ready": 1089.800030517578
+          },
+          "uploadStageMs": {
+            "p50": 1644.39990234375,
+            "p95": 6050.89990234375,
+            "p99": 7041.60009765625
+          },
+          "downloadableMs": {
+            "p50": 8311.5,
+            "p95": 14318.5,
+            "p99": 15611.400146484375
+          }
+        },
+        "text-boundary-below.bin": {
+          "offered": 45,
+          "success": 42,
+          "outcomes": {
+            "success": 42,
+            "rejected": 3
+          },
+          "meanStageMs": {
+            "creating": 53.892862955729164,
+            "uploading": 1602.2595156715029,
+            "preparing": 3659.521420433408,
+            "ready": 858.769054594494
+          },
+          "uploadStageMs": {
+            "p50": 1740.2998046875,
+            "p95": 2825.39990234375,
+            "p99": 3549.800048828125
+          },
+          "downloadableMs": {
+            "p50": 6310.300048828125,
+            "p95": 11329.39990234375,
+            "p99": 12746.7998046875
+          }
+        },
+        "text-small.bin": {
+          "offered": 174,
+          "success": 154,
+          "outcomes": {
+            "success": 154,
+            "rejected": 20
+          },
+          "meanStageMs": {
+            "creating": 70.21363255884741,
+            "uploading": 246.005198292918,
+            "preparing": 2651.584399731128,
+            "ready": 69.21299050071023
+          },
+          "uploadStageMs": {
+            "p50": 156.300048828125,
+            "p95": 868.800048828125,
+            "p99": 1466.10009765625
+          },
+          "downloadableMs": {
+            "p50": 2226,
+            "p95": 8209.5,
+            "p99": 8619.699951171875
+          }
+        },
+        "webp-large.webp": {
+          "offered": 41,
+          "success": 35,
+          "outcomes": {
+            "success": 35,
+            "rejected": 6
+          },
+          "meanStageMs": {
+            "creating": 75.04857700892858,
+            "uploading": 557.7971470424108,
+            "preparing": 20981.43427734375,
+            "ready": 758.0543247767857
+          },
+          "uploadStageMs": {
+            "p50": 357.39990234375,
+            "p95": 1877.39990234375,
+            "p99": 2731.7998046875
+          },
+          "downloadableMs": {
+            "p50": 23792.300048828125,
+            "p95": 37241,
+            "p99": 37881.800048828125
+          }
+        },
+        "webp-small.webp": {
+          "offered": 98,
+          "success": 94,
+          "outcomes": {
+            "success": 94,
+            "rejected": 4
+          },
+          "meanStageMs": {
+            "creating": 56.74468344830452,
+            "uploading": 203.85637518700133,
+            "preparing": 17012.5659595246,
+            "ready": 285.7393746883311
+          },
+          "uploadStageMs": {
+            "p50": 148.699951171875,
+            "p95": 619.2998046875,
+            "p99": 1853.5
+          },
+          "downloadableMs": {
+            "p50": 16649.699951171875,
+            "p95": 34104,
+            "p99": 35808.2001953125
+          }
+        }
+      },
+      "services": {
+        "generator": {
+          "cpuSeconds": 216.912912,
+          "networkRxBytes": 14041345398,
+          "networkTxBytes": 14450881169,
+          "storageReadBytes": 62349312,
+          "storageWriteBytes": 1417576448,
+          "throttledSeconds": 47.739167,
+          "peakMemoryBytes": 4116377600,
+          "peakAnonymousMemoryBytes": 4000739328,
+          "majorFaultDelta": 41708,
+          "sampleSeconds": 162.203
+        },
+        "document-worker": {
+          "cpuSeconds": 1.1079,
+          "networkRxBytes": 1898934,
+          "networkTxBytes": 2277230,
+          "storageReadBytes": 16576512,
+          "storageWriteBytes": 0,
+          "throttledSeconds": 0.131733,
+          "peakMemoryBytes": 15368192,
+          "peakAnonymousMemoryBytes": 9793536,
+          "majorFaultDelta": 9,
+          "sampleSeconds": 162.202
+        },
+        "api": {
+          "cpuSeconds": 58.219642,
+          "networkRxBytes": 36291812,
+          "networkTxBytes": 86094376,
+          "storageReadBytes": 5496832,
+          "storageWriteBytes": 0,
+          "throttledSeconds": 1.5196550000000002,
+          "peakMemoryBytes": 418357248,
+          "peakAnonymousMemoryBytes": 416083968,
+          "majorFaultDelta": 6,
+          "sampleSeconds": 162.202
+        },
+        "image-worker": {
+          "cpuSeconds": 259.500941,
+          "networkRxBytes": 1617774987,
+          "networkTxBytes": 1193667885,
+          "storageReadBytes": 5554176,
+          "storageWriteBytes": 3833856,
+          "throttledSeconds": 295.106179,
+          "peakMemoryBytes": 2062393344,
+          "peakAnonymousMemoryBytes": 2058129408,
+          "majorFaultDelta": 9,
+          "sampleSeconds": 162.201
+        },
+        "grafana": {
+          "cpuSeconds": 5.531419,
+          "networkRxBytes": 80804949,
+          "networkTxBytes": 295127,
+          "storageReadBytes": 1236131840,
+          "storageWriteBytes": 460247040,
+          "throttledSeconds": 12.855789999999999,
+          "peakMemoryBytes": 536866816,
+          "peakAnonymousMemoryBytes": 233762816,
+          "majorFaultDelta": 9479,
+          "sampleSeconds": 162.202
+        },
+        "minio": {
+          "cpuSeconds": 130.934853,
+          "networkRxBytes": 15627350460,
+          "networkTxBytes": 15602274393,
+          "storageReadBytes": 28218548224,
+          "storageWriteBytes": 28433428480,
+          "throttledSeconds": 470.33128100000005,
+          "peakMemoryBytes": 1073741824,
+          "peakAnonymousMemoryBytes": 566636544,
+          "majorFaultDelta": 8344,
+          "sampleSeconds": 162.202
+        },
+        "prometheus": {
+          "cpuSeconds": 1.090436,
+          "networkRxBytes": 18972317,
+          "networkTxBytes": 1553516,
+          "storageReadBytes": 75735040,
+          "storageWriteBytes": 2412544,
+          "throttledSeconds": 0.17529300000000003,
+          "peakMemoryBytes": 68153344,
+          "peakAnonymousMemoryBytes": 38113280,
+          "majorFaultDelta": 25,
+          "sampleSeconds": 162.202
+        },
+        "postgres": {
+          "cpuSeconds": 9.758634,
+          "networkRxBytes": 10549729,
+          "networkTxBytes": 15042565,
+          "storageReadBytes": 40828928,
+          "storageWriteBytes": 61165568,
+          "throttledSeconds": 0.789055,
+          "peakMemoryBytes": 87470080,
+          "peakAnonymousMemoryBytes": 38268928,
+          "majorFaultDelta": 101,
+          "sampleSeconds": 162.201
+        },
+        "rabbitmq": {
+          "cpuSeconds": 18.303659,
+          "networkRxBytes": 3275289,
+          "networkTxBytes": 5667792,
+          "storageReadBytes": 11427840,
+          "storageWriteBytes": 23392256,
+          "throttledSeconds": 10.147207,
+          "peakMemoryBytes": 232869888,
+          "peakAnonymousMemoryBytes": 203292672,
+          "majorFaultDelta": 30,
+          "sampleSeconds": 162.201
+        }
+      }
+    },
+    {
+      "side": "hybrid",
+      "repeat": 1,
+      "label": "hybrid-20261112-hybrid-r1",
+      "offered": 960,
+      "outcomes": {
+        "success": 901,
+        "rejected": 59
+      },
+      "filesPerSecond": 6.01830205063122,
+      "inputMiBPerSecond": 92.63556118392408,
+      "p99Seconds": 36.49090014648438,
+      "cpuSecondsPerSuccess": 0.7785509200887902,
+      "protocolHash": "ff19160c7c28c43e771cc04dac610bfbc6fd5d55884907b8d74a47f495237de1",
+      "fixtureHash": "f5ec95ee30aafbdb5d5981c255010f69173a9311b3b9deef18a0381256f874ee",
+      "environmentHash": "fcd0240c3215f3261e6e585d344db5546f38d241773f2972335569ad8978480d",
+      "checks": {
+        "drained": true,
+        "durableBacklogDrained": true,
+        "unfinishedServerUploads": 0,
+        "cleanupFailures": 0,
+        "diagnostics": [],
+        "measurementCoverageComplete": true,
+        "clientTasksUnsettledAtReturn": 0,
+        "clientPutsActiveAtReturn": 0,
+        "clientPutConcurrencyPeakPerPage": 7
+      },
+      "cohorts": {
+        "jpeg-large.jpeg": {
+          "offered": 100,
+          "success": 94,
+          "outcomes": {
+            "success": 94,
+            "rejected": 6
+          },
+          "meanStageMs": {
+            "creating": 51.469168155751326,
+            "uploading": 403.40637466755317,
+            "preparing": 18096.34468500665,
+            "ready": 750.5191572473404
+          },
+          "uploadStageMs": {
+            "p50": 384.39990234375,
+            "p95": 876.400146484375,
+            "p99": 1182.5
+          },
+          "downloadableMs": {
+            "p50": 16574.5,
+            "p95": 36597.099853515625,
+            "p99": 38058.89990234375
+          }
+        },
+        "jpeg-small.jpeg": {
+          "offered": 87,
+          "success": 80,
+          "outcomes": {
+            "success": 80,
+            "rejected": 7
+          },
+          "meanStageMs": {
+            "creating": 55.45124816894531,
+            "uploading": 200.43751220703126,
+            "preparing": 17054.524987792967,
+            "ready": 374.57249450683594
+          },
+          "uploadStageMs": {
+            "p50": 156.7001953125,
+            "p95": 560.2001953125,
+            "p99": 762.60009765625
+          },
+          "downloadableMs": {
+            "p50": 15099.7998046875,
+            "p95": 34300.5,
+            "p99": 35827.10009765625
+          }
+        },
+        "noise-boundary.bin": {
+          "offered": 41,
+          "success": 36,
+          "outcomes": {
+            "success": 36,
+            "rejected": 5
+          },
+          "meanStageMs": {
+            "creating": 136.14442274305554,
+            "uploading": 1374.1583319769966,
+            "preparing": 4286.597229003906,
+            "ready": 920.1833292643229
+          },
+          "uploadStageMs": {
+            "p50": 1132.10009765625,
+            "p95": 3058.400146484375,
+            "p99": 5376.2001953125
+          },
+          "downloadableMs": {
+            "p50": 5398.7998046875,
+            "p95": 14242.800048828125,
+            "p99": 16671.5
+          }
+        },
+        "noise-large.bin": {
+          "offered": 18,
+          "success": 18,
+          "outcomes": {
+            "success": 18
+          },
+          "meanStageMs": {
+            "creating": 142.4888916015625,
+            "uploading": 6354.138848198785,
+            "preparing": 9698.155544704861,
+            "ready": 2768.061130099826
+          },
+          "uploadStageMs": {
+            "p50": 5245.699951171875,
+            "p95": 17290.599853515625,
+            "p99": 17290.599853515625
+          },
+          "downloadableMs": {
+            "p50": 18634.699951171875,
+            "p95": 36186.2998046875,
+            "p99": 36186.2998046875
+          }
+        },
+        "noise-medium.bin": {
+          "offered": 139,
+          "success": 131,
+          "outcomes": {
+            "success": 131,
+            "rejected": 8
+          },
+          "meanStageMs": {
+            "creating": 57.07328877922233,
+            "uploading": 193.92748464336833,
+            "preparing": 2282.7427484643367,
+            "ready": 84.74580488132156
+          },
+          "uploadStageMs": {
+            "p50": 170.900146484375,
+            "p95": 495.400146484375,
+            "p99": 951.39990234375
+          },
+          "downloadableMs": {
+            "p50": 1765.199951171875,
+            "p95": 6420.60009765625,
+            "p99": 9886.39990234375
+          }
+        },
+        "png-alpha.png": {
+          "offered": 101,
+          "success": 91,
+          "outcomes": {
+            "success": 91,
+            "rejected": 10
+          },
+          "meanStageMs": {
+            "creating": 55.96373304429945,
+            "uploading": 139.0428507039835,
+            "preparing": 18044.740671681833,
+            "ready": 325.5164808336195
+          },
+          "uploadStageMs": {
+            "p50": 112.2998046875,
+            "p95": 439.10009765625,
+            "p99": 503.5
+          },
+          "downloadableMs": {
+            "p50": 18276.7001953125,
+            "p95": 34663.900146484375,
+            "p99": 35088.89990234375
+          }
+        },
+        "png-noise.png": {
+          "offered": 74,
+          "success": 74,
+          "outcomes": {
+            "success": 74
+          },
+          "meanStageMs": {
+            "creating": 65.82296175570102,
+            "uploading": 424.45270930109797,
+            "preparing": 17822.22163679793,
+            "ready": 626.7351305162584
+          },
+          "uploadStageMs": {
+            "p50": 391.400146484375,
+            "p95": 1028.39990234375,
+            "p99": 1089.900146484375
+          },
+          "downloadableMs": {
+            "p50": 16846.5,
+            "p95": 36211,
+            "p99": 36862.599853515625
+          }
+        },
+        "text-boundary-above.bin": {
+          "offered": 42,
+          "success": 38,
+          "outcomes": {
+            "success": 38,
+            "rejected": 4
+          },
+          "meanStageMs": {
+            "creating": 131.80265085320724,
+            "uploading": 1939.9052284642269,
+            "preparing": 4589.389481393914,
+            "ready": 985.002640573602
+          },
+          "uploadStageMs": {
+            "p50": 1677.10009765625,
+            "p95": 5194.2998046875,
+            "p99": 6307.300048828125
+          },
+          "downloadableMs": {
+            "p50": 6519.699951171875,
+            "p95": 16305.2998046875,
+            "p99": 16688
+          }
+        },
+        "text-boundary-below.bin": {
+          "offered": 45,
+          "success": 44,
+          "outcomes": {
+            "success": 44,
+            "rejected": 1
+          },
+          "meanStageMs": {
+            "creating": 73.4999667080966,
+            "uploading": 1508.1977650035512,
+            "preparing": 3557.404541015625,
+            "ready": 826.8454312411221
+          },
+          "uploadStageMs": {
+            "p50": 1486.5,
+            "p95": 2875.800048828125,
+            "p99": 3361.300048828125
+          },
+          "downloadableMs": {
+            "p50": 5874,
+            "p95": 10618.900146484375,
+            "p99": 14532.60009765625
+          }
+        },
+        "text-small.bin": {
+          "offered": 174,
+          "success": 159,
+          "outcomes": {
+            "success": 159,
+            "rejected": 15
+          },
+          "meanStageMs": {
+            "creating": 61.7748332473467,
+            "uploading": 174.0226359817217,
+            "preparing": 2425.164157699489,
+            "ready": 74.25471698113208
+          },
+          "uploadStageMs": {
+            "p50": 157.199951171875,
+            "p95": 467.60009765625,
+            "p99": 583.2998046875
+          },
+          "downloadableMs": {
+            "p50": 1790.5,
+            "p95": 6684.2001953125,
+            "p99": 9793.60009765625
+          }
+        },
+        "webp-large.webp": {
+          "offered": 41,
+          "success": 40,
+          "outcomes": {
+            "success": 40,
+            "rejected": 1
+          },
+          "meanStageMs": {
+            "creating": 42.297515869140625,
+            "uploading": 318.93500366210935,
+            "preparing": 21139.31748046875,
+            "ready": 805.0424926757812
+          },
+          "uploadStageMs": {
+            "p50": 267.39990234375,
+            "p95": 770.5,
+            "p99": 912.5
+          },
+          "downloadableMs": {
+            "p50": 21596.7001953125,
+            "p95": 35708.89990234375,
+            "p99": 38294.800048828125
+          }
+        },
+        "webp-small.webp": {
+          "offered": 98,
+          "success": 96,
+          "outcomes": {
+            "success": 96,
+            "rejected": 2
+          },
+          "meanStageMs": {
+            "creating": 58.34063466389974,
+            "uploading": 172.87916310628256,
+            "preparing": 15969.28749593099,
+            "ready": 266.6885299682617
+          },
+          "uploadStageMs": {
+            "p50": 142.2998046875,
+            "p95": 513.400146484375,
+            "p99": 897.800048828125
+          },
+          "downloadableMs": {
+            "p50": 14442.800048828125,
+            "p95": 34679,
+            "p99": 35202.10009765625
+          }
+        }
+      },
+      "services": {
+        "generator": {
+          "cpuSeconds": 215.535812,
+          "networkRxBytes": 14213627599,
+          "networkTxBytes": 14620760486,
+          "storageReadBytes": 96403456,
+          "storageWriteBytes": 1290346496,
+          "throttledSeconds": 46.980859,
+          "peakMemoryBytes": 4228829184,
+          "peakAnonymousMemoryBytes": 4180959232,
+          "majorFaultDelta": 41058,
+          "sampleSeconds": 164.39
+        },
+        "api": {
+          "cpuSeconds": 58.389407999999996,
+          "networkRxBytes": 35781930,
+          "networkTxBytes": 87004493,
+          "storageReadBytes": 4673536,
+          "storageWriteBytes": 0,
+          "throttledSeconds": 2.6566089999999996,
+          "peakMemoryBytes": 487620608,
+          "peakAnonymousMemoryBytes": 415756288,
+          "majorFaultDelta": 3,
+          "sampleSeconds": 164.394
+        },
+        "document-worker": {
+          "cpuSeconds": 1.061368,
+          "networkRxBytes": 1941220,
+          "networkTxBytes": 2319746,
+          "storageReadBytes": 12218368,
+          "storageWriteBytes": 0,
+          "throttledSeconds": 0.06518,
+          "peakMemoryBytes": 21716992,
+          "peakAnonymousMemoryBytes": 9695232,
+          "majorFaultDelta": 8,
+          "sampleSeconds": 164.391
+        },
+        "image-worker": {
+          "cpuSeconds": 261.74854,
+          "networkRxBytes": 1658674974,
+          "networkTxBytes": 1228121996,
+          "storageReadBytes": 11132928,
+          "storageWriteBytes": 3149824,
+          "throttledSeconds": 312.937165,
+          "peakMemoryBytes": 2053312512,
+          "peakAnonymousMemoryBytes": 2027671552,
+          "majorFaultDelta": 22,
+          "sampleSeconds": 164.391
+        },
+        "rabbitmq": {
+          "cpuSeconds": 18.668934000000004,
+          "networkRxBytes": 3163955,
+          "networkTxBytes": 5756804,
+          "storageReadBytes": 17223680,
+          "storageWriteBytes": 23699456,
+          "throttledSeconds": 10.949256,
+          "peakMemoryBytes": 226816000,
+          "peakAnonymousMemoryBytes": 197947392,
+          "majorFaultDelta": 52,
+          "sampleSeconds": 164.39
+        },
+        "grafana": {
+          "cpuSeconds": 5.437374,
+          "networkRxBytes": 56675369,
+          "networkTxBytes": 187858,
+          "storageReadBytes": 724402176,
+          "storageWriteBytes": 261369856,
+          "throttledSeconds": 16.087501000000003,
+          "peakMemoryBytes": 536858624,
+          "peakAnonymousMemoryBytes": 243302400,
+          "majorFaultDelta": 1312,
+          "sampleSeconds": 164.39
+        },
+        "minio": {
+          "cpuSeconds": 129.709345,
+          "networkRxBytes": 15832054801,
+          "networkTxBytes": 15814889102,
+          "storageReadBytes": 26546991104,
+          "storageWriteBytes": 28815683584,
+          "throttledSeconds": 507.603877,
+          "peakMemoryBytes": 1073741824,
+          "peakAnonymousMemoryBytes": 591323136,
+          "majorFaultDelta": 17560,
+          "sampleSeconds": 164.39
+        },
+        "postgres": {
+          "cpuSeconds": 9.522222,
+          "networkRxBytes": 10471132,
+          "networkTxBytes": 14836257,
+          "storageReadBytes": 34721792,
+          "storageWriteBytes": 61358080,
+          "throttledSeconds": 0.17004999999999992,
+          "peakMemoryBytes": 97206272,
+          "peakAnonymousMemoryBytes": 37818368,
+          "majorFaultDelta": 101,
+          "sampleSeconds": 164.391
+        },
+        "prometheus": {
+          "cpuSeconds": 1.4013759999999997,
+          "networkRxBytes": 19397607,
+          "networkTxBytes": 1424334,
+          "storageReadBytes": 88981504,
+          "storageWriteBytes": 2039808,
+          "throttledSeconds": 0.718928,
+          "peakMemoryBytes": 82448384,
+          "peakAnonymousMemoryBytes": 42229760,
+          "majorFaultDelta": 28,
+          "sampleSeconds": 164.395
+        }
+      }
+    },
+    {
+      "side": "v2",
+      "repeat": 2,
+      "label": "hybrid-20261112-v2-r2",
+      "offered": 960,
+      "outcomes": {
+        "success": 900,
+        "rejected": 60
+      },
+      "filesPerSecond": 5.997033469395966,
+      "inputMiBPerSecond": 92.58904989812267,
+      "p99Seconds": 37.5532998046875,
+      "cpuSecondsPerSuccess": 0.7791099966666668,
+      "protocolHash": "ff19160c7c28c43e771cc04dac610bfbc6fd5d55884907b8d74a47f495237de1",
+      "fixtureHash": "f5ec95ee30aafbdb5d5981c255010f69173a9311b3b9deef18a0381256f874ee",
+      "environmentHash": "fcd0240c3215f3261e6e585d344db5546f38d241773f2972335569ad8978480d",
+      "checks": {
+        "drained": true,
+        "durableBacklogDrained": true,
+        "unfinishedServerUploads": 0,
+        "cleanupFailures": 0,
+        "diagnostics": [],
+        "measurementCoverageComplete": true,
+        "clientTasksUnsettledAtReturn": 0,
+        "clientPutsActiveAtReturn": 0,
+        "clientPutConcurrencyPeakPerPage": 4
+      },
+      "cohorts": {
+        "jpeg-large.jpeg": {
+          "offered": 100,
+          "success": 92,
+          "outcomes": {
+            "success": 92,
+            "rejected": 8
+          },
+          "meanStageMs": {
+            "creating": 60.57065482761549,
+            "uploading": 473.8728213102921,
+            "preparing": 17362.582612410835,
+            "ready": 686.4793329653533
+          },
+          "uploadStageMs": {
+            "p50": 350.900146484375,
+            "p95": 1375.900146484375,
+            "p99": 2598.199951171875
+          },
+          "downloadableMs": {
+            "p50": 15911.400146484375,
+            "p95": 37275.5,
+            "p99": 38332.699951171875
+          }
+        },
+        "jpeg-small.jpeg": {
+          "offered": 87,
+          "success": 83,
+          "outcomes": {
+            "success": 83,
+            "rejected": 4
+          },
+          "meanStageMs": {
+            "creating": 48.6216702748494,
+            "uploading": 298.73374847044425,
+            "preparing": 17061.7686870529,
+            "ready": 356.45902261389307
+          },
+          "uploadStageMs": {
+            "p50": 192.599853515625,
+            "p95": 781.60009765625,
+            "p99": 2104.699951171875
+          },
+          "downloadableMs": {
+            "p50": 14858.800048828125,
+            "p95": 35121.199951171875,
+            "p99": 36078.199951171875
+          }
+        },
+        "noise-boundary.bin": {
+          "offered": 41,
+          "success": 36,
+          "outcomes": {
+            "success": 36,
+            "rejected": 5
+          },
+          "meanStageMs": {
+            "creating": 146.39168294270834,
+            "uploading": 1410.1583319769966,
+            "preparing": 4978.408338758681,
+            "ready": 846.9638943142361
+          },
+          "uploadStageMs": {
+            "p50": 1288,
+            "p95": 3385.10009765625,
+            "p99": 4054.699951171875
+          },
+          "downloadableMs": {
+            "p50": 6329.89990234375,
+            "p95": 15561.599853515625,
+            "p99": 16356.800048828125
+          }
+        },
+        "noise-large.bin": {
+          "offered": 18,
+          "success": 18,
+          "outcomes": {
+            "success": 18
+          },
+          "meanStageMs": {
+            "creating": 133.71671549479166,
+            "uploading": 7081.094428168402,
+            "preparing": 10938.277750651041,
+            "ready": 2532.8500298394097
+          },
+          "uploadStageMs": {
+            "p50": 5758.10009765625,
+            "p95": 19291.5,
+            "p99": 19291.5
+          },
+          "downloadableMs": {
+            "p50": 18746.800048828125,
+            "p95": 40676.599853515625,
+            "p99": 40676.599853515625
+          }
+        },
+        "noise-medium.bin": {
+          "offered": 139,
+          "success": 131,
+          "outcomes": {
+            "success": 131,
+            "rejected": 8
+          },
+          "meanStageMs": {
+            "creating": 56.30228895813454,
+            "uploading": 277.5763358778626,
+            "preparing": 2677.7839746839218,
+            "ready": 101.77861663585401
+          },
+          "uploadStageMs": {
+            "p50": 203.699951171875,
+            "p95": 841.400146484375,
+            "p99": 1864.300048828125
+          },
+          "downloadableMs": {
+            "p50": 2054.699951171875,
+            "p95": 7140.5,
+            "p99": 10863
+          }
+        },
+        "png-alpha.png": {
+          "offered": 101,
+          "success": 95,
+          "outcomes": {
+            "success": 95,
+            "rejected": 6
+          },
+          "meanStageMs": {
+            "creating": 54.01998355263158,
+            "uploading": 317.75158819901316,
+            "preparing": 18068.95369037829,
+            "ready": 320.27686831825656
+          },
+          "uploadStageMs": {
+            "p50": 162.800048828125,
+            "p95": 1120.10009765625,
+            "p99": 3061.599853515625
+          },
+          "downloadableMs": {
+            "p50": 18234,
+            "p95": 36008.300048828125,
+            "p99": 36598.7998046875
+          }
+        },
+        "png-noise.png": {
+          "offered": 74,
+          "success": 72,
+          "outcomes": {
+            "success": 72,
+            "rejected": 2
+          },
+          "meanStageMs": {
+            "creating": 52.03887600368924,
+            "uploading": 474.90834554036456,
+            "preparing": 16980.60417344835,
+            "ready": 627.1763746473524
+          },
+          "uploadStageMs": {
+            "p50": 372.5,
+            "p95": 1277.5,
+            "p99": 2240.5
+          },
+          "downloadableMs": {
+            "p50": 15916,
+            "p95": 37553.2998046875,
+            "p99": 38112
+          }
+        },
+        "text-boundary-above.bin": {
+          "offered": 42,
+          "success": 39,
+          "outcomes": {
+            "success": 39,
+            "rejected": 3
+          },
+          "meanStageMs": {
+            "creating": 154.7487292167468,
+            "uploading": 2105.9000087640225,
+            "preparing": 5619.051244491186,
+            "ready": 839.9692570612981
+          },
+          "uploadStageMs": {
+            "p50": 1499.5,
+            "p95": 7172.699951171875,
+            "p99": 7365
+          },
+          "downloadableMs": {
+            "p50": 7692.5,
+            "p95": 21161,
+            "p99": 21633.699951171875
+          }
+        },
+        "text-boundary-below.bin": {
+          "offered": 45,
+          "success": 44,
+          "outcomes": {
+            "success": 44,
+            "rejected": 1
+          },
+          "meanStageMs": {
+            "creating": 59.62728049538352,
+            "uploading": 1440.061356977983,
+            "preparing": 4235.704545454545,
+            "ready": 830.6840764825994
+          },
+          "uploadStageMs": {
+            "p50": 1503.400146484375,
+            "p95": 2465.60009765625,
+            "p99": 3476.5
+          },
+          "downloadableMs": {
+            "p50": 5836.60009765625,
+            "p95": 11962.7998046875,
+            "p99": 15968.89990234375
+          }
+        },
+        "text-small.bin": {
+          "offered": 174,
+          "success": 157,
+          "outcomes": {
+            "success": 157,
+            "rejected": 17
+          },
+          "meanStageMs": {
+            "creating": 50.70573435011943,
+            "uploading": 236.92928941082803,
+            "preparing": 2943.4713406896894,
+            "ready": 59.24139132165605
+          },
+          "uploadStageMs": {
+            "p50": 139.7998046875,
+            "p95": 824.400146484375,
+            "p99": 1820.5
+          },
+          "downloadableMs": {
+            "p50": 2155.89990234375,
+            "p95": 7532.5,
+            "p99": 12244.800048828125
+          }
+        },
+        "webp-large.webp": {
+          "offered": 41,
+          "success": 39,
+          "outcomes": {
+            "success": 39,
+            "rejected": 2
+          },
+          "meanStageMs": {
+            "creating": 41.52049529246795,
+            "uploading": 402.83333959334936,
+            "preparing": 20071.90513571715,
+            "ready": 791.8846153846154
+          },
+          "uploadStageMs": {
+            "p50": 358.10009765625,
+            "p95": 1203.89990234375,
+            "p99": 1590.300048828125
+          },
+          "downloadableMs": {
+            "p50": 20760.199951171875,
+            "p95": 35738.400146484375,
+            "p99": 38161.89990234375
+          }
+        },
+        "webp-small.webp": {
+          "offered": 98,
+          "success": 94,
+          "outcomes": {
+            "success": 94,
+            "rejected": 4
+          },
+          "meanStageMs": {
+            "creating": 51.568076275764625,
+            "uploading": 219.82234613946144,
+            "preparing": 15221.711703686004,
+            "ready": 268.17234769780583
+          },
+          "uploadStageMs": {
+            "p50": 126.7001953125,
+            "p95": 633.39990234375,
+            "p99": 2538.900146484375
+          },
+          "downloadableMs": {
+            "p50": 13679.199951171875,
+            "p95": 35352.699951171875,
+            "p99": 36671.89990234375
+          }
+        }
+      },
+      "services": {
+        "generator": {
+          "cpuSeconds": 214.07920800000002,
+          "networkRxBytes": 14261422887,
+          "networkTxBytes": 14653082037,
+          "storageReadBytes": 116969472,
+          "storageWriteBytes": 1407787008,
+          "throttledSeconds": 34.406766000000005,
+          "peakMemoryBytes": 4271243264,
+          "peakAnonymousMemoryBytes": 4216807424,
+          "majorFaultDelta": 41302,
+          "sampleSeconds": 164.237
+        },
+        "api": {
+          "cpuSeconds": 57.337223,
+          "networkRxBytes": 35935949,
+          "networkTxBytes": 86261602,
+          "storageReadBytes": 8110080,
+          "storageWriteBytes": 16384,
+          "throttledSeconds": 1.9279270000000004,
+          "peakMemoryBytes": 414121984,
+          "peakAnonymousMemoryBytes": 408903680,
+          "majorFaultDelta": 5,
+          "sampleSeconds": 164.238
+        },
+        "document-worker": {
+          "cpuSeconds": 0.9930510000000001,
+          "networkRxBytes": 1935902,
+          "networkTxBytes": 2312358,
+          "storageReadBytes": 11096064,
+          "storageWriteBytes": 0,
+          "throttledSeconds": 0.015734,
+          "peakMemoryBytes": 15560704,
+          "peakAnonymousMemoryBytes": 10113024,
+          "majorFaultDelta": 6,
+          "sampleSeconds": 164.237
+        },
+        "image-worker": {
+          "cpuSeconds": 259.405434,
+          "networkRxBytes": 1620222407,
+          "networkTxBytes": 1201229137,
+          "storageReadBytes": 9945088,
+          "storageWriteBytes": 3911680,
+          "throttledSeconds": 300.674815,
+          "peakMemoryBytes": 2037288960,
+          "peakAnonymousMemoryBytes": 2031804416,
+          "majorFaultDelta": 17,
+          "sampleSeconds": 164.237
+        },
+        "grafana": {
+          "cpuSeconds": 5.056149,
+          "networkRxBytes": 76042088,
+          "networkTxBytes": 256010,
+          "storageReadBytes": 508825600,
+          "storageWriteBytes": 371019776,
+          "throttledSeconds": 14.076847,
+          "peakMemoryBytes": 536838144,
+          "peakAnonymousMemoryBytes": 257572864,
+          "majorFaultDelta": 374,
+          "sampleSeconds": 164.236
+        },
+        "rabbitmq": {
+          "cpuSeconds": 18.786238,
+          "networkRxBytes": 3267389,
+          "networkTxBytes": 5727014,
+          "storageReadBytes": 12140544,
+          "storageWriteBytes": 23666688,
+          "throttledSeconds": 10.253572,
+          "peakMemoryBytes": 231161856,
+          "peakAnonymousMemoryBytes": 202907648,
+          "majorFaultDelta": 29,
+          "sampleSeconds": 164.236
+        },
+        "postgres": {
+          "cpuSeconds": 9.224860999999999,
+          "networkRxBytes": 10488618,
+          "networkTxBytes": 14910458,
+          "storageReadBytes": 26271744,
+          "storageWriteBytes": 61267968,
+          "throttledSeconds": 0.315763,
+          "peakMemoryBytes": 88469504,
+          "peakAnonymousMemoryBytes": 37695488,
+          "majorFaultDelta": 78,
+          "sampleSeconds": 164.236
+        },
+        "minio": {
+          "cpuSeconds": 135.182197,
+          "networkRxBytes": 15837401000,
+          "networkTxBytes": 15824810032,
+          "storageReadBytes": 27262627840,
+          "storageWriteBytes": 28959354880,
+          "throttledSeconds": 520.433647,
+          "peakMemoryBytes": 1073741824,
+          "peakAnonymousMemoryBytes": 553549824,
+          "majorFaultDelta": 19286,
+          "sampleSeconds": 164.236
+        },
+        "prometheus": {
+          "cpuSeconds": 1.134636,
+          "networkRxBytes": 19187580,
+          "networkTxBytes": 1529094,
+          "storageReadBytes": 48357376,
+          "storageWriteBytes": 2228224,
+          "throttledSeconds": 0.41869,
+          "peakMemoryBytes": 69824512,
+          "peakAnonymousMemoryBytes": 34009088,
+          "majorFaultDelta": 16,
+          "sampleSeconds": 164.236
+        }
+      }
+    },
+    {
+      "side": "hybrid",
+      "repeat": 2,
+      "label": "hybrid-20261112-hybrid-r2",
+      "offered": 960,
+      "outcomes": {
+        "success": 705,
+        "rejected": 255
+      },
+      "filesPerSecond": 4.795980353022539,
+      "inputMiBPerSecond": 73.28573225144305,
+      "p99Seconds": 39.47939990234375,
+      "cpuSecondsPerSuccess": 0.8968027390070923,
+      "protocolHash": "ff19160c7c28c43e771cc04dac610bfbc6fd5d55884907b8d74a47f495237de1",
+      "fixtureHash": "f5ec95ee30aafbdb5d5981c255010f69173a9311b3b9deef18a0381256f874ee",
+      "environmentHash": "fcd0240c3215f3261e6e585d344db5546f38d241773f2972335569ad8978480d",
+      "checks": {
+        "drained": true,
+        "durableBacklogDrained": true,
+        "unfinishedServerUploads": 0,
+        "cleanupFailures": 0,
+        "diagnostics": [],
+        "measurementCoverageComplete": true,
+        "clientTasksUnsettledAtReturn": 0,
+        "clientPutsActiveAtReturn": 0,
+        "clientPutConcurrencyPeakPerPage": 8
+      },
+      "cohorts": {
+        "jpeg-large.jpeg": {
+          "offered": 100,
+          "success": 71,
+          "outcomes": {
+            "success": 71,
+            "rejected": 29
+          },
+          "meanStageMs": {
+            "creating": 552.014091384243,
+            "uploading": 647.1676042583626,
+            "preparing": 21108.96056613116,
+            "ready": 1014.8971824108714
+          },
+          "uploadStageMs": {
+            "p50": 564.900146484375,
+            "p95": 1216.60009765625,
+            "p99": 3155.599853515625
+          },
+          "downloadableMs": {
+            "p50": 23939.5,
+            "p95": 27661.60009765625,
+            "p99": 28716.699951171875
+          }
+        },
+        "jpeg-small.jpeg": {
+          "offered": 87,
+          "success": 68,
+          "outcomes": {
+            "success": 68,
+            "rejected": 19
+          },
+          "meanStageMs": {
+            "creating": 487.33234719669116,
+            "uploading": 323.18381993910845,
+            "preparing": 19951.05589025161,
+            "ready": 539.3323615579044
+          },
+          "uploadStageMs": {
+            "p50": 298.699951171875,
+            "p95": 637.2998046875,
+            "p99": 1043.099853515625
+          },
+          "downloadableMs": {
+            "p50": 21924.300048828125,
+            "p95": 25527.599853515625,
+            "p99": 28091.89990234375
+          }
+        },
+        "noise-boundary.bin": {
+          "offered": 41,
+          "success": 27,
+          "outcomes": {
+            "success": 27,
+            "rejected": 14
+          },
+          "meanStageMs": {
+            "creating": 956.2666829427084,
+            "uploading": 3250.6407335069443,
+            "preparing": 18075.125922309027,
+            "ready": 1218.8111346209491
+          },
+          "uploadStageMs": {
+            "p50": 1860.89990234375,
+            "p95": 9232.900146484375,
+            "p99": 9650.39990234375
+          },
+          "downloadableMs": {
+            "p50": 25626.699951171875,
+            "p95": 31851.89990234375,
+            "p99": 33602.300048828125
+          }
+        },
+        "noise-large.bin": {
+          "offered": 18,
+          "success": 13,
+          "outcomes": {
+            "rejected": 5,
+            "success": 13
+          },
+          "meanStageMs": {
+            "creating": 471.8461726262019,
+            "uploading": 7359.569204477163,
+            "preparing": 29117.80772986779,
+            "ready": 3732.838416466346
+          },
+          "uploadStageMs": {
+            "p50": 7174.7998046875,
+            "p95": 10917,
+            "p99": 10917
+          },
+          "downloadableMs": {
+            "p50": 40050.300048828125,
+            "p95": 53120.89990234375,
+            "p99": 53120.89990234375
+          }
+        },
+        "noise-medium.bin": {
+          "offered": 139,
+          "success": 98,
+          "outcomes": {
+            "success": 98,
+            "rejected": 41
+          },
+          "meanStageMs": {
+            "creating": 570.4346874003508,
+            "uploading": 515.5408113440689,
+            "preparing": 17067.588777503188,
+            "ready": 140.62449926259566
+          },
+          "uploadStageMs": {
+            "p50": 357,
+            "p95": 1031.900146484375,
+            "p99": 5221.699951171875
+          },
+          "downloadableMs": {
+            "p50": 18810.800048828125,
+            "p95": 28011.699951171875,
+            "p99": 29514.699951171875
+          }
+        },
+        "png-alpha.png": {
+          "offered": 101,
+          "success": 73,
+          "outcomes": {
+            "success": 73,
+            "rejected": 28
+          },
+          "meanStageMs": {
+            "creating": 481.84793717893837,
+            "uploading": 256.32603809931504,
+            "preparing": 19925.590398919092,
+            "ready": 494.2123521778681
+          },
+          "uploadStageMs": {
+            "p50": 229.199951171875,
+            "p95": 591.10009765625,
+            "p99": 863.199951171875
+          },
+          "downloadableMs": {
+            "p50": 22199.60009765625,
+            "p95": 25615.89990234375,
+            "p99": 27415.39990234375
+          }
+        },
+        "png-noise.png": {
+          "offered": 74,
+          "success": 55,
+          "outcomes": {
+            "success": 55,
+            "rejected": 19
+          },
+          "meanStageMs": {
+            "creating": 454.9163707386364,
+            "uploading": 1045.8072620738637,
+            "preparing": 20648.854554332385,
+            "ready": 830.5345348011364
+          },
+          "uploadStageMs": {
+            "p50": 733,
+            "p95": 5428.2001953125,
+            "p99": 5958.699951171875
+          },
+          "downloadableMs": {
+            "p50": 23845.300048828125,
+            "p95": 27374.60009765625,
+            "p99": 28455.89990234375
+          }
+        },
+        "text-boundary-above.bin": {
+          "offered": 42,
+          "success": 32,
+          "outcomes": {
+            "success": 32,
+            "rejected": 10
+          },
+          "meanStageMs": {
+            "creating": 819.4281158447266,
+            "uploading": 3026.925003051758,
+            "preparing": 20872.890655517578,
+            "ready": 1114.9406204223633
+          },
+          "uploadStageMs": {
+            "p50": 2150.89990234375,
+            "p95": 10533.300048828125,
+            "p99": 10627.699951171875
+          },
+          "downloadableMs": {
+            "p50": 25438.5,
+            "p95": 34756.199951171875,
+            "p99": 35258.199951171875
+          }
+        },
+        "text-boundary-below.bin": {
+          "offered": 45,
+          "success": 37,
+          "outcomes": {
+            "success": 37,
+            "rejected": 8
+          },
+          "meanStageMs": {
+            "creating": 433.1919077280405,
+            "uploading": 2762.667553051098,
+            "preparing": 19344.23781936233,
+            "ready": 1286.8486790012669
+          },
+          "uploadStageMs": {
+            "p50": 2361.099853515625,
+            "p95": 7658.39990234375,
+            "p99": 8354.89990234375
+          },
+          "downloadableMs": {
+            "p50": 24763.300048828125,
+            "p95": 32931.800048828125,
+            "p99": 36991.5
+          }
+        },
+        "text-small.bin": {
+          "offered": 174,
+          "success": 120,
+          "outcomes": {
+            "success": 120,
+            "rejected": 54
+          },
+          "meanStageMs": {
+            "creating": 449.5433329264323,
+            "uploading": 279.28748982747396,
+            "preparing": 17542.384163411458,
+            "ready": 174.8441650390625
+          },
+          "uploadStageMs": {
+            "p50": 228.199951171875,
+            "p95": 555.800048828125,
+            "p99": 1034
+          },
+          "downloadableMs": {
+            "p50": 19259.10009765625,
+            "p95": 26579.800048828125,
+            "p99": 29092.599853515625
+          }
+        },
+        "webp-large.webp": {
+          "offered": 41,
+          "success": 35,
+          "outcomes": {
+            "success": 35,
+            "rejected": 6
+          },
+          "meanStageMs": {
+            "creating": 349.4828822544643,
+            "uploading": 757.9028669084821,
+            "preparing": 21864.882819475446,
+            "ready": 1223.5771484375
+          },
+          "uploadStageMs": {
+            "p50": 585.39990234375,
+            "p95": 3084.89990234375,
+            "p99": 5430.800048828125
+          },
+          "downloadableMs": {
+            "p50": 24878.89990234375,
+            "p95": 28000,
+            "p99": 28652.199951171875
+          }
+        },
+        "webp-small.webp": {
+          "offered": 98,
+          "success": 76,
+          "outcomes": {
+            "success": 76,
+            "rejected": 22
+          },
+          "meanStageMs": {
+            "creating": 387.17762515419406,
+            "uploading": 266.25132671155427,
+            "preparing": 19515.407894736843,
+            "ready": 447.7947291324013
+          },
+          "uploadStageMs": {
+            "p50": 217,
+            "p95": 621.300048828125,
+            "p99": 1022.7998046875
+          },
+          "downloadableMs": {
+            "p50": 21465.199951171875,
+            "p95": 25874.60009765625,
+            "p99": 27496.39990234375
+          }
+        }
+      },
+      "services": {
+        "generator": {
+          "cpuSeconds": 202.78051,
+          "networkRxBytes": 11087255316,
+          "networkTxBytes": 11363282219,
+          "storageReadBytes": 95703040,
+          "storageWriteBytes": 1041166336,
+          "throttledSeconds": 45.901120999999996,
+          "peakMemoryBytes": 4628279296,
+          "peakAnonymousMemoryBytes": 4473114624,
+          "majorFaultDelta": 48472,
+          "sampleSeconds": 156.937
+        },
+        "document-worker": {
+          "cpuSeconds": 0.872319,
+          "networkRxBytes": 1507637,
+          "networkTxBytes": 1817058,
+          "storageReadBytes": 19566592,
+          "storageWriteBytes": 4096,
+          "throttledSeconds": 0,
+          "peakMemoryBytes": 18219008,
+          "peakAnonymousMemoryBytes": 10067968,
+          "majorFaultDelta": 9,
+          "sampleSeconds": 156.937
+        },
+        "api": {
+          "cpuSeconds": 54.293558,
+          "networkRxBytes": 41523460,
+          "networkTxBytes": 89735207,
+          "storageReadBytes": 10498048,
+          "storageWriteBytes": 1990656,
+          "throttledSeconds": 3.86106,
+          "peakMemoryBytes": 437751808,
+          "peakAnonymousMemoryBytes": 418353152,
+          "majorFaultDelta": 8,
+          "sampleSeconds": 156.937
+        },
+        "image-worker": {
+          "cpuSeconds": 197.96593199999998,
+          "networkRxBytes": 1265362191,
+          "networkTxBytes": 956386142,
+          "storageReadBytes": 8462336,
+          "storageWriteBytes": 5115904,
+          "throttledSeconds": 130.198978,
+          "peakMemoryBytes": 2043265024,
+          "peakAnonymousMemoryBytes": 2036502528,
+          "majorFaultDelta": 14,
+          "sampleSeconds": 156.935
+        },
+        "minio": {
+          "cpuSeconds": 141.753323,
+          "networkRxBytes": 12298452217,
+          "networkTxBytes": 12291303160,
+          "storageReadBytes": 22748286976,
+          "storageWriteBytes": 22441476096,
+          "throttledSeconds": 698.823218,
+          "peakMemoryBytes": 1073741824,
+          "peakAnonymousMemoryBytes": 589406208,
+          "majorFaultDelta": 21489,
+          "sampleSeconds": 156.938
+        },
+        "grafana": {
+          "cpuSeconds": 5.2700499999999995,
+          "networkRxBytes": 46309186,
+          "networkTxBytes": 157674,
+          "storageReadBytes": 774852608,
+          "storageWriteBytes": 188153856,
+          "throttledSeconds": 21.291643,
+          "peakMemoryBytes": 536870912,
+          "peakAnonymousMemoryBytes": 255070208,
+          "majorFaultDelta": 402,
+          "sampleSeconds": 156.936
+        },
+        "rabbitmq": {
+          "cpuSeconds": 16.673729,
+          "networkRxBytes": 2873215,
+          "networkTxBytes": 5158863,
+          "storageReadBytes": 8589312,
+          "storageWriteBytes": 23052288,
+          "throttledSeconds": 10.274121999999998,
+          "peakMemoryBytes": 225595392,
+          "peakAnonymousMemoryBytes": 198602752,
+          "majorFaultDelta": 26,
+          "sampleSeconds": 156.936
+        },
+        "postgres": {
+          "cpuSeconds": 11.463512000000001,
+          "networkRxBytes": 11058445,
+          "networkTxBytes": 17123409,
+          "storageReadBytes": 57331712,
+          "storageWriteBytes": 52543488,
+          "throttledSeconds": 27.24906,
+          "peakMemoryBytes": 95125504,
+          "peakAnonymousMemoryBytes": 37322752,
+          "majorFaultDelta": 224,
+          "sampleSeconds": 156.936
+        },
+        "prometheus": {
+          "cpuSeconds": 1.172998,
+          "networkRxBytes": 18287659,
+          "networkTxBytes": 1514016,
+          "storageReadBytes": 90468352,
+          "storageWriteBytes": 2052096,
+          "throttledSeconds": 0.9939950000000001,
+          "peakMemoryBytes": 84185088,
+          "peakAnonymousMemoryBytes": 36913152,
+          "majorFaultDelta": 29,
+          "sampleSeconds": 156.938
+        }
+      }
+    },
+    {
+      "side": "v1",
+      "repeat": 2,
+      "label": "hybrid-20261112-v1-r2",
+      "offered": 960,
+      "outcomes": {
+        "success": 941,
+        "rejected": 19
+      },
+      "filesPerSecond": 6.30903829019146,
+      "inputMiBPerSecond": 94.868311946108,
+      "p99Seconds": 33.67119995117187,
+      "cpuSecondsPerSuccess": 0.7605943188097769,
+      "protocolHash": "ff19160c7c28c43e771cc04dac610bfbc6fd5d55884907b8d74a47f495237de1",
+      "fixtureHash": "f5ec95ee30aafbdb5d5981c255010f69173a9311b3b9deef18a0381256f874ee",
+      "environmentHash": "fcd0240c3215f3261e6e585d344db5546f38d241773f2972335569ad8978480d",
+      "checks": {
+        "drained": true,
+        "durableBacklogDrained": true,
+        "unfinishedServerUploads": 0,
+        "cleanupFailures": 0,
+        "diagnostics": [],
+        "measurementCoverageComplete": true,
+        "clientTasksUnsettledAtReturn": 0,
+        "clientPutsActiveAtReturn": 0,
+        "clientPutConcurrencyPeakPerPage": 8
+      },
+      "cohorts": {
+        "jpeg-large.jpeg": {
+          "offered": 100,
+          "success": 98,
+          "outcomes": {
+            "success": 98,
+            "rejected": 2
+          },
+          "meanStageMs": {
+            "creating": 75.29285664461096,
+            "uploading": 314.93061423788265,
+            "preparing": 16013.922433035714,
+            "ready": 694.281643614477
+          },
+          "uploadStageMs": {
+            "p50": 294.599853515625,
+            "p95": 640,
+            "p99": 797.2001953125
+          },
+          "downloadableMs": {
+            "p50": 13694.099853515625,
+            "p95": 33820.900146484375,
+            "p99": 34633
+          }
+        },
+        "jpeg-small.jpeg": {
+          "offered": 87,
+          "success": 85,
+          "outcomes": {
+            "success": 85,
+            "rejected": 2
+          },
+          "meanStageMs": {
+            "creating": 56.67293772977941,
+            "uploading": 143.11057272518383,
+            "preparing": 14945.512959558824,
+            "ready": 336.0694106158088
+          },
+          "uploadStageMs": {
+            "p50": 122.5,
+            "p95": 356.800048828125,
+            "p99": 470.39990234375
+          },
+          "downloadableMs": {
+            "p50": 12905,
+            "p95": 30669.7998046875,
+            "p99": 32542.39990234375
+          }
+        },
+        "noise-boundary.bin": {
+          "offered": 41,
+          "success": 38,
+          "outcomes": {
+            "success": 38,
+            "rejected": 3
+          },
+          "meanStageMs": {
+            "creating": 122.15789473684211,
+            "uploading": 2792.4210526315787,
+            "preparing": 3153.6157740542762,
+            "ready": 734.2210436369244
+          },
+          "uploadStageMs": {
+            "p50": 2670.800048828125,
+            "p95": 6585,
+            "p99": 7459.5
+          },
+          "downloadableMs": {
+            "p50": 5874.300048828125,
+            "p95": 15891.099853515625,
+            "p99": 16519.800048828125
+          }
+        },
+        "noise-large.bin": {
+          "offered": 18,
+          "success": 18,
+          "outcomes": {
+            "success": 18
+          },
+          "meanStageMs": {
+            "creating": 107.97782389322917,
+            "uploading": 10330.261081271701,
+            "preparing": 8668.888875325521,
+            "ready": 2141.600002712674
+          },
+          "uploadStageMs": {
+            "p50": 10203.900146484375,
+            "p95": 20312.39990234375,
+            "p99": 20312.39990234375
+          },
+          "downloadableMs": {
+            "p50": 20973.900146484375,
+            "p95": 39451.2998046875,
+            "p99": 39451.2998046875
+          }
+        },
+        "noise-medium.bin": {
+          "offered": 139,
+          "success": 135,
+          "outcomes": {
+            "success": 135,
+            "rejected": 4
+          },
+          "meanStageMs": {
+            "creating": 63.79852430555555,
+            "uploading": 150.79777199074073,
+            "preparing": 1257.4414840133102,
+            "ready": 77.21704282407407
+          },
+          "uploadStageMs": {
+            "p50": 133.599853515625,
+            "p95": 372.300048828125,
+            "p99": 663.800048828125
+          },
+          "downloadableMs": {
+            "p50": 1437.7998046875,
+            "p95": 3189.7998046875,
+            "p99": 5762.39990234375
+          }
+        },
+        "png-alpha.png": {
+          "offered": 101,
+          "success": 101,
+          "outcomes": {
+            "success": 101
+          },
+          "meanStageMs": {
+            "creating": 53.782173383353964,
+            "uploading": 115.82475054146039,
+            "preparing": 16331.137625212717,
+            "ready": 279.3039502436572
+          },
+          "uploadStageMs": {
+            "p50": 78.800048828125,
+            "p95": 272.699951171875,
+            "p99": 564.5
+          },
+          "downloadableMs": {
+            "p50": 16632.199951171875,
+            "p95": 30982.5,
+            "p99": 32754.89990234375
+          }
+        },
+        "png-noise.png": {
+          "offered": 74,
+          "success": 73,
+          "outcomes": {
+            "success": 73,
+            "rejected": 1
+          },
+          "meanStageMs": {
+            "creating": 49.13150149828767,
+            "uploading": 314.90000601990585,
+            "preparing": 14635.110953553081,
+            "ready": 627.0054714255137
+          },
+          "uploadStageMs": {
+            "p50": 344,
+            "p95": 615.89990234375,
+            "p99": 862
+          },
+          "downloadableMs": {
+            "p50": 13604.89990234375,
+            "p95": 32462.10009765625,
+            "p99": 32955.199951171875
+          }
+        },
+        "text-boundary-above.bin": {
+          "offered": 42,
+          "success": 40,
+          "outcomes": {
+            "success": 40,
+            "rejected": 2
+          },
+          "meanStageMs": {
+            "creating": 114.01748657226562,
+            "uploading": 3250.7600036621093,
+            "preparing": 3674.9474975585936,
+            "ready": 879.7574890136718
+          },
+          "uploadStageMs": {
+            "p50": 3091.199951171875,
+            "p95": 6076.39990234375,
+            "p99": 6153
+          },
+          "downloadableMs": {
+            "p50": 7107,
+            "p95": 15290.5,
+            "p99": 16777.699951171875
+          }
+        },
+        "text-boundary-below.bin": {
+          "offered": 45,
+          "success": 44,
+          "outcomes": {
+            "success": 44,
+            "rejected": 1
+          },
+          "meanStageMs": {
+            "creating": 47.28864635120738,
+            "uploading": 1241.7136507901278,
+            "preparing": 2388.1249778053975,
+            "ready": 718.9886474609375
+          },
+          "uploadStageMs": {
+            "p50": 1310.2001953125,
+            "p95": 2590.89990234375,
+            "p99": 2720.900146484375
+          },
+          "downloadableMs": {
+            "p50": 4544.60009765625,
+            "p95": 7456.10009765625,
+            "p99": 12568.5
+          }
+        },
+        "text-small.bin": {
+          "offered": 174,
+          "success": 171,
+          "outcomes": {
+            "success": 171,
+            "rejected": 3
+          },
+          "meanStageMs": {
+            "creating": 56.644432737116226,
+            "uploading": 128.99943176626462,
+            "preparing": 1505.823974609375,
+            "ready": 59.65088604486477
+          },
+          "uploadStageMs": {
+            "p50": 75.5,
+            "p95": 377.60009765625,
+            "p99": 569.300048828125
+          },
+          "downloadableMs": {
+            "p50": 1378.900146484375,
+            "p95": 4030,
+            "p99": 7066.7998046875
+          }
+        },
+        "webp-large.webp": {
+          "offered": 41,
+          "success": 41,
+          "outcomes": {
+            "success": 41
+          },
+          "meanStageMs": {
+            "creating": 50.31948480373475,
+            "uploading": 237.5805187690549,
+            "preparing": 17921.89023199314,
+            "ready": 766.7219655106708
+          },
+          "uploadStageMs": {
+            "p50": 224.89990234375,
+            "p95": 691.800048828125,
+            "p99": 742.10009765625
+          },
+          "downloadableMs": {
+            "p50": 19274.39990234375,
+            "p95": 33027.099853515625,
+            "p99": 33797.400146484375
+          }
+        },
+        "webp-small.webp": {
+          "offered": 98,
+          "success": 97,
+          "outcomes": {
+            "success": 97,
+            "rejected": 1
+          },
+          "meanStageMs": {
+            "creating": 65.92267286163016,
+            "uploading": 88.51238573211984,
+            "preparing": 13329.506163921553,
+            "ready": 270.3721760228737
+          },
+          "uploadStageMs": {
+            "p50": 66.300048828125,
+            "p95": 244,
+            "p99": 446.5
+          },
+          "downloadableMs": {
+            "p50": 11762.5,
+            "p95": 30734.800048828125,
+            "p99": 32559.599853515625
+          }
+        }
+      },
+      "services": {
+        "generator": {
+          "cpuSeconds": 214.892649,
+          "networkRxBytes": 14508693500,
+          "networkTxBytes": 14927180138,
+          "storageReadBytes": 49672192,
+          "storageWriteBytes": 1160761344,
+          "throttledSeconds": 39.932229,
+          "peakMemoryBytes": 4308000768,
+          "peakAnonymousMemoryBytes": 4284268544,
+          "majorFaultDelta": 37300,
+          "sampleSeconds": 158.892
+        },
+        "api": {
+          "cpuSeconds": 58.070812,
+          "networkRxBytes": 32668924,
+          "networkTxBytes": 80411191,
+          "storageReadBytes": 5017600,
+          "storageWriteBytes": 0,
+          "throttledSeconds": 2.042522,
+          "peakMemoryBytes": 412524544,
+          "peakAnonymousMemoryBytes": 411660288,
+          "majorFaultDelta": 2,
+          "sampleSeconds": 158.894
+        },
+        "image-worker": {
+          "cpuSeconds": 274.58975100000004,
+          "networkRxBytes": 1680454742,
+          "networkTxBytes": 1258638015,
+          "storageReadBytes": 11190272,
+          "storageWriteBytes": 3239936,
+          "throttledSeconds": 340.81149600000003,
+          "peakMemoryBytes": 2067931136,
+          "peakAnonymousMemoryBytes": 2065317888,
+          "majorFaultDelta": 12,
+          "sampleSeconds": 158.892
+        },
+        "document-worker": {
+          "cpuSeconds": 1.0491679999999999,
+          "networkRxBytes": 2018107,
+          "networkTxBytes": 2407409,
+          "storageReadBytes": 15433728,
+          "storageWriteBytes": 0,
+          "throttledSeconds": 0.072225,
+          "peakMemoryBytes": 17371136,
+          "peakAnonymousMemoryBytes": 10051584,
+          "majorFaultDelta": 8,
+          "sampleSeconds": 158.893
+        },
+        "postgres": {
+          "cpuSeconds": 9.387069,
+          "networkRxBytes": 9947910,
+          "networkTxBytes": 13631757,
+          "storageReadBytes": 49565696,
+          "storageWriteBytes": 64401408,
+          "throttledSeconds": 0.37975400000000004,
+          "peakMemoryBytes": 95555584,
+          "peakAnonymousMemoryBytes": 37351424,
+          "majorFaultDelta": 113,
+          "sampleSeconds": 158.892
+        },
+        "prometheus": {
+          "cpuSeconds": 1.08041,
+          "networkRxBytes": 18497038,
+          "networkTxBytes": 1265324,
+          "storageReadBytes": 54800384,
+          "storageWriteBytes": 2281472,
+          "throttledSeconds": 0.38136100000000006,
+          "peakMemoryBytes": 71888896,
+          "peakAnonymousMemoryBytes": 42074112,
+          "majorFaultDelta": 19,
+          "sampleSeconds": 158.892
+        },
+        "minio": {
+          "cpuSeconds": 131.67213900000002,
+          "networkRxBytes": 16171093545,
+          "networkTxBytes": 16137246390,
+          "storageReadBytes": 27106156544,
+          "storageWriteBytes": 29415948288,
+          "throttledSeconds": 391.06946300000004,
+          "peakMemoryBytes": 1073737728,
+          "peakAnonymousMemoryBytes": 538062848,
+          "majorFaultDelta": 15781,
+          "sampleSeconds": 158.893
+        },
+        "rabbitmq": {
+          "cpuSeconds": 19.446313999999997,
+          "networkRxBytes": 3081615,
+          "networkTxBytes": 5675157,
+          "storageReadBytes": 6750208,
+          "storageWriteBytes": 25071616,
+          "throttledSeconds": 8.392358000000002,
+          "peakMemoryBytes": 228012032,
+          "peakAnonymousMemoryBytes": 200007680,
+          "majorFaultDelta": 15,
+          "sampleSeconds": 158.892
+        },
+        "grafana": {
+          "cpuSeconds": 5.5309420000000005,
+          "networkRxBytes": 71094703,
+          "networkTxBytes": 249349,
+          "storageReadBytes": 849203200,
+          "storageWriteBytes": 335097856,
+          "throttledSeconds": 13.359354000000002,
+          "peakMemoryBytes": 536862720,
+          "peakAnonymousMemoryBytes": 243437568,
+          "majorFaultDelta": 1293,
+          "sampleSeconds": 158.891
+        }
+      }
+    },
+    {
+      "side": "hybrid",
+      "repeat": 3,
+      "label": "hybrid-20261112-hybrid-r3",
+      "offered": 960,
+      "outcomes": {
+        "success": 870,
+        "rejected": 90
+      },
+      "filesPerSecond": 5.76601128734184,
+      "inputMiBPerSecond": 87.3027765382121,
+      "p99Seconds": 35.30510009765625,
+      "cpuSecondsPerSuccess": 0.8171184712643679,
+      "protocolHash": "ff19160c7c28c43e771cc04dac610bfbc6fd5d55884907b8d74a47f495237de1",
+      "fixtureHash": "f5ec95ee30aafbdb5d5981c255010f69173a9311b3b9deef18a0381256f874ee",
+      "environmentHash": "fcd0240c3215f3261e6e585d344db5546f38d241773f2972335569ad8978480d",
+      "checks": {
+        "drained": true,
+        "durableBacklogDrained": true,
+        "unfinishedServerUploads": 0,
+        "cleanupFailures": 0,
+        "diagnostics": [],
+        "measurementCoverageComplete": true,
+        "clientTasksUnsettledAtReturn": 0,
+        "clientPutsActiveAtReturn": 0,
+        "clientPutConcurrencyPeakPerPage": 8
+      },
+      "cohorts": {
+        "jpeg-large.jpeg": {
+          "offered": 100,
+          "success": 92,
+          "outcomes": {
+            "success": 92,
+            "rejected": 8
+          },
+          "meanStageMs": {
+            "creating": 71.43586531929348,
+            "uploading": 495.81195864470106,
+            "preparing": 20486.10434092646,
+            "ready": 856.9369692595109
+          },
+          "uploadStageMs": {
+            "p50": 516.099853515625,
+            "p95": 843.10009765625,
+            "p99": 1041.199951171875
+          },
+          "downloadableMs": {
+            "p50": 22474.300048828125,
+            "p95": 35368.60009765625,
+            "p99": 36927.5
+          }
+        },
+        "jpeg-small.jpeg": {
+          "offered": 87,
+          "success": 81,
+          "outcomes": {
+            "success": 81,
+            "rejected": 6
+          },
+          "meanStageMs": {
+            "creating": 62.764187282986114,
+            "uploading": 249.92221860532408,
+            "preparing": 19691.8074182581,
+            "ready": 464.3617139274691
+          },
+          "uploadStageMs": {
+            "p50": 239.099853515625,
+            "p95": 538.5,
+            "p99": 735.900146484375
+          },
+          "downloadableMs": {
+            "p50": 22438.2001953125,
+            "p95": 32667.099853515625,
+            "p99": 33766.39990234375
+          }
+        },
+        "noise-boundary.bin": {
+          "offered": 41,
+          "success": 34,
+          "outcomes": {
+            "success": 34,
+            "rejected": 7
+          },
+          "meanStageMs": {
+            "creating": 185.89703728170957,
+            "uploading": 1446.2853142233455,
+            "preparing": 5354.488245346967,
+            "ready": 973.7235179227941
+          },
+          "uploadStageMs": {
+            "p50": 1267.89990234375,
+            "p95": 2728.099853515625,
+            "p99": 6122.10009765625
+          },
+          "downloadableMs": {
+            "p50": 6339.7001953125,
+            "p95": 19594.400146484375,
+            "p99": 20943.89990234375
+          }
+        },
+        "noise-large.bin": {
+          "offered": 18,
+          "success": 17,
+          "outcomes": {
+            "success": 17,
+            "rejected": 1
+          },
+          "meanStageMs": {
+            "creating": 196.57061408547793,
+            "uploading": 7077.811753216912,
+            "preparing": 10312.258817784927,
+            "ready": 3512.5000143612133
+          },
+          "uploadStageMs": {
+            "p50": 5700.599853515625,
+            "p95": 17979.10009765625,
+            "p99": 17979.10009765625
+          },
+          "downloadableMs": {
+            "p50": 20282.2001953125,
+            "p95": 33321,
+            "p99": 33321
+          }
+        },
+        "noise-medium.bin": {
+          "offered": 139,
+          "success": 125,
+          "outcomes": {
+            "success": 125,
+            "rejected": 14
+          },
+          "meanStageMs": {
+            "creating": 62.247197265625,
+            "uploading": 271.92241015625,
+            "preparing": 3939.337595703125,
+            "ready": 119.280802734375
+          },
+          "uploadStageMs": {
+            "p50": 255.60009765625,
+            "p95": 529.800048828125,
+            "p99": 659.800048828125
+          },
+          "downloadableMs": {
+            "p50": 2932.300048828125,
+            "p95": 12770.7998046875,
+            "p99": 15345
+          }
+        },
+        "png-alpha.png": {
+          "offered": 101,
+          "success": 88,
+          "outcomes": {
+            "success": 88,
+            "rejected": 13
+          },
+          "meanStageMs": {
+            "creating": 71.31933316317472,
+            "uploading": 189.9977167302912,
+            "preparing": 20299.262498335404,
+            "ready": 352.51135808771306
+          },
+          "uploadStageMs": {
+            "p50": 164.199951171875,
+            "p95": 425.099853515625,
+            "p99": 566.099853515625
+          },
+          "downloadableMs": {
+            "p50": 22993.7998046875,
+            "p95": 33362.10009765625,
+            "p99": 34389.800048828125
+          }
+        },
+        "png-noise.png": {
+          "offered": 74,
+          "success": 72,
+          "outcomes": {
+            "success": 72,
+            "rejected": 2
+          },
+          "meanStageMs": {
+            "creating": 75.51526896158855,
+            "uploading": 605.4916720920139,
+            "preparing": 19661.765275743273,
+            "ready": 774.629153781467
+          },
+          "uploadStageMs": {
+            "p50": 564.5,
+            "p95": 1186.5,
+            "p99": 1362.199951171875
+          },
+          "downloadableMs": {
+            "p50": 24086,
+            "p95": 34512.800048828125,
+            "p99": 35771.900146484375
+          }
+        },
+        "text-boundary-above.bin": {
+          "offered": 42,
+          "success": 38,
+          "outcomes": {
+            "success": 38,
+            "rejected": 4
+          },
+          "meanStageMs": {
+            "creating": 171.0158113178454,
+            "uploading": 2317.5631810238488,
+            "preparing": 6259.336817691201,
+            "ready": 1089.9421001233552
+          },
+          "uploadStageMs": {
+            "p50": 1607.400146484375,
+            "p95": 7240.699951171875,
+            "p99": 8873.400146484375
+          },
+          "downloadableMs": {
+            "p50": 8871.5,
+            "p95": 18989.199951171875,
+            "p99": 19343.900146484375
+          }
+        },
+        "text-boundary-below.bin": {
+          "offered": 45,
+          "success": 40,
+          "outcomes": {
+            "success": 40,
+            "rejected": 5
+          },
+          "meanStageMs": {
+            "creating": 54.16499633789063,
+            "uploading": 1769.4749877929687,
+            "preparing": 5460.660015869141,
+            "ready": 930.4625183105469
+          },
+          "uploadStageMs": {
+            "p50": 1739.7998046875,
+            "p95": 2990.300048828125,
+            "p99": 3859.39990234375
+          },
+          "downloadableMs": {
+            "p50": 6935.10009765625,
+            "p95": 18579.7001953125,
+            "p99": 20150.400146484375
+          }
+        },
+        "text-small.bin": {
+          "offered": 174,
+          "success": 153,
+          "outcomes": {
+            "success": 153,
+            "rejected": 21
+          },
+          "meanStageMs": {
+            "creating": 65.75031594669117,
+            "uploading": 215.00981190002042,
+            "preparing": 4253.9333400352325,
+            "ready": 97.19345032935048
+          },
+          "uploadStageMs": {
+            "p50": 180.5,
+            "p95": 525.199951171875,
+            "p99": 816.89990234375
+          },
+          "downloadableMs": {
+            "p50": 3112.39990234375,
+            "p95": 13087.900146484375,
+            "p99": 13940.300048828125
+          }
+        },
+        "webp-large.webp": {
+          "offered": 41,
+          "success": 36,
+          "outcomes": {
+            "success": 36,
+            "rejected": 5
+          },
+          "meanStageMs": {
+            "creating": 56.67778184678819,
+            "uploading": 372.54445393880206,
+            "preparing": 21785.216674804688,
+            "ready": 847.7694295247396
+          },
+          "uploadStageMs": {
+            "p50": 360.800048828125,
+            "p95": 654.300048828125,
+            "p99": 780.10009765625
+          },
+          "downloadableMs": {
+            "p50": 26347.39990234375,
+            "p95": 35385.300048828125,
+            "p99": 35500.400146484375
+          }
+        },
+        "webp-small.webp": {
+          "offered": 98,
+          "success": 94,
+          "outcomes": {
+            "success": 94,
+            "rejected": 4
+          },
+          "meanStageMs": {
+            "creating": 88.33721014793883,
+            "uploading": 180.46490348653592,
+            "preparing": 18102.898941364696,
+            "ready": 375.1223456200133
+          },
+          "uploadStageMs": {
+            "p50": 159.60009765625,
+            "p95": 407.199951171875,
+            "p99": 891
+          },
+          "downloadableMs": {
+            "p50": 20148,
+            "p95": 32541.400146484375,
+            "p99": 33735.39990234375
+          }
+        }
+      },
+      "services": {
+        "generator": {
+          "cpuSeconds": 221.649366,
+          "networkRxBytes": 13490884605,
+          "networkTxBytes": 13888665924,
+          "storageReadBytes": 54358016,
+          "storageWriteBytes": 1490067456,
+          "throttledSeconds": 48.155645,
+          "peakMemoryBytes": 4184903680,
+          "peakAnonymousMemoryBytes": 4122202112,
+          "majorFaultDelta": 43658,
+          "sampleSeconds": 163.165
+        },
+        "api": {
+          "cpuSeconds": 58.530004000000005,
+          "networkRxBytes": 37915287,
+          "networkTxBytes": 88277704,
+          "storageReadBytes": 3592192,
+          "storageWriteBytes": 0,
+          "throttledSeconds": 1.9921129999999998,
+          "peakMemoryBytes": 430944256,
+          "peakAnonymousMemoryBytes": 414367744,
+          "majorFaultDelta": 3,
+          "sampleSeconds": 163.165
+        },
+        "image-worker": {
+          "cpuSeconds": 259.680007,
+          "networkRxBytes": 1605646265,
+          "networkTxBytes": 1185144317,
+          "storageReadBytes": 4673536,
+          "storageWriteBytes": 3559424,
+          "throttledSeconds": 265.99914,
+          "peakMemoryBytes": 2128035840,
+          "peakAnonymousMemoryBytes": 2124296192,
+          "majorFaultDelta": 12,
+          "sampleSeconds": 163.166
+        },
+        "document-worker": {
+          "cpuSeconds": 1.0648259999999998,
+          "networkRxBytes": 1860004,
+          "networkTxBytes": 2224628,
+          "storageReadBytes": 15183872,
+          "storageWriteBytes": 0,
+          "throttledSeconds": 0,
+          "peakMemoryBytes": 17801216,
+          "peakAnonymousMemoryBytes": 10113024,
+          "majorFaultDelta": 9,
+          "sampleSeconds": 163.166
+        },
+        "postgres": {
+          "cpuSeconds": 9.445602999999998,
+          "networkRxBytes": 10833689,
+          "networkTxBytes": 15666987,
+          "storageReadBytes": 33189888,
+          "storageWriteBytes": 60280832,
+          "throttledSeconds": 0.4207050000000001,
+          "peakMemoryBytes": 90443776,
+          "peakAnonymousMemoryBytes": 34840576,
+          "majorFaultDelta": 76,
+          "sampleSeconds": 163.165
+        },
+        "grafana": {
+          "cpuSeconds": 4.916476000000001,
+          "networkRxBytes": 66771858,
+          "networkTxBytes": 231666,
+          "storageReadBytes": 818372608,
+          "storageWriteBytes": 313483264,
+          "throttledSeconds": 11.252561,
+          "peakMemoryBytes": 536870912,
+          "peakAnonymousMemoryBytes": 247377920,
+          "majorFaultDelta": 2423,
+          "sampleSeconds": 163.164
+        },
+        "rabbitmq": {
+          "cpuSeconds": 19.310651,
+          "networkRxBytes": 3116202,
+          "networkTxBytes": 5688005,
+          "storageReadBytes": 2080768,
+          "storageWriteBytes": 22765568,
+          "throttledSeconds": 9.666487,
+          "peakMemoryBytes": 222617600,
+          "peakAnonymousMemoryBytes": 199585792,
+          "majorFaultDelta": 8,
+          "sampleSeconds": 163.165
+        },
+        "minio": {
+          "cpuSeconds": 135.14463400000002,
+          "networkRxBytes": 15055524928,
+          "networkTxBytes": 15037895088,
+          "storageReadBytes": 27427110912,
+          "storageWriteBytes": 27355938816,
+          "throttledSeconds": 494.18645300000003,
+          "peakMemoryBytes": 1073741824,
+          "peakAnonymousMemoryBytes": 584630272,
+          "majorFaultDelta": 19243,
+          "sampleSeconds": 163.166
+        },
+        "prometheus": {
+          "cpuSeconds": 1.151503,
+          "networkRxBytes": 19215188,
+          "networkTxBytes": 1433515,
+          "storageReadBytes": 45006848,
+          "storageWriteBytes": 2240512,
+          "throttledSeconds": 0.15332899999999994,
+          "peakMemoryBytes": 66727936,
+          "peakAnonymousMemoryBytes": 39047168,
+          "majorFaultDelta": 15,
+          "sampleSeconds": 163.165
+        }
+      }
+    },
+    {
+      "side": "v1",
+      "repeat": 3,
+      "label": "hybrid-20261112-v1-r3",
+      "offered": 960,
+      "outcomes": {
+        "success": 922,
+        "rejected": 38
+      },
+      "filesPerSecond": 6.008976964588003,
+      "inputMiBPerSecond": 91.58483364678672,
+      "p99Seconds": 39.7965,
+      "cpuSecondsPerSuccess": 0.806000640997831,
+      "protocolHash": "ff19160c7c28c43e771cc04dac610bfbc6fd5d55884907b8d74a47f495237de1",
+      "fixtureHash": "f5ec95ee30aafbdb5d5981c255010f69173a9311b3b9deef18a0381256f874ee",
+      "environmentHash": "fcd0240c3215f3261e6e585d344db5546f38d241773f2972335569ad8978480d",
+      "checks": {
+        "drained": true,
+        "durableBacklogDrained": true,
+        "unfinishedServerUploads": 0,
+        "cleanupFailures": 0,
+        "diagnostics": [],
+        "measurementCoverageComplete": true,
+        "clientTasksUnsettledAtReturn": 0,
+        "clientPutsActiveAtReturn": 0,
+        "clientPutConcurrencyPeakPerPage": 7
+      },
+      "cohorts": {
+        "jpeg-large.jpeg": {
+          "offered": 100,
+          "success": 96,
+          "outcomes": {
+            "success": 96,
+            "rejected": 4
+          },
+          "meanStageMs": {
+            "creating": 61.65521748860677,
+            "uploading": 318.7551854451497,
+            "preparing": 19758.80209350586,
+            "ready": 726.9708302815756
+          },
+          "uploadStageMs": {
+            "p50": 312.39990234375,
+            "p95": 628,
+            "p99": 767.89990234375
+          },
+          "downloadableMs": {
+            "p50": 18011.300048828125,
+            "p95": 39525,
+            "p99": 40191.699951171875
+          }
+        },
+        "jpeg-small.jpeg": {
+          "offered": 87,
+          "success": 83,
+          "outcomes": {
+            "success": 83,
+            "rejected": 4
+          },
+          "meanStageMs": {
+            "creating": 44.19879518072289,
+            "uploading": 144.35540697948042,
+            "preparing": 18712.96145225433,
+            "ready": 346.89759918580575
+          },
+          "uploadStageMs": {
+            "p50": 111.400146484375,
+            "p95": 353.699951171875,
+            "p99": 544.199951171875
+          },
+          "downloadableMs": {
+            "p50": 17158.7001953125,
+            "p95": 36821.800048828125,
+            "p99": 38246
+          }
+        },
+        "noise-boundary.bin": {
+          "offered": 41,
+          "success": 39,
+          "outcomes": {
+            "success": 39,
+            "rejected": 2
+          },
+          "meanStageMs": {
+            "creating": 121.94101186899039,
+            "uploading": 3008.546161358173,
+            "preparing": 3963.6846203926284,
+            "ready": 864.4025753705929
+          },
+          "uploadStageMs": {
+            "p50": 3389.300048828125,
+            "p95": 5025.199951171875,
+            "p99": 5585.39990234375
+          },
+          "downloadableMs": {
+            "p50": 7675.7001953125,
+            "p95": 16813.199951171875,
+            "p99": 18724.39990234375
+          }
+        },
+        "noise-large.bin": {
+          "offered": 18,
+          "success": 18,
+          "outcomes": {
+            "success": 18
+          },
+          "meanStageMs": {
+            "creating": 106.55558268229167,
+            "uploading": 11558.366658528646,
+            "preparing": 10394.272203233508,
+            "ready": 2618.36669921875
+          },
+          "uploadStageMs": {
+            "p50": 13365.699951171875,
+            "p95": 19152,
+            "p99": 19152
+          },
+          "downloadableMs": {
+            "p50": 23559.300048828125,
+            "p95": 41830.199951171875,
+            "p99": 41830.199951171875
+          }
+        },
+        "noise-medium.bin": {
+          "offered": 139,
+          "success": 134,
+          "outcomes": {
+            "success": 134,
+            "rejected": 5
+          },
+          "meanStageMs": {
+            "creating": 73.42237603486474,
+            "uploading": 177.53283327017257,
+            "preparing": 1719.3029949131296,
+            "ready": 78.22313724347015
+          },
+          "uploadStageMs": {
+            "p50": 152.400146484375,
+            "p95": 420.10009765625,
+            "p99": 564.199951171875
+          },
+          "downloadableMs": {
+            "p50": 1743.60009765625,
+            "p95": 4036.10009765625,
+            "p99": 8751.5
+          }
+        },
+        "png-alpha.png": {
+          "offered": 101,
+          "success": 97,
+          "outcomes": {
+            "success": 97,
+            "rejected": 4
+          },
+          "meanStageMs": {
+            "creating": 73.45256624516753,
+            "uploading": 102.17320393041237,
+            "preparing": 20005.66597283747,
+            "ready": 295.01959165592785
+          },
+          "uploadStageMs": {
+            "p50": 73.89990234375,
+            "p95": 281.60009765625,
+            "p99": 419.599853515625
+          },
+          "downloadableMs": {
+            "p50": 20705.7001953125,
+            "p95": 37737.400146484375,
+            "p99": 38417.800048828125
+          }
+        },
+        "png-noise.png": {
+          "offered": 74,
+          "success": 72,
+          "outcomes": {
+            "success": 72,
+            "rejected": 2
+          },
+          "meanStageMs": {
+            "creating": 58.84167141384549,
+            "uploading": 342.7402750651042,
+            "preparing": 18468.036119249133,
+            "ready": 661.5402764214409
+          },
+          "uploadStageMs": {
+            "p50": 368.60009765625,
+            "p95": 615.7998046875,
+            "p99": 715
+          },
+          "downloadableMs": {
+            "p50": 18138.599853515625,
+            "p95": 39347.699951171875,
+            "p99": 40219.199951171875
+          }
+        },
+        "text-boundary-above.bin": {
+          "offered": 42,
+          "success": 37,
+          "outcomes": {
+            "success": 37,
+            "rejected": 5
+          },
+          "meanStageMs": {
+            "creating": 126.53512325802365,
+            "uploading": 3197.6432511613175,
+            "preparing": 3823.9891720333617,
+            "ready": 866.0432590793919
+          },
+          "uploadStageMs": {
+            "p50": 3168.599853515625,
+            "p95": 5188.300048828125,
+            "p99": 5605.599853515625
+          },
+          "downloadableMs": {
+            "p50": 7810.39990234375,
+            "p95": 16426.2001953125,
+            "p99": 20035.89990234375
+          }
+        },
+        "text-boundary-below.bin": {
+          "offered": 45,
+          "success": 45,
+          "outcomes": {
+            "success": 45
+          },
+          "meanStageMs": {
+            "creating": 47.69779188368056,
+            "uploading": 1348.1955457899305,
+            "preparing": 2992.9355631510416,
+            "ready": 820.5488823784722
+          },
+          "uploadStageMs": {
+            "p50": 1538.5,
+            "p95": 2440.400146484375,
+            "p99": 3343.599853515625
+          },
+          "downloadableMs": {
+            "p50": 5074.2001953125,
+            "p95": 7985.300048828125,
+            "p99": 14421.800048828125
+          }
+        },
+        "text-small.bin": {
+          "offered": 174,
+          "success": 165,
+          "outcomes": {
+            "success": 165,
+            "rejected": 9
+          },
+          "meanStageMs": {
+            "creating": 61.681207090435606,
+            "uploading": 117.93878580729167,
+            "preparing": 1724.0830314867424,
+            "ready": 53.62787937973485
+          },
+          "uploadStageMs": {
+            "p50": 96.699951171875,
+            "p95": 297.800048828125,
+            "p99": 579.800048828125
+          },
+          "downloadableMs": {
+            "p50": 1642.5,
+            "p95": 4113.2001953125,
+            "p99": 7508.7001953125
+          }
+        },
+        "webp-large.webp": {
+          "offered": 41,
+          "success": 39,
+          "outcomes": {
+            "success": 39,
+            "rejected": 2
+          },
+          "meanStageMs": {
+            "creating": 53.51537459935897,
+            "uploading": 216.32821264022436,
+            "preparing": 21755.958990635016,
+            "ready": 857.0281951121794
+          },
+          "uploadStageMs": {
+            "p50": 237.199951171875,
+            "p95": 466.800048828125,
+            "p99": 487.599853515625
+          },
+          "downloadableMs": {
+            "p50": 23839.2001953125,
+            "p95": 40469.7001953125,
+            "p99": 40869.300048828125
+          }
+        },
+        "webp-small.webp": {
+          "offered": 98,
+          "success": 97,
+          "outcomes": {
+            "success": 97,
+            "rejected": 1
+          },
+          "meanStageMs": {
+            "creating": 60.13812822164948,
+            "uploading": 108.60619110422036,
+            "preparing": 17093.31029266672,
+            "ready": 250.12167515705542
+          },
+          "uploadStageMs": {
+            "p50": 69.300048828125,
+            "p95": 291.099853515625,
+            "p99": 455
+          },
+          "downloadableMs": {
+            "p50": 16028,
+            "p95": 37648.5,
+            "p99": 37933.800048828125
+          }
+        }
+      },
+      "services": {
+        "generator": {
+          "cpuSeconds": 229.81339899999998,
+          "networkRxBytes": 14425392293,
+          "networkTxBytes": 14818544305,
+          "storageReadBytes": 135090176,
+          "storageWriteBytes": 785620992,
+          "throttledSeconds": 43.46129,
+          "peakMemoryBytes": 4090220544,
+          "peakAnonymousMemoryBytes": 4001370112,
+          "majorFaultDelta": 42787,
+          "sampleSeconds": 165.02
+        },
+        "document-worker": {
+          "cpuSeconds": 1.083402,
+          "networkRxBytes": 1989398,
+          "networkTxBytes": 2377344,
+          "storageReadBytes": 15982592,
+          "storageWriteBytes": 0,
+          "throttledSeconds": 0,
+          "peakMemoryBytes": 25346048,
+          "peakAnonymousMemoryBytes": 9596928,
+          "majorFaultDelta": 9,
+          "sampleSeconds": 165.022
+        },
+        "image-worker": {
+          "cpuSeconds": 277.74339900000007,
+          "networkRxBytes": 1648210274,
+          "networkTxBytes": 1228251928,
+          "storageReadBytes": 52932608,
+          "storageWriteBytes": 47874048,
+          "throttledSeconds": 325.64812499999994,
+          "peakMemoryBytes": 2147336192,
+          "peakAnonymousMemoryBytes": 2134220800,
+          "majorFaultDelta": 2362,
+          "sampleSeconds": 165.021
+        },
+        "api": {
+          "cpuSeconds": 60.150197,
+          "networkRxBytes": 37244812,
+          "networkTxBytes": 87510900,
+          "storageReadBytes": 11436032,
+          "storageWriteBytes": 0,
+          "throttledSeconds": 2.2288359999999994,
+          "peakMemoryBytes": 431489024,
+          "peakAnonymousMemoryBytes": 408113152,
+          "majorFaultDelta": 9,
+          "sampleSeconds": 165.021
+        },
+        "rabbitmq": {
+          "cpuSeconds": 19.432806000000003,
+          "networkRxBytes": 3339212,
+          "networkTxBytes": 5837232,
+          "storageReadBytes": 1445888,
+          "storageWriteBytes": 24100864,
+          "throttledSeconds": 8.095161999999998,
+          "peakMemoryBytes": 227786752,
+          "peakAnonymousMemoryBytes": 203505664,
+          "majorFaultDelta": 7,
+          "sampleSeconds": 165.02
+        },
+        "minio": {
+          "cpuSeconds": 138.93734600000002,
+          "networkRxBytes": 16029193000,
+          "networkTxBytes": 16015959035,
+          "storageReadBytes": 24960671744,
+          "storageWriteBytes": 29100019712,
+          "throttledSeconds": 411.159007,
+          "peakMemoryBytes": 1073741824,
+          "peakAnonymousMemoryBytes": 539230208,
+          "majorFaultDelta": 678,
+          "sampleSeconds": 165.022
+        },
+        "prometheus": {
+          "cpuSeconds": 1.247348,
+          "networkRxBytes": 19262112,
+          "networkTxBytes": 1557774,
+          "storageReadBytes": 93179904,
+          "storageWriteBytes": 1912832,
+          "throttledSeconds": 0.5167570000000001,
+          "peakMemoryBytes": 72339456,
+          "peakAnonymousMemoryBytes": 41517056,
+          "majorFaultDelta": 28,
+          "sampleSeconds": 165.021
+        },
+        "postgres": {
+          "cpuSeconds": 9.833744,
+          "networkRxBytes": 10837263,
+          "networkTxBytes": 15429780,
+          "storageReadBytes": 30900224,
+          "storageWriteBytes": 62857216,
+          "throttledSeconds": 0.19591300000000006,
+          "peakMemoryBytes": 95760384,
+          "peakAnonymousMemoryBytes": 38285312,
+          "majorFaultDelta": 75,
+          "sampleSeconds": 165.021
+        },
+        "grafana": {
+          "cpuSeconds": 4.89095,
+          "networkRxBytes": 50130593,
+          "networkTxBytes": 164585,
+          "storageReadBytes": 610668544,
+          "storageWriteBytes": 259096576,
+          "throttledSeconds": 15.065966000000003,
+          "peakMemoryBytes": 536866816,
+          "peakAnonymousMemoryBytes": 251711488,
+          "majorFaultDelta": 554,
+          "sampleSeconds": 165.021
+        }
+      }
+    },
+    {
+      "side": "v2",
+      "repeat": 3,
+      "label": "hybrid-20261112-v2-r3",
+      "offered": 960,
+      "outcomes": {
+        "success": 908,
+        "rejected": 52
+      },
+      "filesPerSecond": 6.03582140546041,
+      "inputMiBPerSecond": 90.6595129556661,
+      "p99Seconds": 35.8195,
+      "cpuSecondsPerSuccess": 0.7780841453744494,
+      "protocolHash": "ff19160c7c28c43e771cc04dac610bfbc6fd5d55884907b8d74a47f495237de1",
+      "fixtureHash": "f5ec95ee30aafbdb5d5981c255010f69173a9311b3b9deef18a0381256f874ee",
+      "environmentHash": "fcd0240c3215f3261e6e585d344db5546f38d241773f2972335569ad8978480d",
+      "checks": {
+        "drained": true,
+        "durableBacklogDrained": true,
+        "unfinishedServerUploads": 0,
+        "cleanupFailures": 0,
+        "diagnostics": [],
+        "measurementCoverageComplete": true,
+        "clientTasksUnsettledAtReturn": 0,
+        "clientPutsActiveAtReturn": 0,
+        "clientPutConcurrencyPeakPerPage": 4
+      },
+      "cohorts": {
+        "jpeg-large.jpeg": {
+          "offered": 100,
+          "success": 95,
+          "outcomes": {
+            "success": 95,
+            "rejected": 5
+          },
+          "meanStageMs": {
+            "creating": 53.58104954769737,
+            "uploading": 516.5400082236843,
+            "preparing": 19261.511554276316,
+            "ready": 740.6168508429276
+          },
+          "uploadStageMs": {
+            "p50": 403,
+            "p95": 1426.400146484375,
+            "p99": 2475.599853515625
+          },
+          "downloadableMs": {
+            "p50": 19251.5,
+            "p95": 35882.5,
+            "p99": 36956.300048828125
+          }
+        },
+        "jpeg-small.jpeg": {
+          "offered": 87,
+          "success": 81,
+          "outcomes": {
+            "success": 81,
+            "rejected": 6
+          },
+          "meanStageMs": {
+            "creating": 78.06666546103395,
+            "uploading": 247.90617766203704,
+            "preparing": 18409.248146339698,
+            "ready": 361.12098825713736
+          },
+          "uploadStageMs": {
+            "p50": 171.099853515625,
+            "p95": 728.300048828125,
+            "p99": 1665.7001953125
+          },
+          "downloadableMs": {
+            "p50": 16911,
+            "p95": 33592.5,
+            "p99": 34346
+          }
+        },
+        "noise-boundary.bin": {
+          "offered": 41,
+          "success": 38,
+          "outcomes": {
+            "success": 38,
+            "rejected": 3
+          },
+          "meanStageMs": {
+            "creating": 131.99735942639802,
+            "uploading": 1691.4210590563323,
+            "preparing": 3629.3684339021383,
+            "ready": 847.1605224609375
+          },
+          "uploadStageMs": {
+            "p50": 1379.2998046875,
+            "p95": 5964.099853515625,
+            "p99": 6298.5
+          },
+          "downloadableMs": {
+            "p50": 5799,
+            "p95": 11441.099853515625,
+            "p99": 11505.300048828125
+          }
+        },
+        "noise-large.bin": {
+          "offered": 18,
+          "success": 17,
+          "outcomes": {
+            "success": 17,
+            "rejected": 1
+          },
+          "meanStageMs": {
+            "creating": 92.14115636488971,
+            "uploading": 6777.652946920956,
+            "preparing": 7719.058809168198,
+            "ready": 2672.264720243566
+          },
+          "uploadStageMs": {
+            "p50": 5410.2998046875,
+            "p95": 18354.400146484375,
+            "p99": 18354.400146484375
+          },
+          "downloadableMs": {
+            "p50": 17337.7998046875,
+            "p95": 29605.5,
+            "p99": 29605.5
+          }
+        },
+        "noise-medium.bin": {
+          "offered": 139,
+          "success": 136,
+          "outcomes": {
+            "success": 136,
+            "rejected": 3
+          },
+          "meanStageMs": {
+            "creating": 65.03897812787224,
+            "uploading": 286.7463145536535,
+            "preparing": 2198.19486730239,
+            "ready": 98.83235258214614
+          },
+          "uploadStageMs": {
+            "p50": 204.800048828125,
+            "p95": 877.60009765625,
+            "p99": 1889.5
+          },
+          "downloadableMs": {
+            "p50": 2053.5,
+            "p95": 6040.599853515625,
+            "p99": 6979.5
+          }
+        },
+        "png-alpha.png": {
+          "offered": 101,
+          "success": 97,
+          "outcomes": {
+            "success": 97,
+            "rejected": 4
+          },
+          "meanStageMs": {
+            "creating": 67.37115918975516,
+            "uploading": 303.3133909874356,
+            "preparing": 19893.03712195957,
+            "ready": 302.44638973904637
+          },
+          "uploadStageMs": {
+            "p50": 197.7001953125,
+            "p95": 1275.39990234375,
+            "p99": 2335.099853515625
+          },
+          "downloadableMs": {
+            "p50": 21241.199951171875,
+            "p95": 34125.800048828125,
+            "p99": 34351.39990234375
+          }
+        },
+        "png-noise.png": {
+          "offered": 74,
+          "success": 70,
+          "outcomes": {
+            "success": 70,
+            "rejected": 4
+          },
+          "meanStageMs": {
+            "creating": 53.27142857142857,
+            "uploading": 498.639990234375,
+            "preparing": 17972.650017438616,
+            "ready": 644.5042724609375
+          },
+          "uploadStageMs": {
+            "p50": 489.2998046875,
+            "p95": 1088.199951171875,
+            "p99": 1533.39990234375
+          },
+          "downloadableMs": {
+            "p50": 18635.099853515625,
+            "p95": 35428.89990234375,
+            "p99": 35722.099853515625
+          }
+        },
+        "text-boundary-above.bin": {
+          "offered": 42,
+          "success": 38,
+          "outcomes": {
+            "success": 38,
+            "rejected": 4
+          },
+          "meanStageMs": {
+            "creating": 156.77106676603617,
+            "uploading": 2082.8526418585525,
+            "preparing": 3686.834183542352,
+            "ready": 1020.776322214227
+          },
+          "uploadStageMs": {
+            "p50": 1505.900146484375,
+            "p95": 6327.400146484375,
+            "p99": 7890.39990234375
+          },
+          "downloadableMs": {
+            "p50": 7321.699951171875,
+            "p95": 12693.699951171875,
+            "p99": 12855.099853515625
+          }
+        },
+        "text-boundary-below.bin": {
+          "offered": 45,
+          "success": 43,
+          "outcomes": {
+            "success": 43,
+            "rejected": 2
+          },
+          "meanStageMs": {
+            "creating": 75.81626998546511,
+            "uploading": 1508.095339752907,
+            "preparing": 3440.267453215843,
+            "ready": 787.0
+          },
+          "uploadStageMs": {
+            "p50": 1750.199951171875,
+            "p95": 2525.10009765625,
+            "p99": 3093.400146484375
+          },
+          "downloadableMs": {
+            "p50": 6110.39990234375,
+            "p95": 10313,
+            "p99": 10918.599853515625
+          }
+        },
+        "text-small.bin": {
+          "offered": 174,
+          "success": 161,
+          "outcomes": {
+            "success": 161,
+            "rejected": 13
+          },
+          "meanStageMs": {
+            "creating": 60.47328252377717,
+            "uploading": 259.37577943031835,
+            "preparing": 2176.0819827251553,
+            "ready": 64.58447265625
+          },
+          "uploadStageMs": {
+            "p50": 179,
+            "p95": 861.300048828125,
+            "p99": 2260.300048828125
+          },
+          "downloadableMs": {
+            "p50": 1916.199951171875,
+            "p95": 5794.5,
+            "p99": 6296.39990234375
+          }
+        },
+        "webp-large.webp": {
+          "offered": 41,
+          "success": 38,
+          "outcomes": {
+            "success": 38,
+            "rejected": 3
+          },
+          "meanStageMs": {
+            "creating": 65.21054559004934,
+            "uploading": 423.5210474917763,
+            "preparing": 21357.97367136102,
+            "ready": 823.4342233758224
+          },
+          "uploadStageMs": {
+            "p50": 296.400146484375,
+            "p95": 1037.599853515625,
+            "p99": 2106.5
+          },
+          "downloadableMs": {
+            "p50": 23385,
+            "p95": 36240.2998046875,
+            "p99": 36874.199951171875
+          }
+        },
+        "webp-small.webp": {
+          "offered": 98,
+          "success": 94,
+          "outcomes": {
+            "success": 94,
+            "rejected": 4
+          },
+          "meanStageMs": {
+            "creating": 54.1510633103391,
+            "uploading": 213.5978718209774,
+            "preparing": 16467.722344581118,
+            "ready": 268.905307201629
+          },
+          "uploadStageMs": {
+            "p50": 125.2998046875,
+            "p95": 774.89990234375,
+            "p99": 1691.900146484375
+          },
+          "downloadableMs": {
+            "p50": 16028.199951171875,
+            "p95": 33677.099853515625,
+            "p99": 34104.599853515625
+          }
+        }
+      },
+      "services": {
+        "generator": {
+          "cpuSeconds": 219.565516,
+          "networkRxBytes": 14002310545,
+          "networkTxBytes": 14379211218,
+          "storageReadBytes": 123207680,
+          "storageWriteBytes": 1316229120,
+          "throttledSeconds": 50.228532,
+          "peakMemoryBytes": 4004851712,
+          "peakAnonymousMemoryBytes": 3899166720,
+          "majorFaultDelta": 41836,
+          "sampleSeconds": 163.269
+        },
+        "document-worker": {
+          "cpuSeconds": 1.156793,
+          "networkRxBytes": 1972609,
+          "networkTxBytes": 2352068,
+          "storageReadBytes": 9752576,
+          "storageWriteBytes": 81920,
+          "throttledSeconds": 0.227687,
+          "peakMemoryBytes": 15241216,
+          "peakAnonymousMemoryBytes": 9605120,
+          "majorFaultDelta": 6,
+          "sampleSeconds": 163.27
+        },
+        "image-worker": {
+          "cpuSeconds": 263.95462200000003,
+          "networkRxBytes": 1612536263,
+          "networkTxBytes": 1206933324,
+          "storageReadBytes": 44208128,
+          "storageWriteBytes": 57925632,
+          "throttledSeconds": 343.6247379999999,
+          "peakMemoryBytes": 2138419200,
+          "peakAnonymousMemoryBytes": 2136076288,
+          "majorFaultDelta": 2486,
+          "sampleSeconds": 163.271
+        },
+        "api": {
+          "cpuSeconds": 59.372697,
+          "networkRxBytes": 36435392,
+          "networkTxBytes": 84324408,
+          "storageReadBytes": 3919872,
+          "storageWriteBytes": 0,
+          "throttledSeconds": 1.8161489999999993,
+          "peakMemoryBytes": 447414272,
+          "peakAnonymousMemoryBytes": 410705920,
+          "majorFaultDelta": 4,
+          "sampleSeconds": 163.269
+        },
+        "grafana": {
+          "cpuSeconds": 5.552595999999999,
+          "networkRxBytes": 79334939,
+          "networkTxBytes": 279735,
+          "storageReadBytes": 828174336,
+          "storageWriteBytes": 399216640,
+          "throttledSeconds": 14.935732999999999,
+          "peakMemoryBytes": 536866816,
+          "peakAnonymousMemoryBytes": 252731392,
+          "majorFaultDelta": 368,
+          "sampleSeconds": 163.27
+        },
+        "postgres": {
+          "cpuSeconds": 9.796799,
+          "networkRxBytes": 10631228,
+          "networkTxBytes": 15109707,
+          "storageReadBytes": 28966912,
+          "storageWriteBytes": 62672896,
+          "throttledSeconds": 1.361966,
+          "peakMemoryBytes": 90714112,
+          "peakAnonymousMemoryBytes": 37388288,
+          "majorFaultDelta": 149,
+          "sampleSeconds": 163.269
+        },
+        "rabbitmq": {
+          "cpuSeconds": 19.243947,
+          "networkRxBytes": 3223706,
+          "networkTxBytes": 5742095,
+          "storageReadBytes": 7245824,
+          "storageWriteBytes": 23871488,
+          "throttledSeconds": 11.971593,
+          "peakMemoryBytes": 230670336,
+          "peakAnonymousMemoryBytes": 203464704,
+          "majorFaultDelta": 19,
+          "sampleSeconds": 163.271
+        },
+        "prometheus": {
+          "cpuSeconds": 1.213535,
+          "networkRxBytes": 18270911,
+          "networkTxBytes": 1464367,
+          "storageReadBytes": 64036864,
+          "storageWriteBytes": 2404352,
+          "throttledSeconds": 0.4669429999999999,
+          "peakMemoryBytes": 76378112,
+          "peakAnonymousMemoryBytes": 41144320,
+          "majorFaultDelta": 27,
+          "sampleSeconds": 163.268
+        },
+        "minio": {
+          "cpuSeconds": 126.643899,
+          "networkRxBytes": 15568974200,
+          "networkTxBytes": 15559217667,
+          "storageReadBytes": 26492276736,
+          "storageWriteBytes": 28459892736,
+          "throttledSeconds": 459.64312299999995,
+          "peakMemoryBytes": 1073741824,
+          "peakAnonymousMemoryBytes": 547323904,
+          "majorFaultDelta": 23418,
+          "sampleSeconds": 163.271
+        }
+      }
+    }
+  ],
+  "rollup": {
+    "v1": {
+      "runs": 3,
+      "success": 2787,
+      "rejected": 93,
+      "timeouts": 0,
+      "medianFilesPerSecond": 6.1166330715229025,
+      "filesPerSecondRange": [
+        6.008976964588003,
+        6.30903829019146
+      ],
+      "medianP99Seconds": 37.02840014648437,
+      "p99RunRange": [
+        33.67119995117187,
+        39.7965
+      ],
+      "medianCpuSecondsPerSuccess": 0.7724356764069265,
+      "cohorts": {
+        "jpeg-large.jpeg": {
+          "offered": 300,
+          "success": 289,
+          "medianUploadStageMeanMs": 318.7551854451497,
+          "uploadStageMeanRangeMs": [
+            314.93061423788265,
+            380.5305201480263
+          ]
+        },
+        "jpeg-small.jpeg": {
+          "offered": 261,
+          "success": 253,
+          "medianUploadStageMeanMs": 144.35540697948042,
+          "uploadStageMeanRangeMs": [
+            143.11057272518383,
+            178.3188160615809
+          ]
+        },
+        "noise-boundary.bin": {
+          "offered": 123,
+          "success": 112,
+          "medianUploadStageMeanMs": 3008.546161358173,
+          "uploadStageMeanRangeMs": [
+            2792.4210526315787,
+            3086.891441127232
+          ]
+        },
+        "noise-large.bin": {
+          "offered": 54,
+          "success": 54,
+          "medianUploadStageMeanMs": 11558.366658528646,
+          "uploadStageMeanRangeMs": [
+            10330.261081271701,
+            12698.555555555555
+          ]
+        },
+        "noise-medium.bin": {
+          "offered": 417,
+          "success": 403,
+          "medianUploadStageMeanMs": 177.53283327017257,
+          "uploadStageMeanRangeMs": [
+            150.79777199074073,
+            203.7283552938433
+          ]
+        },
+        "png-alpha.png": {
+          "offered": 303,
+          "success": 293,
+          "medianUploadStageMeanMs": 115.82475054146039,
+          "uploadStageMeanRangeMs": [
+            102.17320393041237,
+            162.4599917763158
+          ]
+        },
+        "png-noise.png": {
+          "offered": 222,
+          "success": 219,
+          "medianUploadStageMeanMs": 342.7402750651042,
+          "uploadStageMeanRangeMs": [
+            314.90000601990585,
+            413.4067679740287
+          ]
+        },
+        "text-boundary-above.bin": {
+          "offered": 126,
+          "success": 116,
+          "medianUploadStageMeanMs": 3250.7600036621093,
+          "uploadStageMeanRangeMs": [
+            3197.6432511613175,
+            3645.053867437901
+          ]
+        },
+        "text-boundary-below.bin": {
+          "offered": 135,
+          "success": 133,
+          "medianUploadStageMeanMs": 1348.1955457899305,
+          "uploadStageMeanRangeMs": [
+            1241.7136507901278,
+            1485.4909335049715
+          ]
+        },
+        "text-small.bin": {
+          "offered": 522,
+          "success": 507,
+          "medianUploadStageMeanMs": 128.99943176626462,
+          "uploadStageMeanRangeMs": [
+            117.93878580729167,
+            156.73567565561038
+          ]
+        },
+        "webp-large.webp": {
+          "offered": 123,
+          "success": 120,
+          "medianUploadStageMeanMs": 237.5805187690549,
+          "uploadStageMeanRangeMs": [
+            216.32821264022436,
+            292.6800048828125
+          ]
+        },
+        "webp-small.webp": {
+          "offered": 294,
+          "success": 288,
+          "medianUploadStageMeanMs": 108.60619110422036,
+          "uploadStageMeanRangeMs": [
+            88.51238573211984,
+            128.90318265874336
+          ]
+        }
+      }
+    },
+    "v2": {
+      "runs": 3,
+      "success": 2696,
+      "rejected": 184,
+      "timeouts": 0,
+      "medianFilesPerSecond": 5.997033469395966,
+      "filesPerSecondRange": [
+        5.966402696746935,
+        6.03582140546041
+      ],
+      "medianP99Seconds": 36.20710009765625,
+      "p99RunRange": [
+        35.8195,
+        37.5532998046875
+      ],
+      "medianCpuSecondsPerSuccess": 0.7791099966666668,
+      "cohorts": {
+        "jpeg-large.jpeg": {
+          "offered": 300,
+          "success": 281,
+          "medianUploadStageMeanMs": 516.5400082236843,
+          "uploadStageMeanRangeMs": [
+            473.8728213102921,
+            566.398933572972
+          ]
+        },
+        "jpeg-small.jpeg": {
+          "offered": 261,
+          "success": 249,
+          "medianUploadStageMeanMs": 288.885888671875,
+          "uploadStageMeanRangeMs": [
+            247.90617766203704,
+            298.73374847044425
+          ]
+        },
+        "noise-boundary.bin": {
+          "offered": 123,
+          "success": 108,
+          "medianUploadStageMeanMs": 1456.314718807445,
+          "uploadStageMeanRangeMs": [
+            1410.1583319769966,
+            1691.4210590563323
+          ]
+        },
+        "noise-large.bin": {
+          "offered": 54,
+          "success": 53,
+          "medianUploadStageMeanMs": 7081.094428168402,
+          "uploadStageMeanRangeMs": [
+            6777.652946920956,
+            7105.283311631944
+          ]
+        },
+        "noise-medium.bin": {
+          "offered": 417,
+          "success": 396,
+          "medianUploadStageMeanMs": 277.5763358778626,
+          "uploadStageMeanRangeMs": [
+            267.98837209302326,
+            286.7463145536535
+          ]
+        },
+        "png-alpha.png": {
+          "offered": 303,
+          "success": 283,
+          "medianUploadStageMeanMs": 310.4428469479739,
+          "uploadStageMeanRangeMs": [
+            303.3133909874356,
+            317.75158819901316
+          ]
+        },
+        "png-noise.png": {
+          "offered": 222,
+          "success": 214,
+          "medianUploadStageMeanMs": 498.639990234375,
+          "uploadStageMeanRangeMs": [
+            474.90834554036456,
+            539.0555589463976
+          ]
+        },
+        "text-boundary-above.bin": {
+          "offered": 126,
+          "success": 117,
+          "medianUploadStageMeanMs": 2105.9000087640225,
+          "uploadStageMeanRangeMs": [
+            2082.8526418585525,
+            2254.6550048828126
+          ]
+        },
+        "text-boundary-below.bin": {
+          "offered": 135,
+          "success": 129,
+          "medianUploadStageMeanMs": 1508.095339752907,
+          "uploadStageMeanRangeMs": [
+            1440.061356977983,
+            1602.2595156715029
+          ]
+        },
+        "text-small.bin": {
+          "offered": 522,
+          "success": 472,
+          "medianUploadStageMeanMs": 246.005198292918,
+          "uploadStageMeanRangeMs": [
+            236.92928941082803,
+            259.37577943031835
+          ]
+        },
+        "webp-large.webp": {
+          "offered": 123,
+          "success": 112,
+          "medianUploadStageMeanMs": 423.5210474917763,
+          "uploadStageMeanRangeMs": [
+            402.83333959334936,
+            557.7971470424108
+          ]
+        },
+        "webp-small.webp": {
+          "offered": 294,
+          "success": 282,
+          "medianUploadStageMeanMs": 213.5978718209774,
+          "uploadStageMeanRangeMs": [
+            203.85637518700133,
+            219.82234613946144
+          ]
+        }
+      }
+    },
+    "hybrid": {
+      "runs": 3,
+      "success": 2476,
+      "rejected": 404,
+      "timeouts": 0,
+      "medianFilesPerSecond": 5.76601128734184,
+      "filesPerSecondRange": [
+        4.795980353022539,
+        6.01830205063122
+      ],
+      "medianP99Seconds": 36.49090014648438,
+      "p99RunRange": [
+        35.30510009765625,
+        39.47939990234375
+      ],
+      "medianCpuSecondsPerSuccess": 0.8171184712643679,
+      "cohorts": {
+        "jpeg-large.jpeg": {
+          "offered": 300,
+          "success": 257,
+          "medianUploadStageMeanMs": 495.81195864470106,
+          "uploadStageMeanRangeMs": [
+            403.40637466755317,
+            647.1676042583626
+          ]
+        },
+        "jpeg-small.jpeg": {
+          "offered": 261,
+          "success": 229,
+          "medianUploadStageMeanMs": 249.92221860532408,
+          "uploadStageMeanRangeMs": [
+            200.43751220703126,
+            323.18381993910845
+          ]
+        },
+        "noise-boundary.bin": {
+          "offered": 123,
+          "success": 97,
+          "medianUploadStageMeanMs": 1446.2853142233455,
+          "uploadStageMeanRangeMs": [
+            1374.1583319769966,
+            3250.6407335069443
+          ]
+        },
+        "noise-large.bin": {
+          "offered": 54,
+          "success": 48,
+          "medianUploadStageMeanMs": 7077.811753216912,
+          "uploadStageMeanRangeMs": [
+            6354.138848198785,
+            7359.569204477163
+          ]
+        },
+        "noise-medium.bin": {
+          "offered": 417,
+          "success": 354,
+          "medianUploadStageMeanMs": 271.92241015625,
+          "uploadStageMeanRangeMs": [
+            193.92748464336833,
+            515.5408113440689
+          ]
+        },
+        "png-alpha.png": {
+          "offered": 303,
+          "success": 252,
+          "medianUploadStageMeanMs": 189.9977167302912,
+          "uploadStageMeanRangeMs": [
+            139.0428507039835,
+            256.32603809931504
+          ]
+        },
+        "png-noise.png": {
+          "offered": 222,
+          "success": 201,
+          "medianUploadStageMeanMs": 605.4916720920139,
+          "uploadStageMeanRangeMs": [
+            424.45270930109797,
+            1045.8072620738637
+          ]
+        },
+        "text-boundary-above.bin": {
+          "offered": 126,
+          "success": 108,
+          "medianUploadStageMeanMs": 2317.5631810238488,
+          "uploadStageMeanRangeMs": [
+            1939.9052284642269,
+            3026.925003051758
+          ]
+        },
+        "text-boundary-below.bin": {
+          "offered": 135,
+          "success": 121,
+          "medianUploadStageMeanMs": 1769.4749877929687,
+          "uploadStageMeanRangeMs": [
+            1508.1977650035512,
+            2762.667553051098
+          ]
+        },
+        "text-small.bin": {
+          "offered": 522,
+          "success": 432,
+          "medianUploadStageMeanMs": 215.00981190002042,
+          "uploadStageMeanRangeMs": [
+            174.0226359817217,
+            279.28748982747396
+          ]
+        },
+        "webp-large.webp": {
+          "offered": 123,
+          "success": 111,
+          "medianUploadStageMeanMs": 372.54445393880206,
+          "uploadStageMeanRangeMs": [
+            318.93500366210935,
+            757.9028669084821
+          ]
+        },
+        "webp-small.webp": {
+          "offered": 294,
+          "success": 266,
+          "medianUploadStageMeanMs": 180.46490348653592,
+          "uploadStageMeanRangeMs": [
+            172.87916310628256,
+            266.25132671155427
+          ]
+        }
+      }
+    }
+  }
+}

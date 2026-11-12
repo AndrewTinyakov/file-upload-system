@@ -1,0 +1,230 @@
+{
+  "verifiedAt": "2026-11-12T15:13:47.324Z",
+  "candidateImage": "sha256:369079e8eb885ea89c8e339bc9156e068248d06be17b679dc5d24e441f6400a9",
+  "sourceHead": "3d9e511670635e43a02bb8b2ad0fe62f67a1f71d",
+  "commands": [
+    "docker tag sha256:369079e8eb885ea89c8e339bc9156e068248d06be17b679dc5d24e441f6400a9 upload-benchmark-generator",
+    "docker image inspect all nine non-generator baseline image references --format {{.Id}}",
+    "BENCHMARK_MINIO_COMPRESSION=off node benchmark/src/cli.mjs run --scenario smoke --reuse-build --name hybrid-verified-20261112-smoke",
+    "docker compose -f benchmark/docker/compose.yaml exec -T postgres psql -U file_upload -d file_upload -At -c \"select json_agg(upload_sessions) from upload_sessions;\"",
+    "docker compose -f benchmark/docker/compose.yaml down --volumes --remove-orphans"
+  ],
+  "runExitCode": 0,
+  "runDirectory": ".local/upload-benchmark/hybrid-verified-20261112-smoke",
+  "serviceImagesMatchBaseline": true,
+  "sourceImageHashesMatchCheckout": true,
+  "caller": "Pinned generator browser.ts imports production uploadFile; successful terminal outcomes occur after downloading all variants and SHA256 checking documents against fixtures and images against reference variants.",
+  "counts": {
+    "offered": 10,
+    "dispatches": 10,
+    "terminalRecords": 10,
+    "uniqueTerminalIds": 10,
+    "allOfferedIdsTerminal": true,
+    "outcomes": {
+      "success": 10
+    }
+  },
+  "operationCoverage": [
+    {
+      "operationId": "op-60",
+      "fixture": "text-boundary-below.bin",
+      "bytes": 67108863,
+      "putAttempts": 1,
+      "strategy": "SINGLE",
+      "serverStatus": "COMPLETED",
+      "clientTaskSettled": true,
+      "activePutsAtReturn": 0
+    },
+    {
+      "operationId": "op-61",
+      "fixture": "noise-medium.bin",
+      "bytes": 1048576,
+      "putAttempts": 1,
+      "strategy": "SINGLE",
+      "serverStatus": "COMPLETED",
+      "clientTaskSettled": true,
+      "activePutsAtReturn": 0
+    },
+    {
+      "operationId": "op-62",
+      "fixture": "noise-medium.bin",
+      "bytes": 1048576,
+      "putAttempts": 1,
+      "strategy": "SINGLE",
+      "serverStatus": "COMPLETED",
+      "clientTaskSettled": true,
+      "activePutsAtReturn": 0
+    },
+    {
+      "operationId": "op-63",
+      "fixture": "png-noise.png",
+      "bytes": 11080304,
+      "putAttempts": 1,
+      "strategy": "SINGLE",
+      "serverStatus": "COMPLETED",
+      "clientTaskSettled": true,
+      "activePutsAtReturn": 0
+    },
+    {
+      "operationId": "op-65",
+      "fixture": "text-boundary-above.bin",
+      "bytes": 67108865,
+      "putAttempts": 9,
+      "strategy": "MULTIPART",
+      "serverStatus": "COMPLETED",
+      "clientTaskSettled": true,
+      "activePutsAtReturn": 0
+    },
+    {
+      "operationId": "op-64",
+      "fixture": "noise-large.bin",
+      "bytes": 268435456,
+      "putAttempts": 32,
+      "strategy": "MULTIPART",
+      "serverStatus": "COMPLETED",
+      "clientTaskSettled": true,
+      "activePutsAtReturn": 0
+    },
+    {
+      "operationId": "op-67",
+      "fixture": "text-small.bin",
+      "bytes": 16384,
+      "putAttempts": 1,
+      "strategy": "SINGLE",
+      "serverStatus": "COMPLETED",
+      "clientTaskSettled": true,
+      "activePutsAtReturn": 0
+    },
+    {
+      "operationId": "op-66",
+      "fixture": "text-boundary-above.bin",
+      "bytes": 67108865,
+      "putAttempts": 9,
+      "strategy": "MULTIPART",
+      "serverStatus": "COMPLETED",
+      "clientTaskSettled": true,
+      "activePutsAtReturn": 0
+    },
+    {
+      "operationId": "op-68",
+      "fixture": "jpeg-large.jpeg",
+      "bytes": 6835088,
+      "putAttempts": 1,
+      "strategy": "SINGLE",
+      "serverStatus": "COMPLETED",
+      "clientTaskSettled": true,
+      "activePutsAtReturn": 0
+    },
+    {
+      "operationId": "op-69",
+      "fixture": "text-boundary-above.bin",
+      "bytes": 67108865,
+      "putAttempts": 9,
+      "strategy": "MULTIPART",
+      "serverStatus": "COMPLETED",
+      "clientTaskSettled": true,
+      "activePutsAtReturn": 0
+    }
+  ],
+  "drainage": {
+    "drained": true,
+    "durableBacklogDrained": true,
+    "unfinishedServerUploads": 0,
+    "finalQueues": [
+      {
+        "name": "backend.asset-cleanups",
+        "messages": 0,
+        "ready": 0,
+        "unacked": 0,
+        "headTimestamp": null
+      },
+      {
+        "name": "backend.asset-cleanups-dead",
+        "messages": 0,
+        "ready": 0,
+        "unacked": 0,
+        "headTimestamp": null
+      },
+      {
+        "name": "backend.asset-events",
+        "messages": 0,
+        "ready": 0,
+        "unacked": 0,
+        "headTimestamp": null
+      },
+      {
+        "name": "backend.multipart-aborts",
+        "messages": 0,
+        "ready": 0,
+        "unacked": 0,
+        "headTimestamp": null
+      },
+      {
+        "name": "backend.multipart-aborts-dead",
+        "messages": 0,
+        "ready": 0,
+        "unacked": 0,
+        "headTimestamp": null
+      },
+      {
+        "name": "backend.preparation-dead",
+        "messages": 0,
+        "ready": 0,
+        "unacked": 0,
+        "headTimestamp": null
+      },
+      {
+        "name": "document.jobs",
+        "messages": 0,
+        "ready": 0,
+        "unacked": 0,
+        "headTimestamp": null
+      },
+      {
+        "name": "image.jobs",
+        "messages": 0,
+        "ready": 0,
+        "unacked": 0,
+        "headTimestamp": null
+      }
+    ],
+    "finalDurableBacklog": {
+      "outbox": 0,
+      "preparing": 0,
+      "incomplete": 0,
+      "outboxOldestAgeSeconds": 0
+    },
+    "clientTasksUnsettledAtReturn": 0,
+    "clientPutsActiveAtReturn": 0,
+    "cleanupFailures": 0,
+    "cleanupObjects": 300,
+    "diagnostics": [],
+    "measurementCoverageComplete": true
+  },
+  "clientPutConcurrencyPeakPerPage": 4,
+  "cleanup": {
+    "exitCode": 0,
+    "remainingBenchmarkContainers": 0,
+    "unrelatedAllBefore": 225,
+    "unrelatedAllAfter": 225,
+    "unrelatedRunningBefore": 58,
+    "unrelatedRunningAfter": 58,
+    "missingUnrelatedIds": [],
+    "changedUnrelatedRunningStateIds": []
+  },
+  "limitations": [
+    "Smoke offers ten operations at one per second over four browser pages; peak observed page PUT concurrency was four. It does not demonstrate SINGLE bypass while multipart budget is saturated, simultaneous SINGLE uploads above four, mixed-strategy saturation, capacity, or p99 performance.",
+    "Normal smoke exercised six SINGLE and four MULTIPART operations; fault, cancellation and retry paths were not exercised.",
+    "Shared host had58 unrelated running containers. No speed comparison can be inferred from this correctness smoke.",
+    "Benchmark caller wraps API fetches and PUTs for instrumentation and deadline cleanup. This exercised production uploadFile through that real benchmark caller, not a manually driven product UI."
+  ],
+  "artifacts": [
+    "verification-smoke.log",
+    "verification-cleanup.log",
+    "verification-images.json",
+    "verification-source-hashes.json",
+    "verification-sessions.json",
+    "verification-containers-before.json",
+    "verification-containers-after.json"
+  ]
+}

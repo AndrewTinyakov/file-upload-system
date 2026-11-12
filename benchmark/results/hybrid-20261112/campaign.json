@@ -1,0 +1,959 @@
+{
+  "frozen": {
+    "order": [
+      [
+        "v1",
+        1
+      ],
+      [
+        "v2",
+        1
+      ],
+      [
+        "hybrid",
+        1
+      ],
+      [
+        "v2",
+        2
+      ],
+      [
+        "hybrid",
+        2
+      ],
+      [
+        "v1",
+        2
+      ],
+      [
+        "hybrid",
+        3
+      ],
+      [
+        "v1",
+        3
+      ],
+      [
+        "v2",
+        3
+      ]
+    ],
+    "baselineImages": [
+      {
+        "reference": "grafana/grafana:13.2.2",
+        "id": "sha256:c446c4270dcd9a253979d484c258a10679a1b12ed518eef93a60341da018fd69"
+      },
+      {
+        "reference": "minio/mc:RELEASE.2025-04-16T18-13-26Z",
+        "id": "sha256:0029bb25aef96434e35c2c7d8aa39b32913ec38c4c044f0c7551489f8d0d0e71"
+      },
+      {
+        "reference": "postgres:18.6",
+        "id": "sha256:500e6fec57b004d32e649abd2380a2c38081eb1de0393284fac6ad337f8aecf8"
+      },
+      {
+        "reference": "prom/prometheus:v3.14.0",
+        "id": "sha256:deeef2470dab312d1cade441c2ed31ccbd72c8e78e2fdd51d835e0b740af2b98"
+      },
+      {
+        "reference": "quay.io/minio/minio:RELEASE.2025-09-07T16-13-09Z",
+        "id": "sha256:8f08aee614800a237906bd48114d733e5ac5bfac4ccdf731f141b0e880d7a253"
+      },
+      {
+        "reference": "rabbitmq:4.3.5-management",
+        "id": "sha256:03d95eace92b949b2fd9dc9fbd19c2d65cae25b600e2d6ff42456cce9f110c7c"
+      },
+      {
+        "reference": "upload-benchmark-api",
+        "id": "sha256:213dd66f5e4d402f043d5de03d0662b89080f2d15db3412ba67717492c4c41da"
+      },
+      {
+        "reference": "upload-benchmark-document-worker",
+        "id": "sha256:82a194459c9263f2f898599c610510f2162fdc7e513a8bb107e0fedf30354dd6"
+      },
+      {
+        "reference": "upload-benchmark-generator",
+        "id": "sha256:9727622eca40a1641087863e685fb0a47e6f9f6ed85a14a641b4fecd8bf34c24"
+      },
+      {
+        "reference": "upload-benchmark-image-worker",
+        "id": "sha256:15b0c4d36d6b91f4409d01d190f2f2851980907ff5c7524b2c101657848b355f"
+      }
+    ],
+    "generators": {
+      "v1": "sha256:8142c717328d9cc6b654113499da09515c4a795f0ae2879828ee45b88bfda5f7",
+      "v2": "sha256:ea9827b3aa7a066f02375e123d3506e5103c32b00e18b83c7d5d80921e173afb",
+      "hybrid": "sha256:369079e8eb885ea89c8e339bc9156e068248d06be17b679dc5d24e441f6400a9"
+    },
+    "commonImage": "sha256:719a0710afe4e23cf4836651e831d947a408e507072c4f086bcd0d3a6bda2aeb",
+    "protocolSha256": "7087b36eb9e10203f65adc66132e77c4d855832f213db54e3cf4476ff9e94f4c",
+    "sourceHead": "3d9e511670635e43a02bb8b2ad0fe62f67a1f71d",
+    "selection": "All nine declared runs retained; no replacement or best run selection"
+  },
+  "runs": [
+    {
+      "side": "v1",
+      "repeat": 1,
+      "label": "hybrid-20261112-v1-r1",
+      "command": [
+        "node",
+        "benchmark/src/cli.mjs",
+        "run",
+        "--scenario",
+        "quick",
+        "--reuse-build",
+        "--name",
+        "hybrid-20261112-v1-r1"
+      ],
+      "exitCode": 0,
+      "startedMs": 1794496444418,
+      "finishedMs": 1794496654713,
+      "images": [
+        {
+          "reference": "grafana/grafana:13.2.2",
+          "id": "sha256:c446c4270dcd9a253979d484c258a10679a1b12ed518eef93a60341da018fd69"
+        },
+        {
+          "reference": "minio/mc:RELEASE.2025-04-16T18-13-26Z",
+          "id": "sha256:0029bb25aef96434e35c2c7d8aa39b32913ec38c4c044f0c7551489f8d0d0e71"
+        },
+        {
+          "reference": "postgres:18.6",
+          "id": "sha256:500e6fec57b004d32e649abd2380a2c38081eb1de0393284fac6ad337f8aecf8"
+        },
+        {
+          "reference": "prom/prometheus:v3.14.0",
+          "id": "sha256:deeef2470dab312d1cade441c2ed31ccbd72c8e78e2fdd51d835e0b740af2b98"
+        },
+        {
+          "reference": "quay.io/minio/minio:RELEASE.2025-09-07T16-13-09Z",
+          "id": "sha256:8f08aee614800a237906bd48114d733e5ac5bfac4ccdf731f141b0e880d7a253"
+        },
+        {
+          "reference": "rabbitmq:4.3.5-management",
+          "id": "sha256:03d95eace92b949b2fd9dc9fbd19c2d65cae25b600e2d6ff42456cce9f110c7c"
+        },
+        {
+          "reference": "upload-benchmark-api",
+          "id": "sha256:213dd66f5e4d402f043d5de03d0662b89080f2d15db3412ba67717492c4c41da"
+        },
+        {
+          "reference": "upload-benchmark-document-worker",
+          "id": "sha256:82a194459c9263f2f898599c610510f2162fdc7e513a8bb107e0fedf30354dd6"
+        },
+        {
+          "reference": "upload-benchmark-generator",
+          "id": "sha256:8142c717328d9cc6b654113499da09515c4a795f0ae2879828ee45b88bfda5f7"
+        },
+        {
+          "reference": "upload-benchmark-image-worker",
+          "id": "sha256:15b0c4d36d6b91f4409d01d190f2f2851980907ff5c7524b2c101657848b355f"
+        }
+      ],
+      "summary": {
+        "offered": 960,
+        "recorded": 960,
+        "outcomes": {
+          "success": 924,
+          "rejected": 36
+        },
+        "drained": true,
+        "durableBacklogDrained": true,
+        "unfinishedServerUploads": 0,
+        "diagnostics": [],
+        "clientTasksUnsettledAtReturn": 0,
+        "clientPutsActiveAtReturn": 0
+      },
+      "host": {
+        "before": {
+          "loadAverage": [
+            3.6640625,
+            3.52392578125,
+            3.40380859375
+          ],
+          "swap": "vm.swapusage: total = 8192.00M  used = 6451.38M  free = 1740.62M  (encrypted)",
+          "runningContainers": 58,
+          "unrelatedContainers": 58
+        },
+        "after": {
+          "loadAverage": [
+            7.53662109375,
+            5.642578125,
+            4.326171875
+          ],
+          "swap": "vm.swapusage: total = 8192.00M  used = 6451.38M  free = 1740.62M  (encrypted)",
+          "runningContainers": 66,
+          "unrelatedContainers": 58
+        }
+      }
+    },
+    {
+      "side": "v2",
+      "repeat": 1,
+      "label": "hybrid-20261112-v2-r1",
+      "command": [
+        "node",
+        "benchmark/src/cli.mjs",
+        "run",
+        "--scenario",
+        "quick",
+        "--reuse-build",
+        "--name",
+        "hybrid-20261112-v2-r1"
+      ],
+      "exitCode": 0,
+      "startedMs": 1794496655000,
+      "finishedMs": 1794496895377,
+      "images": [
+        {
+          "reference": "grafana/grafana:13.2.2",
+          "id": "sha256:c446c4270dcd9a253979d484c258a10679a1b12ed518eef93a60341da018fd69"
+        },
+        {
+          "reference": "minio/mc:RELEASE.2025-04-16T18-13-26Z",
+          "id": "sha256:0029bb25aef96434e35c2c7d8aa39b32913ec38c4c044f0c7551489f8d0d0e71"
+        },
+        {
+          "reference": "postgres:18.6",
+          "id": "sha256:500e6fec57b004d32e649abd2380a2c38081eb1de0393284fac6ad337f8aecf8"
+        },
+        {
+          "reference": "prom/prometheus:v3.14.0",
+          "id": "sha256:deeef2470dab312d1cade441c2ed31ccbd72c8e78e2fdd51d835e0b740af2b98"
+        },
+        {
+          "reference": "quay.io/minio/minio:RELEASE.2025-09-07T16-13-09Z",
+          "id": "sha256:8f08aee614800a237906bd48114d733e5ac5bfac4ccdf731f141b0e880d7a253"
+        },
+        {
+          "reference": "rabbitmq:4.3.5-management",
+          "id": "sha256:03d95eace92b949b2fd9dc9fbd19c2d65cae25b600e2d6ff42456cce9f110c7c"
+        },
+        {
+          "reference": "upload-benchmark-api",
+          "id": "sha256:213dd66f5e4d402f043d5de03d0662b89080f2d15db3412ba67717492c4c41da"
+        },
+        {
+          "reference": "upload-benchmark-document-worker",
+          "id": "sha256:82a194459c9263f2f898599c610510f2162fdc7e513a8bb107e0fedf30354dd6"
+        },
+        {
+          "reference": "upload-benchmark-generator",
+          "id": "sha256:ea9827b3aa7a066f02375e123d3506e5103c32b00e18b83c7d5d80921e173afb"
+        },
+        {
+          "reference": "upload-benchmark-image-worker",
+          "id": "sha256:15b0c4d36d6b91f4409d01d190f2f2851980907ff5c7524b2c101657848b355f"
+        }
+      ],
+      "summary": {
+        "offered": 960,
+        "recorded": 960,
+        "outcomes": {
+          "success": 888,
+          "rejected": 72
+        },
+        "drained": true,
+        "durableBacklogDrained": true,
+        "unfinishedServerUploads": 0,
+        "diagnostics": [],
+        "clientTasksUnsettledAtReturn": 0,
+        "clientPutsActiveAtReturn": 0
+      },
+      "host": {
+        "before": {
+          "loadAverage": [
+            7.53662109375,
+            5.642578125,
+            4.326171875
+          ],
+          "swap": "vm.swapusage: total = 8192.00M  used = 6451.38M  free = 1740.62M  (encrypted)",
+          "runningContainers": 66,
+          "unrelatedContainers": 58
+        },
+        "after": {
+          "loadAverage": [
+            6.61669921875,
+            6.5537109375,
+            5.05322265625
+          ],
+          "swap": "vm.swapusage: total = 7168.00M  used = 6091.00M  free = 1077.00M  (encrypted)",
+          "runningContainers": 66,
+          "unrelatedContainers": 58
+        }
+      }
+    },
+    {
+      "side": "hybrid",
+      "repeat": 1,
+      "label": "hybrid-20261112-hybrid-r1",
+      "command": [
+        "node",
+        "benchmark/src/cli.mjs",
+        "run",
+        "--scenario",
+        "quick",
+        "--reuse-build",
+        "--name",
+        "hybrid-20261112-hybrid-r1"
+      ],
+      "exitCode": 0,
+      "startedMs": 1794496895681,
+      "finishedMs": 1794497136053,
+      "images": [
+        {
+          "reference": "grafana/grafana:13.2.2",
+          "id": "sha256:c446c4270dcd9a253979d484c258a10679a1b12ed518eef93a60341da018fd69"
+        },
+        {
+          "reference": "minio/mc:RELEASE.2025-04-16T18-13-26Z",
+          "id": "sha256:0029bb25aef96434e35c2c7d8aa39b32913ec38c4c044f0c7551489f8d0d0e71"
+        },
+        {
+          "reference": "postgres:18.6",
+          "id": "sha256:500e6fec57b004d32e649abd2380a2c38081eb1de0393284fac6ad337f8aecf8"
+        },
+        {
+          "reference": "prom/prometheus:v3.14.0",
+          "id": "sha256:deeef2470dab312d1cade441c2ed31ccbd72c8e78e2fdd51d835e0b740af2b98"
+        },
+        {
+          "reference": "quay.io/minio/minio:RELEASE.2025-09-07T16-13-09Z",
+          "id": "sha256:8f08aee614800a237906bd48114d733e5ac5bfac4ccdf731f141b0e880d7a253"
+        },
+        {
+          "reference": "rabbitmq:4.3.5-management",
+          "id": "sha256:03d95eace92b949b2fd9dc9fbd19c2d65cae25b600e2d6ff42456cce9f110c7c"
+        },
+        {
+          "reference": "upload-benchmark-api",
+          "id": "sha256:213dd66f5e4d402f043d5de03d0662b89080f2d15db3412ba67717492c4c41da"
+        },
+        {
+          "reference": "upload-benchmark-document-worker",
+          "id": "sha256:82a194459c9263f2f898599c610510f2162fdc7e513a8bb107e0fedf30354dd6"
+        },
+        {
+          "reference": "upload-benchmark-generator",
+          "id": "sha256:369079e8eb885ea89c8e339bc9156e068248d06be17b679dc5d24e441f6400a9"
+        },
+        {
+          "reference": "upload-benchmark-image-worker",
+          "id": "sha256:15b0c4d36d6b91f4409d01d190f2f2851980907ff5c7524b2c101657848b355f"
+        }
+      ],
+      "summary": {
+        "offered": 960,
+        "recorded": 960,
+        "outcomes": {
+          "success": 901,
+          "rejected": 59
+        },
+        "drained": true,
+        "durableBacklogDrained": true,
+        "unfinishedServerUploads": 0,
+        "diagnostics": [],
+        "clientTasksUnsettledAtReturn": 0,
+        "clientPutsActiveAtReturn": 0
+      },
+      "host": {
+        "before": {
+          "loadAverage": [
+            6.61669921875,
+            6.5537109375,
+            5.05322265625
+          ],
+          "swap": "vm.swapusage: total = 7168.00M  used = 6091.00M  free = 1077.00M  (encrypted)",
+          "runningContainers": 66,
+          "unrelatedContainers": 58
+        },
+        "after": {
+          "loadAverage": [
+            6.69970703125,
+            6.9384765625,
+            5.57470703125
+          ],
+          "swap": "vm.swapusage: total = 7168.00M  used = 6091.00M  free = 1077.00M  (encrypted)",
+          "runningContainers": 66,
+          "unrelatedContainers": 58
+        }
+      }
+    },
+    {
+      "side": "v2",
+      "repeat": 2,
+      "label": "hybrid-20261112-v2-r2",
+      "command": [
+        "node",
+        "benchmark/src/cli.mjs",
+        "run",
+        "--scenario",
+        "quick",
+        "--reuse-build",
+        "--name",
+        "hybrid-20261112-v2-r2"
+      ],
+      "exitCode": 0,
+      "startedMs": 1794497136399,
+      "finishedMs": 1794497376729,
+      "images": [
+        {
+          "reference": "grafana/grafana:13.2.2",
+          "id": "sha256:c446c4270dcd9a253979d484c258a10679a1b12ed518eef93a60341da018fd69"
+        },
+        {
+          "reference": "minio/mc:RELEASE.2025-04-16T18-13-26Z",
+          "id": "sha256:0029bb25aef96434e35c2c7d8aa39b32913ec38c4c044f0c7551489f8d0d0e71"
+        },
+        {
+          "reference": "postgres:18.6",
+          "id": "sha256:500e6fec57b004d32e649abd2380a2c38081eb1de0393284fac6ad337f8aecf8"
+        },
+        {
+          "reference": "prom/prometheus:v3.14.0",
+          "id": "sha256:deeef2470dab312d1cade441c2ed31ccbd72c8e78e2fdd51d835e0b740af2b98"
+        },
+        {
+          "reference": "quay.io/minio/minio:RELEASE.2025-09-07T16-13-09Z",
+          "id": "sha256:8f08aee614800a237906bd48114d733e5ac5bfac4ccdf731f141b0e880d7a253"
+        },
+        {
+          "reference": "rabbitmq:4.3.5-management",
+          "id": "sha256:03d95eace92b949b2fd9dc9fbd19c2d65cae25b600e2d6ff42456cce9f110c7c"
+        },
+        {
+          "reference": "upload-benchmark-api",
+          "id": "sha256:213dd66f5e4d402f043d5de03d0662b89080f2d15db3412ba67717492c4c41da"
+        },
+        {
+          "reference": "upload-benchmark-document-worker",
+          "id": "sha256:82a194459c9263f2f898599c610510f2162fdc7e513a8bb107e0fedf30354dd6"
+        },
+        {
+          "reference": "upload-benchmark-generator",
+          "id": "sha256:ea9827b3aa7a066f02375e123d3506e5103c32b00e18b83c7d5d80921e173afb"
+        },
+        {
+          "reference": "upload-benchmark-image-worker",
+          "id": "sha256:15b0c4d36d6b91f4409d01d190f2f2851980907ff5c7524b2c101657848b355f"
+        }
+      ],
+      "summary": {
+        "offered": 960,
+        "recorded": 960,
+        "outcomes": {
+          "success": 900,
+          "rejected": 60
+        },
+        "drained": true,
+        "durableBacklogDrained": true,
+        "unfinishedServerUploads": 0,
+        "diagnostics": [],
+        "clientTasksUnsettledAtReturn": 0,
+        "clientPutsActiveAtReturn": 0
+      },
+      "host": {
+        "before": {
+          "loadAverage": [
+            6.69970703125,
+            6.9384765625,
+            5.57470703125
+          ],
+          "swap": "vm.swapusage: total = 7168.00M  used = 6091.00M  free = 1077.00M  (encrypted)",
+          "runningContainers": 66,
+          "unrelatedContainers": 58
+        },
+        "after": {
+          "loadAverage": [
+            6.4658203125,
+            7.216796875,
+            6.05615234375
+          ],
+          "swap": "vm.swapusage: total = 7168.00M  used = 6091.00M  free = 1077.00M  (encrypted)",
+          "runningContainers": 66,
+          "unrelatedContainers": 58
+        }
+      }
+    },
+    {
+      "side": "hybrid",
+      "repeat": 2,
+      "label": "hybrid-20261112-hybrid-r2",
+      "command": [
+        "node",
+        "benchmark/src/cli.mjs",
+        "run",
+        "--scenario",
+        "quick",
+        "--reuse-build",
+        "--name",
+        "hybrid-20261112-hybrid-r2"
+      ],
+      "exitCode": 0,
+      "startedMs": 1794497376981,
+      "finishedMs": 1794497602288,
+      "images": [
+        {
+          "reference": "grafana/grafana:13.2.2",
+          "id": "sha256:c446c4270dcd9a253979d484c258a10679a1b12ed518eef93a60341da018fd69"
+        },
+        {
+          "reference": "minio/mc:RELEASE.2025-04-16T18-13-26Z",
+          "id": "sha256:0029bb25aef96434e35c2c7d8aa39b32913ec38c4c044f0c7551489f8d0d0e71"
+        },
+        {
+          "reference": "postgres:18.6",
+          "id": "sha256:500e6fec57b004d32e649abd2380a2c38081eb1de0393284fac6ad337f8aecf8"
+        },
+        {
+          "reference": "prom/prometheus:v3.14.0",
+          "id": "sha256:deeef2470dab312d1cade441c2ed31ccbd72c8e78e2fdd51d835e0b740af2b98"
+        },
+        {
+          "reference": "quay.io/minio/minio:RELEASE.2025-09-07T16-13-09Z",
+          "id": "sha256:8f08aee614800a237906bd48114d733e5ac5bfac4ccdf731f141b0e880d7a253"
+        },
+        {
+          "reference": "rabbitmq:4.3.5-management",
+          "id": "sha256:03d95eace92b949b2fd9dc9fbd19c2d65cae25b600e2d6ff42456cce9f110c7c"
+        },
+        {
+          "reference": "upload-benchmark-api",
+          "id": "sha256:213dd66f5e4d402f043d5de03d0662b89080f2d15db3412ba67717492c4c41da"
+        },
+        {
+          "reference": "upload-benchmark-document-worker",
+          "id": "sha256:82a194459c9263f2f898599c610510f2162fdc7e513a8bb107e0fedf30354dd6"
+        },
+        {
+          "reference": "upload-benchmark-generator",
+          "id": "sha256:369079e8eb885ea89c8e339bc9156e068248d06be17b679dc5d24e441f6400a9"
+        },
+        {
+          "reference": "upload-benchmark-image-worker",
+          "id": "sha256:15b0c4d36d6b91f4409d01d190f2f2851980907ff5c7524b2c101657848b355f"
+        }
+      ],
+      "summary": {
+        "offered": 960,
+        "recorded": 960,
+        "outcomes": {
+          "success": 705,
+          "rejected": 255
+        },
+        "drained": true,
+        "durableBacklogDrained": true,
+        "unfinishedServerUploads": 0,
+        "diagnostics": [],
+        "clientTasksUnsettledAtReturn": 0,
+        "clientPutsActiveAtReturn": 0
+      },
+      "host": {
+        "before": {
+          "loadAverage": [
+            6.4658203125,
+            7.216796875,
+            6.05615234375
+          ],
+          "swap": "vm.swapusage: total = 7168.00M  used = 6091.00M  free = 1077.00M  (encrypted)",
+          "runningContainers": 66,
+          "unrelatedContainers": 58
+        },
+        "after": {
+          "loadAverage": [
+            5.98486328125,
+            6.685546875,
+            6.08154296875
+          ],
+          "swap": "vm.swapusage: total = 7168.00M  used = 6083.00M  free = 1085.00M  (encrypted)",
+          "runningContainers": 66,
+          "unrelatedContainers": 58
+        }
+      }
+    },
+    {
+      "side": "v1",
+      "repeat": 2,
+      "label": "hybrid-20261112-v1-r2",
+      "command": [
+        "node",
+        "benchmark/src/cli.mjs",
+        "run",
+        "--scenario",
+        "quick",
+        "--reuse-build",
+        "--name",
+        "hybrid-20261112-v1-r2"
+      ],
+      "exitCode": 0,
+      "startedMs": 1794497602554,
+      "finishedMs": 1794497827842,
+      "images": [
+        {
+          "reference": "grafana/grafana:13.2.2",
+          "id": "sha256:c446c4270dcd9a253979d484c258a10679a1b12ed518eef93a60341da018fd69"
+        },
+        {
+          "reference": "minio/mc:RELEASE.2025-04-16T18-13-26Z",
+          "id": "sha256:0029bb25aef96434e35c2c7d8aa39b32913ec38c4c044f0c7551489f8d0d0e71"
+        },
+        {
+          "reference": "postgres:18.6",
+          "id": "sha256:500e6fec57b004d32e649abd2380a2c38081eb1de0393284fac6ad337f8aecf8"
+        },
+        {
+          "reference": "prom/prometheus:v3.14.0",
+          "id": "sha256:deeef2470dab312d1cade441c2ed31ccbd72c8e78e2fdd51d835e0b740af2b98"
+        },
+        {
+          "reference": "quay.io/minio/minio:RELEASE.2025-09-07T16-13-09Z",
+          "id": "sha256:8f08aee614800a237906bd48114d733e5ac5bfac4ccdf731f141b0e880d7a253"
+        },
+        {
+          "reference": "rabbitmq:4.3.5-management",
+          "id": "sha256:03d95eace92b949b2fd9dc9fbd19c2d65cae25b600e2d6ff42456cce9f110c7c"
+        },
+        {
+          "reference": "upload-benchmark-api",
+          "id": "sha256:213dd66f5e4d402f043d5de03d0662b89080f2d15db3412ba67717492c4c41da"
+        },
+        {
+          "reference": "upload-benchmark-document-worker",
+          "id": "sha256:82a194459c9263f2f898599c610510f2162fdc7e513a8bb107e0fedf30354dd6"
+        },
+        {
+          "reference": "upload-benchmark-generator",
+          "id": "sha256:8142c717328d9cc6b654113499da09515c4a795f0ae2879828ee45b88bfda5f7"
+        },
+        {
+          "reference": "upload-benchmark-image-worker",
+          "id": "sha256:15b0c4d36d6b91f4409d01d190f2f2851980907ff5c7524b2c101657848b355f"
+        }
+      ],
+      "summary": {
+        "offered": 960,
+        "recorded": 960,
+        "outcomes": {
+          "success": 941,
+          "rejected": 19
+        },
+        "drained": true,
+        "durableBacklogDrained": true,
+        "unfinishedServerUploads": 0,
+        "diagnostics": [],
+        "clientTasksUnsettledAtReturn": 0,
+        "clientPutsActiveAtReturn": 0
+      },
+      "host": {
+        "before": {
+          "loadAverage": [
+            5.98486328125,
+            6.685546875,
+            6.08154296875
+          ],
+          "swap": "vm.swapusage: total = 7168.00M  used = 6083.00M  free = 1085.00M  (encrypted)",
+          "runningContainers": 66,
+          "unrelatedContainers": 58
+        },
+        "after": {
+          "loadAverage": [
+            7.03955078125,
+            7.041015625,
+            6.36279296875
+          ],
+          "swap": "vm.swapusage: total = 7168.00M  used = 6083.00M  free = 1085.00M  (encrypted)",
+          "runningContainers": 66,
+          "unrelatedContainers": 58
+        }
+      }
+    },
+    {
+      "side": "hybrid",
+      "repeat": 3,
+      "label": "hybrid-20261112-hybrid-r3",
+      "command": [
+        "node",
+        "benchmark/src/cli.mjs",
+        "run",
+        "--scenario",
+        "quick",
+        "--reuse-build",
+        "--name",
+        "hybrid-20261112-hybrid-r3"
+      ],
+      "exitCode": 0,
+      "startedMs": 1794497828149,
+      "finishedMs": 1794498068541,
+      "images": [
+        {
+          "reference": "grafana/grafana:13.2.2",
+          "id": "sha256:c446c4270dcd9a253979d484c258a10679a1b12ed518eef93a60341da018fd69"
+        },
+        {
+          "reference": "minio/mc:RELEASE.2025-04-16T18-13-26Z",
+          "id": "sha256:0029bb25aef96434e35c2c7d8aa39b32913ec38c4c044f0c7551489f8d0d0e71"
+        },
+        {
+          "reference": "postgres:18.6",
+          "id": "sha256:500e6fec57b004d32e649abd2380a2c38081eb1de0393284fac6ad337f8aecf8"
+        },
+        {
+          "reference": "prom/prometheus:v3.14.0",
+          "id": "sha256:deeef2470dab312d1cade441c2ed31ccbd72c8e78e2fdd51d835e0b740af2b98"
+        },
+        {
+          "reference": "quay.io/minio/minio:RELEASE.2025-09-07T16-13-09Z",
+          "id": "sha256:8f08aee614800a237906bd48114d733e5ac5bfac4ccdf731f141b0e880d7a253"
+        },
+        {
+          "reference": "rabbitmq:4.3.5-management",
+          "id": "sha256:03d95eace92b949b2fd9dc9fbd19c2d65cae25b600e2d6ff42456cce9f110c7c"
+        },
+        {
+          "reference": "upload-benchmark-api",
+          "id": "sha256:213dd66f5e4d402f043d5de03d0662b89080f2d15db3412ba67717492c4c41da"
+        },
+        {
+          "reference": "upload-benchmark-document-worker",
+          "id": "sha256:82a194459c9263f2f898599c610510f2162fdc7e513a8bb107e0fedf30354dd6"
+        },
+        {
+          "reference": "upload-benchmark-generator",
+          "id": "sha256:369079e8eb885ea89c8e339bc9156e068248d06be17b679dc5d24e441f6400a9"
+        },
+        {
+          "reference": "upload-benchmark-image-worker",
+          "id": "sha256:15b0c4d36d6b91f4409d01d190f2f2851980907ff5c7524b2c101657848b355f"
+        }
+      ],
+      "summary": {
+        "offered": 960,
+        "recorded": 960,
+        "outcomes": {
+          "success": 870,
+          "rejected": 90
+        },
+        "drained": true,
+        "durableBacklogDrained": true,
+        "unfinishedServerUploads": 0,
+        "diagnostics": [],
+        "clientTasksUnsettledAtReturn": 0,
+        "clientPutsActiveAtReturn": 0
+      },
+      "host": {
+        "before": {
+          "loadAverage": [
+            7.03955078125,
+            7.041015625,
+            6.36279296875
+          ],
+          "swap": "vm.swapusage: total = 7168.00M  used = 6083.00M  free = 1085.00M  (encrypted)",
+          "runningContainers": 66,
+          "unrelatedContainers": 58
+        },
+        "after": {
+          "loadAverage": [
+            6.6943359375,
+            7.87109375,
+            6.9111328125
+          ],
+          "swap": "vm.swapusage: total = 7168.00M  used = 6083.00M  free = 1085.00M  (encrypted)",
+          "runningContainers": 66,
+          "unrelatedContainers": 58
+        }
+      }
+    },
+    {
+      "side": "v1",
+      "repeat": 3,
+      "label": "hybrid-20261112-v1-r3",
+      "command": [
+        "node",
+        "benchmark/src/cli.mjs",
+        "run",
+        "--scenario",
+        "quick",
+        "--reuse-build",
+        "--name",
+        "hybrid-20261112-v1-r3"
+      ],
+      "exitCode": 0,
+      "startedMs": 1794498068834,
+      "finishedMs": 1794498309190,
+      "images": [
+        {
+          "reference": "grafana/grafana:13.2.2",
+          "id": "sha256:c446c4270dcd9a253979d484c258a10679a1b12ed518eef93a60341da018fd69"
+        },
+        {
+          "reference": "minio/mc:RELEASE.2025-04-16T18-13-26Z",
+          "id": "sha256:0029bb25aef96434e35c2c7d8aa39b32913ec38c4c044f0c7551489f8d0d0e71"
+        },
+        {
+          "reference": "postgres:18.6",
+          "id": "sha256:500e6fec57b004d32e649abd2380a2c38081eb1de0393284fac6ad337f8aecf8"
+        },
+        {
+          "reference": "prom/prometheus:v3.14.0",
+          "id": "sha256:deeef2470dab312d1cade441c2ed31ccbd72c8e78e2fdd51d835e0b740af2b98"
+        },
+        {
+          "reference": "quay.io/minio/minio:RELEASE.2025-09-07T16-13-09Z",
+          "id": "sha256:8f08aee614800a237906bd48114d733e5ac5bfac4ccdf731f141b0e880d7a253"
+        },
+        {
+          "reference": "rabbitmq:4.3.5-management",
+          "id": "sha256:03d95eace92b949b2fd9dc9fbd19c2d65cae25b600e2d6ff42456cce9f110c7c"
+        },
+        {
+          "reference": "upload-benchmark-api",
+          "id": "sha256:213dd66f5e4d402f043d5de03d0662b89080f2d15db3412ba67717492c4c41da"
+        },
+        {
+          "reference": "upload-benchmark-document-worker",
+          "id": "sha256:82a194459c9263f2f898599c610510f2162fdc7e513a8bb107e0fedf30354dd6"
+        },
+        {
+          "reference": "upload-benchmark-generator",
+          "id": "sha256:8142c717328d9cc6b654113499da09515c4a795f0ae2879828ee45b88bfda5f7"
+        },
+        {
+          "reference": "upload-benchmark-image-worker",
+          "id": "sha256:15b0c4d36d6b91f4409d01d190f2f2851980907ff5c7524b2c101657848b355f"
+        }
+      ],
+      "summary": {
+        "offered": 960,
+        "recorded": 960,
+        "outcomes": {
+          "success": 922,
+          "rejected": 38
+        },
+        "drained": true,
+        "durableBacklogDrained": true,
+        "unfinishedServerUploads": 0,
+        "diagnostics": [],
+        "clientTasksUnsettledAtReturn": 0,
+        "clientPutsActiveAtReturn": 0
+      },
+      "host": {
+        "before": {
+          "loadAverage": [
+            6.6943359375,
+            7.87109375,
+            6.9111328125
+          ],
+          "swap": "vm.swapusage: total = 7168.00M  used = 6083.00M  free = 1085.00M  (encrypted)",
+          "runningContainers": 66,
+          "unrelatedContainers": 58
+        },
+        "after": {
+          "loadAverage": [
+            5.93017578125,
+            7.51806640625,
+            7.0078125
+          ],
+          "swap": "vm.swapusage: total = 7168.00M  used = 6083.00M  free = 1085.00M  (encrypted)",
+          "runningContainers": 66,
+          "unrelatedContainers": 58
+        }
+      }
+    },
+    {
+      "side": "v2",
+      "repeat": 3,
+      "label": "hybrid-20261112-v2-r3",
+      "command": [
+        "node",
+        "benchmark/src/cli.mjs",
+        "run",
+        "--scenario",
+        "quick",
+        "--reuse-build",
+        "--name",
+        "hybrid-20261112-v2-r3"
+      ],
+      "exitCode": 0,
+      "startedMs": 1794498309484,
+      "finishedMs": 1794498549794,
+      "images": [
+        {
+          "reference": "grafana/grafana:13.2.2",
+          "id": "sha256:c446c4270dcd9a253979d484c258a10679a1b12ed518eef93a60341da018fd69"
+        },
+        {
+          "reference": "minio/mc:RELEASE.2025-04-16T18-13-26Z",
+          "id": "sha256:0029bb25aef96434e35c2c7d8aa39b32913ec38c4c044f0c7551489f8d0d0e71"
+        },
+        {
+          "reference": "postgres:18.6",
+          "id": "sha256:500e6fec57b004d32e649abd2380a2c38081eb1de0393284fac6ad337f8aecf8"
+        },
+        {
+          "reference": "prom/prometheus:v3.14.0",
+          "id": "sha256:deeef2470dab312d1cade441c2ed31ccbd72c8e78e2fdd51d835e0b740af2b98"
+        },
+        {
+          "reference": "quay.io/minio/minio:RELEASE.2025-09-07T16-13-09Z",
+          "id": "sha256:8f08aee614800a237906bd48114d733e5ac5bfac4ccdf731f141b0e880d7a253"
+        },
+        {
+          "reference": "rabbitmq:4.3.5-management",
+          "id": "sha256:03d95eace92b949b2fd9dc9fbd19c2d65cae25b600e2d6ff42456cce9f110c7c"
+        },
+        {
+          "reference": "upload-benchmark-api",
+          "id": "sha256:213dd66f5e4d402f043d5de03d0662b89080f2d15db3412ba67717492c4c41da"
+        },
+        {
+          "reference": "upload-benchmark-document-worker",
+          "id": "sha256:82a194459c9263f2f898599c610510f2162fdc7e513a8bb107e0fedf30354dd6"
+        },
+        {
+          "reference": "upload-benchmark-generator",
+          "id": "sha256:ea9827b3aa7a066f02375e123d3506e5103c32b00e18b83c7d5d80921e173afb"
+        },
+        {
+          "reference": "upload-benchmark-image-worker",
+          "id": "sha256:15b0c4d36d6b91f4409d01d190f2f2851980907ff5c7524b2c101657848b355f"
+        }
+      ],
+      "summary": {
+        "offered": 960,
+        "recorded": 960,
+        "outcomes": {
+          "success": 908,
+          "rejected": 52
+        },
+        "drained": true,
+        "durableBacklogDrained": true,
+        "unfinishedServerUploads": 0,
+        "diagnostics": [],
+        "clientTasksUnsettledAtReturn": 0,
+        "clientPutsActiveAtReturn": 0
+      },
+      "host": {
+        "before": {
+          "loadAverage": [
+            5.93017578125,
+            7.51806640625,
+            7.0078125
+          ],
+          "swap": "vm.swapusage: total = 7168.00M  used = 6083.00M  free = 1085.00M  (encrypted)",
+          "runningContainers": 66,
+          "unrelatedContainers": 58
+        },
+        "after": {
+          "loadAverage": [
+            6.013671875,
+            7.1689453125,
+            6.97509765625
+          ],
+          "swap": "vm.swapusage: total = 7168.00M  used = 6083.00M  free = 1085.00M  (encrypted)",
+          "runningContainers": 66,
+          "unrelatedContainers": 58
+        }
+      }
+    }
+  ]
+}

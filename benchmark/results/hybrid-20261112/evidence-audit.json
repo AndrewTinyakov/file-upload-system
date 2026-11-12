@@ -1,0 +1,19 @@
+{
+  "result": "passed",
+  "archiveMembersVerified": 109,
+  "comparisonRuns": 9,
+  "comparisonOperations": 8640,
+  "smokeOperations": 10,
+  "uniqueIdsAnd960OffersPerRun": "passed",
+  "commonProtocolFixtureEnvironmentHashes": "passed",
+  "perRunDerivedMetricsChecked": 27,
+  "armMedians": "passed",
+  "fiveUploadStageRows": "passed",
+  "falseGuardCounts": {
+    "v1-hybrid": 99,
+    "v2-hybrid": 104,
+    "v1-v2": 30
+  },
+  "canonicalBaselineCandidate": "unchanged from 3d9e511",
+  "discrepancies": []
+}

@@ -94,7 +94,7 @@ async function uploadParts(
       throw new Error('Upload instructions are missing')
     }
     const instructions = session.upload
-    await withTransferSlot(() => put(instructions, file, (loaded) => onProgress(loaded / file.size), signal), signal)
+    await put(instructions, file, (loaded) => onProgress(loaded / file.size), signal)
     return []
   }
 

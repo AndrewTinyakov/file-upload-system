@@ -1,0 +1,38 @@
+{
+  "v1": {
+    "image": "sha256:8142c717328d9cc6b654113499da09515c4a795f0ae2879828ee45b88bfda5f7",
+    "sha256": {
+      "/src/client/src/upload.ts": "55fe05ca20c57d6292bc6f7f1e4a33ed025d55af6f0920330970e3c1bb18f724",
+      "/bench/src/browser.ts": "884017d15024cfaedf6379d4566d145c8b66e65fc318b67fa0843637c44e7aed",
+      "/bench/src/run.mjs": "120fa0eca461d52ea52693cbf56395d4dd1064674a0c89238ad71652030b9102",
+      "/bench/config/protocol.json": "7087b36eb9e10203f65adc66132e77c4d855832f213db54e3cf4476ff9e94f4c",
+      "/bench/package-lock.json": "2d0abf70793819b6ddfea6305fb528436dfe5a90aa97808f8e33ed8f9824dbb0",
+      "/src/package-lock.json": "2414c3876b0a8d355f02106dbe3627000f40153ec8fb997c7bfeaef8b680a26d",
+      "/bench/public/browser.js": "5cb1639d39692a2e2810616f32e84541055d16af5f824805dd506b16c583e171"
+    }
+  },
+  "v2": {
+    "image": "sha256:ea9827b3aa7a066f02375e123d3506e5103c32b00e18b83c7d5d80921e173afb",
+    "sha256": {
+      "/src/client/src/upload.ts": "07e5decf784f9814f9fb0ade92e866af2a088aa3db252f0e615162b7dade9661",
+      "/bench/src/browser.ts": "884017d15024cfaedf6379d4566d145c8b66e65fc318b67fa0843637c44e7aed",
+      "/bench/src/run.mjs": "120fa0eca461d52ea52693cbf56395d4dd1064674a0c89238ad71652030b9102",
+      "/bench/config/protocol.json": "7087b36eb9e10203f65adc66132e77c4d855832f213db54e3cf4476ff9e94f4c",
+      "/bench/package-lock.json": "2d0abf70793819b6ddfea6305fb528436dfe5a90aa97808f8e33ed8f9824dbb0",
+      "/src/package-lock.json": "2414c3876b0a8d355f02106dbe3627000f40153ec8fb997c7bfeaef8b680a26d",
+      "/bench/public/browser.js": "409043ae08db84bbf5856b36a1d9d35976c0a8414f830f9ca4d1ab976292d3f6"
+    }
+  },
+  "hybrid": {
+    "image": "sha256:369079e8eb885ea89c8e339bc9156e068248d06be17b679dc5d24e441f6400a9",
+    "sha256": {
+      "/src/client/src/upload.ts": "75a0c2fc20fa2377ebe3b909dbd27c856ef03c5f6ff3aa7af6f74601fc90bb4d",
+      "/bench/src/browser.ts": "884017d15024cfaedf6379d4566d145c8b66e65fc318b67fa0843637c44e7aed",
+      "/bench/src/run.mjs": "120fa0eca461d52ea52693cbf56395d4dd1064674a0c89238ad71652030b9102",
+      "/bench/config/protocol.json": "7087b36eb9e10203f65adc66132e77c4d855832f213db54e3cf4476ff9e94f4c",
+      "/bench/package-lock.json": "2d0abf70793819b6ddfea6305fb528436dfe5a90aa97808f8e33ed8f9824dbb0",
+      "/src/package-lock.json": "2414c3876b0a8d355f02106dbe3627000f40153ec8fb997c7bfeaef8b680a26d",
+      "/bench/public/browser.js": "c9422cee454a74919c45aad9d16224d450ee4ecf125f1dfc67986a1ca58aca4a"
+    }
+  }
+}

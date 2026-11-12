@@ -1,0 +1,52 @@
+{
+  "request": "Try the old direct upload path for small files and concurrent parts for large files; benchmark against v1/v2.",
+  "mode": "full-stop",
+  "base": "3d9e511670635e43a02bb8b2ad0fe62f67a1f71d",
+  "reviewBase": "4faabb21efe04fdafcb1fa0e872745e807c16689",
+  "arms": {
+    "v1": "PR1 serial multipart and direct SINGLE",
+    "v2": "HEAD shared four-PUT page budget for SINGLE and multipart",
+    "hybrid": "HEAD multipart budget, direct SINGLE"
+  },
+  "conditions": "Common current benchmark image 719a0710, only upload.ts differs; fixed service images, fresh volumes; quick120s8/s,12s warmup,4pages,cap128; three rotated repeats each; preserve unrelated workloads; no builds during campaign.",
+  "order": [
+    [
+      "v1",
+      1
+    ],
+    [
+      "v2",
+      1
+    ],
+    [
+      "hybrid",
+      1
+    ],
+    [
+      "v2",
+      2
+    ],
+    [
+      "hybrid",
+      2
+    ],
+    [
+      "v1",
+      2
+    ],
+    [
+      "hybrid",
+      3
+    ],
+    [
+      "v1",
+      3
+    ],
+    [
+      "v2",
+      3
+    ]
+  ],
+  "criteria": "Report stage means and tails by fixture, success/rejection/timeout counts, throughput/resources and drainage. Use unchanged evaluator. Screening cannot certify rare-cohort p99 or remove uncertainty from shared-host contention.",
+  "prechangeEvidence": "Existing matched v1/v2 investigation report and mixed-strategy test failed on v2: peak4 instead of5, simultaneous singles4 instead of8."
+}
