@@ -1,0 +1,35 @@
+{
+  "Rules": [
+    {
+      "ID": "pending-document-retention",
+      "Status": "Enabled",
+      "Filter": {
+        "And": {
+          "Prefix": "documents/",
+          "Tags": [
+            {
+              "Key": "document-state",
+              "Value": "pending"
+            }
+          ]
+        }
+      },
+      "Expiration": {
+        "Days": 7
+      },
+      "NoncurrentVersionExpiration": {
+        "NoncurrentDays": 7
+      }
+    },
+    {
+      "ID": "document-delete-markers",
+      "Status": "Enabled",
+      "Filter": {
+        "Prefix": "documents/"
+      },
+      "Expiration": {
+        "ExpiredObjectDeleteMarker": true
+      }
+    }
+  ]
+}

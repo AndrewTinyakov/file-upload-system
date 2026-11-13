@@ -48,3 +48,9 @@ With Compose running, generate the OpenAPI contract and client types:
 ```shell
 npm run generate:openapi
 ```
+
+## Checks
+
+CI runs contract, type, lint and unit checks without Docker services.
+
+Run API unit checks with `./api/gradlew -p api unitTest ktlintCheck`, or format Kotlin with `npm run format:kotlin`. See [local development](docs/local-development.md) for integration tests.

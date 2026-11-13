@@ -1,0 +1,1510 @@
+{
+  "schemaVersion": 1,
+  "generatedBy": {
+    "scriptSha256": "52199cf0207585b03e33696d08815de1d18b00c45d72b106263763ca20702d83",
+    "inputs": "Unchanged raw benchmark JSON/JSONL and run-side provenance; percentile calculations use benchmark/src/evaluate.mjs"
+  },
+  "kind": "canonical-baseline",
+  "freeze": {
+    "schemaVersion": 1,
+    "sourceHead": "8ccf39654c474495bc86c600d9ea363b561e7353",
+    "protocolHash": "ddf2659a66cfb7ffa5b3ca9c622ea9c11632943ac12fefde2ee67a67633d218c",
+    "scenario": "quick",
+    "runs": [
+      "canonical-baseline-20261112-control-r1",
+      "canonical-baseline-20261112-control-r2",
+      "canonical-baseline-20261112-control-r3"
+    ],
+    "condition": "First run builds once; repeats reuse all local images; fixed arrival schedule/cap128/resource quotas/cleanup/timeout/acceptance unchanged; fresh Compose project volumes and normal warmup/drain each run; caffeinate; exclusive benchmark project and load slot, unrelated workloads retained and observed",
+    "selection": "Retain all3 predeclared repeats, including failures; no replacement or best-run selection",
+    "limits": [
+      "Laptop and Docker VM are shared with unrelated containers; no claim of full host isolation",
+      "clientTaskSettled includes download verification, not only uploadFile",
+      "Baseline production uploadFile ignores supplied signal; no production cancellation support added",
+      "Harness send guard only covers requests associated before route teardown",
+      "Quick screens are underpowered for1000 successful samples per cohort and cannot establish full original optimization objective"
+    ],
+    "priorAttempt": "Local pre-measurement infrastructurefailure, zero offered operations; not a workloadsample",
+    "composeImagePrecondition": "Compose run can fallbackbuild absentimages; runner verifies everyimagebefore reset, --pull never plus exclusive slot preserves present images. Up additionally uses --no-build."
+  },
+  "runs": [
+    {
+      "label": "canonical-baseline-20261112-control-r1",
+      "path": "r1",
+      "offered": 960,
+      "recorded": 960,
+      "outcomes": {
+        "success": 682,
+        "rejected": 278
+      },
+      "drained": true,
+      "diagnostics": [],
+      "cleanupFailures": 0,
+      "clientTasksUnsettledAtReturn": 0,
+      "clientPutsActiveAtReturn": 0,
+      "fixtureHash": "f5ec95ee30aafbdb5d5981c255010f69173a9311b3b9deef18a0381256f874ee",
+      "environmentHash": "fcd0240c3215f3261e6e585d344db5546f38d241773f2972335569ad8978480d",
+      "images": [
+        {
+          "service": "api",
+          "image": "sha256:213dd66f5e4d402f043d5de03d0662b89080f2d15db3412ba67717492c4c41da"
+        },
+        {
+          "service": "document-worker",
+          "image": "sha256:82a194459c9263f2f898599c610510f2162fdc7e513a8bb107e0fedf30354dd6"
+        },
+        {
+          "service": "generator",
+          "image": "sha256:9727622eca40a1641087863e685fb0a47e6f9f6ed85a14a641b4fecd8bf34c24"
+        },
+        {
+          "service": "grafana",
+          "image": "sha256:c446c4270dcd9a253979d484c258a10679a1b12ed518eef93a60341da018fd69"
+        },
+        {
+          "service": "image-worker",
+          "image": "sha256:15b0c4d36d6b91f4409d01d190f2f2851980907ff5c7524b2c101657848b355f"
+        },
+        {
+          "service": "minio",
+          "image": "sha256:8f08aee614800a237906bd48114d733e5ac5bfac4ccdf731f141b0e880d7a253"
+        },
+        {
+          "service": "postgres",
+          "image": "sha256:500e6fec57b004d32e649abd2380a2c38081eb1de0393284fac6ad337f8aecf8"
+        },
+        {
+          "service": "prometheus",
+          "image": "sha256:deeef2470dab312d1cade441c2ed31ccbd72c8e78e2fdd51d835e0b740af2b98"
+        },
+        {
+          "service": "rabbitmq",
+          "image": "sha256:03d95eace92b949b2fd9dc9fbd19c2d65cae25b600e2d6ff42456cce9f110c7c"
+        }
+      ],
+      "latency": {
+        "scheduledToDownload": {
+          "count": 682,
+          "p50Ms": 24094.199951171875,
+          "p75Ms": 30294.60009765625,
+          "p90Ms": 33951.699951171875,
+          "p95Ms": 36632.10009765625,
+          "p99Ms": 61783.5,
+          "p99Interval": {
+            "confidence": 0.95,
+            "lowerRank": 670,
+            "upperRank": 681,
+            "lower": 50108.199951171875,
+            "upper": 72742.80004882812,
+            "bounded": true
+          },
+          "histogramResolutionMs": 1
+        },
+        "scheduledToReady": {
+          "count": 682,
+          "p50Ms": 23577,
+          "p75Ms": 29672.10009765625,
+          "p90Ms": 33007,
+          "p95Ms": 35677.800048828125,
+          "p99Ms": 58603.7998046875,
+          "p99Interval": {
+            "confidence": 0.95,
+            "lowerRank": 670,
+            "upperRank": 681,
+            "lower": 47032.89990234375,
+            "upper": 65275,
+            "bounded": true
+          },
+          "histogramResolutionMs": 1
+        }
+      },
+      "observedSeconds": 162.85719995117188,
+      "successfulBytes": 11947017587,
+      "successfulFilesPerSecond": 4.1877178301265054,
+      "successfulBytesPerSecond": 73358854.20222118,
+      "cpuSecondsPerSuccess": 0.9748010879765394,
+      "finalDrainObservedMs": 55400,
+      "lifecycle": {
+        "count": 682,
+        "negativeCrossClockSamples": 18,
+        "rawMinimumDeliveryMs": -0.39990234375,
+        "resultDelivery": {
+          "count": 682,
+          "p50Ms": 1.800048828125,
+          "p75Ms": 4.5,
+          "p90Ms": 9.60009765625,
+          "p95Ms": 16.39990234375,
+          "p99Ms": 59.199951171875,
+          "p99Interval": {
+            "confidence": 0.95,
+            "lowerRank": 670,
+            "upperRank": 681,
+            "lower": 36.89990234375,
+            "upper": 82.39990234375,
+            "bounded": true
+          },
+          "histogramResolutionMs": 1
+        },
+        "cleanup": {
+          "count": 682,
+          "p50Ms": 205,
+          "p75Ms": 378,
+          "p90Ms": 617,
+          "p95Ms": 827,
+          "p99Ms": 1173,
+          "p99Interval": {
+            "confidence": 0.95,
+            "lowerRank": 670,
+            "upperRank": 681,
+            "lower": 1057,
+            "upper": 1408,
+            "bounded": true
+          },
+          "histogramResolutionMs": 1
+        },
+        "slot": {
+          "count": 682,
+          "p50Ms": 24667,
+          "p75Ms": 30596,
+          "p90Ms": 34208,
+          "p95Ms": 36980,
+          "p99Ms": 61844,
+          "p99Interval": {
+            "confidence": 0.95,
+            "lowerRank": 670,
+            "upperRank": 681,
+            "lower": 50113,
+            "upper": 73438,
+            "bounded": true
+          },
+          "histogramResolutionMs": 1
+        }
+      },
+      "cohorts": {
+        "jpeg-large.jpeg": {
+          "offered": 100,
+          "outcomes": {
+            "success": 70,
+            "rejected": 30
+          },
+          "scheduledToDownload": {
+            "count": 70,
+            "p50Ms": 30593.800048828125,
+            "p75Ms": 32034.89990234375,
+            "p90Ms": 33672.89990234375,
+            "p95Ms": 34664.300048828125,
+            "p99Ms": 40579.800048828125,
+            "p99Interval": {
+              "confidence": 0.95,
+              "lowerRank": 67,
+              "upperRank": 71,
+              "lower": 34664.300048828125,
+              "upper": null,
+              "bounded": false
+            },
+            "histogramResolutionMs": 1
+          }
+        },
+        "jpeg-small.jpeg": {
+          "offered": 87,
+          "outcomes": {
+            "success": 54,
+            "rejected": 33
+          },
+          "scheduledToDownload": {
+            "count": 54,
+            "p50Ms": 27653.199951171875,
+            "p75Ms": 29582.300048828125,
+            "p90Ms": 31886,
+            "p95Ms": 35059.199951171875,
+            "p99Ms": 35732,
+            "p99Interval": {
+              "confidence": 0.95,
+              "lowerRank": 52,
+              "upperRank": 55,
+              "lower": 35059.199951171875,
+              "upper": null,
+              "bounded": false
+            },
+            "histogramResolutionMs": 1
+          }
+        },
+        "noise-boundary.bin": {
+          "offered": 41,
+          "outcomes": {
+            "success": 33,
+            "rejected": 8
+          },
+          "scheduledToDownload": {
+            "count": 33,
+            "p50Ms": 23206.599853515625,
+            "p75Ms": 32633.2998046875,
+            "p90Ms": 37012.89990234375,
+            "p95Ms": 37669.60009765625,
+            "p99Ms": 40886.7998046875,
+            "p99Interval": {
+              "confidence": 0.95,
+              "lowerRank": 31,
+              "upperRank": 34,
+              "lower": 37612.89990234375,
+              "upper": null,
+              "bounded": false
+            },
+            "histogramResolutionMs": 1
+          }
+        },
+        "noise-large.bin": {
+          "offered": 18,
+          "outcomes": {
+            "success": 15,
+            "rejected": 3
+          },
+          "scheduledToDownload": {
+            "count": 15,
+            "p50Ms": 59587.10009765625,
+            "p75Ms": 68148.39990234375,
+            "p90Ms": 72742.80004882812,
+            "p95Ms": 74904.30004882812,
+            "p99Ms": 74904.30004882812,
+            "p99Interval": {
+              "confidence": 0.95,
+              "lowerRank": 14,
+              "upperRank": 16,
+              "lower": 72742.80004882812,
+              "upper": null,
+              "bounded": false
+            },
+            "histogramResolutionMs": 1
+          }
+        },
+        "noise-medium.bin": {
+          "offered": 139,
+          "outcomes": {
+            "success": 99,
+            "rejected": 40
+          },
+          "scheduledToDownload": {
+            "count": 99,
+            "p50Ms": 8315.699951171875,
+            "p75Ms": 15312.699951171875,
+            "p90Ms": 29539.89990234375,
+            "p95Ms": 30294.60009765625,
+            "p99Ms": 33145.199951171875,
+            "p99Interval": {
+              "confidence": 0.95,
+              "lowerRank": 96,
+              "upperRank": 100,
+              "lower": 30505.800048828125,
+              "upper": null,
+              "bounded": false
+            },
+            "histogramResolutionMs": 1
+          }
+        },
+        "png-alpha.png": {
+          "offered": 101,
+          "outcomes": {
+            "success": 72,
+            "rejected": 29
+          },
+          "scheduledToDownload": {
+            "count": 72,
+            "p50Ms": 28483,
+            "p75Ms": 30229.39990234375,
+            "p90Ms": 33271.199951171875,
+            "p95Ms": 34167.800048828125,
+            "p99Ms": 36461,
+            "p99Interval": {
+              "confidence": 0.95,
+              "lowerRank": 69,
+              "upperRank": 73,
+              "lower": 34167.800048828125,
+              "upper": null,
+              "bounded": false
+            },
+            "histogramResolutionMs": 1
+          }
+        },
+        "png-noise.png": {
+          "offered": 74,
+          "outcomes": {
+            "success": 57,
+            "rejected": 17
+          },
+          "scheduledToDownload": {
+            "count": 57,
+            "p50Ms": 30084.7998046875,
+            "p75Ms": 32925.800048828125,
+            "p90Ms": 35159.199951171875,
+            "p95Ms": 37712.7998046875,
+            "p99Ms": 38374.199951171875,
+            "p99Interval": {
+              "confidence": 0.95,
+              "lowerRank": 55,
+              "upperRank": 58,
+              "lower": 37712.7998046875,
+              "upper": null,
+              "bounded": false
+            },
+            "histogramResolutionMs": 1
+          }
+        },
+        "text-boundary-above.bin": {
+          "offered": 42,
+          "outcomes": {
+            "success": 30,
+            "rejected": 12
+          },
+          "scheduledToDownload": {
+            "count": 30,
+            "p50Ms": 26068.699951171875,
+            "p75Ms": 34006.800048828125,
+            "p90Ms": 36917.89990234375,
+            "p95Ms": 37806.60009765625,
+            "p99Ms": 45081,
+            "p99Interval": {
+              "confidence": 0.95,
+              "lowerRank": 28,
+              "upperRank": 31,
+              "lower": 37739.60009765625,
+              "upper": null,
+              "bounded": false
+            },
+            "histogramResolutionMs": 1
+          }
+        },
+        "text-boundary-below.bin": {
+          "offered": 45,
+          "outcomes": {
+            "success": 35,
+            "rejected": 10
+          },
+          "scheduledToDownload": {
+            "count": 35,
+            "p50Ms": 15356.10009765625,
+            "p75Ms": 31945.10009765625,
+            "p90Ms": 33990.2998046875,
+            "p95Ms": 38038.60009765625,
+            "p99Ms": 40323,
+            "p99Interval": {
+              "confidence": 0.95,
+              "lowerRank": 33,
+              "upperRank": 36,
+              "lower": 36724.199951171875,
+              "upper": null,
+              "bounded": false
+            },
+            "histogramResolutionMs": 1
+          }
+        },
+        "text-small.bin": {
+          "offered": 174,
+          "outcomes": {
+            "success": 116,
+            "rejected": 58
+          },
+          "scheduledToDownload": {
+            "count": 116,
+            "p50Ms": 13502,
+            "p75Ms": 25131.199951171875,
+            "p90Ms": 28930.39990234375,
+            "p95Ms": 29742.5,
+            "p99Ms": 31067.5,
+            "p99Interval": {
+              "confidence": 0.95,
+              "lowerRank": 112,
+              "upperRank": 117,
+              "lower": 30249.60009765625,
+              "upper": null,
+              "bounded": false
+            },
+            "histogramResolutionMs": 1
+          }
+        },
+        "webp-large.webp": {
+          "offered": 41,
+          "outcomes": {
+            "success": 27,
+            "rejected": 14
+          },
+          "scheduledToDownload": {
+            "count": 27,
+            "p50Ms": 30568.300048828125,
+            "p75Ms": 34100.199951171875,
+            "p90Ms": 37324.099853515625,
+            "p95Ms": 37620.7998046875,
+            "p99Ms": 40353,
+            "p99Interval": {
+              "confidence": 0.95,
+              "lowerRank": 25,
+              "upperRank": 28,
+              "lower": 37324.099853515625,
+              "upper": null,
+              "bounded": false
+            },
+            "histogramResolutionMs": 1
+          }
+        },
+        "webp-small.webp": {
+          "offered": 98,
+          "outcomes": {
+            "success": 74,
+            "rejected": 24
+          },
+          "scheduledToDownload": {
+            "count": 74,
+            "p50Ms": 25639,
+            "p75Ms": 29114.199951171875,
+            "p90Ms": 30390.60009765625,
+            "p95Ms": 33485.699951171875,
+            "p99Ms": 36176.300048828125,
+            "p99Interval": {
+              "confidence": 0.95,
+              "lowerRank": 71,
+              "upperRank": 75,
+              "lower": 33485.699951171875,
+              "upper": null,
+              "bounded": false
+            },
+            "histogramResolutionMs": 1
+          }
+        }
+      }
+    },
+    {
+      "label": "canonical-baseline-20261112-control-r2",
+      "path": "r2",
+      "offered": 960,
+      "recorded": 960,
+      "outcomes": {
+        "success": 795,
+        "rejected": 165
+      },
+      "drained": true,
+      "diagnostics": [],
+      "cleanupFailures": 0,
+      "clientTasksUnsettledAtReturn": 0,
+      "clientPutsActiveAtReturn": 0,
+      "fixtureHash": "f5ec95ee30aafbdb5d5981c255010f69173a9311b3b9deef18a0381256f874ee",
+      "environmentHash": "fcd0240c3215f3261e6e585d344db5546f38d241773f2972335569ad8978480d",
+      "images": [
+        {
+          "service": "api",
+          "image": "sha256:213dd66f5e4d402f043d5de03d0662b89080f2d15db3412ba67717492c4c41da"
+        },
+        {
+          "service": "document-worker",
+          "image": "sha256:82a194459c9263f2f898599c610510f2162fdc7e513a8bb107e0fedf30354dd6"
+        },
+        {
+          "service": "generator",
+          "image": "sha256:9727622eca40a1641087863e685fb0a47e6f9f6ed85a14a641b4fecd8bf34c24"
+        },
+        {
+          "service": "grafana",
+          "image": "sha256:c446c4270dcd9a253979d484c258a10679a1b12ed518eef93a60341da018fd69"
+        },
+        {
+          "service": "image-worker",
+          "image": "sha256:15b0c4d36d6b91f4409d01d190f2f2851980907ff5c7524b2c101657848b355f"
+        },
+        {
+          "service": "minio",
+          "image": "sha256:8f08aee614800a237906bd48114d733e5ac5bfac4ccdf731f141b0e880d7a253"
+        },
+        {
+          "service": "postgres",
+          "image": "sha256:500e6fec57b004d32e649abd2380a2c38081eb1de0393284fac6ad337f8aecf8"
+        },
+        {
+          "service": "prometheus",
+          "image": "sha256:deeef2470dab312d1cade441c2ed31ccbd72c8e78e2fdd51d835e0b740af2b98"
+        },
+        {
+          "service": "rabbitmq",
+          "image": "sha256:03d95eace92b949b2fd9dc9fbd19c2d65cae25b600e2d6ff42456cce9f110c7c"
+        }
+      ],
+      "latency": {
+        "scheduledToDownload": {
+          "count": 795,
+          "p50Ms": 11996.5,
+          "p75Ms": 26951.89990234375,
+          "p90Ms": 30908.300048828125,
+          "p95Ms": 32382.39990234375,
+          "p99Ms": 42705.2001953125,
+          "p99Interval": {
+            "confidence": 0.95,
+            "lowerRank": 781,
+            "upperRank": 793,
+            "lower": 34165,
+            "upper": 48485.5,
+            "bounded": true
+          },
+          "histogramResolutionMs": 1
+        },
+        "scheduledToReady": {
+          "count": 795,
+          "p50Ms": 11329.39990234375,
+          "p75Ms": 26244.5,
+          "p90Ms": 30375.300048828125,
+          "p95Ms": 31672,
+          "p99Ms": 40667.10009765625,
+          "p99Interval": {
+            "confidence": 0.95,
+            "lowerRank": 781,
+            "upperRank": 793,
+            "lower": 33336.800048828125,
+            "upper": 43688.599853515625,
+            "bounded": true
+          },
+          "histogramResolutionMs": 1
+        }
+      },
+      "observedSeconds": 148.0122998046875,
+      "successfulBytes": 12644075321,
+      "successfulFilesPerSecond": 5.371175240497294,
+      "successfulBytesPerSecond": 85425841.89073972,
+      "cpuSecondsPerSuccess": 0.864335637735849,
+      "finalDrainObservedMs": 41503,
+      "lifecycle": {
+        "count": 795,
+        "negativeCrossClockSamples": 15,
+        "rawMinimumDeliveryMs": -0.39990234375,
+        "resultDelivery": {
+          "count": 795,
+          "p50Ms": 1.800048828125,
+          "p75Ms": 4.10009765625,
+          "p90Ms": 9.5,
+          "p95Ms": 21.7001953125,
+          "p99Ms": 50.2001953125,
+          "p99Interval": {
+            "confidence": 0.95,
+            "lowerRank": 781,
+            "upperRank": 793,
+            "lower": 36.699951171875,
+            "upper": 63.7001953125,
+            "bounded": true
+          },
+          "histogramResolutionMs": 1
+        },
+        "cleanup": {
+          "count": 795,
+          "p50Ms": 159,
+          "p75Ms": 311,
+          "p90Ms": 468,
+          "p95Ms": 655,
+          "p99Ms": 921,
+          "p99Interval": {
+            "confidence": 0.95,
+            "lowerRank": 781,
+            "upperRank": 793,
+            "lower": 827,
+            "upper": 1374,
+            "bounded": true
+          },
+          "histogramResolutionMs": 1
+        },
+        "slot": {
+          "count": 795,
+          "p50Ms": 12422,
+          "p75Ms": 27069,
+          "p90Ms": 31238,
+          "p95Ms": 32756,
+          "p99Ms": 42783,
+          "p99Interval": {
+            "confidence": 0.95,
+            "lowerRank": 781,
+            "upperRank": 793,
+            "lower": 34339,
+            "upper": 48546,
+            "bounded": true
+          },
+          "histogramResolutionMs": 1
+        }
+      },
+      "cohorts": {
+        "jpeg-large.jpeg": {
+          "offered": 100,
+          "outcomes": {
+            "success": 88,
+            "rejected": 12
+          },
+          "scheduledToDownload": {
+            "count": 88,
+            "p50Ms": 25137.699951171875,
+            "p75Ms": 31778.39990234375,
+            "p90Ms": 33414.7998046875,
+            "p95Ms": 34020.099853515625,
+            "p99Ms": 34981.199951171875,
+            "p99Interval": {
+              "confidence": 0.95,
+              "lowerRank": 85,
+              "upperRank": 89,
+              "lower": 34165,
+              "upper": null,
+              "bounded": false
+            },
+            "histogramResolutionMs": 1
+          }
+        },
+        "jpeg-small.jpeg": {
+          "offered": 87,
+          "outcomes": {
+            "success": 74,
+            "rejected": 13
+          },
+          "scheduledToDownload": {
+            "count": 74,
+            "p50Ms": 25448.10009765625,
+            "p75Ms": 29011.699951171875,
+            "p90Ms": 30546.39990234375,
+            "p95Ms": 31197.60009765625,
+            "p99Ms": 32382.39990234375,
+            "p99Interval": {
+              "confidence": 0.95,
+              "lowerRank": 71,
+              "upperRank": 75,
+              "lower": 31197.60009765625,
+              "upper": null,
+              "bounded": false
+            },
+            "histogramResolutionMs": 1
+          }
+        },
+        "noise-boundary.bin": {
+          "offered": 41,
+          "outcomes": {
+            "success": 34,
+            "rejected": 7
+          },
+          "scheduledToDownload": {
+            "count": 34,
+            "p50Ms": 8403.300048828125,
+            "p75Ms": 17671.5,
+            "p90Ms": 22693.599853515625,
+            "p95Ms": 28420.2001953125,
+            "p99Ms": 31371.10009765625,
+            "p99Interval": {
+              "confidence": 0.95,
+              "lowerRank": 32,
+              "upperRank": 35,
+              "lower": 25201.5,
+              "upper": null,
+              "bounded": false
+            },
+            "histogramResolutionMs": 1
+          }
+        },
+        "noise-large.bin": {
+          "offered": 18,
+          "outcomes": {
+            "success": 15,
+            "rejected": 3
+          },
+          "scheduledToDownload": {
+            "count": 15,
+            "p50Ms": 42705.2001953125,
+            "p75Ms": 45215.2001953125,
+            "p90Ms": 50607,
+            "p95Ms": 53555.60009765625,
+            "p99Ms": 53555.60009765625,
+            "p99Interval": {
+              "confidence": 0.95,
+              "lowerRank": 14,
+              "upperRank": 16,
+              "lower": 50607,
+              "upper": null,
+              "bounded": false
+            },
+            "histogramResolutionMs": 1
+          }
+        },
+        "noise-medium.bin": {
+          "offered": 139,
+          "outcomes": {
+            "success": 115,
+            "rejected": 24
+          },
+          "scheduledToDownload": {
+            "count": 115,
+            "p50Ms": 3023.10009765625,
+            "p75Ms": 10110.699951171875,
+            "p90Ms": 15944.89990234375,
+            "p95Ms": 18827.099853515625,
+            "p99Ms": 20403.300048828125,
+            "p99Interval": {
+              "confidence": 0.95,
+              "lowerRank": 111,
+              "upperRank": 116,
+              "lower": 18896.39990234375,
+              "upper": null,
+              "bounded": false
+            },
+            "histogramResolutionMs": 1
+          }
+        },
+        "png-alpha.png": {
+          "offered": 101,
+          "outcomes": {
+            "success": 76,
+            "rejected": 25
+          },
+          "scheduledToDownload": {
+            "count": 76,
+            "p50Ms": 26004.2001953125,
+            "p75Ms": 29097.39990234375,
+            "p90Ms": 30574.199951171875,
+            "p95Ms": 31058.2998046875,
+            "p99Ms": 31770.39990234375,
+            "p99Interval": {
+              "confidence": 0.95,
+              "lowerRank": 73,
+              "upperRank": 77,
+              "lower": 31058.2998046875,
+              "upper": null,
+              "bounded": false
+            },
+            "histogramResolutionMs": 1
+          }
+        },
+        "png-noise.png": {
+          "offered": 74,
+          "outcomes": {
+            "success": 64,
+            "rejected": 10
+          },
+          "scheduledToDownload": {
+            "count": 64,
+            "p50Ms": 24080.599853515625,
+            "p75Ms": 30893.89990234375,
+            "p90Ms": 32348.800048828125,
+            "p95Ms": 33131,
+            "p99Ms": 34021.5,
+            "p99Interval": {
+              "confidence": 0.95,
+              "lowerRank": 61,
+              "upperRank": 65,
+              "lower": 33131,
+              "upper": null,
+              "bounded": false
+            },
+            "histogramResolutionMs": 1
+          }
+        },
+        "text-boundary-above.bin": {
+          "offered": 42,
+          "outcomes": {
+            "success": 33,
+            "rejected": 9
+          },
+          "scheduledToDownload": {
+            "count": 33,
+            "p50Ms": 15666.39990234375,
+            "p75Ms": 20588.199951171875,
+            "p90Ms": 29244.199951171875,
+            "p95Ms": 30514.599853515625,
+            "p99Ms": 33219.199951171875,
+            "p99Interval": {
+              "confidence": 0.95,
+              "lowerRank": 31,
+              "upperRank": 34,
+              "lower": 29973.10009765625,
+              "upper": null,
+              "bounded": false
+            },
+            "histogramResolutionMs": 1
+          }
+        },
+        "text-boundary-below.bin": {
+          "offered": 45,
+          "outcomes": {
+            "success": 38,
+            "rejected": 7
+          },
+          "scheduledToDownload": {
+            "count": 38,
+            "p50Ms": 6564.199951171875,
+            "p75Ms": 15608.5,
+            "p90Ms": 21607.800048828125,
+            "p95Ms": 23777.900146484375,
+            "p99Ms": 27193.199951171875,
+            "p99Interval": {
+              "confidence": 0.95,
+              "lowerRank": 36,
+              "upperRank": 39,
+              "lower": 23746.800048828125,
+              "upper": null,
+              "bounded": false
+            },
+            "histogramResolutionMs": 1
+          }
+        },
+        "text-small.bin": {
+          "offered": 174,
+          "outcomes": {
+            "success": 150,
+            "rejected": 24
+          },
+          "scheduledToDownload": {
+            "count": 150,
+            "p50Ms": 8500.300048828125,
+            "p75Ms": 10798.099853515625,
+            "p90Ms": 18172.60009765625,
+            "p95Ms": 19598.60009765625,
+            "p99Ms": 20955,
+            "p99Interval": {
+              "confidence": 0.95,
+              "lowerRank": 146,
+              "upperRank": 151,
+              "lower": 20607.099853515625,
+              "upper": null,
+              "bounded": false
+            },
+            "histogramResolutionMs": 1
+          }
+        },
+        "webp-large.webp": {
+          "offered": 41,
+          "outcomes": {
+            "success": 28,
+            "rejected": 13
+          },
+          "scheduledToDownload": {
+            "count": 28,
+            "p50Ms": 22044.699951171875,
+            "p75Ms": 30872.199951171875,
+            "p90Ms": 32664.199951171875,
+            "p95Ms": 33073.7001953125,
+            "p99Ms": 33305.599853515625,
+            "p99Interval": {
+              "confidence": 0.95,
+              "lowerRank": 26,
+              "upperRank": 29,
+              "lower": 32664.199951171875,
+              "upper": null,
+              "bounded": false
+            },
+            "histogramResolutionMs": 1
+          }
+        },
+        "webp-small.webp": {
+          "offered": 98,
+          "outcomes": {
+            "success": 80,
+            "rejected": 18
+          },
+          "scheduledToDownload": {
+            "count": 80,
+            "p50Ms": 15885.199951171875,
+            "p75Ms": 28894.89990234375,
+            "p90Ms": 30214.10009765625,
+            "p95Ms": 30849.699951171875,
+            "p99Ms": 31966,
+            "p99Interval": {
+              "confidence": 0.95,
+              "lowerRank": 77,
+              "upperRank": 81,
+              "lower": 31123.89990234375,
+              "upper": null,
+              "bounded": false
+            },
+            "histogramResolutionMs": 1
+          }
+        }
+      }
+    },
+    {
+      "label": "canonical-baseline-20261112-control-r3",
+      "path": "r3",
+      "offered": 960,
+      "recorded": 960,
+      "outcomes": {
+        "success": 760,
+        "rejected": 200
+      },
+      "drained": true,
+      "diagnostics": [],
+      "cleanupFailures": 0,
+      "clientTasksUnsettledAtReturn": 0,
+      "clientPutsActiveAtReturn": 0,
+      "fixtureHash": "f5ec95ee30aafbdb5d5981c255010f69173a9311b3b9deef18a0381256f874ee",
+      "environmentHash": "fcd0240c3215f3261e6e585d344db5546f38d241773f2972335569ad8978480d",
+      "images": [
+        {
+          "service": "api",
+          "image": "sha256:213dd66f5e4d402f043d5de03d0662b89080f2d15db3412ba67717492c4c41da"
+        },
+        {
+          "service": "document-worker",
+          "image": "sha256:82a194459c9263f2f898599c610510f2162fdc7e513a8bb107e0fedf30354dd6"
+        },
+        {
+          "service": "generator",
+          "image": "sha256:9727622eca40a1641087863e685fb0a47e6f9f6ed85a14a641b4fecd8bf34c24"
+        },
+        {
+          "service": "grafana",
+          "image": "sha256:c446c4270dcd9a253979d484c258a10679a1b12ed518eef93a60341da018fd69"
+        },
+        {
+          "service": "image-worker",
+          "image": "sha256:15b0c4d36d6b91f4409d01d190f2f2851980907ff5c7524b2c101657848b355f"
+        },
+        {
+          "service": "minio",
+          "image": "sha256:8f08aee614800a237906bd48114d733e5ac5bfac4ccdf731f141b0e880d7a253"
+        },
+        {
+          "service": "postgres",
+          "image": "sha256:500e6fec57b004d32e649abd2380a2c38081eb1de0393284fac6ad337f8aecf8"
+        },
+        {
+          "service": "prometheus",
+          "image": "sha256:deeef2470dab312d1cade441c2ed31ccbd72c8e78e2fdd51d835e0b740af2b98"
+        },
+        {
+          "service": "rabbitmq",
+          "image": "sha256:03d95eace92b949b2fd9dc9fbd19c2d65cae25b600e2d6ff42456cce9f110c7c"
+        }
+      ],
+      "latency": {
+        "scheduledToDownload": {
+          "count": 760,
+          "p50Ms": 11085.099853515625,
+          "p75Ms": 28776.2001953125,
+          "p90Ms": 37430.300048828125,
+          "p95Ms": 39153.5,
+          "p99Ms": 49731.199951171875,
+          "p99Interval": {
+            "confidence": 0.95,
+            "lowerRank": 747,
+            "upperRank": 758,
+            "lower": 41495.699951171875,
+            "upper": 55966,
+            "bounded": true
+          },
+          "histogramResolutionMs": 1
+        },
+        "scheduledToReady": {
+          "count": 760,
+          "p50Ms": 10423.800048828125,
+          "p75Ms": 27665.5,
+          "p90Ms": 36747.400146484375,
+          "p95Ms": 38219.5,
+          "p99Ms": 45845.099853515625,
+          "p99Interval": {
+            "confidence": 0.95,
+            "lowerRank": 747,
+            "upperRank": 758,
+            "lower": 40353.800048828125,
+            "upper": 51069.900146484375,
+            "bounded": true
+          },
+          "histogramResolutionMs": 1
+        }
+      },
+      "observedSeconds": 157.02110009765624,
+      "successfulBytes": 12212671669,
+      "successfulFilesPerSecond": 4.840113841562266,
+      "successfulBytesPerSecond": 77777264.72050294,
+      "cpuSecondsPerSuccess": 0.9184624421052632,
+      "finalDrainObservedMs": 50641,
+      "lifecycle": {
+        "count": 760,
+        "negativeCrossClockSamples": 10,
+        "rawMinimumDeliveryMs": -0.39990234375,
+        "resultDelivery": {
+          "count": 760,
+          "p50Ms": 2,
+          "p75Ms": 3.800048828125,
+          "p90Ms": 9,
+          "p95Ms": 17.5,
+          "p99Ms": 49.699951171875,
+          "p99Interval": {
+            "confidence": 0.95,
+            "lowerRank": 747,
+            "upperRank": 758,
+            "lower": 38.099853515625,
+            "upper": 63.699951171875,
+            "bounded": true
+          },
+          "histogramResolutionMs": 1
+        },
+        "cleanup": {
+          "count": 760,
+          "p50Ms": 172,
+          "p75Ms": 340,
+          "p90Ms": 579,
+          "p95Ms": 754,
+          "p99Ms": 1166,
+          "p99Interval": {
+            "confidence": 0.95,
+            "lowerRank": 747,
+            "upperRank": 758,
+            "lower": 1085,
+            "upper": 1451,
+            "bounded": true
+          },
+          "histogramResolutionMs": 1
+        },
+        "slot": {
+          "count": 760,
+          "p50Ms": 11439,
+          "p75Ms": 29541,
+          "p90Ms": 37864,
+          "p95Ms": 39466,
+          "p99Ms": 49896,
+          "p99Interval": {
+            "confidence": 0.95,
+            "lowerRank": 747,
+            "upperRank": 758,
+            "lower": 41778,
+            "upper": 56251,
+            "bounded": true
+          },
+          "histogramResolutionMs": 1
+        }
+      },
+      "cohorts": {
+        "jpeg-large.jpeg": {
+          "offered": 100,
+          "outcomes": {
+            "success": 87,
+            "rejected": 13
+          },
+          "scheduledToDownload": {
+            "count": 87,
+            "p50Ms": 24081.400146484375,
+            "p75Ms": 37565.900146484375,
+            "p90Ms": 40562.10009765625,
+            "p95Ms": 40986.39990234375,
+            "p99Ms": 41881.400146484375,
+            "p99Interval": {
+              "confidence": 0.95,
+              "lowerRank": 84,
+              "upperRank": 88,
+              "lower": 41039.300048828125,
+              "upper": null,
+              "bounded": false
+            },
+            "histogramResolutionMs": 1
+          }
+        },
+        "jpeg-small.jpeg": {
+          "offered": 87,
+          "outcomes": {
+            "success": 64,
+            "rejected": 23
+          },
+          "scheduledToDownload": {
+            "count": 64,
+            "p50Ms": 21568,
+            "p75Ms": 33611.10009765625,
+            "p90Ms": 36700.10009765625,
+            "p95Ms": 37006.800048828125,
+            "p99Ms": 39153.5,
+            "p99Interval": {
+              "confidence": 0.95,
+              "lowerRank": 61,
+              "upperRank": 65,
+              "lower": 37006.800048828125,
+              "upper": null,
+              "bounded": false
+            },
+            "histogramResolutionMs": 1
+          }
+        },
+        "noise-boundary.bin": {
+          "offered": 41,
+          "outcomes": {
+            "success": 29,
+            "rejected": 12
+          },
+          "scheduledToDownload": {
+            "count": 29,
+            "p50Ms": 6523,
+            "p75Ms": 17132.5,
+            "p90Ms": 21566.800048828125,
+            "p95Ms": 33794,
+            "p99Ms": 33844.39990234375,
+            "p99Interval": {
+              "confidence": 0.95,
+              "lowerRank": 27,
+              "upperRank": 30,
+              "lower": 21566.800048828125,
+              "upper": null,
+              "bounded": false
+            },
+            "histogramResolutionMs": 1
+          }
+        },
+        "noise-large.bin": {
+          "offered": 18,
+          "outcomes": {
+            "success": 16,
+            "rejected": 2
+          },
+          "scheduledToDownload": {
+            "count": 16,
+            "p50Ms": 49470.800048828125,
+            "p75Ms": 54376.5,
+            "p90Ms": 56372,
+            "p95Ms": 56874.599853515625,
+            "p99Ms": 56874.599853515625,
+            "p99Interval": {
+              "confidence": 0.95,
+              "lowerRank": 15,
+              "upperRank": 17,
+              "lower": 56372,
+              "upper": null,
+              "bounded": false
+            },
+            "histogramResolutionMs": 1
+          }
+        },
+        "noise-medium.bin": {
+          "offered": 139,
+          "outcomes": {
+            "success": 110,
+            "rejected": 29
+          },
+          "scheduledToDownload": {
+            "count": 110,
+            "p50Ms": 2705.699951171875,
+            "p75Ms": 8652.800048828125,
+            "p90Ms": 12923,
+            "p95Ms": 19822.5,
+            "p99Ms": 24240.900146484375,
+            "p99Interval": {
+              "confidence": 0.95,
+              "lowerRank": 106,
+              "upperRank": 111,
+              "lower": 19977.300048828125,
+              "upper": null,
+              "bounded": false
+            },
+            "histogramResolutionMs": 1
+          }
+        },
+        "png-alpha.png": {
+          "offered": 101,
+          "outcomes": {
+            "success": 77,
+            "rejected": 24
+          },
+          "scheduledToDownload": {
+            "count": 77,
+            "p50Ms": 25796.300048828125,
+            "p75Ms": 36110.7001953125,
+            "p90Ms": 37249.300048828125,
+            "p95Ms": 38351,
+            "p99Ms": 39680.099853515625,
+            "p99Interval": {
+              "confidence": 0.95,
+              "lowerRank": 74,
+              "upperRank": 78,
+              "lower": 38351,
+              "upper": null,
+              "bounded": false
+            },
+            "histogramResolutionMs": 1
+          }
+        },
+        "png-noise.png": {
+          "offered": 74,
+          "outcomes": {
+            "success": 62,
+            "rejected": 12
+          },
+          "scheduledToDownload": {
+            "count": 62,
+            "p50Ms": 22326.800048828125,
+            "p75Ms": 36635.599853515625,
+            "p90Ms": 39594.199951171875,
+            "p95Ms": 40199,
+            "p99Ms": 40537,
+            "p99Interval": {
+              "confidence": 0.95,
+              "lowerRank": 60,
+              "upperRank": 63,
+              "lower": 40295.800048828125,
+              "upper": null,
+              "bounded": false
+            },
+            "histogramResolutionMs": 1
+          }
+        },
+        "text-boundary-above.bin": {
+          "offered": 42,
+          "outcomes": {
+            "success": 30,
+            "rejected": 12
+          },
+          "scheduledToDownload": {
+            "count": 30,
+            "p50Ms": 12804.39990234375,
+            "p75Ms": 21910.599853515625,
+            "p90Ms": 33982.5,
+            "p95Ms": 34979.5,
+            "p99Ms": 37005.900146484375,
+            "p99Interval": {
+              "confidence": 0.95,
+              "lowerRank": 28,
+              "upperRank": 31,
+              "lower": 34953.60009765625,
+              "upper": null,
+              "bounded": false
+            },
+            "histogramResolutionMs": 1
+          }
+        },
+        "text-boundary-below.bin": {
+          "offered": 45,
+          "outcomes": {
+            "success": 36,
+            "rejected": 9
+          },
+          "scheduledToDownload": {
+            "count": 36,
+            "p50Ms": 6866.800048828125,
+            "p75Ms": 13488.900146484375,
+            "p90Ms": 25591.300048828125,
+            "p95Ms": 30916.199951171875,
+            "p99Ms": 31272.300048828125,
+            "p99Interval": {
+              "confidence": 0.95,
+              "lowerRank": 34,
+              "upperRank": 37,
+              "lower": 28776.2001953125,
+              "upper": null,
+              "bounded": false
+            },
+            "histogramResolutionMs": 1
+          }
+        },
+        "text-small.bin": {
+          "offered": 174,
+          "outcomes": {
+            "success": 134,
+            "rejected": 40
+          },
+          "scheduledToDownload": {
+            "count": 134,
+            "p50Ms": 4375.5,
+            "p75Ms": 10532.60009765625,
+            "p90Ms": 18321,
+            "p95Ms": 19949.7001953125,
+            "p99Ms": 24153.300048828125,
+            "p99Interval": {
+              "confidence": 0.95,
+              "lowerRank": 130,
+              "upperRank": 135,
+              "lower": 21701.400146484375,
+              "upper": null,
+              "bounded": false
+            },
+            "histogramResolutionMs": 1
+          }
+        },
+        "webp-large.webp": {
+          "offered": 41,
+          "outcomes": {
+            "success": 30,
+            "rejected": 11
+          },
+          "scheduledToDownload": {
+            "count": 30,
+            "p50Ms": 30355.300048828125,
+            "p75Ms": 38356,
+            "p90Ms": 39739.800048828125,
+            "p95Ms": 40966.300048828125,
+            "p99Ms": 42240.300048828125,
+            "p99Interval": {
+              "confidence": 0.95,
+              "lowerRank": 28,
+              "upperRank": 31,
+              "lower": 40061.199951171875,
+              "upper": null,
+              "bounded": false
+            },
+            "histogramResolutionMs": 1
+          }
+        },
+        "webp-small.webp": {
+          "offered": 98,
+          "outcomes": {
+            "success": 85,
+            "rejected": 13
+          },
+          "scheduledToDownload": {
+            "count": 85,
+            "p50Ms": 20837.300048828125,
+            "p75Ms": 34688.199951171875,
+            "p90Ms": 37369.300048828125,
+            "p95Ms": 38230.400146484375,
+            "p99Ms": 38904.10009765625,
+            "p99Interval": {
+              "confidence": 0.95,
+              "lowerRank": 82,
+              "upperRank": 86,
+              "lower": 38245.699951171875,
+              "upper": null,
+              "bounded": false
+            },
+            "histogramResolutionMs": 1
+          }
+        }
+      }
+    }
+  ],
+  "invariants": {
+    "protocolHash": "ddf2659a66cfb7ffa5b3ca9c622ea9c11632943ac12fefde2ee67a67633d218c",
+    "fixtureHashMatches": true,
+    "environmentHashMatches": true,
+    "runtimeServiceImageIdsMatch": true
+  },
+  "interpretation": {
+    "selection": "All three predeclared measured repeats; no replacement or best-run selection",
+    "latencyPopulation": "Successful offered uploads only; rejection/error/timeout counts retained separately",
+    "percentiles": "Nearest rank; raw per-operation timestamps and1ms histograms retained. p99 intervals assume independent observations, which queueing may violate.",
+    "cleanupScope": "Lifecycle records cover measured admitted operations. Summary cleanupObjects also includes warmup; resource deltas begin after warmup.",
+    "clockPrecision": "Browser performance timestamps are fractional milliseconds; Node Date.now is integer milliseconds. Raw cross-clock delivery may be slightly negative. Derived delivery quantiles clamp negative values to zero; raw values and count retained.",
+    "purpose": "Screening reference, not proof of performance improvement or production capacity",
+    "cohortPower": "1000 successful samples per cohort required by unchanged acceptance; these quick repeats may be insufficient"
+  },
+  "files": [
+    {
+      "path": "r1/summary.json",
+      "sha256": "d64841096e9388ce8badbe075bb7bcda20a85ad9b45d8dee5c97053406c63859"
+    },
+    {
+      "path": "r1/operations.jsonl",
+      "sha256": "f32d52d77b2facb36020038489ffc856e781c7834c29a59cecb260da63cec043"
+    },
+    {
+      "path": "r1/resources.jsonl",
+      "sha256": "e3760cebe503dd4540a32e176fa213422500f0a80658c4a4dd629d7bb21de98b"
+    },
+    {
+      "path": "r1/environment.json",
+      "sha256": "3cda08f3f75a2e9be28c0c4a7470468dfba21bba724f70d660c438d366f4eb8e"
+    },
+    {
+      "path": "r1/protocol.json",
+      "sha256": "1e62d9bc86a2f125ba26c5931ba384b12cc0f0a71a89c918deff1cbc8e1d9c67"
+    },
+    {
+      "path": "r1/fixtures.json",
+      "sha256": "f0793c1b9dfd8fdf62f279677986f4fe1e21266e9e1bb45c28c50da9f6065d64"
+    },
+    {
+      "path": "r1/offered.jsonl",
+      "sha256": "506b4d8ada5da6e37080306717d67862092b126e82d7b167a19062cf30dd3b3d"
+    },
+    {
+      "path": "r1/dispatches.jsonl",
+      "sha256": "b32e5975c7db2bf595f5aef48b4f4517b952a7a63e5b4c8d72b48632a1382156"
+    },
+    {
+      "path": "r1/lifecycle.jsonl",
+      "sha256": "e7217ae0d3124b8c82651563b2adb02a121407bae5346efb0ba824cb6ef876f4"
+    },
+    {
+      "path": "r1/traces.jsonl",
+      "sha256": "aa6539ac2b65a84f2234b07bd7723c28ce254ed98b7fe70e31636b3756e73695"
+    },
+    {
+      "path": "r1/provenance.json",
+      "sha256": "d308303efcbdae80e91bd16e76fc6565df8b3e44077ad913455f2bf3fdbea24e"
+    },
+    {
+      "path": "r2/summary.json",
+      "sha256": "755805332c1992550fab9ad01fe9b07f93e149abf166a136bcd7cae40a06de3c"
+    },
+    {
+      "path": "r2/operations.jsonl",
+      "sha256": "032f4f499cf89f72fc8bec49485a03985fe301d6bd10b3e88b168b98ba2d98d4"
+    },
+    {
+      "path": "r2/resources.jsonl",
+      "sha256": "617640ef65c36713791f1ce030dad1a0a387b7ecc0be9a63409238ab35382a00"
+    },
+    {
+      "path": "r2/environment.json",
+      "sha256": "fe47585803c0cb61080ca8b47367a57fca70187a948e5cc85f71d15f6665daca"
+    },
+    {
+      "path": "r2/protocol.json",
+      "sha256": "1e62d9bc86a2f125ba26c5931ba384b12cc0f0a71a89c918deff1cbc8e1d9c67"
+    },
+    {
+      "path": "r2/fixtures.json",
+      "sha256": "f0793c1b9dfd8fdf62f279677986f4fe1e21266e9e1bb45c28c50da9f6065d64"
+    },
+    {
+      "path": "r2/offered.jsonl",
+      "sha256": "4ffb43555368dc149aef89202c02593159a9848480eb147d04977ecfa560ca2e"
+    },
+    {
+      "path": "r2/dispatches.jsonl",
+      "sha256": "c7514bda61531015d11c8f073e68146ab71d4a9cfbd22985515a2d93e3cf5b63"
+    },
+    {
+      "path": "r2/lifecycle.jsonl",
+      "sha256": "74b15eae314c69cf5273fc83aa12036373024bfbd4265d0dd991faae6065f35e"
+    },
+    {
+      "path": "r2/traces.jsonl",
+      "sha256": "8ad58777047a3838c36a20277bda375da21a97d338092fff9cf6680b456a71b4"
+    },
+    {
+      "path": "r2/provenance.json",
+      "sha256": "8b1acaaa9001b8da30056335609e1dda7db483957bad8bdbf6fa7d6e933e2156"
+    },
+    {
+      "path": "r3/summary.json",
+      "sha256": "6844396f37a15b417d1d263a2949b30fc91a871f4e2a6b8fc467de224b9b38c6"
+    },
+    {
+      "path": "r3/operations.jsonl",
+      "sha256": "267ea155791a37ceb139706e1f80e1a37a6ac5844966268b9cbce2db2039b21b"
+    },
+    {
+      "path": "r3/resources.jsonl",
+      "sha256": "2d38efa1cd6b6b1b6a4cd6414dc116458f57cc095aa88c036f54dcf1e21317f9"
+    },
+    {
+      "path": "r3/environment.json",
+      "sha256": "fd32b6f897a7ec5e9557ec659fdc4be8b9863c5b5bfe6329cf2dce40448e8caf"
+    },
+    {
+      "path": "r3/protocol.json",
+      "sha256": "1e62d9bc86a2f125ba26c5931ba384b12cc0f0a71a89c918deff1cbc8e1d9c67"
+    },
+    {
+      "path": "r3/fixtures.json",
+      "sha256": "f0793c1b9dfd8fdf62f279677986f4fe1e21266e9e1bb45c28c50da9f6065d64"
+    },
+    {
+      "path": "r3/offered.jsonl",
+      "sha256": "90789a93bf63aca0b816ff1b8194700cd558a928b580170bf6bc38e1d083761b"
+    },
+    {
+      "path": "r3/dispatches.jsonl",
+      "sha256": "7f61ee7a9f8881c58da7477167f0239343de0819344dfaf54fb23c21fafc0af5"
+    },
+    {
+      "path": "r3/lifecycle.jsonl",
+      "sha256": "5bab61d2e7bb6db08fdc1e85d433ae456b795907544368d93b24f6d61db4db4e"
+    },
+    {
+      "path": "r3/traces.jsonl",
+      "sha256": "c17efa0f8b9469a7be0650ff01a30d50e9f49e3d163c9e0f9d61bb8d53f0f124"
+    },
+    {
+      "path": "r3/provenance.json",
+      "sha256": "fc3d7aa496902fa350dc305b8fa9b8e20ddbb6bf8a222f19fe0eb4f9a574a0fd"
+    }
+  ]
+}

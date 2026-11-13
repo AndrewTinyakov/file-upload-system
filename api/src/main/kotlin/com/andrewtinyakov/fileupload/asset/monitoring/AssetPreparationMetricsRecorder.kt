@@ -31,6 +31,9 @@ class AssetPreparationMetricsRecorder(
                 .tag("handling_mode", handlingMode.metricValue())
                 .tag("outcome", outcome.metricValue())
                 .serviceLevelObjectives(
+                    Duration.ofMillis(100),
+                    Duration.ofMillis(250),
+                    Duration.ofMillis(500),
                     Duration.ofSeconds(1),
                     Duration.ofSeconds(5),
                     Duration.ofSeconds(10),

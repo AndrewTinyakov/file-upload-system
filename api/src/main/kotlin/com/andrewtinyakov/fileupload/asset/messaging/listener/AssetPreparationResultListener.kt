@@ -13,6 +13,7 @@ import com.andrewtinyakov.fileupload.infrastructure.messaging.AssetMessaging.Rou
 import com.andrewtinyakov.fileupload.infrastructure.messaging.AssetMessaging.RoutingKeys.PREPARE_DOCUMENT
 import com.andrewtinyakov.fileupload.infrastructure.messaging.AssetMessaging.RoutingKeys.PREPARE_IMAGE
 import com.andrewtinyakov.fileupload.infrastructure.messaging.consumeMessage
+import com.andrewtinyakov.fileupload.shared.monitoring.SampledUploadTrace
 import com.rabbitmq.client.Channel
 import org.slf4j.LoggerFactory
 import org.springframework.amqp.core.Message
@@ -44,10 +45,14 @@ class AssetPreparationResultListener(
         val receivedAt = OffsetDateTime.now(clock)
         when (message.messageProperties.receivedRoutingKey) {
             PREPARATION_COMPLETED -> {
+                val event: AssetPreparationCompletedEventV1 = reader
+                    .forType(AssetPreparationCompletedEventV1::class.java)
+                    .readValue(message.body)
                 assetPreparationService.completePreparation(
-                    reader.forType(AssetPreparationCompletedEventV1::class.java).readValue(message.body),
+                    event,
                     receivedAt,
                 )
+                SampledUploadTrace.record(event.assetId, "preparation_result_applied")
             }
 
             PREPARATION_FAILED -> {

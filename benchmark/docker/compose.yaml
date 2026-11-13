@@ -1,0 +1,160 @@
+name: upload-benchmark
+services:
+  postgres:
+    image: postgres:18.6
+    cpus: 0.5
+    mem_limit: 512m
+    environment:
+      POSTGRES_DB: file_upload
+      POSTGRES_USER: file_upload
+      POSTGRES_PASSWORD: file_upload
+    volumes: ["postgres:/var/lib/postgresql"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U file_upload -d file_upload"]
+      interval: 2s
+      timeout: 2s
+      retries: 60
+  rabbitmq:
+    image: rabbitmq:4.3.5-management
+    cpus: 0.5
+    mem_limit: 512m
+    hostname: rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: file_upload
+      RABBITMQ_DEFAULT_PASS: file_upload
+      RABBITMQ_DEFAULT_VHOST: file_upload
+    volumes:
+      - rabbitmq:/var/lib/rabbitmq
+      - ../../infra/rabbitmq/enabled_plugins:/etc/rabbitmq/enabled_plugins:ro
+    ports: ["127.0.0.1:15673:15672"]
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 60
+  minio:
+    image: quay.io/minio/minio:RELEASE.2025-09-07T16-13-09Z
+    command: server /data --console-address :9001
+    cpus: 1
+    mem_limit: 1g
+    environment:
+      MINIO_ROOT_USER: file_upload
+      MINIO_ROOT_PASSWORD: file_upload
+      MINIO_API_CORS_ALLOW_ORIGIN: "*"
+      GOMAXPROCS: ${BENCHMARK_MINIO_GOMAXPROCS:-}
+      MINIO_COMPRESSION_ENABLE: ${BENCHMARK_MINIO_COMPRESSION:-off}
+      MINIO_COMPRESSION_ALLOW_ENCRYPTION: "off"
+      MINIO_COMPRESSION_EXTENSIONS: ".txt,.log,.csv,.json,.tar,.xml,.bin"
+      MINIO_COMPRESSION_MIME_TYPES: "application/octet-stream"
+      MINIO_API_STALE_UPLOADS_EXPIRY: "24h"
+      MINIO_API_STALE_UPLOADS_CLEANUP_INTERVAL: "6h"
+    volumes: ["minio:/data"]
+    ports: ["127.0.0.1:19000:9000"]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 2s
+      timeout: 2s
+      retries: 60
+  minio-init:
+    image: minio/mc:RELEASE.2025-04-16T18-13-26Z
+    depends_on:
+      minio: { condition: service_healthy }
+    volumes:
+      - ../../infra/minio:/configuration:ro
+      - ../config/minio:/benchmark-configuration:ro
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - "mc alias set local http://minio:9000 file_upload file_upload && mc mb --ignore-existing local/uploads && mc mb --ignore-existing local/assets && mc mb --ignore-existing local/documents && mc version enable local/documents && mc ilm import local/uploads < /configuration/uploads-lifecycle.json && mc anonymous set-json /configuration/assets-policy.json local/assets && mc ilm import local/documents < /benchmark-configuration/documents-lifecycle.json && mc anonymous set-json /benchmark-configuration/documents-policy.json local/documents"
+  api:
+    build:
+      context: ../..
+      dockerfile: benchmark/docker/api.Dockerfile
+    cpus: 1
+    mem_limit: 1g
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/file_upload
+      SPRING_DATASOURCE_USERNAME: file_upload
+      SPRING_DATASOURCE_PASSWORD: file_upload
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_USERNAME: file_upload
+      SPRING_RABBITMQ_PASSWORD: file_upload
+      SPRING_RABBITMQ_VIRTUAL_HOST: file_upload
+      FILE_UPLOAD_STORAGE_ENDPOINT: http://minio:9000
+      FILE_UPLOAD_STORAGE_PUBLIC_ENDPOINT: http://minio:9000
+      METRICS_PASSWORD: metrics-local
+      FILE_UPLOAD_MONITORING_BACKLOG_ENABLED: "true"
+    ports: ["127.0.0.1:18080:8080"]
+    depends_on:
+      postgres: { condition: service_healthy }
+      rabbitmq: { condition: service_healthy }
+      minio-init: { condition: service_completed_successfully }
+  document-worker:
+    build:
+      context: ../../workers
+      dockerfile: docker/document.Dockerfile
+    cpus: 0.5
+    mem_limit: 256m
+    environment: &worker
+      RABBITMQ_URL: amqp://file_upload:file_upload@rabbitmq:5672/file_upload
+      S3_ENDPOINT: http://minio:9000
+      WORKER_CONCURRENCY: 4
+      RABBITMQ_PREFETCH: 4
+      METRICS_ADDRESS: :2112
+    depends_on:
+      rabbitmq: { condition: service_healthy }
+      minio-init: { condition: service_completed_successfully }
+    restart: unless-stopped
+  image-worker:
+    build:
+      context: ../../workers
+      dockerfile: docker/image.Dockerfile
+    cpus: 2
+    mem_limit: 2g
+    environment:
+      <<: *worker
+      IMAGE_VARIANT_CONCURRENCY: 2
+      VIPS_CONCURRENCY: 2
+      VIPS_MAX_CACHE_MEMORY_MIB: 256
+    depends_on:
+      rabbitmq: { condition: service_healthy }
+      minio-init: { condition: service_completed_successfully }
+    restart: unless-stopped
+  prometheus:
+    image: prom/prometheus:v3.14.0
+    cpus: 0.25
+    mem_limit: 256m
+    volumes: ["../config/prometheus.yaml:/etc/prometheus/prometheus.yml:ro"]
+    ports: ["127.0.0.1:19090:9090"]
+  grafana:
+    image: grafana/grafana:13.2.2
+    cpus: 0.25
+    mem_limit: 512m
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: admin
+    volumes:
+      - ../../infra/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ../../infra/grafana/dashboards:/var/lib/grafana/dashboards:ro
+    ports: ["127.0.0.1:13000:3000"]
+  generator:
+    build:
+      context: ../..
+      dockerfile: benchmark/docker/generator.Dockerfile
+    cpus: 2
+    mem_limit: 8g
+    ports: ["127.0.0.1:5173:5173"]
+    profiles: ["runner"]
+    environment:
+      SCENARIO: ${SCENARIO:-smoke}
+      RUN_LABEL: ${RUN_LABEL:-smoke}
+      SLOW_CONTROL_MS: ${SLOW_CONTROL_MS:-0}
+      COHORT: ${COHORT:-}
+      BENCHMARK_MINIO_COMPRESSION: ${BENCHMARK_MINIO_COMPRESSION:-off}
+      BENCHMARK_MINIO_GOMAXPROCS: ${BENCHMARK_MINIO_GOMAXPROCS:-}
+    volumes:
+      - ../../.local/upload-benchmark:/results
+      - /var/run/docker.sock:/var/run/docker.sock
+volumes:
+  postgres:
+  rabbitmq:
+  minio:
