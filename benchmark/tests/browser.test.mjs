@@ -39,7 +39,7 @@ async function browserBundle(realClient = false) {
 }
 const bundle = await browserBundle();
 
-async function runAbort(stall, queued = false, realClient = false) {
+async function runAbort(stall, queued = false, realClient = false, { sampled = false, assetId = '01ARZ3NDEKTSV4RRFFQ69G5FAW' } = {}) {
   const payload = new Uint8Array([1, 2, 3, 4]);
   const digest = Buffer.from(await webcrypto.subtle.digest('SHA-256', payload)).toString('hex');
   let apiAttempts = 0;
@@ -62,7 +62,7 @@ async function runAbort(stall, queued = false, realClient = false) {
       if (!stall) return Response.json({ status: 'ABORTED' });
       return new Promise((_, reject) => options.signal.addEventListener('abort', () => reject(new DOMException('Aborted', 'AbortError')), { once: true }));
     }
-    return Response.json({ sessionId: 'session', assetId: '01ARZ3NDEKTSV4RRFFQ69G5FAW', strategy: 'SINGLE', upload: { method: 'PUT', url: 'http://minio:9000/uploads/source', headers: {} } });
+    return Response.json({ sessionId: 'session', assetId, strategy: 'SINGLE', upload: { method: 'PUT', url: 'http://minio:9000/uploads/source', headers: {} } });
   } };
   const sandbox = { window, XMLHttpRequest: Request, performance, AbortSignal, AbortController, DOMException, Blob, File, Response, URL, crypto: webcrypto, setTimeout, clearTimeout, localStorage: { getItem: () => 'owner' } };
   vm.runInNewContext((realClient ? await browserBundle(true) : bundle).outputFiles[0].text, sandbox);
@@ -83,7 +83,7 @@ async function runAbort(stall, queued = false, realClient = false) {
   };
   await window.benchmark.prepare([{ name: 'fixture.bin', bytes: 4, sha256: digest, type: 'application/octet-stream' }]);
   const start = performance.now();
-  const result = await window.benchmark.run({ id: 'op', fixture: 'fixture.bin', interrupt: !queued, timeoutMs: 30 });
+  const result = await window.benchmark.run({ id: 'op', fixture: 'fixture.bin', sampled, interrupt: !queued, timeoutMs: 30 });
   return { result, elapsed: performance.now() - start, apiAttempts, queuedCancelled, mockClientCalled, metrics: window.benchmark.putMetrics(), observedClientSettled: window.observedClientSettled, clientSignalAborted: window.clientSignal?.aborted };
 }
 
@@ -223,4 +223,26 @@ test('a multipart deadline aborts every active PUT and rejects a subsequent send
   assert.equal(result.clientTaskSettled, true);
   assert.equal(result.activePutsAtReturn, 0);
   assert.equal(window.benchmark.putMetrics().activePuts, 0);
+});
+
+
+test('scheduled trace selection survives session creation for an unsampled asset ID', async () => {
+  const { result } = await runAbort(false, false, false, { sampled: true });
+  assert.equal(result.sampled, true);
+  assert.equal(result.serverTraceSampled, false);
+  assert.ok(result.spans.some(span => span.stage.endsWith('/upload-sessions')));
+});
+
+test('asset-ID sampling retains client spans that can join API and worker traces', async () => {
+  const { result } = await runAbort(false, false, false, { assetId: '01ARZ3NDEKTSV4RRFFQ69G5F00' });
+  assert.equal(result.sampled, true);
+  assert.equal(result.serverTraceSampled, true);
+  assert.ok(result.spans.some(span => span.stage.endsWith('/upload-sessions')));
+});
+
+test('an operation selected by neither trace rule records no spans', async () => {
+  const { result } = await runAbort(false);
+  assert.equal(result.sampled, false);
+  assert.equal(result.serverTraceSampled, false);
+  assert.equal(result.spans.length, 0);
 });

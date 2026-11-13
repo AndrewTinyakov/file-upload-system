@@ -201,3 +201,26 @@ test('matched repeats reuse built images but reset project volumes and preserve 
   const laterCalls = (await cli.calls()).slice(calls.length);
   assert.equal(laterCalls.some(call => call.args.includes('down')), false);
 });
+
+
+test('Bash result names preserve early-failure and orphaned sidecar evidence', async t => {
+  const cli = await runner(t);
+  await mkdir(join(cli.root, 'benchmark/legacy-bash'));
+  const script = join(cli.root, 'benchmark/legacy-bash/run.sh');
+  await copyFile(new URL('../legacy-bash/run.sh', import.meta.url), script);
+  await symlink(join(cli.root, 'bin/mock.cjs'), join(cli.root, 'bin/curl'));
+  const run = name => spawnSync('bash', [script, 'quick', name], { cwd: tmpdir(), encoding: 'utf8', env: { ...cli.env, BENCHMARK_REUSE_BUILD: '1' } });
+  cli.env.MISSING_IMAGES = '1';
+  assert.notEqual(run('failed-image').status, 0);
+  const failedCalls = await cli.calls();
+  const savedImages = await readFile(join(cli.root, '.local/upload-benchmark/failed-image-images.txt'), 'utf8');
+  cli.env.MISSING_IMAGES = '';
+  assert.notEqual(run('failed-image').status, 0);
+  assert.deepEqual(await cli.calls(), failedCalls);
+  assert.equal(await readFile(join(cli.root, '.local/upload-benchmark/failed-image-images.txt'), 'utf8'), savedImages);
+  const sidecar = join(cli.root, '.local/upload-benchmark/orphan-services.log');
+  await writeFile(sidecar, 'original evidence');
+  assert.notEqual(run('orphan').status, 0);
+  assert.deepEqual(await cli.calls(), failedCalls);
+  assert.equal(await readFile(sidecar, 'utf8'), 'original evidence');
+});

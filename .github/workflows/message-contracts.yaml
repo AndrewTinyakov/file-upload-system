@@ -65,9 +65,13 @@ jobs:
       - name: Typecheck client
         run: npm run typecheck:client
 
+      - name: Install benchmark tooling
+        run: npm ci --prefix benchmark --ignore-scripts
+
       - name: Test benchmark helpers
         run: >-
           node --test
+          benchmark/tests/browser.test.mjs
           benchmark/tests/drain.test.mjs
           benchmark/tests/evaluate.test.mjs
           benchmark/tests/runner.test.mjs
@@ -77,7 +81,7 @@ jobs:
       - name: Install libvips
         timeout-minutes: 2
         run: |
-          echo 'https://mirrors.edge.kernel.org/ubuntu/' | sudo tee /etc/apt/apt-mirrors.txt
+          echo 'https://archive.ubuntu.com/ubuntu/' | sudo tee /etc/apt/apt-mirrors.txt
           sudo apt-get update --error-on=any
           sudo apt-get install -y --no-install-recommends libvips-dev pkg-config
 
