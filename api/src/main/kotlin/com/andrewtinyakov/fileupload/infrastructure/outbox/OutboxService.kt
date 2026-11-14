@@ -2,6 +2,7 @@ package com.andrewtinyakov.fileupload.infrastructure.outbox
 
 import com.andrewtinyakov.fileupload.infrastructure.config.SchedulingProperties
 import com.andrewtinyakov.fileupload.infrastructure.messaging.MessageRoute
+import com.andrewtinyakov.fileupload.shared.monitoring.SampledUploadTrace
 import org.springframework.amqp.core.Message
 import org.springframework.amqp.core.MessageDeliveryMode
 import org.springframework.amqp.core.MessageProperties
@@ -109,6 +110,9 @@ class OutboxService(
                 check(correlation.returned == null) {
                     "Outbox publication ${correlation.id} was unroutable"
                 }
+            }
+            messages.forEach { message ->
+                SampledUploadTrace.record(message.aggregateId, "outbox_broker_confirmed")
             }
             repository.markPublished(
                 messages.map(OutboxMessage::id),

@@ -5,6 +5,7 @@ import com.andrewtinyakov.fileupload.infrastructure.database.generated.enums.Fil
 import com.andrewtinyakov.fileupload.infrastructure.database.generated.tables.FileAssets.FILE_ASSETS
 import com.github.f4b6a3.ulid.UlidCreator
 import org.jooq.DSLContext
+import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -13,6 +14,7 @@ import org.springframework.transaction.support.TransactionTemplate
 import kotlin.test.assertEquals
 
 @Import(TestcontainersConfig::class)
+@Tag("integration")
 @SpringBootTest
 class JooqIntegrationTests
     @Autowired

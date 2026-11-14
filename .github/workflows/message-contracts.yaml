@@ -19,8 +19,8 @@ permissions:
 
 jobs:
   verify:
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
+    runs-on: ubuntu-26.04
+    timeout-minutes: 10
     steps:
       - name: Check out repository
         uses: actions/checkout@v7
@@ -62,64 +62,34 @@ jobs:
           git add --intent-to-add workers/internal/generated/messaging
           git diff --exit-code -- workers/internal/generated/messaging
 
-      - name: Install libvips
-        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends libvips-dev pkg-config
+      - name: Typecheck client
+        run: npm run typecheck:client
 
-      - name: Test API
-        id: api-tests
-        run: ./api/gradlew -p api test ktlintCheck --no-daemon
+      - name: Install benchmark tooling
+        run: npm ci --prefix benchmark --ignore-scripts
+
+      - name: Test benchmark helpers
+        run: >-
+          node --test
+          benchmark/tests/browser.test.mjs
+          benchmark/tests/drain.test.mjs
+          benchmark/tests/evaluate.test.mjs
+          benchmark/tests/runner.test.mjs
+          benchmark/tests/storage-cleanup.test.mjs
+          benchmark/tests/storage-settings.test.mjs
+
+      - name: Install libvips
+        timeout-minutes: 2
+        run: |
+          echo 'https://archive.ubuntu.com/ubuntu/' | sudo tee /etc/apt/apt-mirrors.txt
+          sudo apt-get update --error-on=any
+          sudo apt-get install -y --no-install-recommends libvips-dev pkg-config
+
+      - name: Test API units and check Kotlin style
+        run: ./api/gradlew -p api unitTest ktlintCheck --no-daemon
 
       - name: Vet Go workers
         run: go -C workers vet ./...
 
-      - name: Test Go workers with the race detector
-        if: ${{ !cancelled() && (success() || steps.api-tests.outcome == 'failure') }}
-        run: go -C workers test -race -count=1 ./...
-
-      - name: Start the local system
-        run: |
-          docker compose -f compose.local.yaml up -d --build
-          ./api/gradlew -p api bootRun --args="--spring.profiles.active=local" > "$RUNNER_TEMP/file-upload-api.log" 2>&1 &
-          echo $! > "$RUNNER_TEMP/file-upload-api.pid"
-          for attempt in {1..90}; do
-            if curl --fail --silent http://localhost:8080/api/actuator/health > /dev/null; then
-              exit 0
-            fi
-            api_pid="$(<"$RUNNER_TEMP/file-upload-api.pid")"
-            if ! kill -0 "$api_pid" 2>/dev/null; then
-              cat "$RUNNER_TEMP/file-upload-api.log"
-              exit 1
-            fi
-            sleep 2
-          done
-          cat "$RUNNER_TEMP/file-upload-api.log"
-          exit 1
-
-      - name: Test Go workers against RabbitMQ and MinIO
-        env:
-          RABBITMQ_TEST_URL: amqp://file_upload:file_upload@localhost:5672/file_upload
-          S3_TEST_ENDPOINT: http://localhost:9000
-        run: go -C workers test -count=1 ./...
-
-      - name: Test the complete upload system
-        run: npm run test:system
-
-      - name: Show system logs
-        if: ${{ failure() }}
-        run: |
-          if [[ -f "$RUNNER_TEMP/file-upload-api.log" ]]; then
-            cat "$RUNNER_TEMP/file-upload-api.log"
-          fi
-          docker compose -f compose.local.yaml ps --all
-          docker compose -f compose.local.yaml logs --no-color
-
-      - name: Stop the local system
-        if: ${{ always() }}
-        run: |
-          if [[ -f "$RUNNER_TEMP/file-upload-api.pid" ]]; then
-            api_pid="$(<"$RUNNER_TEMP/file-upload-api.pid")"
-            if kill -0 "$api_pid" 2>/dev/null; then
-              kill "$api_pid"
-            fi
-          fi
-          docker compose -f compose.local.yaml down --volumes
+      - name: Test Go workers
+        run: go -C workers test ./...

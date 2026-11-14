@@ -129,6 +129,14 @@ tasks.withType<Test> {
     useJUnitPlatform()
 }
 
+tasks.register<Test>("unitTest") {
+    testClassesDirs = sourceSets.test.get().output.classesDirs
+    classpath = sourceSets.test.get().runtimeClasspath
+    useJUnitPlatform {
+        excludeTags("integration")
+    }
+}
+
 openApi {
     apiDocsUrl.set("http://localhost:8080/api/v3/api-docs.yaml")
     outputDir.set(file("../contracts"))

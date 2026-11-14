@@ -22,6 +22,7 @@ import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito
 import org.springframework.amqp.core.Binding
@@ -53,6 +54,7 @@ import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
 @Import(TestcontainersConfig::class)
+@Tag("integration")
 @SpringBootTest(
     webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
     properties = [

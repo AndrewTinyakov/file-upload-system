@@ -132,6 +132,7 @@ func newPreparationCommandHandler[C any](
 			outcome = ProcessingPermanentFailure
 		}
 		metrics.ObserveProcessing(timing.ProcessingDuration(), outcome)
+		traceConfirmedPreparationResult(message, timing, outcome, now)
 		return nil
 	}
 	return NewCommandHandler(handle)

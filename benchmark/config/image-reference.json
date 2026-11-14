@@ -1,0 +1,206 @@
+{
+  "jpeg-small.jpeg": [
+    {
+      "variantType": "DISPLAY_SMALL",
+      "width": 480,
+      "height": 360,
+      "contentType": "image/webp",
+      "byteSize": 98434,
+      "sha256": "e75aa76036a5d2e0ea0505e04663e3e11f1a5e4bd22f773913ccb0e10f42451e"
+    },
+    {
+      "variantType": "DISPLAY_MEDIUM",
+      "width": 640,
+      "height": 480,
+      "contentType": "image/webp",
+      "byteSize": 203556,
+      "sha256": "420b3204df3b42c7fe398c800075f902df320270c11c5c07fe84a0f83824385e"
+    },
+    {
+      "variantType": "DISPLAY_LARGE",
+      "width": 640,
+      "height": 480,
+      "contentType": "image/webp",
+      "byteSize": 203556,
+      "sha256": "420b3204df3b42c7fe398c800075f902df320270c11c5c07fe84a0f83824385e"
+    },
+    {
+      "variantType": "DOWNLOAD",
+      "width": 640,
+      "height": 480,
+      "contentType": "image/jpeg",
+      "byteSize": 197840,
+      "sha256": "1249e83b5d1425fa5acd176aa6d9cc50c4f1c2044e68d236ce66cbfa078780af"
+    }
+  ],
+  "jpeg-large.jpeg": [
+    {
+      "variantType": "DISPLAY_SMALL",
+      "width": 480,
+      "height": 270,
+      "contentType": "image/webp",
+      "byteSize": 22156,
+      "sha256": "4aaef143ee8e2eaf598d494ad7fde9f8418cdca5e36e8807cf2defa1f6d33aba"
+    },
+    {
+      "variantType": "DISPLAY_MEDIUM",
+      "width": 1280,
+      "height": 720,
+      "contentType": "image/webp",
+      "byteSize": 364596,
+      "sha256": "d1a90fa9f58e4a4bb7857fe984e7d8016f9494b8fa27a8a152f0b75be4a55e5c"
+    },
+    {
+      "variantType": "DISPLAY_LARGE",
+      "width": 1920,
+      "height": 1080,
+      "contentType": "image/webp",
+      "byteSize": 997190,
+      "sha256": "387bc17fdc360cde616964317af458bf493ffafb33219e76e206725e07552c9e"
+    },
+    {
+      "variantType": "DOWNLOAD",
+      "width": 3840,
+      "height": 2160,
+      "contentType": "image/jpeg",
+      "byteSize": 5323844,
+      "sha256": "5a6dc68a611ea4d92b2c5e7234cde6b8f0dcf9f6f7fa4620df1f19205d72ee6b"
+    }
+  ],
+  "png-alpha.png": [
+    {
+      "variantType": "DISPLAY_SMALL",
+      "width": 480,
+      "height": 270,
+      "contentType": "image/webp",
+      "byteSize": 544,
+      "sha256": "0bd76f97691f47038bbeedc089d7e6c95a48b1abb3279dbd4f24e086cdfcf3a4"
+    },
+    {
+      "variantType": "DISPLAY_MEDIUM",
+      "width": 1280,
+      "height": 720,
+      "contentType": "image/webp",
+      "byteSize": 1998,
+      "sha256": "2c968863ff5b776dcbda0519ec67f557cfad8d015fec2ccae617249be238e39a"
+    },
+    {
+      "variantType": "DISPLAY_LARGE",
+      "width": 1920,
+      "height": 1080,
+      "contentType": "image/webp",
+      "byteSize": 4120,
+      "sha256": "c5cae81470a9b0661b509fe25080f593becb5e9a34b28b219c227ea3572f897f"
+    },
+    {
+      "variantType": "DOWNLOAD",
+      "width": 1920,
+      "height": 1080,
+      "contentType": "image/png",
+      "byteSize": 10603,
+      "sha256": "ca85663d7d0479178f9b40072018d452f6c8a4a4e74dabc251355623ea148d07"
+    }
+  ],
+  "png-noise.png": [
+    {
+      "variantType": "DISPLAY_SMALL",
+      "width": 480,
+      "height": 270,
+      "contentType": "image/webp",
+      "byteSize": 35424,
+      "sha256": "d5d5b22e68556deec091bea9e50db32060af6c38249013fc026efcc0d8eb6433"
+    },
+    {
+      "variantType": "DISPLAY_MEDIUM",
+      "width": 1280,
+      "height": 720,
+      "contentType": "image/webp",
+      "byteSize": 456050,
+      "sha256": "8997bcf0a363f842c9225d876b461d7f6467466287fa4a8d78633819b5ce798f"
+    },
+    {
+      "variantType": "DISPLAY_LARGE",
+      "width": 1920,
+      "height": 1080,
+      "contentType": "image/webp",
+      "byteSize": 1257564,
+      "sha256": "333c3ad4f6d94686fe5cbdf990b443e4be448de56f7a22c7f41efb60609da865"
+    },
+    {
+      "variantType": "DOWNLOAD",
+      "width": 2560,
+      "height": 1440,
+      "contentType": "image/jpeg",
+      "byteSize": 2566792,
+      "sha256": "09cb8f2190ba05b656d819383de5eb5e1eb3cff100922f3dd90ae3ed346869ae"
+    }
+  ],
+  "webp-small.webp": [
+    {
+      "variantType": "DISPLAY_SMALL",
+      "width": 480,
+      "height": 360,
+      "contentType": "image/webp",
+      "byteSize": 610,
+      "sha256": "239bda8764cc6ff689bb34f8d7d25131006d2c69ce90077cdaf1912cec2cf4a9"
+    },
+    {
+      "variantType": "DISPLAY_MEDIUM",
+      "width": 800,
+      "height": 600,
+      "contentType": "image/webp",
+      "byteSize": 1158,
+      "sha256": "ec15fca981e6a88d3b0c62b09951e5ffdeb54b3c8ac49b947383566fada286c5"
+    },
+    {
+      "variantType": "DISPLAY_LARGE",
+      "width": 800,
+      "height": 600,
+      "contentType": "image/webp",
+      "byteSize": 1158,
+      "sha256": "ec15fca981e6a88d3b0c62b09951e5ffdeb54b3c8ac49b947383566fada286c5"
+    },
+    {
+      "variantType": "DOWNLOAD",
+      "width": 800,
+      "height": 600,
+      "contentType": "image/jpeg",
+      "byteSize": 4808,
+      "sha256": "d0f7ca98692a4d8527ec4d6a2498fc73a5495aa29ee0467ee32ce49a13990d21"
+    }
+  ],
+  "webp-large.webp": [
+    {
+      "variantType": "DISPLAY_SMALL",
+      "width": 480,
+      "height": 320,
+      "contentType": "image/webp",
+      "byteSize": 35822,
+      "sha256": "6a50e99f429718d68305bb881016a940019b3f5a924d173af35965a0bba78ec0"
+    },
+    {
+      "variantType": "DISPLAY_MEDIUM",
+      "width": 1280,
+      "height": 853,
+      "contentType": "image/webp",
+      "byteSize": 479198,
+      "sha256": "bb77c2d67e461afaff7622030943faaf1284a03e133d035951f0663fea42404c"
+    },
+    {
+      "variantType": "DISPLAY_LARGE",
+      "width": 1920,
+      "height": 1280,
+      "contentType": "image/webp",
+      "byteSize": 1318804,
+      "sha256": "1bc8a67520c0f81af56b1845e0555c747e2dc67182bb9e116f36b34fe5f1ff3e"
+    },
+    {
+      "variantType": "DOWNLOAD",
+      "width": 3000,
+      "height": 2000,
+      "contentType": "image/jpeg",
+      "byteSize": 3857248,
+      "sha256": "5be7ca4878da8539d3f30065762a8f0213281b63fd6ef6524f9acff503b3109c"
+    }
+  ]
+}
